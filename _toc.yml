@@ -4,6 +4,7 @@
 format: jb-book
 root: index
 chapters:
+  - file: book/S1_LAB_Representation
   - file: book/markdown
   - file: book/notebooks
   - file: book/bibliography
