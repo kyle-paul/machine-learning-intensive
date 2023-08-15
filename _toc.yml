@@ -4,10 +4,32 @@
 format: jb-book
 root: index
 chapters:
-  - file: book/S1_LAB_Representation
   - file: book/markdown
   - file: book/notebooks
   - file: book/bibliography
+  - file: book/Preclass Session 1
+  - file: book/S1_Lab_Representation
+  - file: book/Preclass Session 2
+  - file: book/S2_Lab_LinearModel
+  - file: book/Preclass Session 3
+  - file: book/S3_Lab_RecSys
+  - file: book/Preclass Session 4
+  - file: book/S4_Lab_NonLinearPredictors
+  - file: book/Preclass Session 5
+  - file: book/S5_Lab_Optimization
+  - file: book/Preclass Session 6
+  - file: book/S6_Lab_Metrics&Losses
+  - file: book/Midterm Theory Test
+  - file: book/Midterm Theory Solution
+  - file: book/Preclass Session 8
+  - file: book/S8_Lab_CNN
+  - file: book/Preclass Session 9
+  - file: book/S9_LAB_RNN
+  - file: book/Preclass Session 10
+  - file: book/S10_LAB_MDP_PLANNING
+  - file: book/Preclass Session 11
+  - file: book/S11_LAB_Q_Learning
+
 
 # Or you organize the TOC by parts
 
