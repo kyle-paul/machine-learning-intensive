@@ -1,0 +1,1672 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Session 5: Optimization &#8212; Machine Learning Intensive</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/S5_Lab_Optimization';</script>
+    <link rel="canonical" href="https://kyle-paul.github.io/machine-learning-intensive/book/S5_Lab_Optimization.html" />
+    <link rel="shortcut icon" href="../_static/fav.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Preclass Session 6: Metrics and Losses" href="Preclass%20Session%206.html" />
+    <link rel="prev" title="Preclass Session 5: Optimization" href="Preclass%20Session%205.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%201.html"><strong>Preclass Session 1: Representation</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%202.html"><strong>Preclass Session 2: Linear Model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S2_Lab_LinearModel.html">Session 2: Linear Model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%203.html"><strong>Preclass Session 3: Recommender System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S3_Lab_RecSys.html">Sesion 3: Recommender System</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%204.html"><strong>Preclass Session 4: NonLinear Predictor</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S4_Lab_NonLinearPredictors.html">Session 4: Nonlinear Predictors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%205.html"><strong>Preclass Session 5: Optimization</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Session 5: Optimization</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%206.html"><strong>Preclass Session 6: Metrics and Losses</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S6_Lab_Metrics%26Losses.html">Session 6: Metrics &amp; Losses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Midterm%20Theory%20Test.html"><strong>Theory Midterm Test</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Midterm%20Theory%20Solution.html"><strong>Theory Midterm Solution</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%208.html"><strong>Preclass Session 8: Convolutional Neural Network</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S8_Lab_CNN.html">Session 8: Convolutional Neural Network</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%209.html"><strong>Preclass Session 9: Natural Language Processing</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S9_LAB_RNN.html">Session 9 - Natural Language Processing</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%2010.html"><strong>Preclass Session 10: MDP Planning</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S10_LAB_MDP_PLANNING.html">Session 10 - MDP Planning</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%2011.html"><strong>Preclass Session 11: Reinforcement Learning</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S11_LAB_Q_Learning.html">Session 11 - Q Learning</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/kyle-paul/machine-learning-intensive/master?urlpath=tree/book/S5_Lab_Optimization.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/kyle-paul/machine-learning-intensive/blob/master/book/S5_Lab_Optimization.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/edit/main/book/S5_Lab_Optimization.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/issues/new?title=Issue%20on%20page%20%2Fbook/S5_Lab_Optimization.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/S5_Lab_Optimization.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Session 5: Optimization</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Session 5: Optimization</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mnist-fashion">MNIST Fashion</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sgd-vs-adam-vs-adamw">SGD vs Adam vs AdamW</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#l2-regularization">L2 regularization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate-scheduler">Learning Rate Scheduler</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-normalization">Batch Normalization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-analysis">Error Analysis</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="session-5-optimization">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Session 5: Optimization</a><a class="headerlink" href="#session-5-optimization" title="Permalink to this heading">#</a></h1>
+<p>You need to read the theory lectures before practicing with this notebook:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://hackmd.io/&#64;KylePaul/ML_Preclass_S5">Preclass S5</a></p></li>
+<li><p><a class="reference external" href="https://hackmd.io/&#64;KylePaul/ML_Slide_S5">Slide</a></p></li>
+</ul>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#session-5-optimization" id="id1">Session 5: Optimization</a></p></li>
+<li><p><a class="reference internal" href="#mnist-fashion" id="id2">MNIST Fashion</a></p>
+<ul>
+<li><p><a class="reference internal" href="#sgd-vs-adam-vs-adamw" id="id3">SGD vs Adam vs AdamW</a></p></li>
+<li><p><a class="reference internal" href="#l2-regularization" id="id4">L2 regularization</a></p></li>
+<li><p><a class="reference internal" href="#learning-rate-scheduler" id="id5">Learning Rate Scheduler</a></p></li>
+<li><p><a class="reference internal" href="#batch-normalization" id="id6">Batch Normalization</a></p></li>
+<li><p><a class="reference internal" href="#error-analysis" id="id7">Error Analysis</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="mnist-fashion">
+<h1><a class="toc-backref" href="#id2" role="doc-backlink">MNIST Fashion</a><a class="headerlink" href="#mnist-fashion" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">def</span> <span class="nf">reset_random_seeds</span><span class="p">(</span><span class="n">CUR_SEED</span><span class="o">=</span><span class="mi">42</span><span class="p">):</span>
+   <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PYTHONHASHSEED&#39;</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">CUR_SEED</span><span class="p">)</span>
+   <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="n">CUR_SEED</span><span class="p">)</span>
+   <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">CUR_SEED</span><span class="p">)</span>
+   <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">CUR_SEED</span><span class="p">)</span>
+
+<span class="n">reset_random_seeds</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">fashion_mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape of x_train:&#39;</span><span class="p">,</span><span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape of y_train:&#39;</span><span class="p">,</span><span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape of x_test:&#39;</span><span class="p">,</span><span class="n">x_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape of y_test:&#39;</span><span class="p">,</span><span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Labels:&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_train</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-labels-idx1-ubyte.gz
+29515/29515 [==============================] - 0s 0us/step
+Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-images-idx3-ubyte.gz
+26421880/26421880 [==============================] - 0s 0us/step
+Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/t10k-labels-idx1-ubyte.gz
+5148/5148 [==============================] - 0s 0us/step
+Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/t10k-images-idx3-ubyte.gz
+4422102/4422102 [==============================] - 0s 0us/step
+Shape of x_train: (60000, 28, 28)
+Shape of y_train: (60000,)
+----------
+Shape of x_test: (10000, 28, 28)
+Shape of y_test: (10000,)
+----------
+Labels: [0 1 2 3 4 5 6 7 8 9]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;T-shirt/top&#39;</span><span class="p">,</span> <span class="s1">&#39;Trouser&#39;</span><span class="p">,</span> <span class="s1">&#39;Pullover&#39;</span><span class="p">,</span> <span class="s1">&#39;Dress&#39;</span><span class="p">,</span> <span class="s1">&#39;Coat&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;Sandal&#39;</span><span class="p">,</span> <span class="s1">&#39;Shirt&#39;</span><span class="p">,</span> <span class="s1">&#39;Sneaker&#39;</span><span class="p">,</span> <span class="s1">&#39;Bag&#39;</span><span class="p">,</span> <span class="s1">&#39;Ankle boot&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rows</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="n">rows</span><span class="p">,</span><span class="n">ncols</span><span class="o">=</span><span class="n">cols</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cols</span><span class="p">):</span>
+    <span class="n">random_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_train</span> <span class="o">==</span> <span class="n">row</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x_train</span><span class="p">[</span><span class="n">random_index</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">y_train</span><span class="p">[</span><span class="n">random_index</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d522003f6a991c7c03741c44e4c0996c4e82298ddabbba83bfd05ee1d098a7b4.png" src="../_images/d522003f6a991c7c03741c44e4c0996c4e82298ddabbba83bfd05ee1d098a7b4.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x_train</span> <span class="o">=</span> <span class="n">x_train</span> <span class="o">/</span> <span class="mf">255.0</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">x_test</span> <span class="o">/</span> <span class="mf">255.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y_train_encode</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">y_test_encode</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="sgd-vs-adam-vs-adamw">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">SGD vs Adam vs AdamW</a><a class="headerlink" href="#sgd-vs-adam-vs-adamw" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">BatchNormalization</span><span class="p">,</span> <span class="n">Dropout</span><span class="p">,</span> <span class="n">Activation</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Flatten</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.regularizers</span> <span class="kn">import</span> <span class="n">l2</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.optimizers</span> <span class="kn">import</span> <span class="n">SGD</span><span class="p">,</span> <span class="n">Adam</span><span class="p">,</span> <span class="n">AdamW</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.callbacks</span> <span class="kn">import</span> <span class="n">EarlyStopping</span><span class="p">,</span> <span class="n">LearningRateScheduler</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">chart_title</span><span class="p">):</span>
+  <span class="n">epochs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]))</span>
+
+  <span class="n">train_loss</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="n">train_loss</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Train Loss&quot;</span>
+  <span class="n">train_loss</span><span class="p">[</span><span class="s2">&quot;showlegend&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+  <span class="n">val_loss</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_loss&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="n">val_loss</span><span class="p">[</span><span class="s2">&quot;line&quot;</span><span class="p">][</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;#00ff00&quot;</span>
+  <span class="n">val_loss</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Val Loss&quot;</span>
+  <span class="n">val_loss</span><span class="p">[</span><span class="s2">&quot;showlegend&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+  <span class="n">train_accuracy</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="n">train_accuracy</span><span class="p">[</span><span class="s2">&quot;line&quot;</span><span class="p">][</span><span class="s2">&quot;dash&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;dot&quot;</span>
+  <span class="n">train_accuracy</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Train Accuracy&quot;</span>
+  <span class="n">train_accuracy</span><span class="p">[</span><span class="s2">&quot;showlegend&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+  <span class="n">val_accuracy</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_accuracy&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="n">val_accuracy</span><span class="p">[</span><span class="s2">&quot;line&quot;</span><span class="p">][</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;#00ff00&quot;</span>
+  <span class="n">val_accuracy</span><span class="p">[</span><span class="s2">&quot;line&quot;</span><span class="p">][</span><span class="s2">&quot;dash&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;dot&quot;</span>
+  <span class="n">val_accuracy</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Val Accuracy&quot;</span>
+  <span class="n">val_accuracy</span><span class="p">[</span><span class="s2">&quot;showlegend&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+  <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">train_loss</span><span class="p">,</span> <span class="n">val_loss</span><span class="p">,</span> <span class="n">train_accuracy</span><span class="p">,</span> <span class="n">val_accuracy</span><span class="p">])</span>
+  <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+      <span class="n">title</span> <span class="o">=</span> <span class="n">chart_title</span><span class="p">,</span>
+      <span class="n">xaxis_title</span> <span class="o">=</span> <span class="s2">&quot;Epoch&quot;</span><span class="p">,</span>
+      <span class="n">yaxis_title</span> <span class="o">=</span> <span class="s2">&quot;Value&quot;</span>
+  <span class="p">)</span>
+  <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_model</span><span class="p">(</span><span class="n">optimizer</span><span class="p">):</span>
+  <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">clear_session</span><span class="p">()</span>
+  <span class="n">reset_random_seeds</span><span class="p">()</span>
+
+  <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Flatten</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">)))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s2">&quot;he_normal&quot;</span><span class="p">))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s2">&quot;he_normal&quot;</span><span class="p">))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;softmax&quot;</span><span class="p">))</span>
+
+  <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">)</span>
+  <span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train_encode</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test_encode</span><span class="p">))</span>
+  <span class="k">return</span> <span class="n">history</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sgd_history</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span><span class="n">SGD</span><span class="p">())</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">sgd_history</span><span class="p">,</span> <span class="n">chart_title</span><span class="o">=</span><span class="s2">&quot;SGD: Loss vs Accuracy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/30
+235/235 [==============================] - 8s 8ms/step - loss: 1.0971 - accuracy: 0.6600 - val_loss: 0.7683 - val_accuracy: 0.7489
+Epoch 2/30
+235/235 [==============================] - 2s 7ms/step - loss: 0.6783 - accuracy: 0.7828 - val_loss: 0.6418 - val_accuracy: 0.7930
+Epoch 3/30
+235/235 [==============================] - 1s 6ms/step - loss: 0.5895 - accuracy: 0.8085 - val_loss: 0.5884 - val_accuracy: 0.8031
+Epoch 4/30
+235/235 [==============================] - 2s 7ms/step - loss: 0.5428 - accuracy: 0.8214 - val_loss: 0.5602 - val_accuracy: 0.8060
+Epoch 5/30
+235/235 [==============================] - 2s 8ms/step - loss: 0.5134 - accuracy: 0.8290 - val_loss: 0.5359 - val_accuracy: 0.8162
+Epoch 6/30
+235/235 [==============================] - 2s 7ms/step - loss: 0.4927 - accuracy: 0.8336 - val_loss: 0.5209 - val_accuracy: 0.8176
+Epoch 7/30
+235/235 [==============================] - 2s 7ms/step - loss: 0.4768 - accuracy: 0.8390 - val_loss: 0.5183 - val_accuracy: 0.8168
+Epoch 8/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.4635 - accuracy: 0.8414 - val_loss: 0.4871 - val_accuracy: 0.8321
+Epoch 9/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.4524 - accuracy: 0.8453 - val_loss: 0.4857 - val_accuracy: 0.8302
+Epoch 10/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.4435 - accuracy: 0.8489 - val_loss: 0.4799 - val_accuracy: 0.8326
+Epoch 11/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.4365 - accuracy: 0.8496 - val_loss: 0.4633 - val_accuracy: 0.8388
+Epoch 12/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.4288 - accuracy: 0.8518 - val_loss: 0.4601 - val_accuracy: 0.8392
+Epoch 13/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.4230 - accuracy: 0.8557 - val_loss: 0.4529 - val_accuracy: 0.8435
+Epoch 14/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.4166 - accuracy: 0.8572 - val_loss: 0.4563 - val_accuracy: 0.8391
+Epoch 15/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.4120 - accuracy: 0.8578 - val_loss: 0.4445 - val_accuracy: 0.8444
+Epoch 16/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.4064 - accuracy: 0.8606 - val_loss: 0.4771 - val_accuracy: 0.8310
+Epoch 17/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.4017 - accuracy: 0.8616 - val_loss: 0.4347 - val_accuracy: 0.8472
+Epoch 18/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.3981 - accuracy: 0.8624 - val_loss: 0.4338 - val_accuracy: 0.8483
+Epoch 19/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.3942 - accuracy: 0.8638 - val_loss: 0.4266 - val_accuracy: 0.8490
+Epoch 20/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.3902 - accuracy: 0.8650 - val_loss: 0.4388 - val_accuracy: 0.8428
+Epoch 21/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.3869 - accuracy: 0.8654 - val_loss: 0.4263 - val_accuracy: 0.8486
+Epoch 22/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.3824 - accuracy: 0.8679 - val_loss: 0.4403 - val_accuracy: 0.8429
+Epoch 23/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.3808 - accuracy: 0.8679 - val_loss: 0.4234 - val_accuracy: 0.8478
+Epoch 24/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.3775 - accuracy: 0.8695 - val_loss: 0.4201 - val_accuracy: 0.8520
+Epoch 25/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.3737 - accuracy: 0.8709 - val_loss: 0.4175 - val_accuracy: 0.8518
+Epoch 26/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.3712 - accuracy: 0.8709 - val_loss: 0.4576 - val_accuracy: 0.8307
+Epoch 27/30
+235/235 [==============================] - 1s 6ms/step - loss: 0.3691 - accuracy: 0.8721 - val_loss: 0.4314 - val_accuracy: 0.8405
+Epoch 28/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.3649 - accuracy: 0.8739 - val_loss: 0.4159 - val_accuracy: 0.8500
+Epoch 29/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.3634 - accuracy: 0.8741 - val_loss: 0.4039 - val_accuracy: 0.8555
+Epoch 30/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.3611 - accuracy: 0.8750 - val_loss: 0.4185 - val_accuracy: 0.8491
+</pre></div>
+</div>
+<div class="output text_html"><html>
+<head><meta charset="utf-8" /></head>
+<body>
+    <div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script src="https://cdn.plot.ly/plotly-2.18.2.min.js"></script>                <div id="ca477198-ad71-4956-a1b8-82983aa13873" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("ca477198-ad71-4956-a1b8-82983aa13873")) {                    Plotly.newPlot(                        "ca477198-ad71-4956-a1b8-82983aa13873",                        [{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#636efa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Train Loss","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[1.0971473455429077,0.678325355052948,0.5895281434059143,0.5427693128585815,0.5134180784225464,0.49266916513442993,0.47681403160095215,0.4634582996368408,0.45239514112472534,0.44350776076316833,0.4364575147628784,0.42877519130706787,0.4229954183101654,0.4165801703929901,0.41203203797340393,0.406404972076416,0.4017409384250641,0.3981252908706665,0.39418405294418335,0.3902100622653961,0.3869498670101166,0.38235288858413696,0.3808407187461853,0.3774588406085968,0.3737175762653351,0.37118902802467346,0.36908310651779175,0.36485055088996887,0.3633650839328766,0.3611442744731903],"yaxis":"y","type":"scatter"},{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#00ff00","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Val Loss","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[0.7682638764381409,0.6418315172195435,0.5883622169494629,0.5601875185966492,0.5359364151954651,0.5209488868713379,0.51833176612854,0.4870615601539612,0.4856767952442169,0.47992974519729614,0.46331727504730225,0.46012598276138306,0.4529265761375427,0.4562875032424927,0.44450142979621887,0.4770644009113312,0.43474408984184265,0.4338178336620331,0.42662739753723145,0.43884071707725525,0.4263265132904053,0.4402957558631897,0.4234236776828766,0.4200812876224518,0.41745689511299133,0.45762568712234497,0.4313681125640869,0.41593295335769653,0.40388914942741394,0.4184730052947998],"yaxis":"y","type":"scatter"},{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#636efa","dash":"dot"},"marker":{"symbol":"circle"},"mode":"lines","name":"Train Accuracy","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[0.6600000262260437,0.7827833294868469,0.808483362197876,0.8213666677474976,0.8289833068847656,0.8335833549499512,0.8389666676521301,0.8414499759674072,0.8453333377838135,0.8489333391189575,0.8496166467666626,0.8518000245094299,0.855650007724762,0.8572166562080383,0.8578166961669922,0.8605666756629944,0.8616333603858948,0.8623666763305664,0.8638499975204468,0.8650333285331726,0.8653500080108643,0.867900013923645,0.8679166436195374,0.8694666624069214,0.8709333539009094,0.8708833456039429,0.8720999956130981,0.8738833069801331,0.8741000294685364,0.875],"yaxis":"y","type":"scatter"},{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#00ff00","dash":"dot"},"marker":{"symbol":"circle"},"mode":"lines","name":"Val Accuracy","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[0.7488999962806702,0.7929999828338623,0.8030999898910522,0.8059999942779541,0.8162000179290771,0.8176000118255615,0.8167999982833862,0.832099974155426,0.8302000164985657,0.8325999975204468,0.8388000130653381,0.8392000198364258,0.843500018119812,0.8391000032424927,0.8443999886512756,0.8309999704360962,0.8471999764442444,0.8482999801635742,0.8489999771118164,0.8428000211715698,0.8485999703407288,0.8428999781608582,0.8478000164031982,0.8519999980926514,0.8518000245094299,0.8306999802589417,0.840499997138977,0.8500000238418579,0.8554999828338623,0.8490999937057495],"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"text":"SGD: Loss vs Accuracy"},"xaxis":{"title":{"text":"Epoch"}},"yaxis":{"title":{"text":"Value"}}},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('ca477198-ad71-4956-a1b8-82983aa13873');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                            </script>        </div>
+</body>
+</html></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">adam_history</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span><span class="n">Adam</span><span class="p">())</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">adam_history</span><span class="p">,</span> <span class="n">chart_title</span><span class="o">=</span><span class="s2">&quot;Adam: Loss vs Accuracy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/30
+235/235 [==============================] - 3s 5ms/step - loss: 0.5012 - accuracy: 0.8256 - val_loss: 0.4252 - val_accuracy: 0.8469
+Epoch 2/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.3556 - accuracy: 0.8710 - val_loss: 0.3724 - val_accuracy: 0.8643
+Epoch 3/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.3141 - accuracy: 0.8853 - val_loss: 0.3499 - val_accuracy: 0.8727
+Epoch 4/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2920 - accuracy: 0.8910 - val_loss: 0.3573 - val_accuracy: 0.8687
+Epoch 5/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2699 - accuracy: 0.8989 - val_loss: 0.3400 - val_accuracy: 0.8744
+Epoch 6/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2551 - accuracy: 0.9045 - val_loss: 0.3337 - val_accuracy: 0.8781
+Epoch 7/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2394 - accuracy: 0.9113 - val_loss: 0.3405 - val_accuracy: 0.8798
+Epoch 8/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.2293 - accuracy: 0.9142 - val_loss: 0.3369 - val_accuracy: 0.8854
+Epoch 9/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.2191 - accuracy: 0.9169 - val_loss: 0.3226 - val_accuracy: 0.8886
+Epoch 10/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.2088 - accuracy: 0.9217 - val_loss: 0.3294 - val_accuracy: 0.8837
+Epoch 11/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1985 - accuracy: 0.9257 - val_loss: 0.3397 - val_accuracy: 0.8880
+Epoch 12/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1872 - accuracy: 0.9292 - val_loss: 0.3356 - val_accuracy: 0.8894
+Epoch 13/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1816 - accuracy: 0.9314 - val_loss: 0.3192 - val_accuracy: 0.8945
+Epoch 14/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1737 - accuracy: 0.9339 - val_loss: 0.3206 - val_accuracy: 0.8934
+Epoch 15/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1675 - accuracy: 0.9363 - val_loss: 0.3237 - val_accuracy: 0.8931
+Epoch 16/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1570 - accuracy: 0.9407 - val_loss: 0.3603 - val_accuracy: 0.8874
+Epoch 17/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1532 - accuracy: 0.9423 - val_loss: 0.3507 - val_accuracy: 0.8948
+Epoch 18/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1487 - accuracy: 0.9436 - val_loss: 0.3375 - val_accuracy: 0.8953
+Epoch 19/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1406 - accuracy: 0.9465 - val_loss: 0.3644 - val_accuracy: 0.8826
+Epoch 20/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.1350 - accuracy: 0.9481 - val_loss: 0.3560 - val_accuracy: 0.8939
+Epoch 21/30
+235/235 [==============================] - 1s 6ms/step - loss: 0.1316 - accuracy: 0.9506 - val_loss: 0.3577 - val_accuracy: 0.8951
+Epoch 22/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1290 - accuracy: 0.9502 - val_loss: 0.3788 - val_accuracy: 0.8958
+Epoch 23/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1204 - accuracy: 0.9536 - val_loss: 0.3739 - val_accuracy: 0.8993
+Epoch 24/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1121 - accuracy: 0.9582 - val_loss: 0.3751 - val_accuracy: 0.8980
+Epoch 25/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1111 - accuracy: 0.9572 - val_loss: 0.3921 - val_accuracy: 0.8956
+Epoch 26/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1094 - accuracy: 0.9587 - val_loss: 0.3950 - val_accuracy: 0.8965
+Epoch 27/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1032 - accuracy: 0.9601 - val_loss: 0.4278 - val_accuracy: 0.8912
+Epoch 28/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.0956 - accuracy: 0.9634 - val_loss: 0.4163 - val_accuracy: 0.8956
+Epoch 29/30
+235/235 [==============================] - 2s 8ms/step - loss: 0.0978 - accuracy: 0.9628 - val_loss: 0.3874 - val_accuracy: 0.8969
+Epoch 30/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.0886 - accuracy: 0.9667 - val_loss: 0.4115 - val_accuracy: 0.8995
+</pre></div>
+</div>
+<div class="output text_html"><html>
+<head><meta charset="utf-8" /></head>
+<body>
+    <div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script src="https://cdn.plot.ly/plotly-2.18.2.min.js"></script>                <div id="743cf1a7-06b5-4f9d-9f2b-96c5f1b50aa1" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("743cf1a7-06b5-4f9d-9f2b-96c5f1b50aa1")) {                    Plotly.newPlot(                        "743cf1a7-06b5-4f9d-9f2b-96c5f1b50aa1",                        [{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#636efa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Train Loss","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[0.5011729001998901,0.35562974214553833,0.3140506148338318,0.2919631898403168,0.269940048456192,0.2550593614578247,0.23940534889698029,0.22931814193725586,0.21911495923995972,0.2088407576084137,0.19854605197906494,0.18717928230762482,0.18162955343723297,0.1736994832754135,0.1674797385931015,0.15695883333683014,0.15317566692829132,0.1487448662519455,0.1406041532754898,0.13504934310913086,0.13162603974342346,0.1289709359407425,0.12036612629890442,0.11210731416940689,0.11111176013946533,0.10944061726331711,0.10323770344257355,0.09560582041740417,0.09778271615505219,0.08860528469085693],"yaxis":"y","type":"scatter"},{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#00ff00","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Val Loss","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[0.42517393827438354,0.3723761737346649,0.34988316893577576,0.35734695196151733,0.34003445506095886,0.33367282152175903,0.3405010402202606,0.33687227964401245,0.3225575387477875,0.32935410737991333,0.33966270089149475,0.3356381058692932,0.3191714882850647,0.3205997943878174,0.32368963956832886,0.3602633476257324,0.35072851181030273,0.33750396966934204,0.3643673062324524,0.35597530007362366,0.35769253969192505,0.37879490852355957,0.3739364445209503,0.3750585615634918,0.39214837551116943,0.39497044682502747,0.4278165400028229,0.4163389503955841,0.38742655515670776,0.41145843267440796],"yaxis":"y","type":"scatter"},{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#636efa","dash":"dot"},"marker":{"symbol":"circle"},"mode":"lines","name":"Train Accuracy","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[0.8256166577339172,0.8710166811943054,0.8852666616439819,0.8909666538238525,0.8989166617393494,0.9045166373252869,0.9113333225250244,0.9141666889190674,0.916866660118103,0.9217166900634766,0.9257000088691711,0.9291999936103821,0.9314333200454712,0.933899998664856,0.9363499879837036,0.9406833052635193,0.942300021648407,0.9435666799545288,0.946483314037323,0.9480999708175659,0.9506000280380249,0.9502166509628296,0.9536499977111816,0.9581999778747559,0.9572333097457886,0.9586666822433472,0.9601166844367981,0.963366687297821,0.9628166556358337,0.9666833281517029],"yaxis":"y","type":"scatter"},{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#00ff00","dash":"dot"},"marker":{"symbol":"circle"},"mode":"lines","name":"Val Accuracy","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[0.8468999862670898,0.864300012588501,0.8726999759674072,0.8687000274658203,0.8744000196456909,0.8780999779701233,0.879800021648407,0.8853999972343445,0.8885999917984009,0.8837000131607056,0.8880000114440918,0.8894000053405762,0.8945000171661377,0.8934000134468079,0.8931000232696533,0.8873999714851379,0.8948000073432922,0.8952999711036682,0.8826000094413757,0.8938999772071838,0.8950999975204468,0.895799994468689,0.8992999792098999,0.8980000019073486,0.8956000208854675,0.8964999914169312,0.8912000060081482,0.8956000208854675,0.8968999981880188,0.8995000123977661],"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"text":"Adam: Loss vs Accuracy"},"xaxis":{"title":{"text":"Epoch"}},"yaxis":{"title":{"text":"Value"}}},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('743cf1a7-06b5-4f9d-9f2b-96c5f1b50aa1');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                            </script>        </div>
+</body>
+</html></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">AdamW_history</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span><span class="n">AdamW</span><span class="p">())</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">AdamW_history</span><span class="p">,</span> <span class="n">chart_title</span><span class="o">=</span><span class="s2">&quot;AdamW: Loss vs Accuracy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/30
+235/235 [==============================] - 2s 5ms/step - loss: 0.5018 - accuracy: 0.8246 - val_loss: 0.4186 - val_accuracy: 0.8504
+Epoch 2/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.3568 - accuracy: 0.8704 - val_loss: 0.3711 - val_accuracy: 0.8641
+Epoch 3/30
+235/235 [==============================] - 1s 6ms/step - loss: 0.3147 - accuracy: 0.8845 - val_loss: 0.3461 - val_accuracy: 0.8760
+Epoch 4/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.2946 - accuracy: 0.8905 - val_loss: 0.3626 - val_accuracy: 0.8670
+Epoch 5/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2724 - accuracy: 0.8978 - val_loss: 0.3460 - val_accuracy: 0.8740
+Epoch 6/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2558 - accuracy: 0.9038 - val_loss: 0.3397 - val_accuracy: 0.8770
+Epoch 7/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2412 - accuracy: 0.9099 - val_loss: 0.3450 - val_accuracy: 0.8772
+Epoch 8/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2332 - accuracy: 0.9127 - val_loss: 0.3400 - val_accuracy: 0.8853
+Epoch 9/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2222 - accuracy: 0.9158 - val_loss: 0.3273 - val_accuracy: 0.8856
+Epoch 10/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2089 - accuracy: 0.9221 - val_loss: 0.3173 - val_accuracy: 0.8888
+Epoch 11/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1999 - accuracy: 0.9249 - val_loss: 0.3275 - val_accuracy: 0.8884
+Epoch 12/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1914 - accuracy: 0.9283 - val_loss: 0.3254 - val_accuracy: 0.8913
+Epoch 13/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1834 - accuracy: 0.9310 - val_loss: 0.3129 - val_accuracy: 0.8901
+Epoch 14/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.1749 - accuracy: 0.9341 - val_loss: 0.3104 - val_accuracy: 0.8976
+Epoch 15/30
+235/235 [==============================] - 1s 6ms/step - loss: 0.1701 - accuracy: 0.9355 - val_loss: 0.3221 - val_accuracy: 0.8936
+Epoch 16/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1626 - accuracy: 0.9383 - val_loss: 0.3478 - val_accuracy: 0.8876
+Epoch 17/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1542 - accuracy: 0.9418 - val_loss: 0.3607 - val_accuracy: 0.8874
+Epoch 18/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1478 - accuracy: 0.9443 - val_loss: 0.3450 - val_accuracy: 0.8913
+Epoch 19/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1433 - accuracy: 0.9453 - val_loss: 0.3693 - val_accuracy: 0.8871
+Epoch 20/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1366 - accuracy: 0.9483 - val_loss: 0.3567 - val_accuracy: 0.8946
+Epoch 21/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1336 - accuracy: 0.9484 - val_loss: 0.3592 - val_accuracy: 0.8954
+Epoch 22/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1277 - accuracy: 0.9522 - val_loss: 0.3701 - val_accuracy: 0.8949
+Epoch 23/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1227 - accuracy: 0.9529 - val_loss: 0.3719 - val_accuracy: 0.8986
+Epoch 24/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1139 - accuracy: 0.9565 - val_loss: 0.3591 - val_accuracy: 0.9014
+Epoch 25/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1093 - accuracy: 0.9584 - val_loss: 0.3855 - val_accuracy: 0.8928
+Epoch 26/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.1065 - accuracy: 0.9593 - val_loss: 0.3747 - val_accuracy: 0.8946
+Epoch 27/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.1039 - accuracy: 0.9606 - val_loss: 0.3959 - val_accuracy: 0.8941
+Epoch 28/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1016 - accuracy: 0.9614 - val_loss: 0.4035 - val_accuracy: 0.8925
+Epoch 29/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.0986 - accuracy: 0.9621 - val_loss: 0.3934 - val_accuracy: 0.8969
+Epoch 30/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.0917 - accuracy: 0.9650 - val_loss: 0.4255 - val_accuracy: 0.8927
+</pre></div>
+</div>
+<div class="output text_html"><html>
+<head><meta charset="utf-8" /></head>
+<body>
+    <div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script src="https://cdn.plot.ly/plotly-2.18.2.min.js"></script>                <div id="e2ee1e58-3bd4-4085-a2f5-ec44359c5ff9" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("e2ee1e58-3bd4-4085-a2f5-ec44359c5ff9")) {                    Plotly.newPlot(                        "e2ee1e58-3bd4-4085-a2f5-ec44359c5ff9",                        [{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#636efa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Train Loss","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[0.501783549785614,0.3567916452884674,0.3147127628326416,0.294582724571228,0.27239763736724854,0.25582510232925415,0.2412412464618683,0.2332388013601303,0.22221897542476654,0.20888088643550873,0.19988548755645752,0.19138506054878235,0.18341971933841705,0.1749454289674759,0.17014764249324799,0.1626495122909546,0.15422506630420685,0.14777728915214539,0.14329655468463898,0.13657498359680176,0.13364587724208832,0.1276596188545227,0.12267863005399704,0.11391442269086838,0.10927575081586838,0.10654791444540024,0.10392943024635315,0.10158054530620575,0.09859582781791687,0.09171190112829208],"yaxis":"y","type":"scatter"},{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#00ff00","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Val Loss","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[0.4186267554759979,0.3710710108280182,0.3460671007633209,0.3625783920288086,0.34604668617248535,0.3396984040737152,0.3450222313404083,0.340026319026947,0.32727184891700745,0.3172604441642761,0.32751917839050293,0.3254322409629822,0.312909334897995,0.31039464473724365,0.32212454080581665,0.3477967381477356,0.3607497215270996,0.3449512720108032,0.3692696690559387,0.35671883821487427,0.35922494530677795,0.3701171576976776,0.37188729643821716,0.3590662181377411,0.38552725315093994,0.37467503547668457,0.3959465026855469,0.40353453159332275,0.39339008927345276,0.4254957437515259],"yaxis":"y","type":"scatter"},{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#636efa","dash":"dot"},"marker":{"symbol":"circle"},"mode":"lines","name":"Train Accuracy","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[0.8246166706085205,0.8704000115394592,0.8845000267028809,0.8904833197593689,0.8977833390235901,0.9038000106811523,0.9098666906356812,0.9126833081245422,0.9158333539962769,0.9220666885375977,0.9249333143234253,0.9282500147819519,0.9309666752815247,0.934149980545044,0.935533344745636,0.9382666945457458,0.9418333172798157,0.944266676902771,0.9452666640281677,0.948283314704895,0.9483833312988281,0.9521833062171936,0.95291668176651,0.956516683101654,0.9584166407585144,0.9592666625976562,0.9606000185012817,0.9614333510398865,0.9620500206947327,0.9650166630744934],"yaxis":"y","type":"scatter"},{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#00ff00","dash":"dot"},"marker":{"symbol":"circle"},"mode":"lines","name":"Val Accuracy","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[0.8503999710083008,0.8640999794006348,0.8759999871253967,0.8669999837875366,0.8740000128746033,0.8769999742507935,0.8772000074386597,0.8852999806404114,0.8855999708175659,0.8888000249862671,0.8884000182151794,0.8913000226020813,0.8901000022888184,0.897599995136261,0.8935999870300293,0.8876000046730042,0.8873999714851379,0.8913000226020813,0.8870999813079834,0.894599974155426,0.8953999876976013,0.8949000239372253,0.8985999822616577,0.9014000296592712,0.892799973487854,0.894599974155426,0.89410001039505,0.8924999833106995,0.8968999981880188,0.8927000164985657],"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"text":"AdamW: Loss vs Accuracy"},"xaxis":{"title":{"text":"Epoch"}},"yaxis":{"title":{"text":"Value"}}},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('e2ee1e58-3bd4-4085-a2f5-ec44359c5ff9');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                            </script>        </div>
+</body>
+</html></div></div>
+</div>
+<p>The direction of validation_loss is tend to increase <span class="math notranslate nohighlight">\(→\)</span> the sign of overfitting. So we should create more data (augmentation) to enhance the model’s generalization. Otherwise, we should apply some heuristics such as L2 Regularization</p>
+</section>
+<section id="l2-regularization">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">L2 regularization</a><a class="headerlink" href="#l2-regularization" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">clear_session</span><span class="p">()</span>
+<span class="n">reset_random_seeds</span><span class="p">()</span>
+
+<span class="n">l2_reg</span> <span class="o">=</span> <span class="n">l2</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Flatten</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s2">&quot;he_normal&quot;</span><span class="p">,</span> <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">l2_reg</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s2">&quot;he_normal&quot;</span><span class="p">,</span> <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">l2_reg</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;softmax&quot;</span><span class="p">))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">AdamW</span><span class="p">(),</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">)</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train_encode</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test_encode</span><span class="p">))</span>
+
+<span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">chart_title</span><span class="o">=</span><span class="s2">&quot;AdamW &amp; L2: Loss vs Accuracy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/30
+235/235 [==============================] - 3s 6ms/step - loss: 0.6798 - accuracy: 0.8251 - val_loss: 0.5844 - val_accuracy: 0.8484
+Epoch 2/30
+235/235 [==============================] - 1s 6ms/step - loss: 0.5096 - accuracy: 0.8688 - val_loss: 0.5127 - val_accuracy: 0.8636
+Epoch 3/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.4551 - accuracy: 0.8815 - val_loss: 0.4830 - val_accuracy: 0.8693
+Epoch 4/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.4233 - accuracy: 0.8870 - val_loss: 0.4915 - val_accuracy: 0.8598
+Epoch 5/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.3963 - accuracy: 0.8950 - val_loss: 0.4586 - val_accuracy: 0.8708
+Epoch 6/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.3782 - accuracy: 0.8973 - val_loss: 0.4405 - val_accuracy: 0.8800
+Epoch 7/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.3590 - accuracy: 0.9036 - val_loss: 0.4570 - val_accuracy: 0.8685
+Epoch 8/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.3504 - accuracy: 0.9053 - val_loss: 0.4220 - val_accuracy: 0.8803
+Epoch 9/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.3390 - accuracy: 0.9065 - val_loss: 0.4104 - val_accuracy: 0.8840
+Epoch 10/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.3227 - accuracy: 0.9116 - val_loss: 0.4063 - val_accuracy: 0.8829
+Epoch 11/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.3133 - accuracy: 0.9144 - val_loss: 0.3935 - val_accuracy: 0.8894
+Epoch 12/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.3080 - accuracy: 0.9160 - val_loss: 0.4099 - val_accuracy: 0.8839
+Epoch 13/30
+235/235 [==============================] - 1s 6ms/step - loss: 0.2998 - accuracy: 0.9170 - val_loss: 0.3942 - val_accuracy: 0.8883
+Epoch 14/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.2928 - accuracy: 0.9191 - val_loss: 0.3794 - val_accuracy: 0.8933
+Epoch 15/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2870 - accuracy: 0.9208 - val_loss: 0.3819 - val_accuracy: 0.8909
+Epoch 16/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2752 - accuracy: 0.9245 - val_loss: 0.4020 - val_accuracy: 0.8834
+Epoch 17/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2740 - accuracy: 0.9244 - val_loss: 0.4056 - val_accuracy: 0.8846
+Epoch 18/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2662 - accuracy: 0.9268 - val_loss: 0.3949 - val_accuracy: 0.8880
+Epoch 19/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2621 - accuracy: 0.9281 - val_loss: 0.4003 - val_accuracy: 0.8849
+Epoch 20/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.2539 - accuracy: 0.9307 - val_loss: 0.3931 - val_accuracy: 0.8885
+Epoch 21/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2536 - accuracy: 0.9297 - val_loss: 0.4041 - val_accuracy: 0.8834
+Epoch 22/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.2499 - accuracy: 0.9318 - val_loss: 0.3959 - val_accuracy: 0.8901
+Epoch 23/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.2443 - accuracy: 0.9327 - val_loss: 0.4058 - val_accuracy: 0.8853
+Epoch 24/30
+235/235 [==============================] - 1s 6ms/step - loss: 0.2380 - accuracy: 0.9354 - val_loss: 0.3996 - val_accuracy: 0.8907
+Epoch 25/30
+235/235 [==============================] - 1s 6ms/step - loss: 0.2327 - accuracy: 0.9370 - val_loss: 0.4283 - val_accuracy: 0.8792
+Epoch 26/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.2354 - accuracy: 0.9354 - val_loss: 0.4015 - val_accuracy: 0.8860
+Epoch 27/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2294 - accuracy: 0.9379 - val_loss: 0.3982 - val_accuracy: 0.8861
+Epoch 28/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2253 - accuracy: 0.9389 - val_loss: 0.4032 - val_accuracy: 0.8893
+Epoch 29/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.2211 - accuracy: 0.9402 - val_loss: 0.4002 - val_accuracy: 0.8923
+Epoch 30/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.2210 - accuracy: 0.9409 - val_loss: 0.3917 - val_accuracy: 0.8938
+</pre></div>
+</div>
+<div class="output text_html"><html>
+<head><meta charset="utf-8" /></head>
+<body>
+    <div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script src="https://cdn.plot.ly/plotly-2.18.2.min.js"></script>                <div id="b0559540-5378-4e76-b156-026d0533edfe" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("b0559540-5378-4e76-b156-026d0533edfe")) {                    Plotly.newPlot(                        "b0559540-5378-4e76-b156-026d0533edfe",                        [{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#636efa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Train Loss","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[0.6797714233398438,0.5096084475517273,0.4550646245479584,0.42333945631980896,0.39630573987960815,0.3781763017177582,0.35901719331741333,0.35043779015541077,0.3390350937843323,0.3227010667324066,0.31334012746810913,0.3080243170261383,0.2997581958770752,0.2927631437778473,0.28695157170295715,0.2751883566379547,0.27397873997688293,0.2662264108657837,0.2621169686317444,0.25390204787254333,0.2536190450191498,0.24987992644309998,0.24431225657463074,0.23803339898586273,0.23273730278015137,0.23544371128082275,0.22943003475666046,0.22530074417591095,0.22107015550136566,0.2210199534893036],"yaxis":"y","type":"scatter"},{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#00ff00","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Val Loss","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[0.5844151973724365,0.5126974582672119,0.4830225706100464,0.4914824366569519,0.45855653285980225,0.4405021369457245,0.45695799589157104,0.42202913761138916,0.4103766977787018,0.4062756896018982,0.39354607462882996,0.4099009335041046,0.3941536545753479,0.37936872243881226,0.381912499666214,0.4019627571105957,0.40561234951019287,0.3949284255504608,0.40034782886505127,0.3930762708187103,0.40409019589424133,0.39587268233299255,0.40579089522361755,0.39961951971054077,0.4283319413661957,0.4014611840248108,0.3981824219226837,0.4031960964202881,0.40018194913864136,0.3916562497615814],"yaxis":"y","type":"scatter"},{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#636efa","dash":"dot"},"marker":{"symbol":"circle"},"mode":"lines","name":"Train Accuracy","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[0.8251333236694336,0.8687833547592163,0.8814833164215088,0.8870333433151245,0.8950499892234802,0.8973000049591064,0.9035666584968567,0.9052666425704956,0.9064666628837585,0.9115833044052124,0.9144499897956848,0.9159500002861023,0.9169999957084656,0.9191166758537292,0.9207833409309387,0.9245499968528748,0.9243833422660828,0.9267666935920715,0.9281333088874817,0.9307166934013367,0.9296666383743286,0.9318333268165588,0.932699978351593,0.9354166388511658,0.9369833469390869,0.9354000091552734,0.9379000067710876,0.9388666749000549,0.9401999711990356,0.940933346748352],"yaxis":"y","type":"scatter"},{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#00ff00","dash":"dot"},"marker":{"symbol":"circle"},"mode":"lines","name":"Val Accuracy","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[0.8483999967575073,0.8636000156402588,0.8693000078201294,0.8597999811172485,0.8708000183105469,0.8799999952316284,0.8684999942779541,0.880299985408783,0.8840000033378601,0.8828999996185303,0.8894000053405762,0.883899986743927,0.8883000016212463,0.8932999968528748,0.8909000158309937,0.883400022983551,0.8845999836921692,0.8880000114440918,0.8848999738693237,0.8884999752044678,0.883400022983551,0.8901000022888184,0.8852999806404114,0.8906999826431274,0.8791999816894531,0.8859999775886536,0.8860999941825867,0.8892999887466431,0.892300009727478,0.8938000202178955],"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"text":"AdamW & L2: Loss vs Accuracy"},"xaxis":{"title":{"text":"Epoch"}},"yaxis":{"title":{"text":"Value"}}},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('b0559540-5378-4e76-b156-026d0533edfe');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                            </script>        </div>
+</body>
+</html></div></div>
+</div>
+</section>
+<section id="learning-rate-scheduler">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Learning Rate Scheduler</a><a class="headerlink" href="#learning-rate-scheduler" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">lr_exp_decay</span><span class="p">(</span><span class="n">epoch</span><span class="p">):</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mf">0.1</span>
+    <span class="c1"># initial_lr == global variable</span>
+    <span class="k">if</span> <span class="n">epoch</span> <span class="o">&gt;</span> <span class="mi">8</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">initial_lr</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">epoch</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">initial_lr</span>
+
+<span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">clear_session</span><span class="p">()</span>
+<span class="n">reset_random_seeds</span><span class="p">()</span>
+
+<span class="n">l2_reg</span> <span class="o">=</span> <span class="n">l2</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">)</span>
+<span class="n">initial_lr</span> <span class="o">=</span> <span class="mf">0.001</span>
+<span class="n">lr_schedule</span> <span class="o">=</span> <span class="n">LearningRateScheduler</span><span class="p">(</span><span class="n">lr_exp_decay</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Flatten</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s2">&quot;he_normal&quot;</span><span class="p">,</span> <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">l2_reg</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s2">&quot;he_normal&quot;</span><span class="p">,</span> <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">l2_reg</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;softmax&quot;</span><span class="p">))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">AdamW</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="n">initial_lr</span><span class="p">),</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">)</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train_encode</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+    <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test_encode</span><span class="p">),</span>
+    <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">lr_schedule</span><span class="p">])</span>
+
+<span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">chart_title</span><span class="o">=</span><span class="s2">&quot;AdamW &amp; L2 &amp; LR-Scheduler: Loss vs Accuracy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1: LearningRateScheduler setting learning rate to 0.001.
+Epoch 1/30
+235/235 [==============================] - 2s 5ms/step - loss: 0.6799 - accuracy: 0.8251 - val_loss: 0.5847 - val_accuracy: 0.8473 - lr: 0.0010
+
+Epoch 2: LearningRateScheduler setting learning rate to 0.001.
+Epoch 2/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.5102 - accuracy: 0.8687 - val_loss: 0.5166 - val_accuracy: 0.8635 - lr: 0.0010
+
+Epoch 3: LearningRateScheduler setting learning rate to 0.001.
+Epoch 3/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.4551 - accuracy: 0.8816 - val_loss: 0.4854 - val_accuracy: 0.8690 - lr: 0.0010
+
+Epoch 4: LearningRateScheduler setting learning rate to 0.001.
+Epoch 4/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.4240 - accuracy: 0.8868 - val_loss: 0.4854 - val_accuracy: 0.8615 - lr: 0.0010
+
+Epoch 5: LearningRateScheduler setting learning rate to 0.001.
+Epoch 5/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.3961 - accuracy: 0.8947 - val_loss: 0.4557 - val_accuracy: 0.8715 - lr: 0.0010
+
+Epoch 6: LearningRateScheduler setting learning rate to 0.001.
+Epoch 6/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.3787 - accuracy: 0.8975 - val_loss: 0.4392 - val_accuracy: 0.8782 - lr: 0.0010
+
+Epoch 7: LearningRateScheduler setting learning rate to 0.001.
+Epoch 7/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.3591 - accuracy: 0.9038 - val_loss: 0.4602 - val_accuracy: 0.8669 - lr: 0.0010
+
+Epoch 8: LearningRateScheduler setting learning rate to 0.001.
+Epoch 8/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.3508 - accuracy: 0.9048 - val_loss: 0.4244 - val_accuracy: 0.8818 - lr: 0.0010
+
+Epoch 9: LearningRateScheduler setting learning rate to 0.001.
+Epoch 9/30
+235/235 [==============================] - 1s 6ms/step - loss: 0.3377 - accuracy: 0.9072 - val_loss: 0.4131 - val_accuracy: 0.8812 - lr: 0.0010
+
+Epoch 10: LearningRateScheduler setting learning rate to 0.00040656965974059914.
+Epoch 10/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.2960 - accuracy: 0.9226 - val_loss: 0.3863 - val_accuracy: 0.8923 - lr: 4.0657e-04
+
+Epoch 11: LearningRateScheduler setting learning rate to 0.00036787944117144236.
+Epoch 11/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2821 - accuracy: 0.9261 - val_loss: 0.3859 - val_accuracy: 0.8948 - lr: 3.6788e-04
+
+Epoch 12: LearningRateScheduler setting learning rate to 0.00033287108369807955.
+Epoch 12/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2714 - accuracy: 0.9297 - val_loss: 0.3760 - val_accuracy: 0.8949 - lr: 3.3287e-04
+
+Epoch 13: LearningRateScheduler setting learning rate to 0.00030119421191220205.
+Epoch 13/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2639 - accuracy: 0.9327 - val_loss: 0.3792 - val_accuracy: 0.8920 - lr: 3.0119e-04
+
+Epoch 14: LearningRateScheduler setting learning rate to 0.0002725317930340126.
+Epoch 14/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2553 - accuracy: 0.9362 - val_loss: 0.3778 - val_accuracy: 0.8944 - lr: 2.7253e-04
+
+Epoch 15: LearningRateScheduler setting learning rate to 0.00024659696394160646.
+Epoch 15/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2479 - accuracy: 0.9384 - val_loss: 0.3691 - val_accuracy: 0.8966 - lr: 2.4660e-04
+
+Epoch 16: LearningRateScheduler setting learning rate to 0.00022313016014842982.
+Epoch 16/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2408 - accuracy: 0.9411 - val_loss: 0.3743 - val_accuracy: 0.8950 - lr: 2.2313e-04
+
+Epoch 17: LearningRateScheduler setting learning rate to 0.00020189651799465538.
+Epoch 17/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.2344 - accuracy: 0.9427 - val_loss: 0.3760 - val_accuracy: 0.8962 - lr: 2.0190e-04
+
+Epoch 18: LearningRateScheduler setting learning rate to 0.0001826835240527346.
+Epoch 18/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.2290 - accuracy: 0.9442 - val_loss: 0.3717 - val_accuracy: 0.8966 - lr: 1.8268e-04
+
+Epoch 19: LearningRateScheduler setting learning rate to 0.00016529888822158653.
+Epoch 19/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.2233 - accuracy: 0.9470 - val_loss: 0.3710 - val_accuracy: 0.8966 - lr: 1.6530e-04
+
+Epoch 20: LearningRateScheduler setting learning rate to 0.00014956861922263504.
+Epoch 20/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.2164 - accuracy: 0.9495 - val_loss: 0.3722 - val_accuracy: 0.8979 - lr: 1.4957e-04
+
+Epoch 21: LearningRateScheduler setting learning rate to 0.0001353352832366127.
+Epoch 21/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.2135 - accuracy: 0.9499 - val_loss: 0.3718 - val_accuracy: 0.8981 - lr: 1.3534e-04
+
+Epoch 22: LearningRateScheduler setting learning rate to 0.0001224564282529819.
+Epoch 22/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.2091 - accuracy: 0.9517 - val_loss: 0.3686 - val_accuracy: 0.9000 - lr: 1.2246e-04
+
+Epoch 23: LearningRateScheduler setting learning rate to 0.00011080315836233387.
+Epoch 23/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.2044 - accuracy: 0.9540 - val_loss: 0.3695 - val_accuracy: 0.8991 - lr: 1.1080e-04
+
+Epoch 24: LearningRateScheduler setting learning rate to 0.00010025884372280371.
+Epoch 24/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.2002 - accuracy: 0.9556 - val_loss: 0.3693 - val_accuracy: 0.8999 - lr: 1.0026e-04
+
+Epoch 25: LearningRateScheduler setting learning rate to 9.071795328941248e-05.
+Epoch 25/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.1961 - accuracy: 0.9573 - val_loss: 0.3730 - val_accuracy: 0.8998 - lr: 9.0718e-05
+
+Epoch 26: LearningRateScheduler setting learning rate to 8.20849986238988e-05.
+Epoch 26/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1940 - accuracy: 0.9579 - val_loss: 0.3662 - val_accuracy: 0.8985 - lr: 8.2085e-05
+
+Epoch 27: LearningRateScheduler setting learning rate to 7.427357821433387e-05.
+Epoch 27/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1906 - accuracy: 0.9594 - val_loss: 0.3677 - val_accuracy: 0.8989 - lr: 7.4274e-05
+
+Epoch 28: LearningRateScheduler setting learning rate to 6.720551273974975e-05.
+Epoch 28/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1879 - accuracy: 0.9604 - val_loss: 0.3721 - val_accuracy: 0.8993 - lr: 6.7206e-05
+
+Epoch 29: LearningRateScheduler setting learning rate to 6.0810062625217954e-05.
+Epoch 29/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1857 - accuracy: 0.9619 - val_loss: 0.3734 - val_accuracy: 0.8987 - lr: 6.0810e-05
+
+Epoch 30: LearningRateScheduler setting learning rate to 5.502322005640721e-05.
+Epoch 30/30
+235/235 [==============================] - 1s 4ms/step - loss: 0.1830 - accuracy: 0.9628 - val_loss: 0.3730 - val_accuracy: 0.9000 - lr: 5.5023e-05
+</pre></div>
+</div>
+<div class="output text_html"><html>
+<head><meta charset="utf-8" /></head>
+<body>
+    <div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script src="https://cdn.plot.ly/plotly-2.18.2.min.js"></script>                <div id="eeb81ec2-67ec-4150-be98-5173c0689b99" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("eeb81ec2-67ec-4150-be98-5173c0689b99")) {                    Plotly.newPlot(                        "eeb81ec2-67ec-4150-be98-5173c0689b99",                        [{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#636efa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Train Loss","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[0.6799445748329163,0.5101553797721863,0.45512843132019043,0.42399531602859497,0.39610299468040466,0.3786621689796448,0.35906481742858887,0.35076266527175903,0.33769720792770386,0.29596197605133057,0.2821365296840668,0.2713513970375061,0.26386579871177673,0.25528889894485474,0.2479037344455719,0.24080292880535126,0.23444455862045288,0.22902508080005646,0.22330407798290253,0.21639536321163177,0.21350188553333282,0.2090758979320526,0.20439448952674866,0.20015893876552582,0.19613806903362274,0.19395680725574493,0.19064810872077942,0.1878676861524582,0.18572373688220978,0.18301500380039215],"yaxis":"y","type":"scatter"},{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#00ff00","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Val Loss","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[0.5847350358963013,0.5166391134262085,0.4854329526424408,0.4854337275028229,0.4557015597820282,0.4391946792602539,0.4601789116859436,0.4243955910205841,0.41309747099876404,0.38630709052085876,0.3859308063983917,0.3760150372982025,0.37921831011772156,0.3777799606323242,0.36905768513679504,0.374319851398468,0.3759595453739166,0.37169885635375977,0.3709973096847534,0.3722209334373474,0.3717651963233948,0.36864131689071655,0.3695152997970581,0.36926329135894775,0.37304356694221497,0.36621591448783875,0.3677384853363037,0.3720676302909851,0.37338879704475403,0.3730374872684479],"yaxis":"y","type":"scatter"},{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#636efa","dash":"dot"},"marker":{"symbol":"circle"},"mode":"lines","name":"Train Accuracy","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[0.8251166939735413,0.8686500191688538,0.8816333413124084,0.8867666721343994,0.8946999907493591,0.8975333571434021,0.9037833213806152,0.9047666788101196,0.9071999788284302,0.9225666522979736,0.9261333346366882,0.9297333359718323,0.9327333569526672,0.9361500144004822,0.9383666515350342,0.9410666823387146,0.9426500201225281,0.9441666603088379,0.9470499753952026,0.9495499730110168,0.9499499797821045,0.9517499804496765,0.9539833068847656,0.9555833339691162,0.9572666883468628,0.9578666687011719,0.9593833088874817,0.9604166746139526,0.9618666768074036,0.9627833366394043],"yaxis":"y","type":"scatter"},{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#00ff00","dash":"dot"},"marker":{"symbol":"circle"},"mode":"lines","name":"Val Accuracy","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[0.8472999930381775,0.8634999990463257,0.8690000176429749,0.8615000247955322,0.8715000152587891,0.8781999945640564,0.8669000267982483,0.8817999958992004,0.8812000155448914,0.892300009727478,0.8948000073432922,0.8949000239372253,0.8920000195503235,0.8944000005722046,0.8966000080108643,0.8949999809265137,0.8962000012397766,0.8966000080108643,0.8966000080108643,0.8978999853134155,0.8981000185012817,0.8999999761581421,0.8991000056266785,0.8999000191688538,0.8998000025749207,0.8985000252723694,0.8988999724388123,0.8992999792098999,0.8986999988555908,0.8999999761581421],"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"text":"AdamW & L2 & LR-Scheduler: Loss vs Accuracy"},"xaxis":{"title":{"text":"Epoch"}},"yaxis":{"title":{"text":"Value"}}},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('eeb81ec2-67ec-4150-be98-5173c0689b99');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                            </script>        </div>
+</body>
+</html></div></div>
+</div>
+</section>
+<section id="batch-normalization">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Batch Normalization</a><a class="headerlink" href="#batch-normalization" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">lr_exp_decay</span><span class="p">(</span><span class="n">epoch</span><span class="p">):</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mf">0.1</span>
+    <span class="c1"># initial_lr == global variable</span>
+    <span class="k">if</span> <span class="n">epoch</span> <span class="o">&gt;</span> <span class="mi">8</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">initial_lr</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">epoch</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">initial_lr</span>
+
+<span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">clear_session</span><span class="p">()</span>
+<span class="n">reset_random_seeds</span><span class="p">()</span>
+
+<span class="n">l2_reg</span> <span class="o">=</span> <span class="n">l2</span><span class="p">(</span><span class="mf">0.0002</span><span class="p">)</span>
+<span class="n">initial_lr</span> <span class="o">=</span> <span class="mf">0.001</span>
+<span class="n">lr_schedule</span> <span class="o">=</span> <span class="n">LearningRateScheduler</span><span class="p">(</span><span class="n">lr_exp_decay</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Flatten</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s2">&quot;he_normal&quot;</span><span class="p">,</span> <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">l2_reg</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">BatchNormalization</span><span class="p">())</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s2">&quot;relu&quot;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s2">&quot;he_normal&quot;</span><span class="p">,</span> <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">l2_reg</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">BatchNormalization</span><span class="p">())</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s2">&quot;relu&quot;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;softmax&quot;</span><span class="p">))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">AdamW</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="n">initial_lr</span><span class="p">),</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">)</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train_encode</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+    <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test_encode</span><span class="p">),</span>
+    <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">lr_schedule</span><span class="p">])</span>
+
+<span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">chart_title</span><span class="o">=</span><span class="s2">&quot;AdamW &amp; L2 &amp; LR-Scheduler &amp; BatchNorm: Loss vs Accuracy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1: LearningRateScheduler setting learning rate to 0.001.
+Epoch 1/30
+235/235 [==============================] - 4s 6ms/step - loss: 0.7956 - accuracy: 0.8484 - val_loss: 0.7580 - val_accuracy: 0.8413 - lr: 0.0010
+
+Epoch 2: LearningRateScheduler setting learning rate to 0.001.
+Epoch 2/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.6071 - accuracy: 0.8847 - val_loss: 0.6695 - val_accuracy: 0.8493 - lr: 0.0010
+
+Epoch 3: LearningRateScheduler setting learning rate to 0.001.
+Epoch 3/30
+235/235 [==============================] - 1s 6ms/step - loss: 0.5163 - accuracy: 0.8963 - val_loss: 0.6268 - val_accuracy: 0.8527 - lr: 0.0010
+
+Epoch 4: LearningRateScheduler setting learning rate to 0.001.
+Epoch 4/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.4538 - accuracy: 0.9025 - val_loss: 0.5601 - val_accuracy: 0.8632 - lr: 0.0010
+
+Epoch 5: LearningRateScheduler setting learning rate to 0.001.
+Epoch 5/30
+235/235 [==============================] - 1s 6ms/step - loss: 0.4110 - accuracy: 0.9094 - val_loss: 0.6114 - val_accuracy: 0.8399 - lr: 0.0010
+
+Epoch 6: LearningRateScheduler setting learning rate to 0.001.
+Epoch 6/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.3778 - accuracy: 0.9128 - val_loss: 0.5195 - val_accuracy: 0.8593 - lr: 0.0010
+
+Epoch 7: LearningRateScheduler setting learning rate to 0.001.
+Epoch 7/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.3496 - accuracy: 0.9190 - val_loss: 0.6654 - val_accuracy: 0.8158 - lr: 0.0010
+
+Epoch 8: LearningRateScheduler setting learning rate to 0.001.
+Epoch 8/30
+235/235 [==============================] - 2s 6ms/step - loss: 0.3322 - accuracy: 0.9204 - val_loss: 0.5144 - val_accuracy: 0.8627 - lr: 0.0010
+
+Epoch 9: LearningRateScheduler setting learning rate to 0.001.
+Epoch 9/30
+235/235 [==============================] - 2s 7ms/step - loss: 0.3189 - accuracy: 0.9228 - val_loss: 0.5573 - val_accuracy: 0.8503 - lr: 0.0010
+
+Epoch 10: LearningRateScheduler setting learning rate to 0.00040656965974059914.
+Epoch 10/30
+235/235 [==============================] - 1s 6ms/step - loss: 0.2569 - accuracy: 0.9454 - val_loss: 0.4342 - val_accuracy: 0.8841 - lr: 4.0657e-04
+
+Epoch 11: LearningRateScheduler setting learning rate to 0.00036787944117144236.
+Epoch 11/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.2266 - accuracy: 0.9531 - val_loss: 0.4316 - val_accuracy: 0.8903 - lr: 3.6788e-04
+
+Epoch 12: LearningRateScheduler setting learning rate to 0.00033287108369807955.
+Epoch 12/30
+235/235 [==============================] - 1s 6ms/step - loss: 0.2077 - accuracy: 0.9590 - val_loss: 0.4200 - val_accuracy: 0.8897 - lr: 3.3287e-04
+
+Epoch 13: LearningRateScheduler setting learning rate to 0.00030119421191220205.
+Epoch 13/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.1894 - accuracy: 0.9645 - val_loss: 0.4330 - val_accuracy: 0.8917 - lr: 3.0119e-04
+
+Epoch 14: LearningRateScheduler setting learning rate to 0.0002725317930340126.
+Epoch 14/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.1736 - accuracy: 0.9696 - val_loss: 0.4387 - val_accuracy: 0.8926 - lr: 2.7253e-04
+
+Epoch 15: LearningRateScheduler setting learning rate to 0.00024659696394160646.
+Epoch 15/30
+235/235 [==============================] - 1s 6ms/step - loss: 0.1599 - accuracy: 0.9728 - val_loss: 0.4757 - val_accuracy: 0.8780 - lr: 2.4660e-04
+
+Epoch 16: LearningRateScheduler setting learning rate to 0.00022313016014842982.
+Epoch 16/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.1488 - accuracy: 0.9766 - val_loss: 0.4447 - val_accuracy: 0.8975 - lr: 2.2313e-04
+
+Epoch 17: LearningRateScheduler setting learning rate to 0.00020189651799465538.
+Epoch 17/30
+235/235 [==============================] - 2s 6ms/step - loss: 0.1362 - accuracy: 0.9804 - val_loss: 0.4376 - val_accuracy: 0.8988 - lr: 2.0190e-04
+
+Epoch 18: LearningRateScheduler setting learning rate to 0.0001826835240527346.
+Epoch 18/30
+235/235 [==============================] - 2s 7ms/step - loss: 0.1270 - accuracy: 0.9827 - val_loss: 0.4542 - val_accuracy: 0.8952 - lr: 1.8268e-04
+
+Epoch 19: LearningRateScheduler setting learning rate to 0.00016529888822158653.
+Epoch 19/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.1173 - accuracy: 0.9862 - val_loss: 0.4781 - val_accuracy: 0.8867 - lr: 1.6530e-04
+
+Epoch 20: LearningRateScheduler setting learning rate to 0.00014956861922263504.
+Epoch 20/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.1096 - accuracy: 0.9887 - val_loss: 0.4848 - val_accuracy: 0.8895 - lr: 1.4957e-04
+
+Epoch 21: LearningRateScheduler setting learning rate to 0.0001353352832366127.
+Epoch 21/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.1024 - accuracy: 0.9904 - val_loss: 0.4636 - val_accuracy: 0.8987 - lr: 1.3534e-04
+
+Epoch 22: LearningRateScheduler setting learning rate to 0.0001224564282529819.
+Epoch 22/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.0962 - accuracy: 0.9924 - val_loss: 0.4811 - val_accuracy: 0.8960 - lr: 1.2246e-04
+
+Epoch 23: LearningRateScheduler setting learning rate to 0.00011080315836233387.
+Epoch 23/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.0918 - accuracy: 0.9938 - val_loss: 0.4810 - val_accuracy: 0.8966 - lr: 1.1080e-04
+
+Epoch 24: LearningRateScheduler setting learning rate to 0.00010025884372280371.
+Epoch 24/30
+235/235 [==============================] - 1s 6ms/step - loss: 0.0867 - accuracy: 0.9948 - val_loss: 0.4813 - val_accuracy: 0.8956 - lr: 1.0026e-04
+
+Epoch 25: LearningRateScheduler setting learning rate to 9.071795328941248e-05.
+Epoch 25/30
+235/235 [==============================] - 1s 6ms/step - loss: 0.0831 - accuracy: 0.9958 - val_loss: 0.4784 - val_accuracy: 0.9006 - lr: 9.0718e-05
+
+Epoch 26: LearningRateScheduler setting learning rate to 8.20849986238988e-05.
+Epoch 26/30
+235/235 [==============================] - 2s 7ms/step - loss: 0.0785 - accuracy: 0.9974 - val_loss: 0.4885 - val_accuracy: 0.8976 - lr: 8.2085e-05
+
+Epoch 27: LearningRateScheduler setting learning rate to 7.427357821433387e-05.
+Epoch 27/30
+235/235 [==============================] - 2s 7ms/step - loss: 0.0758 - accuracy: 0.9978 - val_loss: 0.5163 - val_accuracy: 0.8932 - lr: 7.4274e-05
+
+Epoch 28: LearningRateScheduler setting learning rate to 6.720551273974975e-05.
+Epoch 28/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.0724 - accuracy: 0.9983 - val_loss: 0.4950 - val_accuracy: 0.8994 - lr: 6.7206e-05
+
+Epoch 29: LearningRateScheduler setting learning rate to 6.0810062625217954e-05.
+Epoch 29/30
+235/235 [==============================] - 1s 5ms/step - loss: 0.0704 - accuracy: 0.9988 - val_loss: 0.5082 - val_accuracy: 0.8984 - lr: 6.0810e-05
+
+Epoch 30: LearningRateScheduler setting learning rate to 5.502322005640721e-05.
+Epoch 30/30
+235/235 [==============================] - 1s 6ms/step - loss: 0.0680 - accuracy: 0.9994 - val_loss: 0.5125 - val_accuracy: 0.9007 - lr: 5.5023e-05
+</pre></div>
+</div>
+<div class="output text_html"><html>
+<head><meta charset="utf-8" /></head>
+<body>
+    <div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script src="https://cdn.plot.ly/plotly-2.18.2.min.js"></script>                <div id="a90c3413-548c-41f6-9933-41bd672c89ab" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("a90c3413-548c-41f6-9933-41bd672c89ab")) {                    Plotly.newPlot(                        "a90c3413-548c-41f6-9933-41bd672c89ab",                        [{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#636efa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Train Loss","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[0.7956178784370422,0.6071142554283142,0.5162773728370667,0.4537540376186371,0.4110359847545624,0.37782496213912964,0.34963515400886536,0.33219394087791443,0.318897545337677,0.2569331228733063,0.22656218707561493,0.20771127939224243,0.18941888213157654,0.1735706776380539,0.1599041372537613,0.14875908195972443,0.13623274862766266,0.12698614597320557,0.11727795749902725,0.10964557528495789,0.10243912041187286,0.09622232615947723,0.09183317422866821,0.08670137822628021,0.08309707045555115,0.07846145331859589,0.07580679655075073,0.07239793986082077,0.07037504762411118,0.06799023598432541],"yaxis":"y","type":"scatter"},{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#00ff00","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Val Loss","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[0.7580477595329285,0.6695013046264648,0.6268050670623779,0.5600948929786682,0.6114053130149841,0.51951003074646,0.6653525233268738,0.5143672227859497,0.557344913482666,0.43424731492996216,0.43157142400741577,0.41997459530830383,0.4329560101032257,0.43870455026626587,0.4756922423839569,0.4446534216403961,0.4376043975353241,0.4542025327682495,0.4780867099761963,0.4848376512527466,0.4636051654815674,0.48113423585891724,0.4810449182987213,0.48126375675201416,0.47841307520866394,0.48850175738334656,0.5163477659225464,0.4950462877750397,0.5082092881202698,0.5125260949134827],"yaxis":"y","type":"scatter"},{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#636efa","dash":"dot"},"marker":{"symbol":"circle"},"mode":"lines","name":"Train Accuracy","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[0.8484333157539368,0.8847000002861023,0.896316647529602,0.9024666547775269,0.9093999862670898,0.9127833247184753,0.9190333485603333,0.92044997215271,0.9227833151817322,0.9454333186149597,0.9531000256538391,0.9590333104133606,0.9644833207130432,0.9696166515350342,0.9728000164031982,0.9765833616256714,0.9803500175476074,0.9827166795730591,0.9862333536148071,0.9886999726295471,0.9904333353042603,0.9923666715621948,0.9938333630561829,0.9947999715805054,0.9958166480064392,0.9974499940872192,0.9978333115577698,0.998283326625824,0.9987833499908447,0.9993833303451538],"yaxis":"y","type":"scatter"},{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#00ff00","dash":"dot"},"marker":{"symbol":"circle"},"mode":"lines","name":"Val Accuracy","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"xaxis":"x","y":[0.8413000106811523,0.8493000268936157,0.8526999950408936,0.8632000088691711,0.839900016784668,0.8593000173568726,0.8158000111579895,0.8626999855041504,0.8503000140190125,0.8841000199317932,0.8902999758720398,0.8896999955177307,0.891700029373169,0.8925999999046326,0.878000020980835,0.8974999785423279,0.8988000154495239,0.8952000141143799,0.8866999745368958,0.8895000219345093,0.8986999988555908,0.8960000276565552,0.8966000080108643,0.8956000208854675,0.900600016117096,0.897599995136261,0.8931999802589417,0.899399995803833,0.8984000086784363,0.9006999731063843],"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"text":"AdamW & L2 & LR-Scheduler & BatchNorm: Loss vs Accuracy"},"xaxis":{"title":{"text":"Epoch"}},"yaxis":{"title":{"text":"Value"}}},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('a90c3413-548c-41f6-9933-41bd672c89ab');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                            </script>        </div>
+</body>
+</html></div></div>
+</div>
+</section>
+<section id="error-analysis">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Error Analysis</a><a class="headerlink" href="#error-analysis" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y_test_pred_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+<span class="n">y_test_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">y_test_pred_prob</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">25</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">random_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_test_pred</span> <span class="o">==</span> <span class="n">row</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x_test</span><span class="p">[</span><span class="n">random_index</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+
+    <span class="n">ax_name</span> <span class="o">=</span> <span class="s1">&#39;True: </span><span class="si">{}</span><span class="se">\n</span><span class="s1">Predict: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">y_test</span><span class="p">[</span><span class="n">random_index</span><span class="p">]],</span> <span class="n">labels</span><span class="p">[</span><span class="n">y_test_pred</span><span class="p">[</span><span class="n">random_index</span><span class="p">]])</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">ax_name</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>313/313 [==============================] - 1s 2ms/step
+</pre></div>
+</div>
+<img alt="../_images/c9c3c664747780878c4c1ee7c653486c7b2920c8997baf1aadd5683e885716b8.png" src="../_images/c9c3c664747780878c4c1ee7c653486c7b2920c8997baf1aadd5683e885716b8.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">labels</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
+
+ T-shirt/top       0.83      0.88      0.85      1000
+     Trouser       0.99      0.98      0.99      1000
+    Pullover       0.79      0.86      0.82      1000
+       Dress       0.90      0.91      0.90      1000
+        Coat       0.85      0.82      0.83      1000
+      Sandal       0.97      0.97      0.97      1000
+       Shirt       0.80      0.68      0.74      1000
+     Sneaker       0.96      0.97      0.96      1000
+         Bag       0.96      0.98      0.97      1000
+  Ankle boot       0.96      0.97      0.97      1000
+
+    accuracy                           0.90     10000
+   macro avg       0.90      0.90      0.90     10000
+weighted avg       0.90      0.90      0.90     10000
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Preclass%20Session%205.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Preclass Session 5: Optimization</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Preclass%20Session%206.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Preclass Session 6: Metrics and Losses</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Session 5: Optimization</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mnist-fashion">MNIST Fashion</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sgd-vs-adam-vs-adamw">SGD vs Adam vs AdamW</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#l2-regularization">L2 regularization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate-scheduler">Learning Rate Scheduler</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-normalization">Batch Normalization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-analysis">Error Analysis</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kyle Paul
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

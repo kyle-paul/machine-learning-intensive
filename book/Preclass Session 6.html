@@ -1,0 +1,741 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Preclass Session 6: Metrics and Losses &#8212; Machine Learning Intensive</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/Preclass Session 6';</script>
+    <link rel="canonical" href="https://kyle-paul.github.io/machine-learning-intensive/book/Preclass Session 6.html" />
+    <link rel="shortcut icon" href="../_static/fav.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Session 6: Metrics &amp; Losses" href="S6_Lab_Metrics%26Losses.html" />
+    <link rel="prev" title="Session 5: Optimization" href="S5_Lab_Optimization.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%201.html"><strong>Preclass Session 1: Representation</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%202.html"><strong>Preclass Session 2: Linear Model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S2_Lab_LinearModel.html">Session 2: Linear Model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%203.html"><strong>Preclass Session 3: Recommender System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S3_Lab_RecSys.html">Sesion 3: Recommender System</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%204.html"><strong>Preclass Session 4: NonLinear Predictor</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S4_Lab_NonLinearPredictors.html">Session 4: Nonlinear Predictors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%205.html"><strong>Preclass Session 5: Optimization</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S5_Lab_Optimization.html">Session 5: Optimization</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Preclass Session 6: Metrics and Losses</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S6_Lab_Metrics%26Losses.html">Session 6: Metrics &amp; Losses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Midterm%20Theory%20Test.html"><strong>Theory Midterm Test</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Midterm%20Theory%20Solution.html"><strong>Theory Midterm Solution</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%208.html"><strong>Preclass Session 8: Convolutional Neural Network</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S8_Lab_CNN.html">Session 8: Convolutional Neural Network</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%209.html"><strong>Preclass Session 9: Natural Language Processing</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S9_LAB_RNN.html">Session 9 - Natural Language Processing</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%2010.html"><strong>Preclass Session 10: MDP Planning</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S10_LAB_MDP_PLANNING.html">Session 10 - MDP Planning</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%2011.html"><strong>Preclass Session 11: Reinforcement Learning</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S11_LAB_Q_Learning.html">Session 11 - Q Learning</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/edit/main/book/Preclass Session 6.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/issues/new?title=Issue%20on%20page%20%2Fbook/Preclass Session 6.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/Preclass Session 6.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Preclass Session 6: Metrics and Losses</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-recall-and-accuracy"><strong>Precision, Recall and Accuracy</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theory"><strong>Theory</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1"><strong>Question 1</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2"><strong>Question 2</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cat-detector"><strong>Cat detector</strong></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#dog-detector"><strong>Dog Detector</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#object-detection-information-retrieval"><strong>Object Detection &amp; Information Retrieval</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#support-vector-machine-and-hinge-loss"><strong>Support Vector Machine and Hinge Loss</strong></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="preclass-session-6-metrics-and-losses">
+<h1><strong>Preclass Session 6: Metrics and Losses</strong><a class="headerlink" href="#preclass-session-6-metrics-and-losses" title="Permalink to this heading">#</a></h1>
+<section id="precision-recall-and-accuracy">
+<h2><strong>Precision, Recall and Accuracy</strong><a class="headerlink" href="#precision-recall-and-accuracy" title="Permalink to this heading">#</a></h2>
+<section id="theory">
+<h3><strong>Theory</strong><a class="headerlink" href="#theory" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Binary Classification</strong>: we assume that Binary Classifier as a detector</p>
+<ul>
+<li><p>Predicted &amp; ground-truth labels for a particular class is of the same type (Positive/1) or not of the same type (Negative/0/-1).</p></li>
+<li><p>When predicted label = ground-truth label <span class="math notranslate nohighlight">\(\rightarrow\)</span> True (correctly predicted), otherwise False (mispredicted).</p></li>
+<li><p>Therefore we have 4 case occuring for each prediction: True Positive (TP), True Negative (TN), False Positive (FP), False Negative (FN).</p></li>
+<li><p>False Positive (FP) is also called type-I error. False Negative (FN) is type-II error.</p></li>
+</ul>
+</li>
+<li><p><strong>Precision and Recall</strong>:</p>
+<ul>
+<li><p>Precision only considers the positive labels of predictions (all detections):
+$<span class="math notranslate nohighlight">\(
+\text{Precision} = \frac{\sum{TP}}{\sum (TP + FP)}
+\)</span>$</p></li>
+<li><p>Recall (sensitivity) only consider ground-truth labels (all ground-truth):
+$<span class="math notranslate nohighlight">\(
+\text{Recall} = \frac{\sum{TP}}{\sum (TP + FN)}
+\)</span>$</p></li>
+</ul>
+</li>
+<li><p><strong>It depends on the application to determine how low and high each value is</strong></p></li>
+</ul>
+<center><img src="https://d1q4qwyh0q55bh.cloudfront.net/images/mcGvf602jq0619QpmuYTnTQe3yYMHtPYlCEOH0DGAvQsF1gfkCHueBWqNlJ9U0qr.png?d=desktop-thumbnail"></center><br>
+<ul class="simple">
+<li><p><strong>Other evaluation metrics for the Classification problem</strong>.
+$<span class="math notranslate nohighlight">\(
+f_B \text{ score} = (1 + B^2)\frac{Precision \cdot Recall}{Precision + Recall} \text{ with } B \in [0,1]
+\)</span>$</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+f_1 \text{ score} = 2 \frac{Precision \cdot Recall}{Precision + Recall}
+\]</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- True Positive rate (TPR) = recall (probability of detection)
+- False Positive rate (FPR) = posibility of false alarm
+$$\frac{TN}{TN + FP} = 1 - TNR$$
+- Mis-classification rate = 1 - Accuracy
+</pre></div>
+</div>
+<section id="question-1">
+<h4><strong>Question 1</strong><a class="headerlink" href="#question-1" title="Permalink to this heading">#</a></h4>
+<center><img src="https://d1q4qwyh0q55bh.cloudfront.net/images/WLoCHbUNJEiHEZsDT3zBx9OwdGyZ7oCUBeLvO9qtCDBW3QfmmlqFOOpNN9e1O5Mb.png?d=desktop-thumbnail
+"></center><br>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>True Positive</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>False Positive</p></td>
+<td><p>45</p></td>
+</tr>
+<tr class="row-even"><td><p>True Negative</p></td>
+<td><p>940</p></td>
+</tr>
+<tr class="row-odd"><td><p>False Negative</p></td>
+<td><p>10</p></td>
+</tr>
+</tbody>
+</table>
+<div class="math notranslate nohighlight">
+\[\text{Precision} = \frac{\sum{TP}}{\sum (TP + FP)} = 0.1\]</div>
+<div class="math notranslate nohighlight">
+\[\text{Recall} = \frac{\sum{TP}}{\sum (TP + FN)} = 0.33\]</div>
+<div class="math notranslate nohighlight">
+\[\text{Accuracy} = \frac{\sum{TP + TN}}{\sum (TP + FP + FN + TN)} = 0.945\]</div>
+<div class="math notranslate nohighlight">
+\[FPR = \frac{TN}{TN + FP} = 0.95\]</div>
+</section>
+<section id="question-2">
+<h4><strong>Question 2</strong><a class="headerlink" href="#question-2" title="Permalink to this heading">#</a></h4>
+<center><img src="https://d1q4qwyh0q55bh.cloudfront.net/images/EQ3h60MgsXXuKur2DNLchwblYyEbVboTp22WPV4eJ2gfKB4mMUlHWQ2ZZsamgYBv.png?d=desktop-thumbnail
+"></center><br>
+<section id="cat-detector">
+<h5><strong>Cat detector</strong><a class="headerlink" href="#cat-detector" title="Permalink to this heading">#</a></h5>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>True Positive</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>False Positive</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>True Negative</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>False Negative</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+<div class="math notranslate nohighlight">
+\[\text{Precision} = \frac{\sum{TP}}{\sum (TP + FP)} = 0.75\]</div>
+<div class="math notranslate nohighlight">
+\[\text{Recall} = \frac{\sum{TP}}{\sum (TP + FN)} = 0.75\]</div>
+<div class="math notranslate nohighlight">
+\[\text{Accuracy} = \frac{\sum{TP + TN}}{\sum (TP + FP + FN + TN)} = 0.75\]</div>
+<div class="math notranslate nohighlight">
+\[\text{F1} = 2\frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}} = 0.75\]</div>
+</section>
+<section id="dog-detector">
+<h5><strong>Dog Detector</strong><a class="headerlink" href="#dog-detector" title="Permalink to this heading">#</a></h5>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>True Positive</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>False Positive</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>True Negative</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-odd"><td><p>False Negative</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+<div class="math notranslate nohighlight">
+\[\text{Precision} = \frac{\sum{TP}}{\sum (TP + FP)} = 1\]</div>
+<div class="math notranslate nohighlight">
+\[\text{Recall} = \frac{\sum{TP}}{\sum (TP + FN)} = 0.75\]</div>
+<div class="math notranslate nohighlight">
+\[\text{Accuracy} = \frac{\sum{TP + TN}}{\sum (TP + FP + FN + TN)} = 0.875\]</div>
+<div class="math notranslate nohighlight">
+\[\text{F1} = 2\frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}} = 0.86\]</div>
+</section>
+</section>
+</section>
+<section id="object-detection-information-retrieval">
+<h3><strong>Object Detection &amp; Information Retrieval</strong><a class="headerlink" href="#object-detection-information-retrieval" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>In the database (let take an example is a image with multiple objects) containing some items we consider (for example: cat) and the Object Detection Algorithm can:</p>
+<ul>
+<li><p>Detect/select the defined object (Postives) or not detect</p></li>
+<li><p>Indentify correctly (True Positive) or misidentify (False Positive) after detecting/selecting.</p></li>
+<li><p>If there is no detection or selection, the predicted labels are Negatives. Depending on the ground-truth labels <span class="math notranslate nohighlight">\(\rightarrow\)</span> False Negative or True Negative.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="support-vector-machine-and-hinge-loss">
+<h3><strong>Support Vector Machine and Hinge Loss</strong><a class="headerlink" href="#support-vector-machine-and-hinge-loss" title="Permalink to this heading">#</a></h3>
+<p>SVM is a linear classifier with prediction score <span class="math notranslate nohighlight">\(\bf \hat{y} = w \cdot z - b\)</span> and predicted label is <span class="math notranslate nohighlight">\(\bf sgn(\hat{y})\)</span>. We use <span class="math notranslate nohighlight">\(\bf -b\)</span> for the sake of convenience in math computation and the classification threshold is <span class="math notranslate nohighlight">\(\bf \hat{y} &gt;&lt; 0\)</span></p>
+<p>The idea is that ww will maximize the minimum margin to get large margin classifiers. This task requires 2 things:</p>
+<ul class="simple">
+<li><p>Predicted labels = Ground-truth labels <span class="math notranslate nohighlight">\(\bf sgn(\hat{y}) = y \in \{\pm 1\}\)</span></p></li>
+<li><p>Absolute value of prediction score <span class="math notranslate nohighlight">\(\bf |\hat{y}| = |w \cdot z - b|\)</span> must also be <span class="math notranslate nohighlight">\(&gt; 0\)</span>.</p></li>
+</ul>
+<p>Large Classification margin will be robust to noise: when input features have small noises <span class="math notranslate nohighlight">\(\bf z_i \leftarrow z_i + \epsilon\)</span>, the predicted label <span class="math notranslate nohighlight">\(\bf sgn(\hat{y})\)</span> will not be changed sign.</p>
+<p>Combining these two conditions, we get the Sign Prediction Margin <span class="math notranslate nohighlight">\(\bf m = y(w \cdot - b)\)</span> must be <span class="math notranslate nohighlight">\(&gt; 0\)</span>.</p>
+<p>Next, we only consider <span class="math notranslate nohighlight">\(sign\)</span>, so we can scale prediction score <span class="math notranslate nohighlight">\(\bf \hat{y} = (w \cdot z - b)\)</span> with a random postive integer e.g. <span class="math notranslate nohighlight">\(\bf \hat{y} = 100(w \cdot z - b)\)</span> <span class="math notranslate nohighlight">\(\rightarrow\)</span> get the same <span class="math notranslate nohighlight">\(sign\)</span>. Therefore, we should choose the scale for magin <span class="math notranslate nohighlight">\(&gt; 1\)</span> for convenience.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="S5_Lab_Optimization.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Session 5: Optimization</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="S6_Lab_Metrics%26Losses.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Session 6: Metrics &amp; Losses</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-recall-and-accuracy"><strong>Precision, Recall and Accuracy</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theory"><strong>Theory</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1"><strong>Question 1</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2"><strong>Question 2</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cat-detector"><strong>Cat detector</strong></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#dog-detector"><strong>Dog Detector</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#object-detection-information-retrieval"><strong>Object Detection &amp; Information Retrieval</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#support-vector-machine-and-hinge-loss"><strong>Support Vector Machine and Hinge Loss</strong></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kyle Paul
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

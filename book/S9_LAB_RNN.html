@@ -1,0 +1,2039 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Session 9 - Natural Language Processing &#8212; Machine Learning Intensive</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/S9_LAB_RNN';</script>
+    <link rel="canonical" href="https://kyle-paul.github.io/machine-learning-intensive/book/S9_LAB_RNN.html" />
+    <link rel="shortcut icon" href="../_static/fav.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Preclass Session 10: MDP Planning" href="Preclass%20Session%2010.html" />
+    <link rel="prev" title="Preclass Session 9: Natural Language Processing" href="Preclass%20Session%209.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%201.html"><strong>Preclass Session 1: Representation</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%202.html"><strong>Preclass Session 2: Linear Model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S2_Lab_LinearModel.html">Session 2: Linear Model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%203.html"><strong>Preclass Session 3: Recommender System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S3_Lab_RecSys.html">Sesion 3: Recommender System</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%204.html"><strong>Preclass Session 4: NonLinear Predictor</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S4_Lab_NonLinearPredictors.html">Session 4: Nonlinear Predictors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%205.html"><strong>Preclass Session 5: Optimization</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S5_Lab_Optimization.html">Session 5: Optimization</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%206.html"><strong>Preclass Session 6: Metrics and Losses</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S6_Lab_Metrics%26Losses.html">Session 6: Metrics &amp; Losses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Midterm%20Theory%20Test.html"><strong>Theory Midterm Test</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Midterm%20Theory%20Solution.html"><strong>Theory Midterm Solution</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%208.html"><strong>Preclass Session 8: Convolutional Neural Network</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S8_Lab_CNN.html">Session 8: Convolutional Neural Network</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%209.html"><strong>Preclass Session 9: Natural Language Processing</strong></a></li>
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Session 9 - Natural Language Processing</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%2010.html"><strong>Preclass Session 10: MDP Planning</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S10_LAB_MDP_PLANNING.html">Session 10 - MDP Planning</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%2011.html"><strong>Preclass Session 11: Reinforcement Learning</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S11_LAB_Q_Learning.html">Session 11 - Q Learning</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/kyle-paul/machine-learning-intensive/master?urlpath=tree/book/S9_LAB_RNN.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/kyle-paul/machine-learning-intensive/blob/master/book/S9_LAB_RNN.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/edit/main/book/S9_LAB_RNN.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/issues/new?title=Issue%20on%20page%20%2Fbook/S9_LAB_RNN.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/S9_LAB_RNN.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Session 9 - Natural Language Processing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Session 9 - Natural Language Processing</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rnn-with-tensorflow">RNN with Tensorflow</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-example-of-return-sequences">Simple Example of Return Sequences</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#comment-classification">Comment Classification</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-1">TODO 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-2">TODO 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-3">TODO 3</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="session-9-natural-language-processing">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Session 9 - Natural Language Processing</a><a class="headerlink" href="#session-9-natural-language-processing" title="Permalink to this heading">#</a></h1>
+<p>You need to read the theory lectures before practicing with this notebook:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://hackmd.io/&#64;KylePaul/ML_Preclass_S9">Preclass S4</a></p></li>
+<li><p><a class="reference external" href="https://hackmd.io/&#64;KylePaul/ML_Slide_S9">Slide</a></p></li>
+</ul>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#session-9-natural-language-processing" id="id1">Session 9 - Natural Language Processing</a></p></li>
+<li><p><a class="reference internal" href="#rnn-with-tensorflow" id="id2">RNN with Tensorflow</a></p>
+<ul>
+<li><p><a class="reference internal" href="#simple-example-of-return-sequences" id="id3">Simple Example of Return Sequences</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#comment-classification" id="id4">Comment Classification</a></p>
+<ul>
+<li><p><a class="reference internal" href="#todo-1" id="id5">TODO 1</a></p></li>
+<li><p><a class="reference internal" href="#todo-2" id="id6">TODO 2</a></p></li>
+<li><p><a class="reference internal" href="#todo-3" id="id7">TODO 3</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="rnn-with-tensorflow">
+<h1><a class="toc-backref" href="#id2" role="doc-backlink">RNN with Tensorflow</a><a class="headerlink" href="#rnn-with-tensorflow" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">SimpleRNN</span><span class="p">,</span> <span class="n">Embedding</span><span class="p">,</span> <span class="n">TimeDistributed</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Imagine we build a model that predicts the temperature of a day based on the previous 30 days.</p>
+<p>What the RNN model should look like:</p>
+<ul class="simple">
+<li><p>What does the input data look like?</p></li>
+<li><p>What is the output?</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># batch_size, time_step, n_features (n, 30, 1)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SimpleRNN</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>       <span class="c1"># tanh (-1, 1) (default)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>           <span class="c1"># fully-connected layer with linear activation to map into temperature range</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ simple_rnn (SimpleRNN)      (None, 1)                 3         
+                                                                 
+ dense (Dense)               (None, 1)                 2         
+                                                                 
+=================================================================
+Total params: 5
+Trainable params: 5
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<p>In language processing, there is 1 type of problem called Token Classification. Used to:</p>
+<ul class="simple">
+<li><p>Entity identification (NER): which word in a sentence indicates a person’s name, place name, time, etc.</p></li>
+<li><p>Part of Speech (POS): nouns, adjectives, verbs, adverbs</p></li>
+</ul>
+<p>What the RNN model should look like:</p>
+<ul class="simple">
+<li><p>What does the input data look like?</p></li>
+<li><p>What is the output?</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span>
+    <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">128</span><span class="p">)),</span>
+    <span class="n">SimpleRNN</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>  <span class="c1"># return the representation of token/timestep (many to many)</span>
+    <span class="n">TimeDistributed</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;softmax&quot;</span><span class="p">))</span>  <span class="c1"># one dense predicting for each timestep</span>
+<span class="p">])</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_2&quot;
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ simple_rnn_2 (SimpleRNN)    (None, 500, 64)           12352     
+                                                                 
+ time_distributed_1 (TimeDis  (None, 500, 10)          650       
+ tributed)                                                       
+                                                                 
+=================================================================
+Total params: 13,002
+Trainable params: 13,002
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Stacked RNN</strong></p>
+<p><img alt="" src="https://amitness.com/images/rnn-stacked.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SimpleRNN</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">700</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
+                    <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span> <span class="c1"># return_sequences is required here</span>
+<span class="c1"># whether return_sequences is required or not is based on each different task</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SimpleRNN</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+<span class="c1"># and prediction layer also change based on that</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_3&quot;
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ simple_rnn_3 (SimpleRNN)    (None, 700, 200)          60200     
+                                                                 
+ simple_rnn_4 (SimpleRNN)    (None, 100)               30100     
+                                                                 
+=================================================================
+Total params: 90,300
+Trainable params: 90,300
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">model</span> <span class="pre">=</span> <span class="pre">Sequential()</span></code> creates a sequential model object, which is a linear stack of layers that can be easily built and trained⁶.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model.add(SimpleRNN(200,</span> <span class="pre">input_shape=(700,</span> <span class="pre">100),</span> <span class="pre">return_sequences=True))</span></code> adds a SimpleRNN layer to the model, which is a fully-connected recurrent neural network where the output is fed back to the input¹². This layer has 200 units, which means it has 200 hidden states and output values. The input shape is (700, 100), which means the input has 700 time steps and 100 features per time step. The return_sequences argument is set to True, which means the layer returns the full sequence of output values for each input sequence, not just the last one.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model.add(SimpleRNN(100))</span></code> adds another SimpleRNN layer to the model, with 100 units. This layer does not specify the input shape, because it inherits it from the previous layer. The return_sequences argument is set to False by default, which means the layer only returns the last output value for each input sequence.</p></li>
+</ul>
+<section id="simple-example-of-return-sequences">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Simple Example of Return Sequences</a><a class="headerlink" href="#simple-example-of-return-sequences" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p>The return_sequences argument is a boolean flag that determines whether the SimpleRNN layer returns the full sequence of output values for each input sequence, or only the last one. This is useful when you want to stack multiple recurrent layers on top of each other, or when you want to use the output sequence for further processing .</p></li>
+<li><p>For example, suppose you have an input sequence of length 4, and each time step has 3 features. The input shape would be (4, 3). If you pass this input to a SimpleRNN layer with 2 units and return_sequences=True, the output shape would be (4, 2), because the layer returns 2 output values for each of the 4 time steps. The output sequence would look something like this:</p>
+<p><code class="docutils literal notranslate"><span class="pre">[[0.1,</span> <span class="pre">-0.2],</span> <span class="pre">[0.3,</span> <span class="pre">-0.4],</span> <span class="pre">[0.5,</span> <span class="pre">-0.6],</span> <span class="pre">[0.7,</span> <span class="pre">-0.8]]</span></code></p>
+</li>
+<li><p>However, if you set return_sequences=False, the output shape would be (2,), because the layer only returns the last output value for each input sequence. The output value would look something like this:</p>
+<p><code class="docutils literal notranslate"><span class="pre">[0.7,</span> <span class="pre">-0.8]</span></code></p>
+</li>
+</ul>
+<p><strong>Bidirectional RNN</strong></p>
+<p><img alt="" src="https://i.imgur.com/BtjtlMA.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Bidirectional</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">10</span><span class="p">)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Bidirectional</span><span class="p">(</span><span class="n">SimpleRNN</span><span class="p">(</span><span class="mi">64</span> <span class="p">)))</span>  <span class="c1"># two concatenated layers</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_6&quot;
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ bidirectional (Bidirectiona  (None, 128)              9600      
+ l)                                                              
+                                                                 
+=================================================================
+Total params: 9,600
+Trainable params: 9,600
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Sequence to sequence</strong></p>
+<p>Used for auto completion</p>
+<p><img alt="" src="https://tiensu.github.io/images/post/encoder_decoder_predict.png" /></p>
+<ul class="simple">
+<li><p>Inital parameters for encoder is either random or intialized zero</p></li>
+<li><p>Final state of encodeer is ser as initial state of decoder</p></li>
+<li><p>The training technique: Teacher Forcing, instead of input <span class="math notranslate nohighlight">\(y'_1\)</span>, we input <span class="math notranslate nohighlight">\(y_1\)</span> which is true</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
+
+<span class="c1"># input shape</span>
+<span class="n">input_seq_length</span> <span class="o">=</span> <span class="mi">512</span>
+<span class="n">input_dim</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="c1"># hidden unit</span>
+<span class="n">hidden_units</span> <span class="o">=</span> <span class="mi">256</span>
+
+<span class="n">encoder_inputs</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">input_seq_length</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">))</span>
+<span class="c1"># return hidden_state to be initial_state for decoder</span>
+<span class="n">encoder</span> <span class="o">=</span> <span class="n">SimpleRNN</span><span class="p">(</span><span class="n">hidden_units</span><span class="p">,</span> <span class="n">return_state</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">encoder_outputs</span><span class="p">,</span> <span class="n">encoder_state</span> <span class="o">=</span> <span class="n">encoder</span><span class="p">(</span><span class="n">encoder_inputs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the output sequence length and dimensionality</span>
+<span class="n">decoder_input_seq_length</span> <span class="o">=</span> <span class="mi">512</span>
+<span class="n">decoder_input_dim</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">decoder_hidden_units</span> <span class="o">=</span> <span class="mi">256</span>
+<span class="n">output_vocab</span> <span class="o">=</span> <span class="mi">10000</span>
+
+<span class="c1"># Define the input layer for the decoder</span>
+<span class="n">decoder_inputs</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">decoder_input_seq_length</span><span class="p">,</span> <span class="n">decoder_input_dim</span><span class="p">))</span>
+<span class="c1"># Define the SimpleRNN layer as the decoder, using the encoder&#39;s state as initial state</span>
+<span class="n">decoder</span> <span class="o">=</span> <span class="n">SimpleRNN</span><span class="p">(</span><span class="n">decoder_hidden_units</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">)(</span><span class="n">decoder_inputs</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="n">encoder_state</span><span class="p">)</span>
+<span class="c1"># Define the output layer</span>
+<span class="n">output_layer</span> <span class="o">=</span> <span class="n">TimeDistributed</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">output_vocab</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;softmax&quot;</span><span class="p">))(</span><span class="n">decoder</span><span class="p">)</span>
+
+<span class="c1"># Create the model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">encoder_inputs</span><span class="p">,</span> <span class="n">decoder_inputs</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="n">output_layer</span><span class="p">)</span>
+
+<span class="c1"># Print the model summary</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;model&quot;
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ input_4 (InputLayer)           [(None, 512, 128)]   0           []                               
+                                                                                                  
+ input_5 (InputLayer)           [(None, 512, 128)]   0           []                               
+                                                                                                  
+ simple_rnn_5 (SimpleRNN)       [(None, 256),        98560       [&#39;input_4[0][0]&#39;]                
+                                 (None, 256)]                                                     
+                                                                                                  
+ simple_rnn_6 (SimpleRNN)       (None, 512, 256)     98560       [&#39;input_5[0][0]&#39;,                
+                                                                  &#39;simple_rnn_5[0][1]&#39;]           
+                                                                                                  
+ time_distributed_2 (TimeDistri  (None, 512, 10000)  2570000     [&#39;simple_rnn_6[0][0]&#39;]           
+ buted)                                                                                           
+                                                                                                  
+==================================================================================================
+Total params: 2,767,120
+Trainable params: 2,767,120
+Non-trainable params: 0
+__________________________________________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow.keras.utils</span> <span class="kn">import</span> <span class="n">plot_model</span>
+<span class="n">plot_model</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/95cd8f8853200e4abce74d297fc2f9b27357c8549e2506324ba5587ae7d680a1.png" src="../_images/95cd8f8853200e4abce74d297fc2f9b27357c8549e2506324ba5587ae7d680a1.png" />
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="comment-classification">
+<h1><a class="toc-backref" href="#id4" role="doc-backlink">Comment Classification</a><a class="headerlink" href="#comment-classification" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mounted at /content/drive
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!pip install py_vncorenlp
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting py_vncorenlp
+  Downloading py_vncorenlp-0.1.4.tar.gz (3.9 kB)
+  Preparing metadata (setup.py) ... ?25l?25hdone
+Collecting pyjnius (from py_vncorenlp)
+  Downloading pyjnius-1.5.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.4 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1.4/1.4 MB</span> <span class=" -Color -Color-Red">7.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hBuilding wheels for collected packages: py_vncorenlp
+  Building wheel for py_vncorenlp (setup.py) ... ?25l?25hdone
+  Created wheel for py_vncorenlp: filename=py_vncorenlp-0.1.4-py3-none-any.whl size=4305 sha256=e5fe8a2d34e60c5e70bdb3bac7d02db13361075598db8a9670f33a0c18a5b860
+  Stored in directory: /root/.cache/pip/wheels/d5/d9/bf/62632cdb007c702a0664091e92a0bb1f18a2fcecbe962d9827
+Successfully built py_vncorenlp
+Installing collected packages: pyjnius, py_vncorenlp
+Successfully installed py_vncorenlp-0.1.4 pyjnius-1.5.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;/content/drive/MyDrive/Colab Notebooks/ML-intensive/data/sentiment_small.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+
+  <div id="df-fa01477e-1180-4cdb-9bd3-fc36bd3255a7">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>review</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Lần trước mình mua áo gió màu hồng rất ok mà đ...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Các siêu phẩm thấy cấu hình toàn tựa tựa nhau ...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Đồng hồ đẹp nhưng 1 cái đứt dây 1 cái không ch...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Giao thiếu mình cái này rồi shop ơi</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>không hài lòng sản phẩm cho lắm giặt lần đầu t...</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-fa01477e-1180-4cdb-9bd3-fc36bd3255a7')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+
+
+    <div id="df-45ea7e23-1792-4985-8293-3dcd3d35fae5">
+      <button class="colab-df-quickchart" onclick="quickchart('df-45ea7e23-1792-4985-8293-3dcd3d35fae5')"
+              title="Suggest charts."
+              style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+      </button>
+    </div>
+
+<style>
+  .colab-df-quickchart {
+    background-color: #E8F0FE;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: #1967D2;
+    height: 32px;
+    padding: 0 0 0 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: #E2EBFA;
+    box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: #174EA6;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+    background-color: #3B4455;
+    fill: #D2E3FC;
+  }
+
+  [theme=dark] .colab-df-quickchart:hover {
+    background-color: #434B5C;
+    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+    fill: #FFFFFF;
+  }
+</style>
+
+    <script>
+      async function quickchart(key) {
+        const containerElement = document.querySelector('#' + key);
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      }
+    </script>
+
+      <script>
+
+function displayQuickchartButton(domScope) {
+  let quickchartButtonEl =
+    domScope.querySelector('#df-45ea7e23-1792-4985-8293-3dcd3d35fae5 button.colab-df-quickchart');
+  quickchartButtonEl.style.display =
+    google.colab.kernel.accessAllowed ? 'block' : 'none';
+}
+
+        displayQuickchartButton(document);
+      </script>
+      <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-fa01477e-1180-4cdb-9bd3-fc36bd3255a7 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-fa01477e-1180-4cdb-9bd3-fc36bd3255a7');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">review</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;review&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">review</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lần trước mình mua áo gió màu hồng rất ok mà đợt này lại giao 2 cái áo gió chất khác như vải mưa ý
+Các siêu phẩm thấy cấu hình toàn tựa tựa nhau không còn sự đột phá lớn nữa
+Đồng hồ đẹp nhưng 1 cái đứt dây 1 cái không chạy mua về phải sửa
+Giao thiếu mình cái này rồi shop ơi
+không hài lòng sản phẩm cho lắm giặt lần đầu tiên đã nhòe màu
+Đồng hồ thì đẹp thật nhưng tại sao kim lúc chạy lúc đứng
+Cũng hơi bất tiện
+Toàn hàng trung quốc khi mua quên không coi kĩ
+Shop giao hàng không giống màu
+Shop giao sai màu đặt màu xanh da trời shop giao màu nõn chuối
+không thấy đèn sáng
+hàng bị lỗi nhiều quá màn hình bị cháy
+Đóng gói sản phẩm rất kém
+Tư vấn không nhiệt tình
+Sản phẩm không an toàn quá nguy hiểm cho người sử_dụng
+Không đáng để mua sản phẩm này 
+Thời gian giao hàng lâu
+Khẩu trang mỏng tang không biết có phải do giá sale không mà chất lượng chán thế
+Chất lượng quá kém giao hàng không đúng mẫu
+Đặt lần 2 rồi mà giao hàng lâu quá vậy
+Shop hết hàng nhưng không báo 
+Thấy ghi đc tặng kèm tã quần đến khi nhận hàng thì không thấy
+Shop phục vụ rất kém
+Đặt combo mà shop chỉ giao bánh gạo và sốt không thấy phô mai và chả cá đâu
+Mui khoan xài mau lục quá
+Hạt giống không nảy mầm
+toàn hàng fake
+hàng ko đúng chất lượng
+Chất lượng sản phẩm rất kém
+Váy nhỏ sao với kích thước bé nhà mình 19kg đã chọn size lớn nhất nhưng vẫn không vừa
+Đóng gói sản phẩm rất đẹp và chắc chắn
+Chất lượng sản phẩm tuyệt vời
+Son mịn khi đánh lên như màu trên ảnh
+Chất lượng sản phẩm tuyệt vời nói chung đẹp hợp túi tiền
+Đã nhận đc hàng rất nhanh mới đặt buổi tối mà trưa mai là có rồi
+Hàng ship nhanh chất lượng tốt
+tư vấn nhiệt tình ship rất đúng size
+Chất lượng sản phẩm tuyệt vời giống với hình chụp
+nhìn đẹp phết nhỉ
+Săn đc với giá rẻ tuyệt vời
+Ok rất hài lòng
+Chất lượng sản phẩm tuyệt vời tôi rất thích
+Giày đẹp lắm có điều dây hơi ngắn tí ạ
+Yếm vải đẹp
+Giao hàng nhanh mặc đẹp cám ơn shop
+bao bì cute phô mai que
+Giao hàng siêu nhanh đóng gói cẩn thận và tư vấn nhiệt tình
+Hạt điều thấm vị và giòn
+Đóng gói sản phẩm rất đẹp và chắc_chắn được shop tặng thêm quà nữa
+So với giá thì chất lượng tuyệt vời
+Shop phục vụ rất tốt thời gian giao hàng rất nhanh
+Giày đẹp mang êm và vừa chân lắm nha shop
+Chưa dùng nhưng nghe bạn m dùng rồi chất lượng khá tốt
+Uống rất ngon giao hàng nhanh 
+Rẻ lắm mà tốt
+Sản phẩm tốt ưng ý
+Chất lượng sản phẩm tuyệt vời nhưng hơi cũ tí
+Áo với giày siêu đáng yêu ạ
+Thời gian bảo hành rất nhanh
+Kem dùng ổn mỗi tội hơi tối do với da mình
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">py_vncorenlp</span> <span class="c1"># word segmentor</span>
+<span class="n">segmenter</span> <span class="o">=</span> <span class="n">py_vncorenlp</span><span class="o">.</span><span class="n">VnCoreNLP</span><span class="p">(</span><span class="n">annotators</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;wseg&quot;</span><span class="p">],</span> <span class="n">save_dir</span><span class="o">=</span><span class="s1">&#39;/content/drive/MyDrive/Colab Notebooks/ML-intensive/data/vncorenlp&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">segmenter</span><span class="o">.</span><span class="n">word_segment</span><span class="p">(</span><span class="s2">&quot;Hôm nay tôi rất thất vọng&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Hôm_nay tôi rất thất_vọng&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="todo-1">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">TODO 1</a><a class="headerlink" href="#todo-1" title="Permalink to this heading">#</a></h2>
+<p>Complete the function by following the guildance:</p>
+<ul class="simple">
+<li><p>Remove leading and ending spaces</p></li>
+<li><p>Convert characters to lowercase</p></li>
+<li><p>Apply <code class="docutils literal notranslate"><span class="pre">word_segment</span></code> to convert to new sentences and <code class="docutils literal notranslate"><span class="pre">return</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">word_segment</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="n">segmenter</span><span class="o">.</span><span class="n">word_segment</span><span class="p">(</span><span class="n">text</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="k">return</span> <span class="n">text</span>
+
+<span class="n">segmenter</span><span class="o">.</span><span class="n">word_segment</span><span class="p">(</span><span class="s2">&quot;Hôm nay tôi nhận được bài kiểm tra điểm rất kém và tôi rất thất vọng&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Hôm_nay tôi nhận được bài kiểm_tra điểm rất kém và tôi rất thất_vọng&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;review&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;review&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">word_segment</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+
+  <div id="df-23b17f88-9862-464c-bd61-e0c37647f5c1">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>review</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>lần trước mình mua áo_gió màu hồng rất ok mà đ...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>các siêu phẩm thấy cấu_hình toàn tựa tựa nhau ...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>đồng_hồ đẹp nhưng 1 cái đứt dây 1 cái không ch...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>giao thiếu mình cái này rồi shop ơi</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>không hài_lòng sản_phẩm cho lắm giặt lần đầu_t...</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-23b17f88-9862-464c-bd61-e0c37647f5c1')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+
+
+    <div id="df-fc061f74-f565-4b19-a2bd-59bf1ad11aa5">
+      <button class="colab-df-quickchart" onclick="quickchart('df-fc061f74-f565-4b19-a2bd-59bf1ad11aa5')"
+              title="Suggest charts."
+              style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+      </button>
+    </div>
+
+<style>
+  .colab-df-quickchart {
+    background-color: #E8F0FE;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: #1967D2;
+    height: 32px;
+    padding: 0 0 0 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: #E2EBFA;
+    box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: #174EA6;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+    background-color: #3B4455;
+    fill: #D2E3FC;
+  }
+
+  [theme=dark] .colab-df-quickchart:hover {
+    background-color: #434B5C;
+    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+    fill: #FFFFFF;
+  }
+</style>
+
+    <script>
+      async function quickchart(key) {
+        const containerElement = document.querySelector('#' + key);
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      }
+    </script>
+
+      <script>
+
+function displayQuickchartButton(domScope) {
+  let quickchartButtonEl =
+    domScope.querySelector('#df-fc061f74-f565-4b19-a2bd-59bf1ad11aa5 button.colab-df-quickchart');
+  quickchartButtonEl.style.display =
+    google.colab.kernel.accessAllowed ? 'block' : 'none';
+}
+
+        displayQuickchartButton(document);
+      </script>
+      <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-23b17f88-9862-464c-bd61-e0c37647f5c1 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-23b17f88-9862-464c-bd61-e0c37647f5c1');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+</section>
+<section id="todo-2">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">TODO 2</a><a class="headerlink" href="#todo-2" title="Permalink to this heading">#</a></h2>
+<p>Tokenizer: count the number of words in a data set</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">word_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">review</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;review&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
+  <span class="n">review_words</span> <span class="o">=</span> <span class="n">review</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+  <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">review_words</span><span class="p">:</span>
+    <span class="n">word_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word_set</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>232
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># import Tokenizer để tách từ</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.preprocessing.text</span> <span class="kn">import</span> <span class="n">Tokenizer</span>
+<span class="c1"># import pad_sequences để lấy số từ mỗi câu là như nhau</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.preprocessing.sequence</span> <span class="kn">import</span> <span class="n">pad_sequences</span>
+
+<span class="c1"># Tensorflow phiên bản mới có cung cấp layer để gộp 2 bước này</span>
+<span class="c1"># Trong bài Lab này, ta vẫn dùng cách cũ vì ta muốn đi từng bước một</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">VOCAB_SIZE</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_set</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">num_words</span><span class="o">=</span><span class="n">VOCAB_SIZE</span><span class="p">,</span> <span class="n">oov_token</span><span class="o">=</span><span class="s2">&quot;oov&quot;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">tokenizer</span><span class="o">.</span><span class="n">fit_on_texts</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;review&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tokenizer</span><span class="o">.</span><span class="n">word_index</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;oov&#39;: 1,
+ &#39;không&#39;: 2,
+ &#39;hàng&#39;: 3,
+ &#39;rất&#39;: 4,
+ &#39;giao&#39;: 5,
+ &#39;sản_phẩm&#39;: 6,
+ &#39;chất_lượng&#39;: 7,
+ &#39;shop&#39;: 8,
+ &#39;đẹp&#39;: 9,
+ &#39;màu&#39;: 10,
+ &#39;và&#39;: 11,
+ &#39;tuyệt_vời&#39;: 12,
+ &#39;nhanh&#39;: 13,
+ &#39;mà&#39;: 14,
+ &#39;nhưng&#39;: 15,
+ &#39;với&#39;: 16,
+ &#39;thấy&#39;: 17,
+ &#39;quá&#39;: 18,
+ &#39;tốt&#39;: 19,
+ &#39;mình&#39;: 20,
+ &#39;mua&#39;: 21,
+ &#39;cái&#39;: 22,
+ &#39;rồi&#39;: 23,
+ &#39;lắm&#39;: 24,
+ &#39;hơi&#39;: 25,
+ &#39;đặt&#39;: 26,
+ &#39;đóng_gói&#39;: 27,
+ &#39;kém&#39;: 28,
+ &#39;lần&#39;: 29,
+ &#39;này&#39;: 30,
+ &#39;siêu&#39;: 31,
+ &#39;toàn&#39;: 32,
+ &#39;đã&#39;: 33,
+ &#39;thì&#39;: 34,
+ &#39;khi&#39;: 35,
+ &#39;tư_vấn&#39;: 36,
+ &#39;nhiệt_tình&#39;: 37,
+ &#39;thời_gian&#39;: 38,
+ &#39;giá&#39;: 39,
+ &#39;đúng&#39;: 40,
+ &#39;đc&#39;: 41,
+ &#39;giày&#39;: 42,
+ &#39;dùng&#39;: 43,
+ &#39;áo_gió&#39;: 44,
+ &#39;ok&#39;: 45,
+ &#39;2&#39;: 46,
+ &#39;như&#39;: 47,
+ &#39;vải&#39;: 48,
+ &#39;tựa&#39;: 49,
+ &#39;lớn&#39;: 50,
+ &#39;nữa&#39;: 51,
+ &#39;đồng_hồ&#39;: 52,
+ &#39;1&#39;: 53,
+ &#39;dây&#39;: 54,
+ &#39;chạy&#39;: 55,
+ &#39;phải&#39;: 56,
+ &#39;hài_lòng&#39;: 57,
+ &#39;cho&#39;: 58,
+ &#39;lúc&#39;: 59,
+ &#39;giống&#39;: 60,
+ &#39;bị&#39;: 61,
+ &#39;_&#39;: 62,
+ &#39;đáng&#39;: 63,
+ &#39;lâu&#39;: 64,
+ &#39;có&#39;: 65,
+ &#39;do&#39;: 66,
+ &#39;tặng&#39;: 67,
+ &#39;nhận&#39;: 68,
+ &#39;phục_vụ&#39;: 69,
+ &#39;phô_mai&#39;: 70,
+ &#39;size&#39;: 71,
+ &#39;vừa&#39;: 72,
+ &#39;tối&#39;: 73,
+ &#39;ship&#39;: 74,
+ &#39;rẻ&#39;: 75,
+ &#39;tí&#39;: 76,
+ &#39;ạ&#39;: 77,
+ &#39;trước&#39;: 78,
+ &#39;hồng&#39;: 79,
+ &#39;đợt&#39;: 80,
+ &#39;lại&#39;: 81,
+ &#39;chất&#39;: 82,
+ &#39;khác&#39;: 83,
+ &#39;mưa&#39;: 84,
+ &#39;ý&#39;: 85,
+ &#39;các&#39;: 86,
+ &#39;phẩm&#39;: 87,
+ &#39;cấu_hình&#39;: 88,
+ &#39;nhau&#39;: 89,
+ &#39;còn&#39;: 90,
+ &#39;sự&#39;: 91,
+ &#39;đột_phá&#39;: 92,
+ &#39;đứt&#39;: 93,
+ &#39;về&#39;: 94,
+ &#39;sửa&#39;: 95,
+ &#39;thiếu&#39;: 96,
+ &#39;ơi&#39;: 97,
+ &#39;giặt&#39;: 98,
+ &#39;đầu_tiên&#39;: 99,
+ &#39;nhoè&#39;: 100,
+ &#39;thật&#39;: 101,
+ &#39;tại_sao&#39;: 102,
+ &#39;kim&#39;: 103,
+ &#39;đứng&#39;: 104,
+ &#39;cũng&#39;: 105,
+ &#39;bất_tiện&#39;: 106,
+ &#39;trung_quốc&#39;: 107,
+ &#39;quên&#39;: 108,
+ &#39;coi&#39;: 109,
+ &#39;kĩ&#39;: 110,
+ &#39;sai&#39;: 111,
+ &#39;xanh&#39;: 112,
+ &#39;da_trời&#39;: 113,
+ &#39;nõn&#39;: 114,
+ &#39;chuối&#39;: 115,
+ &#39;đèn&#39;: 116,
+ &#39;sáng&#39;: 117,
+ &#39;lỗi&#39;: 118,
+ &#39;nhiều&#39;: 119,
+ &#39;màn_hình&#39;: 120,
+ &#39;cháy&#39;: 121,
+ &#39;an_toàn&#39;: 122,
+ &#39;nguy_hiểm&#39;: 123,
+ &#39;người&#39;: 124,
+ &#39;sử&#39;: 125,
+ &#39;dụng&#39;: 126,
+ &#39;để&#39;: 127,
+ &#39;khẩu_trang&#39;: 128,
+ &#39;mỏng_tang&#39;: 129,
+ &#39;biết&#39;: 130,
+ &#39;sale&#39;: 131,
+ &#39;chán&#39;: 132,
+ &#39;thế&#39;: 133,
+ &#39;mẫu&#39;: 134,
+ &#39;vậy&#39;: 135,
+ &#39;hết&#39;: 136,
+ &#39;báo&#39;: 137,
+ &#39;ghi&#39;: 138,
+ &#39;kèm&#39;: 139,
+ &#39;tã&#39;: 140,
+ &#39;quần&#39;: 141,
+ &#39;đến&#39;: 142,
+ &#39;combo&#39;: 143,
+ &#39;chỉ&#39;: 144,
+ &#39;bánh&#39;: 145,
+ &#39;gạo&#39;: 146,
+ &#39;sốt&#39;: 147,
+ &#39;chả&#39;: 148,
+ &#39;cá&#39;: 149,
+ &#39;đâu&#39;: 150,
+ &#39;mui&#39;: 151,
+ &#39;khoan&#39;: 152,
+ &#39;xài&#39;: 153,
+ &#39;mau&#39;: 154,
+ &#39;lục&#39;: 155,
+ &#39;hạt_giống&#39;: 156,
+ &#39;nảy&#39;: 157,
+ &#39;mầm&#39;: 158,
+ &#39;fake&#39;: 159,
+ &#39;ko&#39;: 160,
+ &#39;váy&#39;: 161,
+ &#39;nhỏ&#39;: 162,
+ &#39;sao&#39;: 163,
+ &#39;kích_thước&#39;: 164,
+ &#39;bé&#39;: 165,
+ &#39;nhà&#39;: 166,
+ &#39;19kg&#39;: 167,
+ &#39;chọn&#39;: 168,
+ &#39;nhất&#39;: 169,
+ &#39;vẫn&#39;: 170,
+ &#39;chắc_chắn&#39;: 171,
+ &#39;_son&#39;: 172,
+ &#39;mịn&#39;: 173,
+ &#39;đánh&#39;: 174,
+ &#39;lên&#39;: 175,
+ &#39;trên&#39;: 176,
+ &#39;ảnh&#39;: 177,
+ &#39;nói_chung&#39;: 178,
+ &#39;hợp&#39;: 179,
+ &#39;túi_tiền&#39;: 180,
+ &#39;mới&#39;: 181,
+ &#39;buổi&#39;: 182,
+ &#39;trưa&#39;: 183,
+ &#39;mai&#39;: 184,
+ &#39;là&#39;: 185,
+ &#39;hình&#39;: 186,
+ &#39;chụp&#39;: 187,
+ &#39;nhìn&#39;: 188,
+ &#39;phết&#39;: 189,
+ &#39;nhỉ&#39;: 190,
+ &#39;săn&#39;: 191,
+ &#39;tôi&#39;: 192,
+ &#39;thích&#39;: 193,
+ &#39;có_điều&#39;: 194,
+ &#39;ngắn&#39;: 195,
+ &#39;yếm&#39;: 196,
+ &#39;mặc&#39;: 197,
+ &#39;cám_ơn&#39;: 198,
+ &#39;bao_bì&#39;: 199,
+ &#39;cute&#39;: 200,
+ &#39;que&#39;: 201,
+ &#39;cẩn_thận&#39;: 202,
+ &#39;hạt&#39;: 203,
+ &#39;điều&#39;: 204,
+ &#39;thấm&#39;: 205,
+ &#39;vị&#39;: 206,
+ &#39;giòn&#39;: 207,
+ &#39;chắc&#39;: 208,
+ &#39;chắn&#39;: 209,
+ &#39;được&#39;: 210,
+ &#39;thêm&#39;: 211,
+ &#39;quà&#39;: 212,
+ &#39;so&#39;: 213,
+ &#39;mang&#39;: 214,
+ &#39;êm&#39;: 215,
+ &#39;chân&#39;: 216,
+ &#39;nha&#39;: 217,
+ &#39;chưa&#39;: 218,
+ &#39;nghe&#39;: 219,
+ &#39;bạn&#39;: 220,
+ &#39;m&#39;: 221,
+ &#39;khá&#39;: 222,
+ &#39;uống&#39;: 223,
+ &#39;ngon&#39;: 224,
+ &#39;ưng_ý&#39;: 225,
+ &#39;cũ&#39;: 226,
+ &#39;áo&#39;: 227,
+ &#39;yêu&#39;: 228,
+ &#39;bảo_hành&#39;: 229,
+ &#39;kem&#39;: 230,
+ &#39;ổn&#39;: 231,
+ &#39;mỗi_tội&#39;: 232,
+ &#39;da&#39;: 233}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">word_index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>233
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">VOCAB_SIZE</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">word_index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">train_sequences</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">texts_to_sequences</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;review&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">train_sequences</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[29,
+  78,
+  20,
+  21,
+  44,
+  10,
+  79,
+  4,
+  45,
+  14,
+  80,
+  30,
+  81,
+  5,
+  46,
+  22,
+  44,
+  82,
+  83,
+  47,
+  48,
+  84,
+  85],
+ [86, 31, 87, 17, 88, 32, 49, 49, 89, 2, 90, 91, 92, 50, 51],
+ [52, 9, 15, 53, 22, 93, 54, 53, 22, 2, 55, 21, 94, 56, 95],
+ [5, 96, 20, 22, 30, 23, 8, 97],
+ [2, 57, 6, 58, 24, 98, 29, 99, 33, 100, 10],
+ [52, 34, 9, 101, 15, 102, 103, 59, 55, 59, 104],
+ [105, 25, 106],
+ [32, 3, 107, 35, 21, 108, 2, 109, 110],
+ [8, 5, 3, 2, 60, 10],
+ [8, 5, 111, 10, 26, 10, 112, 113, 8, 5, 10, 114, 115],
+ [2, 17, 116, 117],
+ [3, 61, 118, 119, 18, 120, 61, 121],
+ [27, 6, 4, 28],
+ [36, 2, 37],
+ [6, 2, 122, 18, 123, 58, 124, 125, 62, 126],
+ [2, 63, 127, 21, 6, 30],
+ [38, 5, 3, 64],
+ [128, 129, 2, 130, 65, 56, 66, 39, 131, 2, 14, 7, 132, 133],
+ [7, 18, 28, 5, 3, 2, 40, 134],
+ [26, 29, 46, 23, 14, 5, 3, 64, 18, 135],
+ [8, 136, 3, 15, 2, 137],
+ [17, 138, 41, 67, 139, 140, 141, 142, 35, 68, 3, 34, 2, 17],
+ [8, 69, 4, 28],
+ [26, 143, 14, 8, 144, 5, 145, 146, 11, 147, 2, 17, 70, 11, 148, 149, 150],
+ [151, 152, 153, 154, 155, 18],
+ [156, 2, 157, 158],
+ [32, 3, 159],
+ [3, 160, 40, 7],
+ [7, 6, 4, 28],
+ [161,
+  162,
+  163,
+  16,
+  164,
+  165,
+  166,
+  20,
+  167,
+  33,
+  168,
+  71,
+  50,
+  169,
+  15,
+  170,
+  2,
+  72],
+ [27, 6, 4, 9, 11, 171],
+ [7, 6, 12],
+ [172, 173, 35, 174, 175, 47, 10, 176, 177],
+ [7, 6, 12, 178, 9, 179, 180],
+ [33, 68, 41, 3, 4, 13, 181, 26, 182, 73, 14, 183, 184, 185, 65, 23],
+ [3, 74, 13, 7, 19],
+ [36, 37, 74, 4, 40, 71],
+ [7, 6, 12, 60, 16, 186, 187],
+ [188, 9, 189, 190],
+ [191, 41, 16, 39, 75, 12],
+ [45, 4, 57],
+ [7, 6, 12, 192, 4, 193],
+ [42, 9, 24, 194, 54, 25, 195, 76, 77],
+ [196, 48, 9],
+ [5, 3, 13, 197, 9, 198, 8],
+ [199, 200, 70, 201],
+ [5, 3, 31, 13, 27, 202, 11, 36, 37],
+ [203, 204, 205, 206, 11, 207],
+ [27, 6, 4, 9, 11, 208, 62, 209, 210, 8, 67, 211, 212, 51],
+ [213, 16, 39, 34, 7, 12],
+ [8, 69, 4, 19, 38, 5, 3, 4, 13],
+ [42, 9, 214, 215, 11, 72, 216, 24, 217, 8],
+ [218, 43, 15, 219, 220, 221, 43, 23, 7, 222, 19],
+ [223, 4, 224, 5, 3, 13],
+ [75, 24, 14, 19],
+ [6, 19, 225],
+ [7, 6, 12, 15, 25, 226, 76],
+ [227, 16, 42, 31, 63, 228, 77],
+ [38, 229, 4, 13],
+ [230, 43, 231, 1, 25, 73, 66, 16, 1, 20]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Đếm độ dài các câu để padding</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">count_word_in_sequence</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">seq</span> <span class="ow">in</span> <span class="n">train_sequences</span><span class="p">:</span>
+  <span class="n">count_word_in_sequence</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span>
+
+<span class="nb">min</span><span class="p">(</span><span class="n">count_word_in_sequence</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">count_word_in_sequence</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3, 23)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">MAX_LENGTH</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">count_word_in_sequence</span><span class="p">)</span>
+<span class="n">padding_train</span> <span class="o">=</span> <span class="n">pad_sequences</span><span class="p">(</span><span class="n">train_sequences</span><span class="p">,</span> <span class="n">maxlen</span> <span class="o">=</span> <span class="n">MAX_LENGTH</span><span class="p">,</span> <span class="n">truncating</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">,</span> <span class="n">padding</span> <span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">)</span>
+<span class="n">padding_train</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 29,  78,  20, ...,  48,  84,  85],
+       [ 86,  31,  87, ...,   0,   0,   0],
+       [ 52,   9,  15, ...,   0,   0,   0],
+       ...,
+       [227,  16,  42, ...,   0,   0,   0],
+       [ 38, 229,   4, ...,   0,   0,   0],
+       [230,  43, 231, ...,   0,   0,   0]], dtype=int32)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">padding_train</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(60, 23)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">VOCAB_SIZE</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">VOCAB_SIZE</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>234
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">label</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="todo-3">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">TODO 3</a><a class="headerlink" href="#todo-3" title="Permalink to this heading">#</a></h2>
+<p>Tạo mô hình RNN đơn giản để giải quyết bài toán này, huấn luyện trong 10 epochs</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span>
+  <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">23</span><span class="p">,)),</span>
+  <span class="n">Embedding</span><span class="p">(</span><span class="n">VOCAB_SIZE</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span>
+  <span class="n">SimpleRNN</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span>
+  <span class="c1"># MLP 1 hidden layer</span>
+  <span class="n">Dense</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">),</span>
+  <span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;sigmoid&quot;</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_4&quot;
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ embedding (Embedding)       (None, 23, 64)            14976     
+                                                                 
+ simple_rnn_7 (SimpleRNN)    (None, 32)                3104      
+                                                                 
+ dense_4 (Dense)             (None, 32)                1056      
+                                                                 
+ dense_5 (Dense)             (None, 1)                 33        
+                                                                 
+=================================================================
+Total params: 19,169
+Trainable params: 19,169
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;binary_crossentropy&quot;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">])</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">padding_train</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
+2/2 [==============================] - 2s 28ms/step - loss: 0.6933 - accuracy: 0.5667
+Epoch 2/10
+2/2 [==============================] - 0s 16ms/step - loss: 0.6634 - accuracy: 0.7167
+Epoch 3/10
+2/2 [==============================] - 0s 15ms/step - loss: 0.6375 - accuracy: 0.7833
+Epoch 4/10
+2/2 [==============================] - 0s 16ms/step - loss: 0.6080 - accuracy: 0.8333
+Epoch 5/10
+2/2 [==============================] - 0s 13ms/step - loss: 0.5685 - accuracy: 0.9000
+Epoch 6/10
+2/2 [==============================] - 0s 14ms/step - loss: 0.5184 - accuracy: 0.9167
+Epoch 7/10
+2/2 [==============================] - 0s 14ms/step - loss: 0.4614 - accuracy: 0.9500
+Epoch 8/10
+2/2 [==============================] - 0s 19ms/step - loss: 0.3937 - accuracy: 0.9667
+Epoch 9/10
+2/2 [==============================] - 0s 14ms/step - loss: 0.3259 - accuracy: 0.9833
+Epoch 10/10
+2/2 [==============================] - 0s 13ms/step - loss: 0.2621 - accuracy: 0.9833
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.callbacks.History at 0x7b8f3ba750f0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>sentence <span class="math notranslate nohighlight">\(\rightarrow\)</span> tokenize <span class="math notranslate nohighlight">\(\rightarrow\)</span> mapping <span class="math notranslate nohighlight">\(\rightarrow\)</span> padding <span class="math notranslate nohighlight">\(\rightarrow\)</span> embedding <span class="math notranslate nohighlight">\(\rightarrow\)</span> model</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Preclass%20Session%209.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Preclass Session 9: Natural Language Processing</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Preclass%20Session%2010.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Preclass Session 10: MDP Planning</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Session 9 - Natural Language Processing</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rnn-with-tensorflow">RNN with Tensorflow</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-example-of-return-sequences">Simple Example of Return Sequences</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#comment-classification">Comment Classification</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-1">TODO 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-2">TODO 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-3">TODO 3</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kyle Paul
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

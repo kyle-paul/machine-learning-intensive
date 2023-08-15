@@ -1,0 +1,734 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Preclass Session 9: Natural Language Processing &#8212; Machine Learning Intensive</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/Preclass Session 9';</script>
+    <link rel="canonical" href="https://kyle-paul.github.io/machine-learning-intensive/book/Preclass Session 9.html" />
+    <link rel="shortcut icon" href="../_static/fav.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Session 9 - Natural Language Processing" href="S9_LAB_RNN.html" />
+    <link rel="prev" title="Session 8: Convolutional Neural Network" href="S8_Lab_CNN.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%201.html"><strong>Preclass Session 1: Representation</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%202.html"><strong>Preclass Session 2: Linear Model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S2_Lab_LinearModel.html">Session 2: Linear Model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%203.html"><strong>Preclass Session 3: Recommender System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S3_Lab_RecSys.html">Sesion 3: Recommender System</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%204.html"><strong>Preclass Session 4: NonLinear Predictor</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S4_Lab_NonLinearPredictors.html">Session 4: Nonlinear Predictors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%205.html"><strong>Preclass Session 5: Optimization</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S5_Lab_Optimization.html">Session 5: Optimization</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%206.html"><strong>Preclass Session 6: Metrics and Losses</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S6_Lab_Metrics%26Losses.html">Session 6: Metrics &amp; Losses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Midterm%20Theory%20Test.html"><strong>Theory Midterm Test</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Midterm%20Theory%20Solution.html"><strong>Theory Midterm Solution</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%208.html"><strong>Preclass Session 8: Convolutional Neural Network</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S8_Lab_CNN.html">Session 8: Convolutional Neural Network</a></li>
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Preclass Session 9: Natural Language Processing</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S9_LAB_RNN.html">Session 9 - Natural Language Processing</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%2010.html"><strong>Preclass Session 10: MDP Planning</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S10_LAB_MDP_PLANNING.html">Session 10 - MDP Planning</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%2011.html"><strong>Preclass Session 11: Reinforcement Learning</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S11_LAB_Q_Learning.html">Session 11 - Q Learning</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/edit/main/book/Preclass Session 9.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/issues/new?title=Issue%20on%20page%20%2Fbook/Preclass Session 9.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/Preclass Session 9.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Preclass Session 9: Natural Language Processing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Preclass Session 9: Natural Language Processing</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#recurrent-neural-network-rnn"><strong>Recurrent Neural Network (RNN)</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vanilla-rnns-basic-recurrent-neural-network"><strong>Vanilla RNNs: Basic Recurrent neural network</strong></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#natural-language-processing-nlp"><strong>Natural Language Processing (NLP)</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terminology"><strong>Terminology</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method"><strong>Method</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing"><strong>Preprocessing</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizer"><strong>Tokenizer</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#word-embedding"><strong>Word Embedding</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="preclass-session-9-natural-language-processing">
+<h1><strong>Preclass Session 9: Natural Language Processing</strong><a class="headerlink" href="#preclass-session-9-natural-language-processing" title="Permalink to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="recurrent-neural-network-rnn">
+<h1><strong>Recurrent Neural Network (RNN)</strong><a class="headerlink" href="#recurrent-neural-network-rnn" title="Permalink to this heading">#</a></h1>
+<section id="vanilla-rnns-basic-recurrent-neural-network">
+<h2><strong>Vanilla RNNs: Basic Recurrent neural network</strong><a class="headerlink" href="#vanilla-rnns-basic-recurrent-neural-network" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Large language models (LLMs) (e.g. ChatGPT) has the main principle of operation based on predicting the next word.</p></li>
+</ul>
+<center><img src=https://d1q4qwyh0q55bh.cloudfront.net/images/RWKrPMxCp3hrKi6psqp2MMBzGUb30uo6wVRHYuw1gX8uBMUF4eqkquQsKBHn58hK.gif?d=desktop-thumbnail></center>
+<ul class="simple">
+<li><p>We can describe this problem as follows: given a lot of (billion) series of words <span class="math notranslate nohighlight">\((x_t)^T_{t=1}\)</span> of sample sentences on the internet. We need to train a predictor to correctly predict the probability of the following word <span class="math notranslate nohighlight">\(x_t\)</span> in the sentence if we input a series of previous words (called <strong>context</strong>).
+$<span class="math notranslate nohighlight">\(
+\bf x_0 \text{(start)}, x_1, ... x_{t-1} \xrightarrow{\text{predictors}} x_t
+\)</span>$</p>
+<ol class="arabic simple">
+<li><p>First, we need to have embedding vector <span class="math notranslate nohighlight">\({\bf z_t} \in \mathbb{R}^d\)</span> to represent word <span class="math notranslate nohighlight">\(x_t\)</span> (simplest example is one-hot-encoding)</p></li>
+<li><p>Next, we need embedding vector <span class="math notranslate nohighlight">\(\bf h_{t-1} \in \mathbb{R}^n\)</span> to represent the series of previous words (context): <span class="math notranslate nohighlight">\(\bf x_0, x_1, ..., x_{t-1}\)</span> to predict the following word <span class="math notranslate nohighlight">\(\bf \hat{x}_t\)</span>. Take an example with linear predictor <span class="math notranslate nohighlight">\({\bf \hat{x}_t} = s(\bf U \cdot h_{t-1} + b)\)</span>.</p></li>
+<li><p>We have the ground truth (the real next word) from the sample sentence <span class="math notranslate nohighlight">\(\bf x_t\)</span>, we continue to create the embedding vector (hidden, history) <span class="math notranslate nohighlight">\(\bf h_t\)</span> to represent the series of context <span class="math notranslate nohighlight">\(\bf x_0, x_1,.., x_t\)</span></p></li>
+</ol>
+</li>
+<li><p>Recurrent Neural Network (<a class="reference external" href="https://en.wikipedia.org/wiki/Recurrent_neural_network">RNN</a>) is a classic model and it is easy to compute the embedding vector <span class="math notranslate nohighlight">\(\bf h_t\)</span> for each series of context <span class="math notranslate nohighlight">\(\bf x_0, x_1,..., x_t\)</span> by linear combination of embedding vector of the previous series context <span class="math notranslate nohighlight">\(\bf h_{t-1}\)</span> with embedding vector <span class="math notranslate nohighlight">\(\bf x_t\)</span> of the new word included.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\bf h_t \leftarrow W \cdot z_t + H \cdot h_{t-1} + b \space | \space W \in \mathbb{R}^{n \times d}, z_t \in \mathbb{R}^d, H \in \mathbb{R}^{n \times n}, h_t \in \mathbb{R}^n
+\]</div>
+<ul class="simple">
+<li><p>Note:</p>
+<ul>
+<li><p>Review: <strong>feed-forward</strong> neural networks (e.g. MLPs): <span class="math notranslate nohighlight">\(\bf h_t = \gamma(W z_t + b)\)</span> with activation function <span class="math notranslate nohighlight">\(\gamma = \text{sigmoid, tanh, relu,...}\)</span> (element-wise operation)</p></li>
+<li><p>We expand the above formula to plug in embedding vector of the next word (by linear transform) in RNN: <span class="math notranslate nohighlight">\(\bf h_t = \gamma(W \cdot z_t + H \cdot h_{t-1} + b)\)</span></p></li>
+<li><p>This formula is of 1 vanilla RNN unit. We can rearrange it into <span class="math notranslate nohighlight">\(\bf h_t = \gamma (\bar{W} \left[\begin{matrix}   \mathbf{z}_t\newline\mathbf{h}_{t-1}\newline\end{matrix} \right] + b)\)</span> with <span class="math notranslate nohighlight">\(\bf \bar{W} = [W, H] \in \mathbb{R}^{n \times (d + n)}\)</span> and the input vector <span class="math notranslate nohighlight">\(\left[\begin{matrix}   \mathbf{z}_t\newline\mathbf{h}_{t-1}\newline\end{matrix} \right]\)</span> is concatenated from <span class="math notranslate nohighlight">\(\bf z_t\)</span> and <span class="math notranslate nohighlight">\(\bf h_{t-1}\)</span>.</p></li>
+<li><p>Important notion: parameters <span class="math notranslate nohighlight">\(\bf W\)</span> is reused through all time-step <span class="math notranslate nohighlight">\(\rightarrow\)</span> called <strong>weight-sharing in time</strong>.</p></li>
+<li><p>The output <span class="math notranslate nohighlight">\(\bf h_{t-1}\)</span> of the previous time-step is plugged in as the input for RNN to comput <span class="math notranslate nohighlight">\(\bf h_t\)</span> of the next time-step <span class="math notranslate nohighlight">\(rightarrow\)</span> <strong>Recurrent connection</strong></p></li>
+</ul>
+</li>
+</ul>
+<center><img src=https://d1q4qwyh0q55bh.cloudfront.net/images/NEdRKsROW2uxgUOUjCmCytlbgUfnJKHTgXPNeRTeHN3ay1Ql5FHy6VAxqHHNcmMx.png?d=desktop-thumbnail></center><br>
+<p>Note: the below image uses the math notations different from the our lecture, but you can figure it out easily based on the you knowledge of each component’s function.</p>
+<center><img src=https://d1q4qwyh0q55bh.cloudfront.net/images/BAWEdRauwTwPOZylWaWaNbm9fqWNSQnxhOR6Q0OQk3a4pyrrKo2oOfuhfNjM5KBG.png?d=desktop-thumbnail></center>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="natural-language-processing-nlp">
+<h1><strong>Natural Language Processing (NLP)</strong><a class="headerlink" href="#natural-language-processing-nlp" title="Permalink to this heading">#</a></h1>
+<section id="terminology">
+<h2><strong>Terminology</strong><a class="headerlink" href="#terminology" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Corpus: dataset of language (consist of multiple sentences or texts)</p></li>
+<li><p>Document: each sentence (or each text) in corpus</p></li>
+</ul>
+</section>
+<section id="method">
+<h2><strong>Method</strong><a class="headerlink" href="#method" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>There are many ways to digitalize document to make it an input for AI model. You have learn about <code class="docutils literal notranslate"><span class="pre">CountVectorizer</span></code> and <code class="docutils literal notranslate"><span class="pre">TF-IDF</span></code>.</p></li>
+<li><p>There is another popular method is to use <code class="docutils literal notranslate"><span class="pre">Word</span> <span class="pre">Embedding</span></code> to represent document.</p></li>
+<li><p>There are few basic steps below to digitalize document input:</p>
+<ol class="arabic simple">
+<li><p>Prepocessing</p></li>
+<li><p>Tokenizer</p></li>
+<li><p>Embedding / CountVectorizer, TF-IDF… (represented as embedding vector)</p></li>
+</ol>
+</li>
+</ul>
+<section id="preprocessing">
+<h3><strong>Preprocessing</strong><a class="headerlink" href="#preprocessing" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The most popular way is to remove <code class="docutils literal notranslate"><span class="pre">stop</span> <span class="pre">words</span></code>, lemmatization</p></li>
+<li><p>Depends on the each problem we are solving, there are other ways: removing special characters (e.g. emoji), normalize text (<code class="docutils literal notranslate"><span class="pre">&quot;123&quot;</span></code> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <code class="docutils literal notranslate"><span class="pre">&quot;one</span> <span class="pre">two</span> <span class="pre">three&quot;</span></code>), or convert <code class="docutils literal notranslate"><span class="pre">&quot;teencode&quot;</span></code> into normal language. Specially, in some other language (not English), there is a phenomenon which many words onyl represent one word; in this case, we have to use Word Segmentator. For example, in Vietnamese, <code class="docutils literal notranslate"><span class="pre">&quot;đẹp</span> <span class="pre">trai&quot;</span></code> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <code class="docutils literal notranslate"><span class="pre">&quot;đẹp_trai&quot;</span></code> (handsome).</p></li>
+</ul>
+</section>
+<section id="tokenizer">
+<h3><strong>Tokenizer</strong><a class="headerlink" href="#tokenizer" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The purpose of this step is to seperate each word in document and assign a different <code class="docutils literal notranslate"><span class="pre">id</span></code> to each word. We can seperate multiple words or single word, yet simplest way is <code class="docutils literal notranslate"><span class="pre">White</span> <span class="pre">Space</span> <span class="pre">Tokenizer</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;I</span> <span class="pre">am</span> <span class="pre">a</span> <span class="pre">student&quot;</span></code> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <code class="docutils literal notranslate"><span class="pre">[&quot;I&quot;,</span> <span class="pre">&quot;am&quot;,</span> <span class="pre">&quot;a&quot;,</span> <span class="pre">&quot;student&quot;]</span></code>)</p></li>
+<li><p>Then, create a dictionary to perform mapping unique words with a distinct <code class="docutils literal notranslate"><span class="pre">id</span></code>. The number of elements in this dictionary is called <code class="docutils literal notranslate"><span class="pre">vocab</span> <span class="pre">length</span></code>.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">word2index</span> <span class="o">=</span> <span class="p">{</span>
+ <span class="s2">&quot;good&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+ <span class="s2">&quot;bad&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="o">...</span><span class="p">,</span>
+ <span class="s2">&quot;movie&quot;</span><span class="p">:</span> <span class="mi">3511</span><span class="p">,</span>
+  <span class="o">...</span><span class="p">,</span>
+ <span class="s2">&quot;learning&quot;</span><span class="p">:</span> <span class="mi">6000</span><span class="p">,</span>
+  <span class="o">...</span>
+<span class="p">}</span>
+
+<span class="n">index2word</span> <span class="o">=</span> <span class="p">{</span>
+ <span class="mi">0</span><span class="p">:,</span> <span class="s2">&quot;good&quot;</span><span class="p">,</span>
+ <span class="mi">1</span><span class="p">:,</span> <span class="s2">&quot;bad&quot;</span><span class="p">,</span>
+ <span class="o">...</span><span class="p">,</span>
+ <span class="mi">3511</span><span class="p">:</span> <span class="s2">&quot;movie&quot;</span><span class="p">,</span>
+ <span class="o">...</span><span class="p">,</span>
+ <span class="mi">6000</span><span class="p">:</span> <span class="s2">&quot;learning&quot;</span><span class="p">,</span>
+ <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Finally, each word in a document is represented by each of its distinct id. For example, <code class="docutils literal notranslate"><span class="pre">&quot;I</span> <span class="pre">am</span> <span class="pre">a</span> <span class="pre">a</span> <span class="pre">student&quot;</span></code> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">10,</span> <span class="pre">15]</span></code>. These id numbers are called token.</p></li>
+<li><p>AI language models will only receive input of the same length, but there will be documents with different length in the dataset. If we declare the maximum length is 100 token, we need to remove redundant token in long sentence/document and add padding to short sentence/document. For example:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">word2index</span> <span class="o">=</span> <span class="p">{</span>
+ <span class="s2">&quot;&lt;pad&gt;&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+ <span class="s2">&quot;good&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+ <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="word-embedding">
+<h3><strong>Word Embedding</strong><a class="headerlink" href="#word-embedding" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>How to combine pretrained Word Embedding model into Tensorflow. In <code class="docutils literal notranslate"><span class="pre">tensorflow.keras</span></code>, thers is a layer called <code class="docutils literal notranslate"><span class="pre">Embedding</span></code></p>
+<ul>
+<li><p>Layer embedding can map (convert) one token in the dictionary into a <strong>dense vector</strong>. There are two primary components in <code class="docutils literal notranslate"><span class="pre">Layer</span> <span class="pre">Embebedding</span></code>:</p></li>
+<li><p>Vocab size: the size (the number of words) of a dictionary.</p></li>
+<li><p>Embedding dimension: the size of representation space</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Embedding</span><span class="p">(</span>
+	<span class="n">input_dim</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span> <span class="c1"># vocab size  </span>
+	<span class="n">output_dim</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span> <span class="c1"># embedding dimension </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>For example, we create a layer embedding with <code class="docutils literal notranslate"><span class="pre">input_dim=6000</span></code> and <code class="docutils literal notranslate"><span class="pre">output_dim=50</span></code> (which means your dictionary has 6000 unique token, each token is represented as a vector of <code class="docutils literal notranslate"><span class="pre">50</span></code> dimensions)</p></li>
+<li><p>There will be a matrix created with <code class="docutils literal notranslate"><span class="pre">shape=(6000,</span> <span class="pre">50)</span></code>; each value of this matrix is randomly initialized and each row of matrix is the representation of each token in the dictionary (corresponding to positions).</p></li>
+<li><p>Recall, the input of the model will be the result of the tokenizer <code class="docutils literal notranslate"><span class="pre">&quot;I</span> <span class="pre">am</span> <span class="pre">a</span> <span class="pre">student&quot;</span></code> → <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">10,</span> <span class="pre">15]</span></code>. When putting vectors <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">10,</span> <span class="pre">15]</span></code> into the Embedding layer, the Embedding layer will retrieve the vectors at lines <code class="docutils literal notranslate"><span class="pre">0,</span> <span class="pre">10,</span> <span class="pre">15</span></code> to represent the input sentence. At this point, the input of the AI model will be a matrix with <code class="docutils literal notranslate"><span class="pre">shape=(3,50)</span></code>. The numbers in the Embedding layer will be learned (updated) by Gradient Descent during training. Of course, in the Embedding layer, there will exist lines to represent special tokens (padding, …)</p></li>
+<li><p>Instead of randomly initializing numbers in the Embedding layer, we can instantiate them from Pretrained Word Embedding. The problem is that the <code class="docutils literal notranslate"><span class="pre">vocab_size</span></code> of the Embedding layer will be different <code class="docutils literal notranslate"><span class="pre">vocab_size</span></code> of Pretrained Word Embedding, so we have to process this. Look at the pseudo code below:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize an empty list my_embeddings</span>
+<span class="n">my_embeddings</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1">#  Loop through each word in the dictionary</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+    <span class="c1"># If the current Word exists in Pretrained Word Embedding</span>
+    <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">pretrained_model_embedding</span><span class="p">:</span>
+        <span class="c1"># Take out the representation vector and put it in the my_embeddings</span>
+        <span class="n">my_embeddings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">representation_vector</span><span class="p">)</span>
+        
+    <span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Randomly generated and put in my_embeddings</span>
+    <span class="n">my_embeddings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
+    
+<span class="c1"># Casting my_embeddings into numpy array</span>
+<span class="n">my_embeddings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">my_embeddings</span><span class="p">)</span>
+<span class="c1"># Assign this numpy array to the Embedding layer of the tensorflow</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Then we have 2 options (for example, the problem of classifying Good - Bad customer comments):</p>
+<ul>
+<li><p>Do not update the numbers in the Embedding layer, but only other weights in the model.</p></li>
+<li><p>Update the numbers in Embedding layer. After training, we will receive a new Embedding, this new Embedding may no longer have the original properties of Pretrained Word Embedding, but only the best representation of words to produce the best classification results.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="S8_Lab_CNN.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Session 8: Convolutional Neural Network</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="S9_LAB_RNN.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Session 9 - Natural Language Processing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Preclass Session 9: Natural Language Processing</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#recurrent-neural-network-rnn"><strong>Recurrent Neural Network (RNN)</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vanilla-rnns-basic-recurrent-neural-network"><strong>Vanilla RNNs: Basic Recurrent neural network</strong></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#natural-language-processing-nlp"><strong>Natural Language Processing (NLP)</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terminology"><strong>Terminology</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method"><strong>Method</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing"><strong>Preprocessing</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizer"><strong>Tokenizer</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#word-embedding"><strong>Word Embedding</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kyle Paul
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
