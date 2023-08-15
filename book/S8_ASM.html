@@ -1,0 +1,1094 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Session 8: Assignment &#8212; Machine Learning Intensive</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/S8_ASM';</script>
+    <link rel="canonical" href="https://kyle-paul.github.io/machine-learning-intensive/book/S8_ASM.html" />
+    <link rel="shortcut icon" href="../_static/avatar.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Session 8: Coding Solution" href="S8_SOL.html" />
+    <link rel="prev" title="Session 8: Convolutional Neural Network" href="S8_Lab_CNN.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%201.html"><strong>Preclass Session 1: Representation</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S1_ASM.html">Session 1: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S1_SOL.html">Session 1: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%201%20Revision.html"><strong>Session 1: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%202.html"><strong>Preclass Session 2: Linear Model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S2_Lab_LinearModel.html">Session 2: Linear Model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S2_ASM.html">Session 2: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S2_SOL.html">Session 2: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%202%20Revision.html"><strong>Session 2: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%203.html"><strong>Preclass Session 3: Recommender System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S3_Lab_RecSys.html">Sesion 3: Recommender System</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S3_ASM.html">Session 3: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S3_SOL.html">Session 3: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%203%20Revision.html"><strong>Session 3: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%204.html"><strong>Preclass Session 4: NonLinear Predictor</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S4_Lab_NonLinearPredictors.html">Session 4: Nonlinear Predictors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S4_ASM.html">Session 4: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S4_SOL.html">Session 4: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%204%20Revision.html"><strong>Session 4: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%205.html"><strong>Preclass Session 5: Optimization</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S5_Lab_Optimization.html">Session 5: Optimization</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S5_ASM.html">Session 5: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S5_SOL.html">Session 5: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%205%20Revision.html"><strong>Session 5: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%206.html"><strong>Preclass Session 6: Metrics and Losses</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S6_Lab_Metrics%26Losses.html">Session 6: Metrics &amp; Losses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S6_ASM.html">Session 6: Assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S6_SOL.html">Session 6: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Midterm%20Theory%20Test.html"><strong>Theory Midterm Test</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Midterm%20Theory%20Solution.html"><strong>Theory Midterm Solution</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S7_MidTerm_TEST.html">Session 7: Midterm Coding Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S7_MidTerm_SOL.html">Session 7: Midterm Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%208.html"><strong>Preclass Session 8: Convolutional Neural Network</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S8_Lab_CNN.html">Session 8: Convolutional Neural Network</a></li>
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Session 8: Assignment</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S8_SOL.html">Session 8: Coding Solution</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Session%208%20Revision.html"><strong>Session 8: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%209.html"><strong>Preclass Session 9: Natural Language Processing</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S9_LAB_RNN.html">Session 9 - Natural Language Processing</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S9_ASM.html">Session 9: Assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S9_SOL.html">Session 9: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%209%20Revision.html"><strong>Session: 9 Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%2010.html"><strong>Preclass Session 10: MDP Planning</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S10_LAB_MDP_PLANNING.html">Session 10 - MDP Planning</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S10_ASM.html">Session 10: Assigment</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S10_SOL.html">Session 10: Coding Solution</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Session%2010%20Revision.html"><strong>Session 10: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%2011.html"><strong>Preclass Session 11: Reinforcement Learning</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S11_LAB_Q_Learning.html">Session 11: Q Learning</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S11_SOL.html">Session 11: Coding Solution</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Session%2011%20Revision.html"><strong>Theory</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S12_FinalExam.html">Sesssion 12: Final Coding test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Final%20Test%20Theory.html"><strong>Session 12: final theory test</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/kyle-paul/machine-learning-intensive/master?urlpath=tree/book/S8_ASM.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/kyle-paul/machine-learning-intensive/blob/master/book/S8_ASM.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/edit/main/book/S8_ASM.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/issues/new?title=Issue%20on%20page%20%2Fbook/S8_ASM.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/S8_ASM.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Session 8: Assignment</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Session 8: Assignment</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classic-filter-types">Classic filter types</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-of-recognizing-diseases-for-cowpea-leaves">The problem of recognizing diseases for cowpea leaves</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-dataset">Prepare the dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#image-augmentation">Image Augmentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rescaling">Rescaling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#global-average-pooling">Global Average Pooling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-architecture-of-model-and-start-training">Build the architecture of model and start training</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-read-carefully-before-coding">TODO: READ CAREFULLY BEFORE CODING</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="session-8-assignment">
+<h1>Session 8: Assignment<a class="headerlink" href="#session-8-assignment" title="Permalink to this heading">#</a></h1>
+<section id="classic-filter-types">
+<h2>Classic filter types<a class="headerlink" href="#classic-filter-types" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The Deep Convolutional Neural Network model essentially learns filters to be able to extract features in the data set (the numbers in the filter are the weights to learn)</p></li>
+<li><p>The concept of filter and convolution has been around for a long time, filters at that time were hand-crafted and each filter only had 1 effect.</p></li>
+<li><p>The following section will go through the 2 most basic filters, which are vertical and horizontal edge detection.</p></li>
+</ul>
+<p><strong>Download sample image</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!wget https://i.imgur.com/kbWNDCh.png
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Read the image</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># read the image with Pillow</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;kbWNDCh.png&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s1">&#39;L&#39;</span><span class="p">)</span>
+
+<span class="c1"># convert into numpy array</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+<span class="c1"># show the image</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>  <span class="c1"># imshow function receive an numpy array</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Create a filter</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filter_vertical</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+  <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">],</span>
+  <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">],</span>
+  <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">]</span>
+<span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">filter_vertical</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Looking at the newly created filter, we see that the brightness of the filter changes horizontally <span class="math notranslate nohighlight">\(\rightarrow\)</span> filter capable of detecting vertical strokes</p>
+<p>Perform convolution operation with <code class="docutils literal notranslate"><span class="pre">padding='same'</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">convolve</span>
+
+<span class="n">res_vertical</span> <span class="o">=</span> <span class="n">convolve</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">filter_vertical</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;direct&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">res_vertical</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Observing the results we see that:</p>
+<ul class="simple">
+<li><p>At vertical edges, the results are easy to see</p></li>
+<li><p>At oblique edges, we get faint results</p></li>
+<li><p>On horizontal edges, the result is very blurry or none at all</p></li>
+</ul>
+<p>We continue to experiment with horizontal edge detection filters</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filter_horizontal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+  <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+  <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">]</span>
+<span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">filter_horizontal</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">res_horizontal</span> <span class="o">=</span> <span class="n">convolve</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">filter_horizontal</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;direct&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">res_horizontal</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So how to detect horizontal and vertical edges at the same time?</p>
+<p>Let’s just add up the above 2 results</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">res_vertical</span> <span class="o">+</span> <span class="n">res_horizontal</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are many other types of filters, you can refer to in the lecture slide or Google, then apply it to the above lesson.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="the-problem-of-recognizing-diseases-for-cowpea-leaves">
+<h1>The problem of recognizing diseases for cowpea leaves<a class="headerlink" href="#the-problem-of-recognizing-diseases-for-cowpea-leaves" title="Permalink to this heading">#</a></h1>
+<p>In this Assignment, we will use CNN to classify whether the leaves of beans belong to be sick or not.</p>
+<ul class="simple">
+<li><p>Normal leaves</p></li>
+<li><p>Angular Leaf spot</p></li>
+<li><p>Bean Rust</p></li>
+</ul>
+<p>We will load the available dataset of Tensorflow</p>
+<section id="prepare-the-dataset">
+<h2>Prepare the dataset<a class="headerlink" href="#prepare-the-dataset" title="Permalink to this heading">#</a></h2>
+<p><strong>Download data</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow_datasets</span> <span class="k">as</span> <span class="nn">tfds</span>
+
+<span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">test</span><span class="p">),</span> <span class="n">info</span> <span class="o">=</span> <span class="n">tfds</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;beans&#39;</span><span class="p">,</span>
+                                      <span class="n">split</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="s1">&#39;validation&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">],</span>
+                                      <span class="n">shuffle_files</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                      <span class="n">as_supervised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                      <span class="n">with_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>View dataset description</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Check out the images</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tfds</span><span class="o">.</span><span class="n">show_examples</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">info</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To make it easier to code, we will convert all data to numpy array</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">train_label</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">train_image</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">image</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">tfds</span><span class="o">.</span><span class="n">as_numpy</span><span class="p">(</span><span class="n">train</span><span class="p">):</span>
+  <span class="n">train_image</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+  <span class="n">train_label</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+
+<span class="n">train_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">train_image</span><span class="p">)</span>
+<span class="n">train_label</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">train_label</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train Set&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shape:&quot;</span><span class="p">,</span> <span class="n">train_image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">train_label</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Label distribution:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">train_label</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">val_label</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">val_image</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">image</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">tfds</span><span class="o">.</span><span class="n">as_numpy</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+  <span class="n">val_image</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+  <span class="n">val_label</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+
+<span class="n">val_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">val_image</span><span class="p">)</span>
+<span class="n">val_label</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">val_label</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Validation Set&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shape:&quot;</span><span class="p">,</span> <span class="n">val_image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">val_label</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Label distribution:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">val_label</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">test_label</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">test_image</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">image</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">tfds</span><span class="o">.</span><span class="n">as_numpy</span><span class="p">(</span><span class="n">test</span><span class="p">):</span>
+  <span class="n">test_image</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+  <span class="n">test_label</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+<span class="n">test_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test_image</span><span class="p">)</span>
+<span class="n">test_label</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test_label</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test Set&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shape:&quot;</span><span class="p">,</span> <span class="n">test_image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">test_label</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Label distribution:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">test_label</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Remove unnecessary variables</span>
+<span class="k">del</span> <span class="n">train</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">test</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="image-augmentation">
+<h2>Image Augmentation<a class="headerlink" href="#image-augmentation" title="Permalink to this heading">#</a></h2>
+<p>With visual-style data, data generation is quite simple, 1 few examples</p>
+<ul class="simple">
+<li><p>Pixel shifting</p></li>
+<li><p>Rotation</p></li>
+<li><p>Flip</p></li>
+<li><p>Zoom-in/out</p></li>
+<li><p>Change color</p></li>
+</ul>
+<p>Generating more data gives the model the ability to generalize better when used in practice. At the same time, when we have a lot of data, we also partly reduce overfitting.</p>
+<p>There are 2 ways to augment data:</p>
+<ul class="simple">
+<li><p>Offline: augment first, save images and then train</p></li>
+<li><p>Online: augmented during training (before putting images into the model)</p></li>
+</ul>
+<p>The commonly used Online Augmentation technique is called Random Augmentation, for example:</p>
+<ul class="simple">
+<li><p>Create a pipeline consisting of 4 augmented steps as above, each step is assigned 1 probability: do or do not do, the input of step <code class="docutils literal notranslate"><span class="pre">n</span></code> is the result of step <code class="docutils literal notranslate"><span class="pre">n-1</span></code></p></li>
+<li><p>In each step: Create 1 range of random values to perform Augment (how many pixels to shift, how many degrees to rotate, how much zoom-in/out)</p></li>
+<li><p>The input image will be fed through the above pipeline → the probability that image A in epoch 2 will be augmented like image A in epoch 1 is very unlikely -&gt; the model is almost trained with an infinite number of images.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">tensorflow.keras</span></code> supports Online Augmentation with layers (note, in <code class="docutils literal notranslate"><span class="pre">tf.keras</span></code> each layer we have no control over the probability of execution / non-execution), the pipeline is built using the <code class="docutils literal notranslate"><span class="pre">Sequential</span></code> API. Supported layers include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">RandomBrightness</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RandomContrast</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RandomCrop</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RandomFlip</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RandomHeight</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RandomRotation</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RandomTranslation</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RandomWidth</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RandomZoom</span></code></p></li>
+</ul>
+<p>You can read all the parameters of the above layers <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomBrightness">at this document</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">RandomFlip</span><span class="p">,</span> <span class="n">RandomRotation</span><span class="p">,</span> <span class="n">RandomBrightness</span><span class="p">,</span> <span class="n">RandomContrast</span><span class="p">,</span> <span class="n">RandomCrop</span><span class="p">,</span> <span class="n">RandomHeight</span><span class="p">,</span> <span class="n">RandomTranslation</span><span class="p">,</span> <span class="n">RandomWidth</span><span class="p">,</span> <span class="n">RandomZoom</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simple Augment Pipeline example consists of 2 flip and rotate steps</span>
+<span class="c1"># Instead of augmentor.add(layer), we put the layer at initialization</span>
+
+<span class="n">augmentor</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span>
+  <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="mi">500</span><span class="p">,</span><span class="mi">3</span><span class="p">)),</span>
+  <span class="n">RandomFlip</span><span class="p">(</span><span class="s2">&quot;horizontal_and_vertical&quot;</span><span class="p">),</span>
+  <span class="n">RandomRotation</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span> <span class="c1"># Read the document to understand the meaning behind 0.2</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">train_image</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># add the batch dimension</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Put images into the Augmentor 9 times -&gt; can produce 9 different images</span>
+<span class="sd">  - Augment and convert the data type back to numpy</span>
+<span class="sd">  - Augment only occurs when calling Augmentor(image) or when train using the fit function</span>
+<span class="sd">  - Delete the first dimension (batch size) to plot with matplotlib with squeeze()</span>
+<span class="sd">  - After augmentation is complete, there will be a dtype of float</span>
+<span class="sd">  - We haven&#39;t normalized the image yet, so pyplot doesn&#39;t understand the 0-255 float data as an image</span>
+<span class="sd">  - Convert back to int</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+  <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="n">augmented_image</span> <span class="o">=</span> <span class="n">augmentor</span><span class="p">(</span><span class="n">image</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+  <span class="n">augmented_image</span> <span class="o">=</span> <span class="n">augmented_image</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+  <span class="n">augmented_image</span> <span class="o">=</span> <span class="n">augmented_image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">augmented_image</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Try other augmentation techniques</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># YOUR SOLUTION HERE (OPTIONAL)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Predict</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">train_image</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Augmentation will not take place when calling predict (inference)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+  <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="c1"># Predict function returs Numpy Array</span>
+  <span class="n">augmented_image</span> <span class="o">=</span> <span class="n">augmentor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># verbose = 0 -&gt; no progress bar</span>
+  <span class="n">augmented_image</span> <span class="o">=</span> <span class="n">augmented_image</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+  <span class="n">augmented_image</span> <span class="o">=</span> <span class="n">augmented_image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">augmented_image</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="rescaling">
+<h2>Rescaling<a class="headerlink" href="#rescaling" title="Permalink to this heading">#</a></h2>
+<p>Normally, we will normalize the image by dividing 255 and the image data type will now be <code class="docutils literal notranslate"><span class="pre">float</span></code> instead of <code class="docutils literal notranslate"><span class="pre">int</span></code>, saving the <code class="docutils literal notranslate"><span class="pre">float</span></code> will take more RAM than <code class="docutils literal notranslate"><span class="pre">int</span></code> and this data set is relatively large (image 500x500 pixels) so we will not normalize first but will integrate this normalize step into the model</p>
+<ul class="simple">
+<li><p>The first layer in the model is <code class="docutils literal notranslate"><span class="pre">Input</span></code></p></li>
+<li><p>The next layer is <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/Rescaling%60">Rescaling</a></p></li>
+</ul>
+<p>Usage example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Rescaling</span><span class="p">,</span> <span class="n">Input</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Rescaling</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="o">/</span><span class="mi">255</span><span class="p">))</span>
+<span class="c1"># ... next layers</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Rescaling</span><span class="p">,</span> <span class="n">Input</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Rescaling</span><span class="p">(</span><span class="n">scale</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="mi">255</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># run to see the results</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span> <span class="o">*</span> <span class="mi">255</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="global-average-pooling">
+<h2>Global Average Pooling<a class="headerlink" href="#global-average-pooling" title="Permalink to this heading">#</a></h2>
+<p>In the theory Lab, we see that CNNs final feature map will be <code class="docutils literal notranslate"><span class="pre">Flatten</span></code> before passing to the <code class="docutils literal notranslate"><span class="pre">Dense</span></code> layer</p>
+<p>The fact that <code class="docutils literal notranslate"><span class="pre">Flatten</span></code> has 1 drawback is that if the final feature map is large, we will have a lot of weight in the <code class="docutils literal notranslate"><span class="pre">Dense</span></code> layer → FLOPs are high → train long.</p>
+<p>A more common practice is that instead of using <code class="docutils literal notranslate"><span class="pre">Flatten</span></code> we will use the layer <code class="docutils literal notranslate"><span class="pre">GlobalAveragePooling2D</span></code></p>
+<p>This layer will average each feature map → if in the last Convolution layer we have 512 feature maps, the result of <code class="docutils literal notranslate"><span class="pre">GlobalAveragePooling2D</span></code> will be a 512-dimensional vector → reduce FLOPs and a lot of weight in the <code class="docutils literal notranslate"><span class="pre">Dense</span></code> layer</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="c1"># ...</span>
+<span class="c1"># replace layer Flatten()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">GlobalAveragePooling2D</span><span class="p">())</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="o">...</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="build-the-architecture-of-model-and-start-training">
+<h2>Build the architecture of model and start training<a class="headerlink" href="#build-the-architecture-of-model-and-start-training" title="Permalink to this heading">#</a></h2>
+<section id="todo-read-carefully-before-coding">
+<h3>TODO: READ CAREFULLY BEFORE CODING<a class="headerlink" href="#todo-read-carefully-before-coding" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Build the Augmentation Pipeline of your own</p></li>
+<li><p>Build CNN model (layer <code class="docutils literal notranslate"><span class="pre">Rescaling</span></code> is required)</p>
+<ul>
+<li><p>Recode the models yourself in the Lab</p></li>
+<li><p>Because the input image is quite large, you may have to use multiple <code class="docutils literal notranslate"><span class="pre">Convolution-Batchnorm-Relu</span></code> blocks instead of just 3.</p></li>
+<li><p>The architecture of VGG-16 is very easy to understand. Try searching Google and implementing this architecture (reduce the number of layers, there is no need for 16 layers because the train takes a long time)</p></li>
+<li><p>You need to use <code class="docutils literal notranslate"><span class="pre">SeparableConv2D</span></code> instead of <code class="docutils literal notranslate"><span class="pre">Conv2D</span></code> and <code class="docutils literal notranslate"><span class="pre">GlobalAveragePooling2D</span></code> instead of <code class="docutils literal notranslate"><span class="pre">Flatten</span></code> to reduce FLOPs and the number of weights to be able to train using Colab.</p></li>
+</ul>
+</li>
+<li><p>Connect Augmentation Pipeline and CNN with another <code class="docutils literal notranslate"><span class="pre">Sequential</span></code> (Because when inference, the augmentation pipeline will be disabled, so we can completely use it in real application)</p></li>
+<li><p>Train the model, and make predictions on the Test set(Confusion Matrix, Classification Report)</p>
+<ul>
+<li><p>If encountering error <code class="docutils literal notranslate"><span class="pre">Out</span> <span class="pre">of</span> <span class="pre">Memory</span></code>, you should reduce the number of <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> when training</p></li>
+</ul>
+</li>
+<li><p>Draw some pictures to see the predicted results of the model.</p></li>
+<li><p>The training may be a bit long, you can make tea or coffee to enjoy while looking at the train screen.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># YOUR SOLUTION - CNN here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># YOUR SOLUTION - confusion matrix </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># YOUR SOLUTION - classification report</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="S8_Lab_CNN.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Session 8: Convolutional Neural Network</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="S8_SOL.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Session 8: Coding Solution</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Session 8: Assignment</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classic-filter-types">Classic filter types</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-of-recognizing-diseases-for-cowpea-leaves">The problem of recognizing diseases for cowpea leaves</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-dataset">Prepare the dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#image-augmentation">Image Augmentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rescaling">Rescaling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#global-average-pooling">Global Average Pooling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-architecture-of-model-and-start-training">Build the architecture of model and start training</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-read-carefully-before-coding">TODO: READ CAREFULLY BEFORE CODING</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kyle Paul
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,685 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Session 12: final theory test &#8212; Machine Learning Intensive</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/Final Test Theory';</script>
+    <link rel="canonical" href="https://kyle-paul.github.io/machine-learning-intensive/book/Final Test Theory.html" />
+    <link rel="shortcut icon" href="../_static/avatar.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Sesssion 12: Final Coding test" href="S12_FinalExam.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%201.html"><strong>Preclass Session 1: Representation</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S1_ASM.html">Session 1: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S1_SOL.html">Session 1: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%201%20Revision.html"><strong>Session 1: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%202.html"><strong>Preclass Session 2: Linear Model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S2_Lab_LinearModel.html">Session 2: Linear Model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S2_ASM.html">Session 2: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S2_SOL.html">Session 2: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%202%20Revision.html"><strong>Session 2: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%203.html"><strong>Preclass Session 3: Recommender System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S3_Lab_RecSys.html">Sesion 3: Recommender System</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S3_ASM.html">Session 3: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S3_SOL.html">Session 3: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%203%20Revision.html"><strong>Session 3: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%204.html"><strong>Preclass Session 4: NonLinear Predictor</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S4_Lab_NonLinearPredictors.html">Session 4: Nonlinear Predictors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S4_ASM.html">Session 4: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S4_SOL.html">Session 4: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%204%20Revision.html"><strong>Session 4: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%205.html"><strong>Preclass Session 5: Optimization</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S5_Lab_Optimization.html">Session 5: Optimization</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S5_ASM.html">Session 5: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S5_SOL.html">Session 5: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%205%20Revision.html"><strong>Session 5: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%206.html"><strong>Preclass Session 6: Metrics and Losses</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S6_Lab_Metrics%26Losses.html">Session 6: Metrics &amp; Losses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S6_ASM.html">Session 6: Assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S6_SOL.html">Session 6: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Midterm%20Theory%20Test.html"><strong>Theory Midterm Test</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Midterm%20Theory%20Solution.html"><strong>Theory Midterm Solution</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S7_MidTerm_TEST.html">Session 7: Midterm Coding Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S7_MidTerm_SOL.html">Session 7: Midterm Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%208.html"><strong>Preclass Session 8: Convolutional Neural Network</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S8_Lab_CNN.html">Session 8: Convolutional Neural Network</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="S8_ASM.html">Session 8: Assignment</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S8_SOL.html">Session 8: Coding Solution</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Session%208%20Revision.html"><strong>Session 8: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%209.html"><strong>Preclass Session 9: Natural Language Processing</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S9_LAB_RNN.html">Session 9 - Natural Language Processing</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S9_ASM.html">Session 9: Assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S9_SOL.html">Session 9: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%209%20Revision.html"><strong>Session: 9 Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%2010.html"><strong>Preclass Session 10: MDP Planning</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S10_LAB_MDP_PLANNING.html">Session 10 - MDP Planning</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S10_ASM.html">Session 10: Assigment</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S10_SOL.html">Session 10: Coding Solution</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Session%2010%20Revision.html"><strong>Session 10: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%2011.html"><strong>Preclass Session 11: Reinforcement Learning</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S11_LAB_Q_Learning.html">Session 11: Q Learning</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S11_SOL.html">Session 11: Coding Solution</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Session%2011%20Revision.html"><strong>Theory</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S12_FinalExam.html">Sesssion 12: Final Coding test</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Session 12: final theory test</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/edit/main/book/Final Test Theory.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/issues/new?title=Issue%20on%20page%20%2Fbook/Final Test Theory.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/Final Test Theory.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Session 12: final theory test</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theory-1"><strong>Theory 1</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theory-2"><strong>Theory 2</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theory-3"><strong>Theory 3</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theory-4"><strong>Theory 4</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theory-5"><strong>Theory 5</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="session-12-final-theory-test">
+<h1><strong>Session 12: final theory test</strong><a class="headerlink" href="#session-12-final-theory-test" title="Permalink to this heading">#</a></h1>
+<section id="theory-1">
+<h2><strong>Theory 1</strong><a class="headerlink" href="#theory-1" title="Permalink to this heading">#</a></h2>
+<ol class="arabic">
+<li><p>Build a face recogtnition system for attendance checking</p>
+<ul class="simple">
+<li><p>Task: Recognize and classify faces</p></li>
+<li><p>Experience: Image data with each sample <span class="math notranslate nohighlight">\(X \in \mathbb{R}^{m \times n \times k}\)</span> and labels <span class="math notranslate nohighlight">\(\bf y\)</span> with number unique values are number of attendees</p></li>
+<li><p>Function space: MLP <span class="math notranslate nohighlight">\(\bf \hat{y} = s(W^{l+2} \gamma(W^{l+1} \gamma(W^l\phi(z) + b^{l+1}) + b^2) + b^{l+2})\)</span></p></li>
+<li><p>Performance Measure: we use loss metric instead accuracy <span class="math notranslate nohighlight">\(\rightarrow\)</span> loss function “Categorical Cross Entropy”</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Algorithm: SGD or Adam, and use backpropagation to optimize parameters</p></li>
+</ol>
+</li>
+<li><p>Build a recsys</p>
+<ul class="simple">
+<li><p>Task: e.g Classify rating <span class="math notranslate nohighlight">\(1 \rightarrow 5\)</span> stars for an unknown item for a particular user</p></li>
+<li><p>Experience: Utility matrix with columns are feature vector of users and rows are feature vector of items</p></li>
+<li><p>Function space:  softmax regression <span class="math notranslate nohighlight">\(\bf \hat{y} = s(Wz + b)\)</span></p></li>
+<li><p>Performance Measure: we use loss metric instead accuracy <span class="math notranslate nohighlight">\(\rightarrow\)</span> loss function “Categorical Cross Entropy”</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Algorithm: SGD or Adam, and use backpropagation to optimize parameters</p></li>
+</ol>
+</li>
+<li><p>Customer Segmentation Application</p>
+<ul class="simple">
+<li><p>Task:  Grouping customers based on their shared features</p></li>
+<li><p>Experience:  matrix <span class="math notranslate nohighlight">\(X \in \mathbb{R}^{n \times d}\)</span> with <span class="math notranslate nohighlight">\(n\)</span> is number of sample (customers). Each row of <span class="math notranslate nohighlight">\(X\)</span> has <span class="math notranslate nohighlight">\(d\)</span> features. use KNN (need label), K-means (no need label)</p></li>
+<li><p>Function space: KNN / K-means clustering</p></li>
+<li><p>Performance Measure: MSE, MAE</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Algorithm: SGD or Adam, and use backpropagation to optimize parameters</p></li>
+</ol>
+</li>
+<li><p>Sentiment Analysis model</p>
+<ul class="simple">
+<li><p>Task: Classify input into 3 classes (good, bad, neutral)</p></li>
+<li><p>Experience: Train data is tokenized sentence with each word in the sentence having an ID of <span class="math notranslate nohighlight">\(n\)</span> features (embedding vector of that token)</p></li>
+<li><p>Function space: RNNs (or LSTM, GRU) + Dense</p></li>
+<li><p>Performance Measure: we use loss metric instead accuracy <span class="math notranslate nohighlight">\(\rightarrow\)</span> loss function “Categorical Cross Entropy”</p></li>
+<li><p>Algorithm: SGD or Adam, and use backpropagation to optimize parameters</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="theory-2">
+<h2><strong>Theory 2</strong><a class="headerlink" href="#theory-2" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Convolution = Dot product + Sliding: a feature map is obtained by applying a filter or a kernel to the input image or feature map and performing a dot product operation at each position. So we get the <strong>feature</strong> output image by <strong>mapping = dot + sliding</strong></p></li>
+<li><p><span class="math notranslate nohighlight">\({\bf \hat{y}} = s(W^s \gamma(W^l * Z^l + {\bf b}^l) + {\bf b}^s)\)</span> with convolutional layers <span class="math notranslate nohighlight">\(\gamma(W^l * Z^l + {\bf b}^l)\)</span>. Each row of <span class="math notranslate nohighlight">\(W^l\)</span> is used as kernel <span class="math notranslate nohighlight">\(\mathcal{K_i} = {\bf w}^l_i\)</span> to perform convolution (dot product + sliding) with low level feature <span class="math notranslate nohighlight">\(Z^l\)</span> (or raw input <span class="math notranslate nohighlight">\(X\)</span> at the first neuron layer <span class="math notranslate nohighlight">\(l = 1\)</span>), producing highlevel feature map <span class="math notranslate nohighlight">\(Z^{l+1}\)</span>. This is the highly abstract features.</p>
+<ul class="simple">
+<li><p>Kernel <span class="math notranslate nohighlight">\({\bf w}^l_i \in \mathbb{R}^{k \times k}\)</span> sliding on an input image <span class="math notranslate nohighlight">\(X \in \mathbb{R}^{n \times n}\)</span> and perform dot product (padding = same, stride = 1) <span class="math notranslate nohighlight">\(\rightarrow\)</span> we get the feature map with size <span class="math notranslate nohighlight">\(\frac{n +2p - k}{1}+1\)</span> (the same size input image). This high level feature map is add a bias <span class="math notranslate nohighlight">\(b^l_i\)</span>, producing <span class="math notranslate nohighlight">\(Z^{l+1} \in \mathbb{R}^{n \times n}\)</span></p></li>
+<li><p>If we have <span class="math notranslate nohighlight">\(W^l\)</span> with <span class="math notranslate nohighlight">\(d\)</span> rows <span class="math notranslate nohighlight">\(\rightarrow\)</span> we have <span class="math notranslate nohighlight">\(d\)</span> kernels <span class="math notranslate nohighlight">\(\rightarrow\)</span> we have <span class="math notranslate nohighlight">\(d\)</span> bias <span class="math notranslate nohighlight">\(b_i^l\)</span> (i=1..d) stacked into vector <span class="math notranslate nohighlight">\(b^l\)</span></p></li>
+<li><p>Therefore, we have the <span class="math notranslate nohighlight">\(d\)</span> output feature maps or output shape is <span class="math notranslate nohighlight">\((n, n, d)\)</span>. These highly abstract feature maps <span class="math notranslate nohighlight">\(Z^{l+1}\)</span> is then perform next convolution or pooling</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="theory-3">
+<h2><strong>Theory 3</strong><a class="headerlink" href="#theory-3" title="Permalink to this heading">#</a></h2>
+<p><strong>1. BPTT vs normal BPT</strong></p>
+<ul class="simple">
+<li><p>Output is recurrently used as input: Back-propagation through time (BPTT) is a technique of updating tuned parameters within recurrent neural networks (RNNs), which can process sequential data (in time series)</p></li>
+<li><p>Difference:</p>
+<ul>
+<li><p>Input and output is <strong>separate/independent</strong> in Norm BP <span class="math notranslate nohighlight">\(\rightarrow\)</span> not work for sequential data, while BPTT allows the RNN to learn from the errors made at each time step and adjust its parameters accordingly.</p></li>
+<li><p>BPTT has more problems: gradient vanishing, complex computations.
+**</p></li>
+</ul>
+</li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Weight-sharing in time in RNNs.**</p>
+<ul class="simple">
+<li><p>The same weight matrices are applied to the input and the hidden state at every time step, dont care about the length and position of sequence.</p></li>
+<li><p>Advantages:</p>
+<ul>
+<li><p>Reduce complexity and computation time</p></li>
+<li><p>Do not need to learn more parameter/weights when input changes (cause only use one and share for all)</p></li>
+<li><p>Capture the pattern of sequential data. If the weights not shared <span class="math notranslate nohighlight">\(\rightarrow\)</span> network treat each time step independently <span class="math notranslate nohighlight">\(\rightarrow\)</span> ignore the sequential nature of the data.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>2. Classify sentiments</strong></p>
+<ul class="simple">
+<li><p>Output label <span class="math notranslate nohighlight">\(y = \arg\max {\bf \hat{y}} \in \mathbb{R}^3\)</span> (3 classes: good, bad, neutral) is <span class="math notranslate nohighlight">\(i\)</span>-th having the greatest prediction score <span class="math notranslate nohighlight">\(\hat{y}^i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\({\bf \hat{y}} = s(W {\bf h} + b)\)</span> is a softmax classifier with input is the hidden state <span class="math notranslate nohighlight">\({\bf h}_t = \gamma(W {\bf h}_{t-1} + H {\bf z}_t + \bf b_h\)</span>) with <span class="math notranslate nohighlight">\(W \in \mathbb{R}^{n \times d}\)</span>,  <span class="math notranslate nohighlight">\({\bf h}_{t-1}\in \mathbb{R}^n\)</span>, <span class="math notranslate nohighlight">\(\bf b \in \mathbb{R}^n\)</span>,  <span class="math notranslate nohighlight">\({\bf z}_t \in \mathbb{R}^d\)</span> is the embedding vector of <span class="math notranslate nohighlight">\(t-th\)</span> word in the sentence (embedding vector has <span class="math notranslate nohighlight">\(d\)</span> features)</p></li>
+</ul>
+</section>
+<section id="theory-4">
+<h2><strong>Theory 4</strong><a class="headerlink" href="#theory-4" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Equation for <span class="math notranslate nohighlight">\(G = \sum_{t=0}^9 \gamma^t r_t\)</span>, and <span class="math notranslate nohighlight">\(a_t = \pi(s_t)\)</span> or <span class="math notranslate nohighlight">\(a_t = \arg \max Q(s,a)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(Q^\pi(\text{home, wait-bus}) = \frac1{10} \sum_{k=1}^{10} \Big(10 \space \text{mins} + \gamma G^\pi_k(s') \Big)\)</span></p></li>
+<li><p>Prediction <span class="math notranslate nohighlight">\(\bf \hat{y}\)</span> can be image (tensor) = state / environment that agent can observe <span class="math notranslate nohighlight">\(o_t\)</span> and make optimal action under optimal policy <span class="math notranslate nohighlight">\(\pi*\)</span></p></li>
+</ol>
+</section>
+<section id="theory-5">
+<h2><strong>Theory 5</strong><a class="headerlink" href="#theory-5" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>This is the MDP planning problem because the agent need to estimate its chance of winning by simulating the future over many courses of actions based on the rewards provided. State: position of the “quân cờ” on the chess table. And action here is how to move each “quân cờ” (make its position change)</p></li>
+<li><p>Range within <span class="math notranslate nohighlight">\(-1 \rightarrow +1\)</span></p></li>
+<li></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="S12_FinalExam.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Sesssion 12: Final Coding test</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theory-1"><strong>Theory 1</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theory-2"><strong>Theory 2</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theory-3"><strong>Theory 3</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theory-4"><strong>Theory 4</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theory-5"><strong>Theory 5</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kyle Paul
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

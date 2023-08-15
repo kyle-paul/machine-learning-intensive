@@ -1,0 +1,1025 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Session 10: Assigment &#8212; Machine Learning Intensive</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/S10_ASM';</script>
+    <link rel="canonical" href="https://kyle-paul.github.io/machine-learning-intensive/book/S10_ASM.html" />
+    <link rel="shortcut icon" href="../_static/avatar.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Session 10: Coding Solution" href="S10_SOL.html" />
+    <link rel="prev" title="Session 10 - MDP Planning" href="S10_LAB_MDP_PLANNING.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%201.html"><strong>Preclass Session 1: Representation</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S1_ASM.html">Session 1: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S1_SOL.html">Session 1: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%201%20Revision.html"><strong>Session 1: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%202.html"><strong>Preclass Session 2: Linear Model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S2_Lab_LinearModel.html">Session 2: Linear Model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S2_ASM.html">Session 2: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S2_SOL.html">Session 2: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%202%20Revision.html"><strong>Session 2: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%203.html"><strong>Preclass Session 3: Recommender System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S3_Lab_RecSys.html">Sesion 3: Recommender System</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S3_ASM.html">Session 3: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S3_SOL.html">Session 3: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%203%20Revision.html"><strong>Session 3: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%204.html"><strong>Preclass Session 4: NonLinear Predictor</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S4_Lab_NonLinearPredictors.html">Session 4: Nonlinear Predictors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S4_ASM.html">Session 4: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S4_SOL.html">Session 4: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%204%20Revision.html"><strong>Session 4: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%205.html"><strong>Preclass Session 5: Optimization</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S5_Lab_Optimization.html">Session 5: Optimization</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S5_ASM.html">Session 5: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S5_SOL.html">Session 5: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%205%20Revision.html"><strong>Session 5: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%206.html"><strong>Preclass Session 6: Metrics and Losses</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S6_Lab_Metrics%26Losses.html">Session 6: Metrics &amp; Losses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S6_ASM.html">Session 6: Assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S6_SOL.html">Session 6: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Midterm%20Theory%20Test.html"><strong>Theory Midterm Test</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Midterm%20Theory%20Solution.html"><strong>Theory Midterm Solution</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S7_MidTerm_TEST.html">Session 7: Midterm Coding Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S7_MidTerm_SOL.html">Session 7: Midterm Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%208.html"><strong>Preclass Session 8: Convolutional Neural Network</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S8_Lab_CNN.html">Session 8: Convolutional Neural Network</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="S8_ASM.html">Session 8: Assignment</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S8_SOL.html">Session 8: Coding Solution</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Session%208%20Revision.html"><strong>Session 8: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%209.html"><strong>Preclass Session 9: Natural Language Processing</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S9_LAB_RNN.html">Session 9 - Natural Language Processing</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S9_ASM.html">Session 9: Assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S9_SOL.html">Session 9: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%209%20Revision.html"><strong>Session: 9 Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%2010.html"><strong>Preclass Session 10: MDP Planning</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S10_LAB_MDP_PLANNING.html">Session 10 - MDP Planning</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Session 10: Assigment</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S10_SOL.html">Session 10: Coding Solution</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Session%2010%20Revision.html"><strong>Session 10: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%2011.html"><strong>Preclass Session 11: Reinforcement Learning</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S11_LAB_Q_Learning.html">Session 11: Q Learning</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S11_SOL.html">Session 11: Coding Solution</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Session%2011%20Revision.html"><strong>Theory</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S12_FinalExam.html">Sesssion 12: Final Coding test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Final%20Test%20Theory.html"><strong>Session 12: final theory test</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/kyle-paul/machine-learning-intensive/master?urlpath=tree/book/S10_ASM.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/kyle-paul/machine-learning-intensive/blob/master/book/S10_ASM.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/edit/main/book/S10_ASM.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/issues/new?title=Issue%20on%20page%20%2Fbook/S10_ASM.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/S10_ASM.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Session 10: Assigment</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Session 10: Assigment</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#coding-practice">Coding Practice</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions-for-dealing-with-environment">Instructions for dealing with Environment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-1">TODO 1</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#planning">Planning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-2">TODO 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-3">TODO 3</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watch-agent-plays">Watch Agent plays</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="session-10-assigment">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Session 10: Assigment</a><a class="headerlink" href="#session-10-assigment" title="Permalink to this heading">#</a></h1>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#session-10-assigment" id="id1">Session 10: Assigment</a></p></li>
+<li><p><a class="reference internal" href="#coding-practice" id="id2">Coding Practice</a></p>
+<ul>
+<li><p><a class="reference internal" href="#instructions-for-dealing-with-environment" id="id3">Instructions for dealing with Environment</a></p>
+<ul>
+<li><p><a class="reference internal" href="#todo-1" id="id4">TODO 1</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#planning" id="id5">Planning</a></p>
+<ul>
+<li><p><a class="reference internal" href="#todo-2" id="id6">TODO 2</a></p></li>
+<li><p><a class="reference internal" href="#todo-3" id="id7">TODO 3</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#watch-agent-plays" id="id8">Watch Agent plays</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>!pip install gymnasium
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="coding-practice">
+<h1><a class="toc-backref" href="#id2" role="doc-backlink">Coding Practice</a><a class="headerlink" href="#coding-practice" title="Permalink to this heading">#</a></h1>
+<p>In this assignment, we will perform Planning for the game Frozen Lake. Unlike the lab, the game will be created automatically by OpenAI’s <code class="docutils literal notranslate"><span class="pre">gymnasium</span></code> library and this is the Stochastic Environment (performing an <code class="docutils literal notranslate"><span class="pre">A</span></code> action will have a probability of reaching different <code class="docutils literal notranslate"><span class="pre">s</span></code> states)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import gymnasium as gym
+import matplotlib.pyplot as plt
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># intialize the environment
+env = gym.make(&#39;FrozenLake-v1&#39;, desc=None, map_name=&quot;4x4&quot;, is_slippery=True, render_mode=&quot;rgb_array&quot;)
+env.reset() # use this to reset the environment to intial state
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># render game
+frame = env.render()
+plt.imshow(frame)
+plt.show()
+</pre></div>
+</div>
+</div>
+</div>
+<p>According to the documentation of the library <a class="reference external" href="https://gymnasium.farama.org/environments/toy_text/frozen_lake/">here</a></p>
+<p>The game has 4 actions as follows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> Move left</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> Move down</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code> Move right</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">3</span></code> Move up</p></li>
+</ul>
+<p>Reward</p>
+<ul class="simple">
+<li><p>Reach goal: <code class="docutils literal notranslate"><span class="pre">+1</span></code></p></li>
+<li><p>Reach hole: <code class="docutils literal notranslate"><span class="pre">0</span></code></p></li>
+<li><p>Reach frozen: <code class="docutils literal notranslate"><span class="pre">0</span></code></p></li>
+</ul>
+<section id="instructions-for-dealing-with-environment">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Instructions for dealing with Environment</a><a class="headerlink" href="#instructions-for-dealing-with-environment" title="Permalink to this heading">#</a></h2>
+<p>When calling the <code class="docutils literal notranslate"><span class="pre">reset</span></code> function, the game environment will be reset to its original state, the player will be in position <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>state, info = env.reset()
+print(state)
+# info is a dictionary contains secondary information
+# In this case the probability of resulting in state=0 is 100%
+print(info)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+{&#39;prob&#39;: 1}
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">step(action)</span></code> function will return the following information:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">next_state</span></code> index of the next state</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Reward</span></code> reward of next state</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">terminated</span></code> Boolean indicates whether the game is over or not (falling into the hole, reaching the goal)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">truncated</span></code> in this notebook we don`t use this value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">info</span></code> dictionary contains probabilistic information to reach <code class="docutils literal notranslate"><span class="pre">next_state</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>next_state, reward, terminated, truncated, info = env.step(1)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Said earlier, this is the Stochastic Environment.</p>
+<p>Running the cell below many times we observe that although performing Action=Right, the new position of the player can be in 1 of the following 3 cases:</p>
+<ul class="simple">
+<li><p>No change</p></li>
+<li><p>To the right</p></li>
+<li><p>Going down</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># to reset the state of the game to original
+env.reset()
+# Perform action to the right
+env.step(2)
+# render
+frame = env.render()
+plt.imshow(frame)
+plt.show()
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>env.reset()
+info = env.step(2)
+info
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can get a complete description of the environment with the command <code class="docutils literal notranslate"><span class="pre">env.P</span></code></p>
+<p>Kết quả là 1 dictionary theo format sau</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="n">state_0</span><span class="p">:</span> <span class="p">{</span> <span class="c1"># state index 0</span>
+    <span class="n">action_0</span><span class="p">:</span> <span class="p">[</span> <span class="c1"># list contains cases that occur when executing action_0</span>
+      <span class="c1"># probability for next state to happen, next_state, reward, terminated (true or false)</span>
+      <span class="p">(</span><span class="n">prob_0</span><span class="p">,</span> <span class="n">next_state_0</span><span class="p">,</span> <span class="n">reward_0</span><span class="p">,</span> <span class="n">terminated_0</span><span class="p">),</span>
+      <span class="p">(</span><span class="n">prob_1</span><span class="p">,</span> <span class="n">next_state_1</span><span class="p">,</span> <span class="n">reward_1</span><span class="p">,</span> <span class="n">terminated_1</span><span class="p">),</span>
+      <span class="o">...</span>
+    <span class="p">]</span>
+    <span class="n">action_1</span><span class="p">:</span> <span class="p">[</span> <span class="c1"># similar to action_0, but for action_1</span>
+      <span class="p">(</span><span class="n">prob_0</span><span class="p">,</span> <span class="n">next_state_0</span><span class="p">,</span> <span class="n">reward_0</span><span class="p">,</span> <span class="n">terminated_0</span><span class="p">),</span>
+      <span class="p">(</span><span class="n">prob_1</span><span class="p">,</span> <span class="n">next_state_1</span><span class="p">,</span> <span class="n">reward_1</span><span class="p">,</span> <span class="n">terminated_1</span><span class="p">),</span>
+      <span class="o">...</span>
+    <span class="p">],</span>
+    <span class="o">...</span> <span class="c1"># the rest of actions</span>
+  <span class="p">}</span>
+  <span class="n">state_1</span><span class="p">:</span> <span class="p">{},</span> <span class="c1"># similar to state_0, but for state_1</span>
+  <span class="o">...</span> <span class="c1"># the rest of state</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For example, we will take out all the possible cases when the agent is in State 9.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>env.P
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ACTION_LABELS = [&quot;GO LEFT&quot;, &quot;GO DOWN&quot;, &quot;GO RIGHT&quot;, &quot;GO UP&quot;]
+print(&quot;At State 9&quot;)
+for k, v in env.P[9].items():
+  # key là action
+  # value là list chứa các trường hợp sẽ xảy khi thực hiện action
+  print(f&quot;If executing action: {ACTION_LABELS[k]}&quot;)
+  for result in v:
+    prob, next_state, reward, terminated = result
+    print(f&quot;Probability {prob} to get into {next_state} with reward={reward}, game over = {terminated}&quot;)
+  print(&quot;=&quot;*30)
+</pre></div>
+</div>
+</div>
+</div>
+<section id="todo-1">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">TODO 1</a><a class="headerlink" href="#todo-1" title="Permalink to this heading">#</a></h3>
+<p>From the above tests, conclude how the game’s slide feature works?</p>
+<p>Once you understand how to play, try to think about what is the optimal way to solve this problem?</p>
+<p><strong>Your answer here</strong></p>
+</section>
+</section>
+<section id="planning">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Planning</a><a class="headerlink" href="#planning" title="Permalink to this heading">#</a></h2>
+<p>In this section, we use Bellman’s Optimality Equations to perform Planning for the glacial lake problem with the Stochastic Environment</p>
+<p><strong>Bellman’s Optimality Equations</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\forall s,a: ~ Q(s,a) = \sum_{s'} P(s'|s,a)\big[R(s,a,s') + \gamma \max_{a'}(Q(s',a'))\big].
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\max(Q(s',a'))\)</span>: The max value of <code class="docutils literal notranslate"><span class="pre">Q[next_state]</span></code></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(s'|s,a)\)</span>: Probability of reaching the state <span class="math notranslate nohighlight">\(s'\)</span> after executing action <span class="math notranslate nohighlight">\(a\)</span> at state <span class="math notranslate nohighlight">\(s\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(R(s,a,s')\)</span>: reward received upon arrival in the state <span class="math notranslate nohighlight">\(s'\)</span> from state <span class="math notranslate nohighlight">\(s\)</span> with action <span class="math notranslate nohighlight">\(a\)</span></p></li>
+</ul>
+<section id="todo-2">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">TODO 2</a><a class="headerlink" href="#todo-2" title="Permalink to this heading">#</a></h3>
+<p>Use Bellman Equations to complete the <code class="docutils literal notranslate"><span class="pre">planning</span></code> function below (similar to Lab, but with probability)</p>
+<p>Note: if the current state is terminal, do not update</p>
+<p>Hint: use loops to compute the sum <span class="math notranslate nohighlight">\(\sum\)</span> <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">probability,</span> <span class="pre">next_state,</span> <span class="pre">reward,</span> <span class="pre">_</span> <span class="pre">in</span> <span class="pre">env.P[state][action]</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># YOUR SOLUTION HERE
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="todo-3">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">TODO 3</a><a class="headerlink" href="#todo-3" title="Permalink to this heading">#</a></h3>
+<p>From the <code class="docutils literal notranslate"><span class="pre">Q</span></code> matrix, complete the <code class="docutils literal notranslate"><span class="pre">get_optimal_actions</span></code> below.</p>
+<p>This function returns <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">list</span></code> with the number of elements equal to the number of states, the numbers inside indicate the best action that the agent must perform when in the corresponding state based on the optimized <code class="docutils literal notranslate"><span class="pre">Q</span></code> matrix</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># YOUR SOLUTION HERE
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Visualize optimal policy</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import pandas as pd
+from matplotlib.table import Table
+
+def visualize_policy(optimal_actions, terminal):
+  ACTION_LABELS = [&quot;left&quot;, &quot;down&quot;, &quot;right&quot;, &quot;up&quot;]
+
+  temp = []
+  for i in range(4):
+    temp_1 = []
+    for j in range(4):
+      temp_1.append(ACTION_LABELS[optimal_actions[i*4+j]])
+    temp.append(temp_1)
+
+  data = pd.DataFrame(temp)
+  fig, ax = plt.subplots(figsize=(7,7))
+  ax.set_axis_off()
+  tb = Table(ax, bbox=[0,0,1,1])
+
+  nrows, ncols = 4, 4
+  width, height = 1.0 / ncols, 1.0 / nrows
+
+  bkg_colors = [&#39;teal&#39; for i in range(16)]
+  for pos in terminal:
+    bkg_colors[pos] = &#39;blue&#39;
+  bkg_colors[0] = &#39;orange&#39;
+  bkg_colors[15] = &#39;green&#39;
+
+  # Add cells
+  for (i,j), val in np.ndenumerate(data):
+    # Index either the first or second item of bkg_colors based on
+    # a checker board pattern
+    color = bkg_colors[i*4 + j]
+    if i*4+j in terminal and i*4+j!=15:
+      tb.add_cell(i, j, width, height, text=&#39;die&#39;,
+                  loc=&#39;center&#39;, facecolor=color)
+    elif i*4+j==15:
+      tb.add_cell(i, j, width, height, text=&#39;goal&#39;,
+                  loc=&#39;center&#39;, facecolor=color)
+    else:
+      tb.add_cell(i, j, width, height, text=val,
+                  loc=&#39;center&#39;, facecolor=color)
+
+  ax.add_table(tb)
+  plt.show()
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>visualize_policy(optimal_actions, terminal=[5, 7, 11, 12, 15])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Support function to compute winrate</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from tqdm.notebook import tqdm
+
+def get_average_winrate(env, optimal_actions, num_play=10000):
+  lost_count = 0
+  step_count = 0
+  for episode in tqdm(range(num_play)):
+    state, info = env.reset()
+    steps = 0
+    while True:
+      action = optimal_actions[state]
+      state, reward, terminated, _, _ = env.step(action)
+      steps += 1
+      if terminated and reward == 1:
+        # win
+        step_count += steps
+        break
+      elif terminated and reward == 0:
+        # lose
+        lost_count += 1
+        break
+  print(f&quot;{num_play} games&quot;)
+  print(&quot;----------------------------------------------&quot;)
+  print(&quot;You took an average of {:.2f} steps to reach goal&quot;.format(step_count / num_play))
+  print(&quot;And you fell in the hole {} times ({:.2f}%)&quot;.format(lost_count, (lost_count/num_play) * 100))
+  print(&quot;----------------------------------------------&quot;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>get_average_winrate(env, optimal_actions)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="watch-agent-plays">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Watch Agent plays</a><a class="headerlink" href="#watch-agent-plays" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def play_one_game(env, optimal_actions):
+  frames = []
+  cur_state, _ = env.reset()
+  frames.append(env.render())
+  while True:
+    best_action = optimal_actions[cur_state]
+    cur_state, _, terminated, _, _ = env.step(best_action)
+    frames.append(env.render())
+    if terminated:
+      break
+  return frames
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>frames = play_one_game(env, optimal_actions)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import matplotlib.animation as anim
+from IPython.display import HTML
+
+plt.figure(figsize=(frames[0].shape[1] / 72.0, frames[0].shape[0] / 72.0), dpi = 72)
+patch = plt.imshow(frames[0])
+plt.axis(&#39;off&#39;) 
+animate = lambda i: patch.set_data(frames[i])
+ani = anim.FuncAnimation(plt.gcf(), animate, frames=len(frames), interval = 50)
+HTML(ani.to_jshtml())
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="S10_LAB_MDP_PLANNING.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Session 10 - MDP Planning</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="S10_SOL.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Session 10: Coding Solution</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Session 10: Assigment</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#coding-practice">Coding Practice</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions-for-dealing-with-environment">Instructions for dealing with Environment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-1">TODO 1</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#planning">Planning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-2">TODO 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-3">TODO 3</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watch-agent-plays">Watch Agent plays</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kyle Paul
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -23,7 +23,7 @@ Otherwise, we can use similarity scores, e.g. cosine cos$(\bf x^t, m^j)$ or norm
 Given the utility matrix as below
 <center><img src=https://d1q4qwyh0q55bh.cloudfront.net/images/hL3EeAAWJ4bSgZLRTLlYy63KJOTnAejOY1QjTJLBsrqjz5kjaQrF0En6WxDQHBs0.png?d=desktop-thumbnail></center><br>
 
-Measure the similarity between users $\bf A \& B$, $\bf A & C$.
+Measure the similarity between users $\bf A \& B$, $\bf A \& C$.
 ### **Answer**
 We will center each feature vector (based on items) of users and then calculate the cosine similarity.
 
@@ -39,7 +39,7 @@ $$
 $$
 s(u_A,u_C) = \frac{u_A \cdot u_C}{||u_A||_2 ||u_C||_2} \approx -0.78824078
 $$
-$\rightarrow$ $A&B$ are quite similar and $A&C$ are quite different.
+$\rightarrow$ $A \& B$ are quite similar and $A \& C$ are quite different.
 
 ### **Question 2**
 Measure the similarity between items $\bf m_1 \& m_3$, $\bf m_3 \& m_4$.

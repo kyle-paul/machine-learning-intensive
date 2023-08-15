@@ -1,0 +1,1956 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Session 5: Coding Solution &#8212; Machine Learning Intensive</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/S5_SOL';</script>
+    <link rel="canonical" href="https://kyle-paul.github.io/machine-learning-intensive/book/S5_SOL.html" />
+    <link rel="shortcut icon" href="../_static/avatar.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Session 5: Revision" href="Session%205%20Revision.html" />
+    <link rel="prev" title="Session 5: Assigment" href="S5_ASM.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%201.html"><strong>Preclass Session 1: Representation</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S1_ASM.html">Session 1: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S1_SOL.html">Session 1: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%201%20Revision.html"><strong>Session 1: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%202.html"><strong>Preclass Session 2: Linear Model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S2_Lab_LinearModel.html">Session 2: Linear Model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S2_ASM.html">Session 2: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S2_SOL.html">Session 2: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%202%20Revision.html"><strong>Session 2: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%203.html"><strong>Preclass Session 3: Recommender System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S3_Lab_RecSys.html">Sesion 3: Recommender System</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S3_ASM.html">Session 3: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S3_SOL.html">Session 3: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%203%20Revision.html"><strong>Session 3: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%204.html"><strong>Preclass Session 4: NonLinear Predictor</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S4_Lab_NonLinearPredictors.html">Session 4: Nonlinear Predictors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S4_ASM.html">Session 4: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S4_SOL.html">Session 4: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%204%20Revision.html"><strong>Session 4: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%205.html"><strong>Preclass Session 5: Optimization</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S5_Lab_Optimization.html">Session 5: Optimization</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S5_ASM.html">Session 5: Assigment</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Session 5: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%205%20Revision.html"><strong>Session 5: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%206.html"><strong>Preclass Session 6: Metrics and Losses</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S6_Lab_Metrics%26Losses.html">Session 6: Metrics &amp; Losses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S6_ASM.html">Session 6: Assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S6_SOL.html">Session 6: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Midterm%20Theory%20Test.html"><strong>Theory Midterm Test</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Midterm%20Theory%20Solution.html"><strong>Theory Midterm Solution</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S7_MidTerm_TEST.html">Session 7: Midterm Coding Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S7_MidTerm_SOL.html">Session 7: Midterm Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%208.html"><strong>Preclass Session 8: Convolutional Neural Network</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S8_Lab_CNN.html">Session 8: Convolutional Neural Network</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="S8_ASM.html">Session 8: Assignment</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S8_SOL.html">Session 8: Coding Solution</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Session%208%20Revision.html"><strong>Session 8: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%209.html"><strong>Preclass Session 9: Natural Language Processing</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S9_LAB_RNN.html">Session 9 - Natural Language Processing</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S9_ASM.html">Session 9: Assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S9_SOL.html">Session 9: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%209%20Revision.html"><strong>Session: 9 Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%2010.html"><strong>Preclass Session 10: MDP Planning</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S10_LAB_MDP_PLANNING.html">Session 10 - MDP Planning</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S10_ASM.html">Session 10: Assigment</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S10_SOL.html">Session 10: Coding Solution</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Session%2010%20Revision.html"><strong>Session 10: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%2011.html"><strong>Preclass Session 11: Reinforcement Learning</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S11_LAB_Q_Learning.html">Session 11: Q Learning</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S11_SOL.html">Session 11: Coding Solution</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Session%2011%20Revision.html"><strong>Theory</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S12_FinalExam.html">Sesssion 12: Final Coding test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Final%20Test%20Theory.html"><strong>Session 12: final theory test</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/kyle-paul/machine-learning-intensive/master?urlpath=tree/book/S5_SOL.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/kyle-paul/machine-learning-intensive/blob/master/book/S5_SOL.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/edit/main/book/S5_SOL.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/issues/new?title=Issue%20on%20page%20%2Fbook/S5_SOL.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/S5_SOL.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Session 5: Coding Solution</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mechanism-of-dropout-layer">The mechanism of Dropout Layer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-spam-classification">A simple Spam Classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-dataset">Prepare the dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-1">TODO 1</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-conversion">Data Conversion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-test-split">Train Test Split</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-2">TODO 2</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-model">Train the model</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-3">TODO 3</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#your-comment">Your comment</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="session-5-coding-solution">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Session 5: Coding Solution</a><a class="headerlink" href="#session-5-coding-solution" title="Permalink to this heading">#</a></h1>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#session-5-coding-solution" id="id1">Session 5: Coding Solution</a></p>
+<ul>
+<li><p><a class="reference internal" href="#the-mechanism-of-dropout-layer" id="id2">The mechanism of Dropout Layer</a></p></li>
+<li><p><a class="reference internal" href="#a-simple-spam-classification" id="id3">A simple Spam Classification</a></p>
+<ul>
+<li><p><a class="reference internal" href="#prepare-the-dataset" id="id4">Prepare the dataset</a></p>
+<ul>
+<li><p><a class="reference internal" href="#todo-1" id="id5">TODO 1</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-conversion" id="id6">Data Conversion</a></p></li>
+<li><p><a class="reference internal" href="#train-test-split" id="id7">Train Test Split</a></p>
+<ul>
+<li><p><a class="reference internal" href="#todo-2" id="id8">TODO 2</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#train-the-model" id="id9">Train the model</a></p>
+<ul>
+<li><p><a class="reference internal" href="#todo-3" id="id10">TODO 3</a></p></li>
+<li><p><a class="reference internal" href="#your-comment" id="id11">Your comment</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="the-mechanism-of-dropout-layer">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">The mechanism of Dropout Layer</a><a class="headerlink" href="#the-mechanism-of-dropout-layer" title="Permalink to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Dropout</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Input</span><span class="p">(</span><span class="o">...</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="o">...</span><span class="p">))</span> <span class="c1"># no activation</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="o">...</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>In the above exmaple, we create an layer <code class="docutils literal notranslate"><span class="pre">dropout_rate</span> <span class="pre">=</span> <span class="pre">0.2</span></code>.</p>
+<p>That is, <code class="docutils literal notranslate"><span class="pre">each</span> <span class="pre">unit</span></code> in the Dense layer will have a 20% probability of being assigned to the value = 0.</p>
+<p>The remaining numbers will be scaled up according to the formula</p>
+<div class="math notranslate nohighlight">
+\[
+\text{new value} = \text{old value} * \frac{1}{1-\text{rate}}
+\]</div>
+<p>Let’s go through the detailed example below to better understand</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from tensorflow.random import set_seed
+from tensorflow.keras.layers import Dropout
+
+layer = Dropout(0.2, input_shape=(2,))
+</pre></div>
+</div>
+</div>
+</div>
+<p>Create a matrix with shape = <span class="math notranslate nohighlight">\((5,2)\)</span> representing the Dense layer</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import numpy as np
+
+np.random.seed(42)
+
+data = np.arange(10).reshape(5, 2).astype(np.float32)
+print(data)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0. 1.]
+ [2. 3.]
+ [4. 5.]
+ [6. 7.]
+ [8. 9.]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Pass the above matrix through the Dropout layer</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>set_seed(42)
+
+outputs = layer(data, training=True)
+print(outputs)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tf.Tensor(
+[[ 0.    1.25]
+ [ 2.5   3.75]
+ [ 0.    6.25]
+ [ 7.5   8.75]
+ [10.   11.25]], shape=(5, 2), dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="a-simple-spam-classification">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">A simple Spam Classification</a><a class="headerlink" href="#a-simple-spam-classification" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from google.colab import drive
+drive.mount(&#39;/content/drive&#39;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mounted at /content/drive
+</pre></div>
+</div>
+</div>
+</div>
+<section id="prepare-the-dataset">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Prepare the dataset</a><a class="headerlink" href="#prepare-the-dataset" title="Permalink to this heading">#</a></h3>
+<p>In this article, we will practice using the <code class="docutils literal notranslate"><span class="pre">MLP</span></code> model to classify phone messages (SMS) as spam or normal messages.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set()
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>df = pd.read_csv(&#39;/content/drive/MyDrive/Colab Notebooks/ML-intensive/data/spam.csv&#39;, encoding=&#39;latin-1&#39;, usecols=[0,1],names=[&#39;Label&#39;,&#39;SMS&#39;], header=0)
+df.head()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-40e5e0bd-07ab-4b9d-a95c-9321de232559">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Label</th>
+      <th>SMS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ham</td>
+      <td>Go until jurong point, crazy.. Available only ...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ham</td>
+      <td>Ok lar... Joking wif u oni...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>spam</td>
+      <td>Free entry in 2 a wkly comp to win FA Cup fina...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ham</td>
+      <td>U dun say so early hor... U c already then say...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ham</td>
+      <td>Nah I don't think he goes to usf, he lives aro...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-40e5e0bd-07ab-4b9d-a95c-9321de232559')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+        
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+      
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-40e5e0bd-07ab-4b9d-a95c-9321de232559 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-40e5e0bd-07ab-4b9d-a95c-9321de232559');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+  </div></div>
+</div>
+<p>Annotate the values in column <strong>Label</strong></p>
+<ul class="simple">
+<li><p><strong>ham</strong> means normal message</p></li>
+<li><p><strong>spam</strong> means spam messages (ads, phishing, etc.)</p></li>
+</ul>
+<section id="todo-1">
+<h4><a class="toc-backref" href="#id5" role="doc-backlink">TODO 1</a><a class="headerlink" href="#todo-1" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Print out <strong>5 spam messages</strong> and <strong>5 ham messages</strong></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># YOUR SOLUTION
+spam = df[df.Label == &#39;spam&#39;]
+spam[:5]
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-ef304038-c5bc-433d-afbc-0a86bae084e7">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Label</th>
+      <th>SMS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>spam</td>
+      <td>Free entry in 2 a wkly comp to win FA Cup fina...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>spam</td>
+      <td>FreeMsg Hey there darling it's been 3 week's n...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>spam</td>
+      <td>WINNER!! As a valued network customer you have...</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>spam</td>
+      <td>Had your mobile 11 months or more? U R entitle...</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>spam</td>
+      <td>SIX chances to win CASH! From 100 to 20,000 po...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-ef304038-c5bc-433d-afbc-0a86bae084e7')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+        
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+      
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-ef304038-c5bc-433d-afbc-0a86bae084e7 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-ef304038-c5bc-433d-afbc-0a86bae084e7');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+  </div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ham = df[df.Label == &#39;ham&#39;]
+ham[:5]
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-b1f715db-cb85-435d-a854-0c3bf8bdbedd">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Label</th>
+      <th>SMS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ham</td>
+      <td>Go until jurong point, crazy.. Available only ...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ham</td>
+      <td>Ok lar... Joking wif u oni...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ham</td>
+      <td>U dun say so early hor... U c already then say...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ham</td>
+      <td>Nah I don't think he goes to usf, he lives aro...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>ham</td>
+      <td>Even my brother is not like to speak with me. ...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-b1f715db-cb85-435d-a854-0c3bf8bdbedd')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+        
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+      
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-b1f715db-cb85-435d-a854-0c3bf8bdbedd button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-b1f715db-cb85-435d-a854-0c3bf8bdbedd');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+  </div></div>
+</div>
+<p>We count the number of messages belonging to each <strong>Label</strong> to see if this data set is <strong>Balanced Dataset</strong> or <strong>Imbalanced Dataset</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>df[&#39;Label&#39;].value_counts()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ham     4825
+spam     747
+Name: Label, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>We take the data in the SMS column as input <strong>x</strong></p>
+<p>Then convert <strong>Label</strong> into number</p>
+<ul class="simple">
+<li><p><strong>Ham</strong> = 0</p></li>
+<li><p><strong>Spam</strong> = 1</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># retrieve the data from the SMS column, then convert into numpy array
+x = df[&#39;SMS&#39;].values
+# retrieve the data of the Label column
+# binary mapping and convert into numpy array
+y = df[&#39;Label&#39;].map({&#39;ham&#39;:0,&#39;spam&#39;:1}).values
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>x.shape, y.shape
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((5572,), (5572,))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>y
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 0, 1, ..., 0, 0, 0])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="data-conversion">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Data Conversion</a><a class="headerlink" href="#data-conversion" title="Permalink to this heading">#</a></h3>
+<p>Remember that AI models take in data in the form of numbers. Therefore we will transform our data set from string of characters to numbers.</p>
+<p>There are many ways to transform, here we will use the simplest method called <strong>Count Vectorizer</strong>. For example, we have a data set of 4 sentences as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>example_data = [
+  &#39;This is the first document.&#39;,
+  &#39;This document is the second document.&#39;,
+  &#39;And this is the third one.&#39;,
+  &#39;Is this the first document?&#39;,
+]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Perform <strong>CountVectorizer</strong> on <code class="docutils literal notranslate"><span class="pre">example_data</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from sklearn.feature_extraction.text import CountVectorizer # Import sklearn library
+
+transformer = CountVectorizer()  # Initiallize CountVectorizer
+transformer.fit(example_data) # Fit CountVectorizer on  example_data
+
+example_features = transformer.transform(example_data).toarray() # create a set of features
+print(example_features)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0 1 1 1 0 0 1 0 1]
+ [0 2 0 1 0 1 1 0 1]
+ [1 0 0 1 1 0 1 1 1]
+ [0 1 1 1 0 0 1 0 1]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>To understand the meaning of the numbers in variable ‘example_features’ one must understand how the <strong>Count Vectorizer</strong> transformation works</p>
+<p>How the <strong>Count Vectorizer</strong> transformation works</p>
+<ul class="simple">
+<li><p>Step 1: Separate the dataset into a list of separate words (dictionary)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># We can see the result of step 1 by the following function
+print(transformer.get_feature_names_out())
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;and&#39; &#39;document&#39; &#39;first&#39; &#39;is&#39; &#39;one&#39; &#39;second&#39; &#39;the&#39; &#39;third&#39; &#39;this&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that from <code class="docutils literal notranslate"><span class="pre">example_dataset</span></code>, we can separate them into <strong>9 seperable words</strong>. <code class="docutils literal notranslate"><span class="pre">example_dataset</span></code> có 4 sentences</p>
+<p><span class="math notranslate nohighlight">\(\rightarrow\)</span> <code class="docutils literal notranslate"><span class="pre">example_features</span></code> will have the shape of <code class="docutils literal notranslate"><span class="pre">(4,</span> <span class="pre">9)</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>print(&#39;Shape:&#39;,example_features.shape)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape: (4, 9)
+</pre></div>
+</div>
+</div>
+</div>
+<ul>
+<li><p>Step 2: Reconcile original data with separate words after splitting. These are the features of each sentence in the dataset. Example:</p>
+<ul class="simple">
+<li><p>Sentence 1: <code class="docutils literal notranslate"><span class="pre">'This</span> <span class="pre">is</span> <span class="pre">the</span> <span class="pre">first</span> <span class="pre">document.'</span></code>. At the corresponding places there will be the number <code class="docutils literal notranslate"><span class="pre">n</span></code> meaning that the word appears <code class="docutils literal notranslate"><span class="pre">n</span></code> times in the sentence.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;and&#39;</span><span class="p">,</span> <span class="s1">&#39;document&#39;</span><span class="p">,</span> <span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;is&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="s1">&#39;the&#39;</span><span class="p">,</span> <span class="s1">&#39;third&#39;</span><span class="p">,</span> <span class="s1">&#39;this&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Sentence 2: <code class="docutils literal notranslate"><span class="pre">'This</span> <span class="pre">document</span> <span class="pre">is</span> <span class="pre">the</span> <span class="pre">second</span> <span class="pre">document.'</span></code> There are 2 words in this sentence <strong>document</strong> <span class="math notranslate nohighlight">\(\rightarrow\)</span> at the position [1] is 2</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;and&#39;</span><span class="p">,</span> <span class="s1">&#39;document&#39;</span><span class="p">,</span> <span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;is&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="s1">&#39;the&#39;</span><span class="p">,</span> <span class="s1">&#39;third&#39;</span><span class="p">,</span> <span class="s1">&#39;this&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">0</span> <span class="mi">2</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>We will apply <strong>Count Vectorizer</strong> to the SMS dataset</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># fit on x_train
+transformer = CountVectorizer(stop_words = &#39;english&#39;).fit(x)
+# transform on x_train and x_test
+x_vectors = transformer.transform(x)
+
+print(&#39;Shape of x_train:&#39;,x_vectors.shape)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape of x_train: (5572, 8404)
+</pre></div>
+</div>
+</div>
+</div>
+<p>That is, in the dataset there are</p>
+<ul class="simple">
+<li><p>5572 messages</p></li>
+<li><p>8404 distinct words, each sample in the dataset is represented by a characteristic 8404</p></li>
+</ul>
+<p>Also, when initializing <code class="docutils literal notranslate"><span class="pre">CountVectorizer</span></code>, we pass param <code class="docutils literal notranslate"><span class="pre">stop_words=&quot;english&quot;</span></code></p>
+<p>In language processing, the term <code class="docutils literal notranslate"><span class="pre">stop_words</span></code> refers to words that are frequently used in a language, but do not make much sense. These words will be ignored when the <code class="docutils literal notranslate"><span class="pre">CountVectorizer</span></code> builds a dictionary of words. Run the cell below to see a list of <code class="docutils literal notranslate"><span class="pre">stop_words</span></code> in English</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>transformer.get_stop_words()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>frozenset({&#39;a&#39;,
+           &#39;about&#39;,
+           &#39;above&#39;,
+           &#39;across&#39;,
+           &#39;after&#39;,
+           &#39;afterwards&#39;,
+           &#39;again&#39;,
+           &#39;against&#39;,
+           &#39;all&#39;,
+           &#39;almost&#39;,
+           &#39;alone&#39;,
+           &#39;along&#39;,
+           &#39;already&#39;,
+           &#39;also&#39;,
+           &#39;although&#39;,
+           &#39;always&#39;,
+           &#39;am&#39;,
+           &#39;among&#39;,
+           &#39;amongst&#39;,
+           &#39;amoungst&#39;,
+           &#39;amount&#39;,
+           &#39;an&#39;,
+           &#39;and&#39;,
+           &#39;another&#39;,
+           &#39;any&#39;,
+           &#39;anyhow&#39;,
+           &#39;anyone&#39;,
+           &#39;anything&#39;,
+           &#39;anyway&#39;,
+           &#39;anywhere&#39;,
+           &#39;are&#39;,
+           &#39;around&#39;,
+           &#39;as&#39;,
+           &#39;at&#39;,
+           &#39;back&#39;,
+           &#39;be&#39;,
+           &#39;became&#39;,
+           &#39;because&#39;,
+           &#39;become&#39;,
+           &#39;becomes&#39;,
+           &#39;becoming&#39;,
+           &#39;been&#39;,
+           &#39;before&#39;,
+           &#39;beforehand&#39;,
+           &#39;behind&#39;,
+           &#39;being&#39;,
+           &#39;below&#39;,
+           &#39;beside&#39;,
+           &#39;besides&#39;,
+           &#39;between&#39;,
+           &#39;beyond&#39;,
+           &#39;bill&#39;,
+           &#39;both&#39;,
+           &#39;bottom&#39;,
+           &#39;but&#39;,
+           &#39;by&#39;,
+           &#39;call&#39;,
+           &#39;can&#39;,
+           &#39;cannot&#39;,
+           &#39;cant&#39;,
+           &#39;co&#39;,
+           &#39;con&#39;,
+           &#39;could&#39;,
+           &#39;couldnt&#39;,
+           &#39;cry&#39;,
+           &#39;de&#39;,
+           &#39;describe&#39;,
+           &#39;detail&#39;,
+           &#39;do&#39;,
+           &#39;done&#39;,
+           &#39;down&#39;,
+           &#39;due&#39;,
+           &#39;during&#39;,
+           &#39;each&#39;,
+           &#39;eg&#39;,
+           &#39;eight&#39;,
+           &#39;either&#39;,
+           &#39;eleven&#39;,
+           &#39;else&#39;,
+           &#39;elsewhere&#39;,
+           &#39;empty&#39;,
+           &#39;enough&#39;,
+           &#39;etc&#39;,
+           &#39;even&#39;,
+           &#39;ever&#39;,
+           &#39;every&#39;,
+           &#39;everyone&#39;,
+           &#39;everything&#39;,
+           &#39;everywhere&#39;,
+           &#39;except&#39;,
+           &#39;few&#39;,
+           &#39;fifteen&#39;,
+           &#39;fifty&#39;,
+           &#39;fill&#39;,
+           &#39;find&#39;,
+           &#39;fire&#39;,
+           &#39;first&#39;,
+           &#39;five&#39;,
+           &#39;for&#39;,
+           &#39;former&#39;,
+           &#39;formerly&#39;,
+           &#39;forty&#39;,
+           &#39;found&#39;,
+           &#39;four&#39;,
+           &#39;from&#39;,
+           &#39;front&#39;,
+           &#39;full&#39;,
+           &#39;further&#39;,
+           &#39;get&#39;,
+           &#39;give&#39;,
+           &#39;go&#39;,
+           &#39;had&#39;,
+           &#39;has&#39;,
+           &#39;hasnt&#39;,
+           &#39;have&#39;,
+           &#39;he&#39;,
+           &#39;hence&#39;,
+           &#39;her&#39;,
+           &#39;here&#39;,
+           &#39;hereafter&#39;,
+           &#39;hereby&#39;,
+           &#39;herein&#39;,
+           &#39;hereupon&#39;,
+           &#39;hers&#39;,
+           &#39;herself&#39;,
+           &#39;him&#39;,
+           &#39;himself&#39;,
+           &#39;his&#39;,
+           &#39;how&#39;,
+           &#39;however&#39;,
+           &#39;hundred&#39;,
+           &#39;i&#39;,
+           &#39;ie&#39;,
+           &#39;if&#39;,
+           &#39;in&#39;,
+           &#39;inc&#39;,
+           &#39;indeed&#39;,
+           &#39;interest&#39;,
+           &#39;into&#39;,
+           &#39;is&#39;,
+           &#39;it&#39;,
+           &#39;its&#39;,
+           &#39;itself&#39;,
+           &#39;keep&#39;,
+           &#39;last&#39;,
+           &#39;latter&#39;,
+           &#39;latterly&#39;,
+           &#39;least&#39;,
+           &#39;less&#39;,
+           &#39;ltd&#39;,
+           &#39;made&#39;,
+           &#39;many&#39;,
+           &#39;may&#39;,
+           &#39;me&#39;,
+           &#39;meanwhile&#39;,
+           &#39;might&#39;,
+           &#39;mill&#39;,
+           &#39;mine&#39;,
+           &#39;more&#39;,
+           &#39;moreover&#39;,
+           &#39;most&#39;,
+           &#39;mostly&#39;,
+           &#39;move&#39;,
+           &#39;much&#39;,
+           &#39;must&#39;,
+           &#39;my&#39;,
+           &#39;myself&#39;,
+           &#39;name&#39;,
+           &#39;namely&#39;,
+           &#39;neither&#39;,
+           &#39;never&#39;,
+           &#39;nevertheless&#39;,
+           &#39;next&#39;,
+           &#39;nine&#39;,
+           &#39;no&#39;,
+           &#39;nobody&#39;,
+           &#39;none&#39;,
+           &#39;noone&#39;,
+           &#39;nor&#39;,
+           &#39;not&#39;,
+           &#39;nothing&#39;,
+           &#39;now&#39;,
+           &#39;nowhere&#39;,
+           &#39;of&#39;,
+           &#39;off&#39;,
+           &#39;often&#39;,
+           &#39;on&#39;,
+           &#39;once&#39;,
+           &#39;one&#39;,
+           &#39;only&#39;,
+           &#39;onto&#39;,
+           &#39;or&#39;,
+           &#39;other&#39;,
+           &#39;others&#39;,
+           &#39;otherwise&#39;,
+           &#39;our&#39;,
+           &#39;ours&#39;,
+           &#39;ourselves&#39;,
+           &#39;out&#39;,
+           &#39;over&#39;,
+           &#39;own&#39;,
+           &#39;part&#39;,
+           &#39;per&#39;,
+           &#39;perhaps&#39;,
+           &#39;please&#39;,
+           &#39;put&#39;,
+           &#39;rather&#39;,
+           &#39;re&#39;,
+           &#39;same&#39;,
+           &#39;see&#39;,
+           &#39;seem&#39;,
+           &#39;seemed&#39;,
+           &#39;seeming&#39;,
+           &#39;seems&#39;,
+           &#39;serious&#39;,
+           &#39;several&#39;,
+           &#39;she&#39;,
+           &#39;should&#39;,
+           &#39;show&#39;,
+           &#39;side&#39;,
+           &#39;since&#39;,
+           &#39;sincere&#39;,
+           &#39;six&#39;,
+           &#39;sixty&#39;,
+           &#39;so&#39;,
+           &#39;some&#39;,
+           &#39;somehow&#39;,
+           &#39;someone&#39;,
+           &#39;something&#39;,
+           &#39;sometime&#39;,
+           &#39;sometimes&#39;,
+           &#39;somewhere&#39;,
+           &#39;still&#39;,
+           &#39;such&#39;,
+           &#39;system&#39;,
+           &#39;take&#39;,
+           &#39;ten&#39;,
+           &#39;than&#39;,
+           &#39;that&#39;,
+           &#39;the&#39;,
+           &#39;their&#39;,
+           &#39;them&#39;,
+           &#39;themselves&#39;,
+           &#39;then&#39;,
+           &#39;thence&#39;,
+           &#39;there&#39;,
+           &#39;thereafter&#39;,
+           &#39;thereby&#39;,
+           &#39;therefore&#39;,
+           &#39;therein&#39;,
+           &#39;thereupon&#39;,
+           &#39;these&#39;,
+           &#39;they&#39;,
+           &#39;thick&#39;,
+           &#39;thin&#39;,
+           &#39;third&#39;,
+           &#39;this&#39;,
+           &#39;those&#39;,
+           &#39;though&#39;,
+           &#39;three&#39;,
+           &#39;through&#39;,
+           &#39;throughout&#39;,
+           &#39;thru&#39;,
+           &#39;thus&#39;,
+           &#39;to&#39;,
+           &#39;together&#39;,
+           &#39;too&#39;,
+           &#39;top&#39;,
+           &#39;toward&#39;,
+           &#39;towards&#39;,
+           &#39;twelve&#39;,
+           &#39;twenty&#39;,
+           &#39;two&#39;,
+           &#39;un&#39;,
+           &#39;under&#39;,
+           &#39;until&#39;,
+           &#39;up&#39;,
+           &#39;upon&#39;,
+           &#39;us&#39;,
+           &#39;very&#39;,
+           &#39;via&#39;,
+           &#39;was&#39;,
+           &#39;we&#39;,
+           &#39;well&#39;,
+           &#39;were&#39;,
+           &#39;what&#39;,
+           &#39;whatever&#39;,
+           &#39;when&#39;,
+           &#39;whence&#39;,
+           &#39;whenever&#39;,
+           &#39;where&#39;,
+           &#39;whereafter&#39;,
+           &#39;whereas&#39;,
+           &#39;whereby&#39;,
+           &#39;wherein&#39;,
+           &#39;whereupon&#39;,
+           &#39;wherever&#39;,
+           &#39;whether&#39;,
+           &#39;which&#39;,
+           &#39;while&#39;,
+           &#39;whither&#39;,
+           &#39;who&#39;,
+           &#39;whoever&#39;,
+           &#39;whole&#39;,
+           &#39;whom&#39;,
+           &#39;whose&#39;,
+           &#39;why&#39;,
+           &#39;will&#39;,
+           &#39;with&#39;,
+           &#39;within&#39;,
+           &#39;without&#39;,
+           &#39;would&#39;,
+           &#39;yet&#39;,
+           &#39;you&#39;,
+           &#39;your&#39;,
+           &#39;yours&#39;,
+           &#39;yourself&#39;,
+           &#39;yourselves&#39;})
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>len(transformer.get_stop_words())
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>318
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can completely create 1 <code class="docutils literal notranslate"><span class="pre">list</span></code> containing your own word stops and pass on to the <code class="docutils literal notranslate"><span class="pre">CountVectorizer</span></code> if you are not satisfied with the available <code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</section>
+<section id="train-test-split">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Train Test Split</a><a class="headerlink" href="#train-test-split" title="Permalink to this heading">#</a></h3>
+<section id="todo-2">
+<h4><a class="toc-backref" href="#id8" role="doc-backlink">TODO 2</a><a class="headerlink" href="#todo-2" title="Permalink to this heading">#</a></h4>
+<p>Divide the dataset into Train and Test sets with:</p>
+<ul class="simple">
+<li><p>Test set size is 20% of the total data</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">stratified</span> <span class="pre">split</span></code>
+-Shuffle</p></li>
+<li><p>Use random_state=42</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># YOUR SOLUTION
+from sklearn.model_selection import train_test_split
+x_train, x_test, y_train, y_test = train_test_split(x_vectors, y, test_size=0.2, shuffle=True, random_state=42, stratify=y)
+x_train.shape, x_test.shape, y_train.shape, y_test.shape
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((4457, 8404), (1115, 8404), (4457,), (1115,))
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="train-the-model">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Train the model</a><a class="headerlink" href="#train-the-model" title="Permalink to this heading">#</a></h3>
+<section id="todo-3">
+<h4><a class="toc-backref" href="#id10" role="doc-backlink">TODO 3</a><a class="headerlink" href="#todo-3" title="Permalink to this heading">#</a></h4>
+<p>Apply the MLP model to classify the above dataset. Once you’re satisfied with the training results, draw a Confusion Matrix and print out a <code class="docutils literal notranslate"><span class="pre">classification_repor</span></code>.</p>
+<p>Comment on the predicted results of the model based on the Confusion Matrix and Classification Report</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># YOUR SOLUTION
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Input, Dense, Flatten, Activation
+from tensorflow.random import set_seed
+from tensorflow.keras.backend import clear_session
+
+clear_session()
+set_seed(42)
+np.random.seed(42)
+
+model = Sequential()
+model.add(Input(shape=(x_train.shape[1:])))
+model.add(Dense(32, activation=&#39;relu&#39;, name=&#39;layer_1&#39;))
+model.add(Dense(64, activation=&#39;relu&#39;, name=&#39;layer_2&#39;))
+model.add(Dense(128, activation=&#39;relu&#39;, name=&#39;layer_3&#39;))
+model.add(Dense(64, activation=&#39;relu&#39;, name=&#39;layer_4&#39;))
+model.add(Dense(32, activation=&#39;relu&#39;, name=&#39;layer_5&#39;))
+model.add(Dense(1, activation=&#39;sigmoid&#39;, name=&#39;output_layer&#39;))
+model.summary()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ layer_1 (Dense)             (None, 32)                268960    
+                                                                 
+ layer_2 (Dense)             (None, 64)                2112      
+                                                                 
+ layer_3 (Dense)             (None, 128)               8320      
+                                                                 
+ layer_4 (Dense)             (None, 64)                8256      
+                                                                 
+ layer_5 (Dense)             (None, 32)                2080      
+                                                                 
+ output_layer (Dense)        (None, 1)                 33        
+                                                                 
+=================================================================
+Total params: 289,761
+Trainable params: 289,761
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>model.compile(loss=&quot;binary_crossentropy&quot;, optimizer=&quot;adam&quot;, metrics=&quot;accuracy&quot;)
+history = model.fit(x_train, y_train, epochs=10, verbose=1)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
+140/140 [==============================] - 3s 9ms/step - loss: 0.2281 - accuracy: 0.9264
+Epoch 2/10
+140/140 [==============================] - 1s 10ms/step - loss: 0.0146 - accuracy: 0.9960
+Epoch 3/10
+140/140 [==============================] - 1s 10ms/step - loss: 0.0020 - accuracy: 0.9996
+Epoch 4/10
+140/140 [==============================] - 1s 6ms/step - loss: 0.0011 - accuracy: 0.9996
+Epoch 5/10
+140/140 [==============================] - 1s 6ms/step - loss: 3.3540e-04 - accuracy: 0.9998
+Epoch 6/10
+140/140 [==============================] - 1s 6ms/step - loss: 9.4479e-05 - accuracy: 1.0000
+Epoch 7/10
+140/140 [==============================] - 1s 9ms/step - loss: 5.5155e-05 - accuracy: 1.0000
+Epoch 8/10
+140/140 [==============================] - 1s 9ms/step - loss: 3.7994e-05 - accuracy: 1.0000
+Epoch 9/10
+140/140 [==============================] - 1s 8ms/step - loss: 2.7231e-05 - accuracy: 1.0000
+Epoch 10/10
+140/140 [==============================] - 1s 6ms/step - loss: 2.0746e-05 - accuracy: 1.0000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>model.evaluate(x_test, y_test)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35/35 [==============================] - 1s 3ms/step - loss: 0.1397 - accuracy: 0.9857
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.13970947265625, 0.9856502413749695]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>plt.figure(figsize=(12,4))
+plt.subplot(1,2,1)
+plt.title(&#39;Loss&#39;)
+plt.plot(history.history[&#39;loss&#39;])
+
+plt.subplot(1,2,2)
+plt.title(&#39;Accuracy&#39;)
+plt.plot(history.history[&#39;accuracy&#39;])
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e02f3822566205e5b40c231c8b0f60a98aeb9328eb1d8dbd07c85a54a9d84ba4.png" src="../_images/e02f3822566205e5b40c231c8b0f60a98aeb9328eb1d8dbd07c85a54a9d84ba4.png" />
+</div>
+</div>
+<p>There is no phenomonen of overfitting</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from sklearn.metrics import confusion_matrix
+y_test_pred = model.predict(x_test)
+y_test_pred = [1 if y &gt; 0.5 else 0 for y in y_test_pred]
+len(y_test_pred)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35/35 [==============================] - 0s 2ms/step
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1115
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cm = confusion_matrix(y_test, y_test_pred)
+labels = [&#39;ham&#39;, &#39;spam&#39;,]
+plt.figure(figsize=(5,5))
+sns.heatmap(cm, annot=True, cmap=&#39;Blues&#39;, yticklabels=labels, xticklabels=labels)
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6c65758a3e9d3ee4834685d6dd3e9b63d81c4091cc6be383a326677accb4863c.png" src="../_images/6c65758a3e9d3ee4834685d6dd3e9b63d81c4091cc6be383a326677accb4863c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from sklearn.metrics import classification_report
+
+report = classification_report(y_test, y_test_pred)
+print(report)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
+
+           0       0.98      1.00      0.99       966
+           1       1.00      0.89      0.94       149
+
+    accuracy                           0.99      1115
+   macro avg       0.99      0.95      0.97      1115
+weighted avg       0.99      0.99      0.99      1115
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="your-comment">
+<h4><a class="toc-backref" href="#id11" role="doc-backlink">Your comment</a><a class="headerlink" href="#your-comment" title="Permalink to this heading">#</a></h4>
+<p>High accuracy:</p>
+<p>Spam: positive</p>
+<ul class="simple">
+<li><p>True Positive: 1.3e+02</p></li>
+<li><p>False Positive: 0</p></li>
+<li><p>True Negative: 9.7e+02</p></li>
+<li><p>False Negative: 16</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\(\rightarrow\)</span> There are about 16 that are spam but predictably spam.</p>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="S5_ASM.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Session 5: Assigment</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Session%205%20Revision.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Session 5: Revision</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mechanism-of-dropout-layer">The mechanism of Dropout Layer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-spam-classification">A simple Spam Classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-dataset">Prepare the dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-1">TODO 1</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-conversion">Data Conversion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-test-split">Train Test Split</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-2">TODO 2</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-model">Train the model</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-3">TODO 3</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#your-comment">Your comment</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kyle Paul
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
