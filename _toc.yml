@@ -4,31 +4,73 @@
 format: jb-book
 root: index
 chapters:
-  - file: book/markdown
-  - file: book/notebooks
   - file: book/bibliography
+
   - file: book/Preclass Session 1
   - file: book/S1_Lab_Representation
+  - file: book/S1_ASM
+  - file: book/S1_SOL
+  - file: book/Session 1 Revision
+
   - file: book/Preclass Session 2
   - file: book/S2_Lab_LinearModel
+  - file: book/S2_ASM
+  - file: book/S2_SOL
+  - file: book/Session 2 Revision
+
   - file: book/Preclass Session 3
   - file: book/S3_Lab_RecSys
+  - file: book/S3_ASM
+  - file: book/S3_SOL
+  - file: book/Session 3 Revision
+
   - file: book/Preclass Session 4
   - file: book/S4_Lab_NonLinearPredictors
+  - file: book/S4_ASM
+  - file: book/S4_SOL
+  - file: book/Session 4 Revision
+
   - file: book/Preclass Session 5
   - file: book/S5_Lab_Optimization
+  - file: book/S5_ASM
+  - file: book/S5_SOL
+  - file: book/Session 5 Revision
+
   - file: book/Preclass Session 6
   - file: book/S6_Lab_Metrics&Losses
+  - file: book/S6_ASM
+  - file: book/S6_SOL
+
   - file: book/Midterm Theory Test
   - file: book/Midterm Theory Solution
+  - file: book/S7_MidTerm_TEST
+  - file: book/S7_MidTerm_SOL
+
   - file: book/Preclass Session 8
   - file: book/S8_Lab_CNN
+  - file: book/S8_ASM
+  - file: book/S8_SOL
+  - file: book/Session 8 Revision
+
   - file: book/Preclass Session 9
   - file: book/S9_LAB_RNN
+  - file: book/S9_ASM
+  - file: book/S9_SOL
+  - file: book/Session 9 Revision
+
   - file: book/Preclass Session 10
   - file: book/S10_LAB_MDP_PLANNING
+  - file: book/S10_ASM
+  - file: book/S10_SOL
+  - file: book/Session 10 Revision
+
   - file: book/Preclass Session 11
   - file: book/S11_LAB_Q_Learning
+  - file: book/S11_SOL
+  - file: book/Session 11 Revision
+
+  - file: book/S12_FinalExam
+  - file: book/Final Test Theory
 
 
 # Or you organize the TOC by parts
@@ -43,3 +85,6 @@ chapters:
 #   - caption: Appendices
 #     chapters:
 #       - file: book/bibliography
+
+
+# remains: s6 assignment, s11 assignment, final coding test, final theory tests
