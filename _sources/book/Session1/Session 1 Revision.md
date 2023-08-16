@@ -1,4 +1,4 @@
-# **Session 1: Revision**
+# Session 1: Revision
 
 ## **Theory**
 ### **Question 1:**

@@ -1,0 +1,1824 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Unit 2: Q-Learning with FrozenLake-v1 ⛄ and Taxi-v3 🚕 &#8212; Machine Learning Intensive</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/Bonus/Reinforcement Learning Full Tutorial';</script>
+    <link rel="canonical" href="https://kyle-paul.github.io/machine-learning-intensive/book/Bonus/Reinforcement Learning Full Tutorial.html" />
+    <link rel="shortcut icon" href="../../_static/avatar.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Natural Laguage Processing - NLP" href="NLP.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Session1/Preclass%20Session%201.html"><strong>Preclass Session 1: Representation</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session1/S1_Lab_Representation.html">Session 1: Representation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session1/S1_ASM.html">Session 1: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session1/S1_SOL.html">Session 1: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session1/Session%201%20Revision.html">Session 1: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/Preclass%20Session%202.html"><strong>Preclass Session 2: Linear Model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/S2_Lab_LinearModel.html">Session 2: Linear Model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session2/S2_ASM.html">Session 2: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/S2_SOL.html">Session 2: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/Session%202%20Revision.html">Session 2: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/Preclass%20Session%203.html"><strong>Preclass Session 3: Recommender System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/S3_Lab_RecSys.html">Sesion 3: Recommender System</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session3/S3_ASM.html">Session 3: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/S3_SOL.html">Session 3: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/Session%203%20Revision.html">Session 3: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/Preclass%20Session%204.html"><strong>Preclass Session 4: NonLinear Predictor</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/S4_Lab_NonLinearPredictors.html">Session 4: Nonlinear Predictors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/S4_ASM.html">Session 4: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/S4_SOL.html">Session 4: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/Session%204%20Revision.html">Session 4: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/Preclass%20Session%205.html"><strong>Preclass Session 5: Optimization</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/S5_Lab_Optimization.html">Session 5: Optimization</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session5/S5_ASM.html">Session 5: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/S5_SOL.html">Session 5: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/Session%205%20Revision.html">Session 5: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/Preclass%20Session%206.html"><strong>Preclass Session 6: Metrics and Losses</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/S6_Lab_Metrics%26Losses.html">Session 6: Metrics &amp; Losses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/S6_ASM.html">Session 6: Assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/S6_SOL.html">Session 6: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/Session%206%20Revision.html">Session 6: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session7/Midterm%20Theory%20Test.html"><strong>Theory Midterm Test</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session7/Midterm%20Theory%20Solution.html">Theory Midterm Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session7/S7_MidTerm_TEST.html">Session 7: Midterm Coding Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session7/S7_MidTerm_SOL.html">Session 7: Midterm Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session8/Preclass%20Session%208.html"><strong>Preclass Session 8: Convolutional Neural Network</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session8/S8_Lab_CNN.html">Session 8: Convolutional Neural Network</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session8/S8_ASM.html">Session 8: Assignment</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session8/S8_SOL.html">Session 8: Coding Solution</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session8/Session%208%20Revision.html">Session 8: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session9/Preclass%20Session%209.html"><strong>Preclass Session 9: Natural Language Processing</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session9/S9_LAB_RNN.html">Session 9 - Natural Language Processing</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session9/S9_ASM.html">Session 9: Assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session9/S9_SOL.html">Session 9: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session9/Session%209%20Revision.html">Session: 9 Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session10/Preclass%20Session%2010.html"><strong>Preclass Session 10: MDP Planning</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session10/S10_LAB_MDP_PLANNING.html">Session 10 - MDP Planning</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session10/S10_ASM.html">Session 10: Assigment</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session10/S10_SOL.html">Session 10: Coding Solution</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session10/Session%2010%20Revision.html">Session 10: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session11/Preclass%20Session%2011.html"><strong>Preclass Session 11: Reinforcement Learning</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session11/S11_LAB_Q_Learning.html">Session 11: Q Learning</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session11/S11_SOL.html">Session 11: Coding Solution</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session11/Session%2011%20Revision.html">Session 11: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session12/Final%20Test%20Theory.html"><strong>Session 12: final theory test</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session12/S12_FinalExam_TEST.html">Sesssion 12: Final Coding Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session12/S12_FinalExam_SOL.html">Sesssion 12: Final Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Sentiment%20Analysis.html">Sentiment Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NLP.html">Natural Laguage Processing - NLP</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Unit 2: Q-Learning with FrozenLake-v1 ⛄ and Taxi-v3 🚕</a></li>
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/kyle-paul/machine-learning-intensive/master?urlpath=tree/book/Bonus/Reinforcement Learning Full Tutorial.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/kyle-paul/machine-learning-intensive/blob/master/book/Bonus/Reinforcement Learning Full Tutorial.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/edit/main/book/Bonus/Reinforcement Learning Full Tutorial.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/issues/new?title=Issue%20on%20page%20%2Fbook/Bonus/Reinforcement Learning Full Tutorial.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/book/Bonus/Reinforcement Learning Full Tutorial.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Unit 2: Q-Learning with FrozenLake-v1 ⛄ and Taxi-v3 🚕</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Unit 2: Q-Learning with FrozenLake-v1 ⛄ and Taxi-v3 🚕</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives-of-this-notebook">Objectives of this notebook 🏆</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#this-notebook-is-from-the-deep-reinforcement-learning-course">This notebook is from the Deep Reinforcement Learning Course</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites 🏗️</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-small-recap-of-q-learning">A small recap of Q-Learning</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-code-our-first-reinforcement-learning-algorithm">Let’s code our first Reinforcement Learning algorithm 🚀</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-dependencies-and-create-a-virtual-display">Install dependencies and create a virtual display 🔽</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-packages">Import the packages 📦</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-frozen-lake-non-slippery-version">Part 1: Frozen Lake ⛄ (non slippery version)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-and-understand-frozenlake-environment-https-gymnasium-farama-org-environments-toy-text-frozen-lake">Create and understand [FrozenLake environment ⛄]((https://gymnasium.farama.org/environments/toy_text/frozen_lake/)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution">Solution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-see-what-the-environment-looks-like">Let’s see what the Environment looks like:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-and-initialize-the-q-table">Create and Initialize the Q-table 🗄️</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Solution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-greedy-policy">Define the greedy policy 🤖</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Solution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Solution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-hyperparameters">Define the hyperparameters ⚙️</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-training-loop-method">Create the training loop method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Solution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-q-learning-agent">Train the Q-Learning agent 🏃</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-see-what-our-q-learning-table-looks-like-now">Let’s see what our Q-Learning table looks like now 👀</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-evaluation-method">The evaluation method 📝</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-our-q-learning-agent">Evaluate our Q-Learning agent 📈</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#publish-our-trained-model-to-the-hub">Publish our trained model to the Hub 🔥</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#do-not-modify-this-code">Do not modify this code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-taxi-v3">Part 2: Taxi-v3 🚖</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-and-understand-taxi-v3">Create and understand Taxi-v3 🚕</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Define the hyperparameters ⚙️</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-our-q-learning-agent">Train our Q-Learning agent 🏃</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-model-dictionary-and-publish-our-trained-model-to-the-hub">Create a model dictionary 💾 and publish our trained model to the Hub 🔥</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-load-from-hub">Part 3: Load from Hub 🔽</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Do not modify this code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-additional-challenges">Some additional challenges 🏆</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keep-learning-stay-awesome">Keep learning, stay awesome 🤗</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="unit-2-q-learning-with-frozenlake-v1-and-taxi-v3">
+<h1>Unit 2: Q-Learning with FrozenLake-v1 ⛄ and Taxi-v3 🚕<a class="headerlink" href="#unit-2-q-learning-with-frozenlake-v1-and-taxi-v3" title="Permalink to this heading">#</a></h1>
+<img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit3/thumbnail.jpg" alt="Unit 2 Thumbnail">
+<p>In this notebook, <strong>you’ll code your first Reinforcement Learning agent from scratch</strong> to play FrozenLake ❄️ using Q-Learning, share it with the community, and experiment with different configurations.</p>
+<p>⬇️ Here is an example of what <strong>you will achieve in just a couple of minutes.</strong> ⬇️</p>
+<img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit3/envs.gif" alt="Environments"/><p>###🎮 Environments:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://gymnasium.farama.org/environments/toy_text/frozen_lake/">FrozenLake-v1</a></p></li>
+<li><p><a class="reference external" href="https://gymnasium.farama.org/environments/toy_text/taxi/">Taxi-v3</a></p></li>
+</ul>
+<p>###📚 RL-Library:</p>
+<ul class="simple">
+<li><p>Python and NumPy</p></li>
+<li><p><a class="reference external" href="https://gymnasium.farama.org/">Gymnasium</a></p></li>
+</ul>
+<p>We’re constantly trying to improve our tutorials, so <strong>if you find some issues in this notebook</strong>, please <a class="reference external" href="https://github.com/huggingface/deep-rl-class/issues">open an issue on the GitHub Repo</a>.</p>
+<section id="objectives-of-this-notebook">
+<h2>Objectives of this notebook 🏆<a class="headerlink" href="#objectives-of-this-notebook" title="Permalink to this heading">#</a></h2>
+<p>At the end of the notebook, you will:</p>
+<ul class="simple">
+<li><p>Be able to use <strong>Gymnasium</strong>, the environment library.</p></li>
+<li><p>Be able to code a Q-Learning agent from scratch.</p></li>
+<li><p>Be able to <strong>push your trained agent and the code to the Hub</strong> with a nice video replay and an evaluation score 🔥.</p></li>
+</ul>
+</section>
+<section id="this-notebook-is-from-the-deep-reinforcement-learning-course">
+<h2>This notebook is from the Deep Reinforcement Learning Course<a class="headerlink" href="#this-notebook-is-from-the-deep-reinforcement-learning-course" title="Permalink to this heading">#</a></h2>
+<img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/notebooks/deep-rl-course-illustration.jpg" alt="Deep RL Course illustration"/><p>In this free course, you will:</p>
+<ul class="simple">
+<li><p>📖 Study Deep Reinforcement Learning in <strong>theory and practice</strong>.</p></li>
+<li><p>🧑‍💻 Learn to <strong>use famous Deep RL libraries</strong> such as Stable Baselines3, RL Baselines3 Zoo, CleanRL and Sample Factory 2.0.</p></li>
+<li><p>🤖 Train <strong>agents in unique environments</strong></p></li>
+</ul>
+<p>And more check 📚 the syllabus 👉 <a class="reference external" href="https://simoninithomas.github.io/deep-rl-course">https://simoninithomas.github.io/deep-rl-course</a></p>
+<p>Don’t forget to <strong><a href="http://eepurl.com/ic5ZUD">sign up to the course</a></strong> (we are collecting your email to be able to <strong>send you the links when each Unit is published and give you information about the challenges and updates).</strong></p>
+<p>The best way to keep in touch is to join our discord server to exchange with the community and with us 👉🏻 <a class="reference external" href="https://discord.gg/ydHrjt3WP5">https://discord.gg/ydHrjt3WP5</a></p>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites 🏗️<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h2>
+<p>Before diving into the notebook, you need to:</p>
+<p>🔲 📚 <strong>Study <a class="reference external" href="https://huggingface.co/deep-rl-course/unit2/introduction">Q-Learning by reading Unit 2</a></strong>  🤗</p>
+</section>
+<section id="a-small-recap-of-q-learning">
+<h2>A small recap of Q-Learning<a class="headerlink" href="#a-small-recap-of-q-learning" title="Permalink to this heading">#</a></h2>
+<p><em>Q-Learning</em> <strong>is the RL algorithm that</strong>:</p>
+<ul class="simple">
+<li><p>Trains <em>Q-Function</em>, an <strong>action-value function</strong> that encoded, in internal memory, by a <em>Q-table</em> <strong>that contains all the state-action pair values.</strong></p></li>
+<li><p>Given a state and action, our Q-Function <strong>will search the Q-table for the corresponding value.</strong></p></li>
+</ul>
+<img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit3/Q-function-2.jpg" alt="Q function"  width="100%"/>
+<ul class="simple">
+<li><p>When the training is done,<strong>we have an optimal Q-Function, so an optimal Q-Table.</strong></p></li>
+<li><p>And if we <strong>have an optimal Q-function</strong>, we
+have an optimal policy, since we <strong>know for, each state, the best action to take.</strong></p></li>
+</ul>
+<img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit3/link-value-policy.jpg" alt="Link value policy"  width="100%"/>
+<p>But, in the beginning, our <strong>Q-Table is useless since it gives arbitrary value for each state-action pair (most of the time we initialize the Q-Table to 0 values)</strong>. But, as we’ll explore the environment and update our Q-Table it will give us better and better approximations</p>
+<img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/notebooks/unit2/q-learning.jpeg" alt="q-learning.jpeg" width="100%"/>
+<p>This is the Q-Learning pseudocode:</p>
+<img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit3/Q-learning-2.jpg" alt="Q-Learning" width="100%"/>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="let-s-code-our-first-reinforcement-learning-algorithm">
+<h1>Let’s code our first Reinforcement Learning algorithm 🚀<a class="headerlink" href="#let-s-code-our-first-reinforcement-learning-algorithm" title="Permalink to this heading">#</a></h1>
+<p>To validate this hands-on for the <a class="reference external" href="https://huggingface.co/deep-rl-course/en/unit0/introduction#certification-process">certification process</a>, you need to push your trained Taxi model to the Hub and <strong>get a result of &gt;= 4.5</strong>.</p>
+<p>To find your result, go to the <a class="reference external" href="https://huggingface.co/spaces/huggingface-projects/Deep-Reinforcement-Learning-Leaderboard">leaderboard</a> and find your model, <strong>the result = mean_reward - std of reward</strong></p>
+<p>For more information about the certification process, check this section 👉 <a class="reference external" href="https://huggingface.co/deep-rl-course/en/unit0/introduction#certification-process">https://huggingface.co/deep-rl-course/en/unit0/introduction#certification-process</a></p>
+<section id="install-dependencies-and-create-a-virtual-display">
+<h2>Install dependencies and create a virtual display 🔽<a class="headerlink" href="#install-dependencies-and-create-a-virtual-display" title="Permalink to this heading">#</a></h2>
+<p>In the notebook, we’ll need to generate a replay video. To do so, with Colab, <strong>we need to have a virtual screen to render the environment</strong> (and thus record the frames).</p>
+<p>Hence the following cell will install the libraries and create and run a virtual screen 🖥</p>
+<p>We’ll install multiple ones:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">gymnasium</span></code>: Contains the FrozenLake-v1 ⛄ and Taxi-v3 🚕 environments.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pygame</span></code>: Used for the FrozenLake-v1 and Taxi-v3 UI.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy</span></code>: Used for handling our Q-table.</p></li>
+</ul>
+<p>The Hugging Face Hub 🤗 works as a central place where anyone can share and explore models and datasets. It has versioning, metrics, visualizations and other features that will allow you to easily collaborate with others.</p>
+<p>You can see here all the Deep RL models available (if they use Q Learning) here 👉 <a class="reference external" href="https://huggingface.co/models?other=q-learning">https://huggingface.co/models?other=q-learning</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!pip install -r https://raw.githubusercontent.com/huggingface/deep-rl-class/main/notebooks/unit2/requirements-unit2.txt
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%capture
+!sudo apt-get update
+!apt install python-opengl ffmpeg xvfb
+!pip3 install pyvirtualdisplay
+</pre></div>
+</div>
+</div>
+</div>
+<p>To make sure the new installed libraries are used, <strong>sometimes it’s required to restart the notebook runtime</strong>. The next cell will force the <strong>runtime to crash, so you’ll need to connect again and run the code starting from here</strong>. Thanks to this trick, <strong>we will be able to run our virtual screen.</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">kill</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">(),</span> <span class="mi">9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Virtual display</span>
+<span class="kn">from</span> <span class="nn">pyvirtualdisplay</span> <span class="kn">import</span> <span class="n">Display</span>
+
+<span class="n">virtual_display</span> <span class="o">=</span> <span class="n">Display</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1400</span><span class="p">,</span> <span class="mi">900</span><span class="p">))</span>
+<span class="n">virtual_display</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="import-the-packages">
+<h2>Import the packages 📦<a class="headerlink" href="#import-the-packages" title="Permalink to this heading">#</a></h2>
+<p>In addition to the installed libraries, we also use:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">random</span></code>: To generate random numbers (that will be useful for epsilon-greedy policy).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">imageio</span></code>: To generate a replay video.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">gymnasium</span> <span class="k">as</span> <span class="nn">gym</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">imageio</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">tqdm</span>
+
+<span class="kn">import</span> <span class="nn">pickle5</span> <span class="k">as</span> <span class="nn">pickle</span>
+<span class="kn">from</span> <span class="nn">tqdm.notebook</span> <span class="kn">import</span> <span class="n">tqdm</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’re now ready to code our Q-Learning algorithm 🔥</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="part-1-frozen-lake-non-slippery-version">
+<h1>Part 1: Frozen Lake ⛄ (non slippery version)<a class="headerlink" href="#part-1-frozen-lake-non-slippery-version" title="Permalink to this heading">#</a></h1>
+<section id="create-and-understand-frozenlake-environment-https-gymnasium-farama-org-environments-toy-text-frozen-lake">
+<h2>Create and understand [FrozenLake environment ⛄]((<a class="reference external" href="https://gymnasium.farama.org/environments/toy_text/frozen_lake/">https://gymnasium.farama.org/environments/toy_text/frozen_lake/</a>)<a class="headerlink" href="#create-and-understand-frozenlake-environment-https-gymnasium-farama-org-environments-toy-text-frozen-lake" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>💡 A good habit when you start to use an environment is to check its documentation</p>
+<p>👉 <a class="reference external" href="https://gymnasium.farama.org/environments/toy_text/frozen_lake/">https://gymnasium.farama.org/environments/toy_text/frozen_lake/</a></p>
+<hr class="docutils" />
+<p>We’re going to train our Q-Learning agent <strong>to navigate from the starting state (S) to the goal state (G) by walking only on frozen tiles (F) and avoid holes (H)</strong>.</p>
+<p>We can have two sizes of environment:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">map_name=&quot;4x4&quot;</span></code>: a 4x4 grid version</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">map_name=&quot;8x8&quot;</span></code>: a 8x8 grid version</p></li>
+</ul>
+<p>The environment has two modes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">is_slippery=False</span></code>: The agent always moves <strong>in the intended direction</strong> due to the non-slippery nature of the frozen lake (deterministic).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_slippery=True</span></code>: The agent <strong>may not always move in the intended direction</strong> due to the slippery nature of the frozen lake (stochastic).</p></li>
+</ul>
+<p>For now let’s keep it simple with the 4x4 map and non-slippery.
+We add a parameter called <code class="docutils literal notranslate"><span class="pre">render_mode</span></code> that specifies how the environment should be visualised. In our case because we <strong>want to record a video of the environment at the end, we need to set render_mode to rgb_array</strong>.</p>
+<p>As <a class="reference external" href="https://gymnasium.farama.org/api/env/#gymnasium.Env.render">explained in the documentation</a> “rgb_array”: Return a single frame representing the current state of the environment. A frame is a np.ndarray with shape (x, y, 3) representing RGB values for an x-by-y pixel image.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the FrozenLake-v1 environment using 4x4 map and non-slippery version and render_mode=&quot;rgb_array&quot;</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">()</span> <span class="c1"># TODO use the correct parameters</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="solution">
+<h3>Solution<a class="headerlink" href="#solution" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;FrozenLake-v1&quot;</span><span class="p">,</span> <span class="n">map_name</span><span class="o">=</span><span class="s2">&quot;4x4&quot;</span><span class="p">,</span> <span class="n">is_slippery</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">render_mode</span><span class="o">=</span><span class="s2">&quot;rgb_array&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can create your own custom grid like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">desc</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;SFFF&quot;</span><span class="p">,</span> <span class="s2">&quot;FHFH&quot;</span><span class="p">,</span> <span class="s2">&quot;FFFH&quot;</span><span class="p">,</span> <span class="s2">&quot;HFFG&quot;</span><span class="p">]</span>
+<span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s1">&#39;FrozenLake-v1&#39;</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="n">desc</span><span class="p">,</span> <span class="n">is_slippery</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>but we’ll use the default environment for now.</p>
+</section>
+<section id="let-s-see-what-the-environment-looks-like">
+<h3>Let’s see what the Environment looks like:<a class="headerlink" href="#let-s-see-what-the-environment-looks-like" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># We create our environment with gym.make(&quot;&lt;name_of_the_environment&gt;&quot;)- `is_slippery=False`: The agent always moves in the intended direction due to the non-slippery nature of the frozen lake (deterministic).</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;_____OBSERVATION SPACE_____ </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Observation Space&quot;</span><span class="p">,</span> <span class="n">env</span><span class="o">.</span><span class="n">observation_space</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample observation&quot;</span><span class="p">,</span> <span class="n">env</span><span class="o">.</span><span class="n">observation_space</span><span class="o">.</span><span class="n">sample</span><span class="p">())</span> <span class="c1"># Get a random observation</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see with <code class="docutils literal notranslate"><span class="pre">Observation</span> <span class="pre">Space</span> <span class="pre">Shape</span> <span class="pre">Discrete(16)</span></code> that the observation is an integer representing the <strong>agent’s current position as current_row * nrows + current_col (where both the row and col start at 0)</strong>.</p>
+<p>For example, the goal position in the 4x4 map can be calculated as follows: 3 * 4 + 3 = 15. The number of possible observations is dependent on the size of the map. <strong>For example, the 4x4 map has 16 possible observations.</strong></p>
+<p>For instance, this is what state = 0 looks like:</p>
+<img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/notebooks/unit2/frozenlake.png" alt="FrozenLake"><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> _____ACTION SPACE_____ </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Action Space Shape&quot;</span><span class="p">,</span> <span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Action Space Sample&quot;</span><span class="p">,</span> <span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">sample</span><span class="p">())</span> <span class="c1"># Take a random action</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The action space (the set of possible actions the agent can take) is discrete with 4 actions available 🎮:</p>
+<ul class="simple">
+<li><p>0: GO LEFT</p></li>
+<li><p>1: GO DOWN</p></li>
+<li><p>2: GO RIGHT</p></li>
+<li><p>3: GO UP</p></li>
+</ul>
+<p>Reward function 💰:</p>
+<ul class="simple">
+<li><p>Reach goal: +1</p></li>
+<li><p>Reach hole: 0</p></li>
+<li><p>Reach frozen: 0</p></li>
+</ul>
+</section>
+</section>
+<section id="create-and-initialize-the-q-table">
+<h2>Create and Initialize the Q-table 🗄️<a class="headerlink" href="#create-and-initialize-the-q-table" title="Permalink to this heading">#</a></h2>
+<p>(👀 Step 1 of the pseudocode)</p>
+<img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit3/Q-learning-2.jpg" alt="Q-Learning" width="100%"/>
+<p>It’s time to initialize our Q-table! To know how many rows (states) and columns (actions) to use, we need to know the action and observation space. We already know their values from before, but we’ll want to obtain them programmatically so that our algorithm generalizes for different environments. Gym provides us a way to do that: <code class="docutils literal notranslate"><span class="pre">env.action_space.n</span></code> and <code class="docutils literal notranslate"><span class="pre">env.observation_space.n</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">state_space</span> <span class="o">=</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There are &quot;</span><span class="p">,</span> <span class="n">state_space</span><span class="p">,</span> <span class="s2">&quot; possible states&quot;</span><span class="p">)</span>
+
+<span class="n">action_space</span> <span class="o">=</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There are &quot;</span><span class="p">,</span> <span class="n">action_space</span><span class="p">,</span> <span class="s2">&quot; possible actions&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s create our Qtable of size (state_space, action_space) and initialized each values at 0 using np.zeros. np.zeros needs a tuple (a,b)</span>
+<span class="k">def</span> <span class="nf">initialize_q_table</span><span class="p">(</span><span class="n">state_space</span><span class="p">,</span> <span class="n">action_space</span><span class="p">):</span>
+  <span class="n">Qtable</span> <span class="o">=</span>
+  <span class="k">return</span> <span class="n">Qtable</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Qtable_frozenlake</span> <span class="o">=</span> <span class="n">initialize_q_table</span><span class="p">(</span><span class="n">state_space</span><span class="p">,</span> <span class="n">action_space</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id1">
+<h3>Solution<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">state_space</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">observation_space</span><span class="o">.</span><span class="n">n</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There are &quot;</span><span class="p">,</span> <span class="n">state_space</span><span class="p">,</span> <span class="s2">&quot; possible states&quot;</span><span class="p">)</span>
+
+<span class="n">action_space</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">n</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There are &quot;</span><span class="p">,</span> <span class="n">action_space</span><span class="p">,</span> <span class="s2">&quot; possible actions&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s create our Qtable of size (state_space, action_space) and initialized each values at 0 using np.zeros</span>
+<span class="k">def</span> <span class="nf">initialize_q_table</span><span class="p">(</span><span class="n">state_space</span><span class="p">,</span> <span class="n">action_space</span><span class="p">):</span>
+  <span class="n">Qtable</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">state_space</span><span class="p">,</span> <span class="n">action_space</span><span class="p">))</span>
+  <span class="k">return</span> <span class="n">Qtable</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Qtable_frozenlake</span> <span class="o">=</span> <span class="n">initialize_q_table</span><span class="p">(</span><span class="n">state_space</span><span class="p">,</span> <span class="n">action_space</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="define-the-greedy-policy">
+<h2>Define the greedy policy 🤖<a class="headerlink" href="#define-the-greedy-policy" title="Permalink to this heading">#</a></h2>
+<p>Remember we have two policies since Q-Learning is an <strong>off-policy</strong> algorithm. This means we’re using a <strong>different policy for acting and updating the value function</strong>.</p>
+<ul class="simple">
+<li><p>Epsilon-greedy policy (acting policy)</p></li>
+<li><p>Greedy-policy (updating policy)</p></li>
+</ul>
+<p>The greedy policy will also be the final policy we’ll have when the Q-learning agent completes training. The greedy policy is used to select an action using the Q-table.</p>
+<img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit3/off-on-4.jpg" alt="Q-Learning" width="100%"/>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">greedy_policy</span><span class="p">(</span><span class="n">Qtable</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+  <span class="c1"># Exploitation: take the action with the highest state, action value</span>
+  <span class="n">action</span> <span class="o">=</span>
+
+  <span class="k">return</span> <span class="n">action</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id2">
+<h3>Solution<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">greedy_policy</span><span class="p">(</span><span class="n">Qtable</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+  <span class="c1"># Exploitation: take the action with the highest state, action value</span>
+  <span class="n">action</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">Qtable</span><span class="p">[</span><span class="n">state</span><span class="p">][:])</span>
+
+  <span class="k">return</span> <span class="n">action</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>##Define the epsilon-greedy policy 🤖</p>
+<p>Epsilon-greedy is the training policy that handles the exploration/exploitation trade-off.</p>
+<p>The idea with epsilon-greedy:</p>
+<ul class="simple">
+<li><p>With <em>probability 1 - ɛ</em> : <strong>we do exploitation</strong> (i.e. our agent selects the action with the highest state-action pair value).</p></li>
+<li><p>With <em>probability ɛ</em>: we do <strong>exploration</strong> (trying a random action).</p></li>
+</ul>
+<p>As the training continues, we progressively <strong>reduce the epsilon value since we will need less and less exploration and more exploitation.</strong></p>
+<img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit3/Q-learning-4.jpg" alt="Q-Learning" width="100%"/>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">epsilon_greedy_policy</span><span class="p">(</span><span class="n">Qtable</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">):</span>
+  <span class="c1"># Randomly generate a number between 0 and 1</span>
+  <span class="n">random_num</span> <span class="o">=</span>
+  <span class="c1"># if random_num &gt; greater than epsilon --&gt; exploitation</span>
+  <span class="k">if</span> <span class="n">random_num</span> <span class="o">&gt;</span> <span class="n">epsilon</span><span class="p">:</span>
+    <span class="c1"># Take the action with the highest value given a state</span>
+    <span class="c1"># np.argmax can be useful here</span>
+    <span class="n">action</span> <span class="o">=</span>
+  <span class="c1"># else --&gt; exploration</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="c1"># Take a random action</span>
+
+  <span class="k">return</span> <span class="n">action</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h3>Solution<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">epsilon_greedy_policy</span><span class="p">(</span><span class="n">Qtable</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">):</span>
+  <span class="c1"># Randomly generate a number between 0 and 1</span>
+  <span class="n">random_num</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+  <span class="c1"># if random_num &gt; greater than epsilon --&gt; exploitation</span>
+  <span class="k">if</span> <span class="n">random_num</span> <span class="o">&gt;</span> <span class="n">epsilon</span><span class="p">:</span>
+    <span class="c1"># Take the action with the highest value given a state</span>
+    <span class="c1"># np.argmax can be useful here</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="n">greedy_policy</span><span class="p">(</span><span class="n">Qtable</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+  <span class="c1"># else --&gt; exploration</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+
+  <span class="k">return</span> <span class="n">action</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="define-the-hyperparameters">
+<h2>Define the hyperparameters ⚙️<a class="headerlink" href="#define-the-hyperparameters" title="Permalink to this heading">#</a></h2>
+<p>The exploration related hyperparamters are some of the most important ones.</p>
+<ul class="simple">
+<li><p>We need to make sure that our agent <strong>explores enough of the state space</strong> to learn a good value approximation. To do that, we need to have progressive decay of the epsilon.</p></li>
+<li><p>If you decrease epsilon too fast (too high decay_rate), <strong>you take the risk that your agent will be stuck</strong>, since your agent didn’t explore enough of the state space and hence can’t solve the problem.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Training parameters</span>
+<span class="n">n_training_episodes</span> <span class="o">=</span> <span class="mi">10000</span>  <span class="c1"># Total training episodes</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.7</span>          <span class="c1"># Learning rate</span>
+
+<span class="c1"># Evaluation parameters</span>
+<span class="n">n_eval_episodes</span> <span class="o">=</span> <span class="mi">100</span>        <span class="c1"># Total number of test episodes</span>
+
+<span class="c1"># Environment parameters</span>
+<span class="n">env_id</span> <span class="o">=</span> <span class="s2">&quot;FrozenLake-v1&quot;</span>     <span class="c1"># Name of the environment</span>
+<span class="n">max_steps</span> <span class="o">=</span> <span class="mi">99</span>               <span class="c1"># Max steps per episode</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.95</span>                 <span class="c1"># Discounting rate</span>
+<span class="n">eval_seed</span> <span class="o">=</span> <span class="p">[]</span>               <span class="c1"># The evaluation seed of the environment</span>
+
+<span class="c1"># Exploration parameters</span>
+<span class="n">max_epsilon</span> <span class="o">=</span> <span class="mf">1.0</span>             <span class="c1"># Exploration probability at start</span>
+<span class="n">min_epsilon</span> <span class="o">=</span> <span class="mf">0.05</span>            <span class="c1"># Minimum exploration probability</span>
+<span class="n">decay_rate</span> <span class="o">=</span> <span class="mf">0.0005</span>            <span class="c1"># Exponential decay rate for exploration prob</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-the-training-loop-method">
+<h2>Create the training loop method<a class="headerlink" href="#create-the-training-loop-method" title="Permalink to this heading">#</a></h2>
+<img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit3/Q-learning-2.jpg" alt="Q-Learning" width="100%"/>
+<p>The training loop goes like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">For</span> <span class="n">episode</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">total</span> <span class="n">of</span> <span class="n">training</span> <span class="n">episodes</span><span class="p">:</span>
+
+<span class="n">Reduce</span> <span class="n">epsilon</span> <span class="p">(</span><span class="n">since</span> <span class="n">we</span> <span class="n">need</span> <span class="n">less</span> <span class="ow">and</span> <span class="n">less</span> <span class="n">exploration</span><span class="p">)</span>
+<span class="n">Reset</span> <span class="n">the</span> <span class="n">environment</span>
+
+  <span class="n">For</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">max</span> <span class="n">timesteps</span><span class="p">:</span>    
+    <span class="n">Choose</span> <span class="n">the</span> <span class="n">action</span> <span class="n">At</span> <span class="n">using</span> <span class="n">epsilon</span> <span class="n">greedy</span> <span class="n">policy</span>
+    <span class="n">Take</span> <span class="n">the</span> <span class="n">action</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="ow">and</span> <span class="n">observe</span> <span class="n">the</span> <span class="n">outcome</span> <span class="n">state</span><span class="p">(</span><span class="n">s</span><span class="s1">&#39;) and reward (r)</span>
+    <span class="n">Update</span> <span class="n">the</span> <span class="n">Q</span><span class="o">-</span><span class="n">value</span> <span class="n">Q</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">a</span><span class="p">)</span> <span class="n">using</span> <span class="n">Bellman</span> <span class="n">equation</span> <span class="n">Q</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">lr</span> <span class="p">[</span><span class="n">R</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">gamma</span> <span class="o">*</span> <span class="nb">max</span> <span class="n">Q</span><span class="p">(</span><span class="n">s</span><span class="s1">&#39;,a&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="n">Q</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">a</span><span class="p">)]</span>
+    <span class="n">If</span> <span class="n">done</span><span class="p">,</span> <span class="n">finish</span> <span class="n">the</span> <span class="n">episode</span>
+    <span class="n">Our</span> <span class="nb">next</span> <span class="n">state</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">new</span> <span class="n">state</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">n_training_episodes</span><span class="p">,</span> <span class="n">min_epsilon</span><span class="p">,</span> <span class="n">max_epsilon</span><span class="p">,</span> <span class="n">decay_rate</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">max_steps</span><span class="p">,</span> <span class="n">Qtable</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">episode</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_training_episodes</span><span class="p">)):</span>
+    <span class="c1"># Reduce epsilon (because we need less and less exploration)</span>
+    <span class="n">epsilon</span> <span class="o">=</span> <span class="n">min_epsilon</span> <span class="o">+</span> <span class="p">(</span><span class="n">max_epsilon</span> <span class="o">-</span> <span class="n">min_epsilon</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">decay_rate</span><span class="o">*</span><span class="n">episode</span><span class="p">)</span>
+    <span class="c1"># Reset the environment</span>
+    <span class="n">state</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">terminated</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">truncated</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># repeat</span>
+    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_steps</span><span class="p">):</span>
+      <span class="c1"># Choose the action At using epsilon greedy policy</span>
+      <span class="n">action</span> <span class="o">=</span>
+
+      <span class="c1"># Take action At and observe Rt+1 and St+1</span>
+      <span class="c1"># Take the action (a) and observe the outcome state(s&#39;) and reward (r)</span>
+      <span class="n">new_state</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span>
+
+      <span class="c1"># Update Q(s,a):= Q(s,a) + lr [R(s,a) + gamma * max Q(s&#39;,a&#39;) - Q(s,a)]</span>
+      <span class="n">Qtable</span><span class="p">[</span><span class="n">state</span><span class="p">][</span><span class="n">action</span><span class="p">]</span> <span class="o">=</span>
+
+      <span class="c1"># If terminated or truncated finish the episode</span>
+      <span class="k">if</span> <span class="n">terminated</span> <span class="ow">or</span> <span class="n">truncated</span><span class="p">:</span>
+        <span class="k">break</span>
+
+      <span class="c1"># Our next state is the new state</span>
+      <span class="n">state</span> <span class="o">=</span> <span class="n">new_state</span>
+  <span class="k">return</span> <span class="n">Qtable</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id4">
+<h3>Solution<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">n_training_episodes</span><span class="p">,</span> <span class="n">min_epsilon</span><span class="p">,</span> <span class="n">max_epsilon</span><span class="p">,</span> <span class="n">decay_rate</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">max_steps</span><span class="p">,</span> <span class="n">Qtable</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">episode</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_training_episodes</span><span class="p">)):</span>
+    <span class="c1"># Reduce epsilon (because we need less and less exploration)</span>
+    <span class="n">epsilon</span> <span class="o">=</span> <span class="n">min_epsilon</span> <span class="o">+</span> <span class="p">(</span><span class="n">max_epsilon</span> <span class="o">-</span> <span class="n">min_epsilon</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">decay_rate</span><span class="o">*</span><span class="n">episode</span><span class="p">)</span>
+    <span class="c1"># Reset the environment</span>
+    <span class="n">state</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">terminated</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">truncated</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># repeat</span>
+    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_steps</span><span class="p">):</span>
+      <span class="c1"># Choose the action At using epsilon greedy policy</span>
+      <span class="n">action</span> <span class="o">=</span> <span class="n">epsilon_greedy_policy</span><span class="p">(</span><span class="n">Qtable</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">)</span>
+
+      <span class="c1"># Take action At and observe Rt+1 and St+1</span>
+      <span class="c1"># Take the action (a) and observe the outcome state(s&#39;) and reward (r)</span>
+      <span class="n">new_state</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+
+      <span class="c1"># Update Q(s,a):= Q(s,a) + lr [R(s,a) + gamma * max Q(s&#39;,a&#39;) - Q(s,a)]</span>
+      <span class="n">Qtable</span><span class="p">[</span><span class="n">state</span><span class="p">][</span><span class="n">action</span><span class="p">]</span> <span class="o">=</span> <span class="n">Qtable</span><span class="p">[</span><span class="n">state</span><span class="p">][</span><span class="n">action</span><span class="p">]</span> <span class="o">+</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="p">(</span><span class="n">reward</span> <span class="o">+</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">Qtable</span><span class="p">[</span><span class="n">new_state</span><span class="p">])</span> <span class="o">-</span> <span class="n">Qtable</span><span class="p">[</span><span class="n">state</span><span class="p">][</span><span class="n">action</span><span class="p">])</span>
+
+      <span class="c1"># If terminated or truncated finish the episode</span>
+      <span class="k">if</span> <span class="n">terminated</span> <span class="ow">or</span> <span class="n">truncated</span><span class="p">:</span>
+        <span class="k">break</span>
+
+      <span class="c1"># Our next state is the new state</span>
+      <span class="n">state</span> <span class="o">=</span> <span class="n">new_state</span>
+  <span class="k">return</span> <span class="n">Qtable</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="train-the-q-learning-agent">
+<h2>Train the Q-Learning agent 🏃<a class="headerlink" href="#train-the-q-learning-agent" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Qtable_frozenlake</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span><span class="n">n_training_episodes</span><span class="p">,</span> <span class="n">min_epsilon</span><span class="p">,</span> <span class="n">max_epsilon</span><span class="p">,</span> <span class="n">decay_rate</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">max_steps</span><span class="p">,</span> <span class="n">Qtable_frozenlake</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="let-s-see-what-our-q-learning-table-looks-like-now">
+<h2>Let’s see what our Q-Learning table looks like now 👀<a class="headerlink" href="#let-s-see-what-our-q-learning-table-looks-like-now" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Qtable_frozenlake</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-evaluation-method">
+<h2>The evaluation method 📝<a class="headerlink" href="#the-evaluation-method" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>We defined the evaluation method that we’re going to use to test our Q-Learning agent.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">evaluate_agent</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">max_steps</span><span class="p">,</span> <span class="n">n_eval_episodes</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">seed</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Evaluate the agent for ``n_eval_episodes`` episodes and returns average reward and std of reward.</span>
+<span class="sd">  :param env: The evaluation environment</span>
+<span class="sd">  :param n_eval_episodes: Number of episode to evaluate the agent</span>
+<span class="sd">  :param Q: The Q-table</span>
+<span class="sd">  :param seed: The evaluation seed array (for taxi-v3)</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">episode_rewards</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="k">for</span> <span class="n">episode</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_eval_episodes</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="n">seed</span><span class="p">:</span>
+      <span class="n">state</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">[</span><span class="n">episode</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">state</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">truncated</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">terminated</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">total_rewards_ep</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_steps</span><span class="p">):</span>
+      <span class="c1"># Take the action (index) that have the maximum expected future reward given that state</span>
+      <span class="n">action</span> <span class="o">=</span> <span class="n">greedy_policy</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+      <span class="n">new_state</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+      <span class="n">total_rewards_ep</span> <span class="o">+=</span> <span class="n">reward</span>
+
+      <span class="k">if</span> <span class="n">terminated</span> <span class="ow">or</span> <span class="n">truncated</span><span class="p">:</span>
+        <span class="k">break</span>
+      <span class="n">state</span> <span class="o">=</span> <span class="n">new_state</span>
+    <span class="n">episode_rewards</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">total_rewards_ep</span><span class="p">)</span>
+  <span class="n">mean_reward</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">episode_rewards</span><span class="p">)</span>
+  <span class="n">std_reward</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">episode_rewards</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="n">mean_reward</span><span class="p">,</span> <span class="n">std_reward</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="evaluate-our-q-learning-agent">
+<h2>Evaluate our Q-Learning agent 📈<a class="headerlink" href="#evaluate-our-q-learning-agent" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Usually, you should have a mean reward of 1.0</p></li>
+<li><p>The <strong>environment is relatively easy</strong> since the state space is really small (16). What you can try to do is <a class="reference external" href="https://www.gymlibrary.dev/environments/toy_text/frozen_lake/">to replace it with the slippery version</a>, which introduces stochasticity, making the environment more complex.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Evaluate our Agent</span>
+<span class="n">mean_reward</span><span class="p">,</span> <span class="n">std_reward</span> <span class="o">=</span> <span class="n">evaluate_agent</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">max_steps</span><span class="p">,</span> <span class="n">n_eval_episodes</span><span class="p">,</span> <span class="n">Qtable_frozenlake</span><span class="p">,</span> <span class="n">eval_seed</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean_reward=</span><span class="si">{</span><span class="n">mean_reward</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> +/- </span><span class="si">{</span><span class="n">std_reward</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="publish-our-trained-model-to-the-hub">
+<h2>Publish our trained model to the Hub 🔥<a class="headerlink" href="#publish-our-trained-model-to-the-hub" title="Permalink to this heading">#</a></h2>
+<p>Now that we saw good results after the training, <strong>we can publish our trained model to the Hub 🤗 with one line of code</strong>.</p>
+<p>Here’s an example of a Model Card:</p>
+<img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/notebooks/unit2/modelcard.png" alt="Model card" width="100%"/>
+<p>Under the hood, the Hub uses git-based repositories (don’t worry if you don’t know what git is), which means you can update the model with new versions as you experiment and improve your agent.</p>
+<section id="do-not-modify-this-code">
+<h3>Do not modify this code<a class="headerlink" href="#do-not-modify-this-code" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">huggingface_hub</span> <span class="kn">import</span> <span class="n">HfApi</span><span class="p">,</span> <span class="n">snapshot_download</span>
+<span class="kn">from</span> <span class="nn">huggingface_hub.repocard</span> <span class="kn">import</span> <span class="n">metadata_eval_result</span><span class="p">,</span> <span class="n">metadata_save</span>
+
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">record_video</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">Qtable</span><span class="p">,</span> <span class="n">out_directory</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Generate a replay video of the agent</span>
+<span class="sd">  :param env</span>
+<span class="sd">  :param Qtable: Qtable of our agent</span>
+<span class="sd">  :param out_directory</span>
+<span class="sd">  :param fps: how many frame per seconds (with taxi-v3 and frozenlake-v1 we use 1)</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">images</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">terminated</span> <span class="o">=</span> <span class="kc">False</span>
+  <span class="n">truncated</span> <span class="o">=</span> <span class="kc">False</span>
+  <span class="n">state</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">500</span><span class="p">))</span>
+  <span class="n">img</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+  <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+  <span class="k">while</span> <span class="ow">not</span> <span class="n">terminated</span> <span class="ow">or</span> <span class="n">truncated</span><span class="p">:</span>
+    <span class="c1"># Take the action (index) that have the maximum expected future reward given that state</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">Qtable</span><span class="p">[</span><span class="n">state</span><span class="p">][:])</span>
+    <span class="n">state</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span> <span class="c1"># We directly put next_state = state for recording logic</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+    <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+  <span class="n">imageio</span><span class="o">.</span><span class="n">mimsave</span><span class="p">(</span><span class="n">out_directory</span><span class="p">,</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">img</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">img</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">images</span><span class="p">)],</span> <span class="n">fps</span><span class="o">=</span><span class="n">fps</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">push_to_hub</span><span class="p">(</span>
+    <span class="n">repo_id</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">video_fps</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">local_repo_path</span><span class="o">=</span><span class="s2">&quot;hub&quot;</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Evaluate, Generate a video and Upload a model to Hugging Face Hub.</span>
+<span class="sd">    This method does the complete pipeline:</span>
+<span class="sd">    - It evaluates the model</span>
+<span class="sd">    - It generates the model card</span>
+<span class="sd">    - It generates a replay video of the agent</span>
+<span class="sd">    - It pushes everything to the Hub</span>
+
+<span class="sd">    :param repo_id: repo_id: id of the model repository from the Hugging Face Hub</span>
+<span class="sd">    :param env</span>
+<span class="sd">    :param video_fps: how many frame per seconds to record our video replay</span>
+<span class="sd">    (with taxi-v3 and frozenlake-v1 we use 1)</span>
+<span class="sd">    :param local_repo_path: where the local repository is</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">repo_name</span> <span class="o">=</span> <span class="n">repo_id</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+
+    <span class="n">eval_env</span> <span class="o">=</span> <span class="n">env</span>
+    <span class="n">api</span> <span class="o">=</span> <span class="n">HfApi</span><span class="p">()</span>
+
+    <span class="c1"># Step 1: Create the repo</span>
+    <span class="n">repo_url</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">create_repo</span><span class="p">(</span>
+        <span class="n">repo_id</span><span class="o">=</span><span class="n">repo_id</span><span class="p">,</span>
+        <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Step 2: Download files</span>
+    <span class="n">repo_local_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">snapshot_download</span><span class="p">(</span><span class="n">repo_id</span><span class="o">=</span><span class="n">repo_id</span><span class="p">))</span>
+
+    <span class="c1"># Step 3: Save the model</span>
+    <span class="k">if</span> <span class="n">env</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;map_name&quot;</span><span class="p">):</span>
+        <span class="n">model</span><span class="p">[</span><span class="s2">&quot;map_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;map_name&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">env</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;is_slippery&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="n">model</span><span class="p">[</span><span class="s2">&quot;slippery&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># Pickle the model</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">((</span><span class="n">repo_local_path</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;q-learning.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># Step 4: Evaluate the model and build JSON with evaluation metrics</span>
+    <span class="n">mean_reward</span><span class="p">,</span> <span class="n">std_reward</span> <span class="o">=</span> <span class="n">evaluate_agent</span><span class="p">(</span>
+        <span class="n">eval_env</span><span class="p">,</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;max_steps&quot;</span><span class="p">],</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;n_eval_episodes&quot;</span><span class="p">],</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;qtable&quot;</span><span class="p">],</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;eval_seed&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="n">evaluate_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;env_id&quot;</span><span class="p">:</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;env_id&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;mean_reward&quot;</span><span class="p">:</span> <span class="n">mean_reward</span><span class="p">,</span>
+        <span class="s2">&quot;n_eval_episodes&quot;</span><span class="p">:</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;n_eval_episodes&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;eval_datetime&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Write a JSON file called &quot;results.json&quot; that will contain the</span>
+    <span class="c1"># evaluation results</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">repo_local_path</span> <span class="o">/</span> <span class="s2">&quot;results.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">evaluate_data</span><span class="p">,</span> <span class="n">outfile</span><span class="p">)</span>
+
+    <span class="c1"># Step 5: Create the model card</span>
+    <span class="n">env_name</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;env_id&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">env</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;map_name&quot;</span><span class="p">):</span>
+        <span class="n">env_name</span> <span class="o">+=</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="n">env</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;map_name&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">env</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;is_slippery&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="n">env_name</span> <span class="o">+=</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="s2">&quot;no_slippery&quot;</span>
+
+    <span class="n">metadata</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;tags&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">env_name</span><span class="p">,</span> <span class="s2">&quot;q-learning&quot;</span><span class="p">,</span> <span class="s2">&quot;reinforcement-learning&quot;</span><span class="p">,</span> <span class="s2">&quot;custom-implementation&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Add metrics</span>
+    <span class="nb">eval</span> <span class="o">=</span> <span class="n">metadata_eval_result</span><span class="p">(</span>
+        <span class="n">model_pretty_name</span><span class="o">=</span><span class="n">repo_name</span><span class="p">,</span>
+        <span class="n">task_pretty_name</span><span class="o">=</span><span class="s2">&quot;reinforcement-learning&quot;</span><span class="p">,</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;reinforcement-learning&quot;</span><span class="p">,</span>
+        <span class="n">metrics_pretty_name</span><span class="o">=</span><span class="s2">&quot;mean_reward&quot;</span><span class="p">,</span>
+        <span class="n">metrics_id</span><span class="o">=</span><span class="s2">&quot;mean_reward&quot;</span><span class="p">,</span>
+        <span class="n">metrics_value</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">mean_reward</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> +/- </span><span class="si">{</span><span class="n">std_reward</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="n">dataset_pretty_name</span><span class="o">=</span><span class="n">env_name</span><span class="p">,</span>
+        <span class="n">dataset_id</span><span class="o">=</span><span class="n">env_name</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Merges both dictionaries</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">metadata</span><span class="p">,</span> <span class="o">**</span><span class="nb">eval</span><span class="p">}</span>
+
+    <span class="n">model_card</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">  # **Q-Learning** Agent playing1 **</span><span class="si">{</span><span class="n">env_id</span><span class="si">}</span><span class="s2">**</span>
+<span class="s2">  This is a trained model of a **Q-Learning** agent playing **</span><span class="si">{</span><span class="n">env_id</span><span class="si">}</span><span class="s2">** .</span>
+
+<span class="s2">  ## Usage</span>
+
+<span class="s2">  ```python</span>
+
+<span class="s2">  model = load_from_hub(repo_id=&quot;</span><span class="si">{</span><span class="n">repo_id</span><span class="si">}</span><span class="s2">&quot;, filename=&quot;q-learning.pkl&quot;)</span>
+
+<span class="s2">  # Don&#39;t forget to check if you need to add additional attributes (is_slippery=False etc)</span>
+<span class="s2">  env = gym.make(model[&quot;env_id&quot;])</span>
+<span class="s2">  ```</span>
+<span class="s2">  &quot;&quot;&quot;</span>
+
+    <span class="n">evaluate_agent</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;max_steps&quot;</span><span class="p">],</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;n_eval_episodes&quot;</span><span class="p">],</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;qtable&quot;</span><span class="p">],</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;eval_seed&quot;</span><span class="p">])</span>
+
+    <span class="n">readme_path</span> <span class="o">=</span> <span class="n">repo_local_path</span> <span class="o">/</span> <span class="s2">&quot;README.md&quot;</span>
+    <span class="n">readme</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">readme_path</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">readme_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">with</span> <span class="n">readme_path</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">readme</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">readme</span> <span class="o">=</span> <span class="n">model_card</span>
+
+    <span class="k">with</span> <span class="n">readme_path</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">readme</span><span class="p">)</span>
+
+    <span class="c1"># Save our metrics to Readme metadata</span>
+    <span class="n">metadata_save</span><span class="p">(</span><span class="n">readme_path</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span>
+
+    <span class="c1"># Step 6: Record a video</span>
+    <span class="n">video_path</span> <span class="o">=</span> <span class="n">repo_local_path</span> <span class="o">/</span> <span class="s2">&quot;replay.mp4&quot;</span>
+    <span class="n">record_video</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;qtable&quot;</span><span class="p">],</span> <span class="n">video_path</span><span class="p">,</span> <span class="n">video_fps</span><span class="p">)</span>
+
+    <span class="c1"># Step 7. Push everything to the Hub</span>
+    <span class="n">api</span><span class="o">.</span><span class="n">upload_folder</span><span class="p">(</span>
+        <span class="n">repo_id</span><span class="o">=</span><span class="n">repo_id</span><span class="p">,</span>
+        <span class="n">folder_path</span><span class="o">=</span><span class="n">repo_local_path</span><span class="p">,</span>
+        <span class="n">path_in_repo</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Your model is pushed to the Hub. You can view your model here: &quot;</span><span class="p">,</span> <span class="n">repo_url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h3>.<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<p>By using <code class="docutils literal notranslate"><span class="pre">push_to_hub</span></code> <strong>you evaluate, record a replay, generate a model card of your agent and push it to the Hub</strong>.</p>
+<p>This way:</p>
+<ul class="simple">
+<li><p>You can <strong>showcase our work</strong> 🔥</p></li>
+<li><p>You can <strong>visualize your agent playing</strong> 👀</p></li>
+<li><p>You can <strong>share an agent with the community that others can use</strong> 💾</p></li>
+<li><p>You can <strong>access a leaderboard 🏆 to see how well your agent is performing compared to your classmates</strong> 👉 <a class="reference external" href="https://huggingface.co/spaces/huggingface-projects/Deep-Reinforcement-Learning-Leaderboard">https://huggingface.co/spaces/huggingface-projects/Deep-Reinforcement-Learning-Leaderboard</a></p></li>
+</ul>
+<p>To be able to share your model with the community there are three more steps to follow:</p>
+<p>1️⃣ (If it’s not already done) create an account to HF ➡ <a class="reference external" href="https://huggingface.co/join">https://huggingface.co/join</a></p>
+<p>2️⃣ Sign in and then, you need to store your authentication token from the Hugging Face website.</p>
+<ul class="simple">
+<li><p>Create a new token (<a class="reference external" href="https://huggingface.co/settings/tokens">https://huggingface.co/settings/tokens</a>) <strong>with write role</strong></p></li>
+</ul>
+<img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/notebooks/create-token.jpg" alt="Create HF Token">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">huggingface_hub</span> <span class="kn">import</span> <span class="n">notebook_login</span>
+<span class="n">notebook_login</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you don’t want to use a Google Colab or a Jupyter Notebook, you need to use this command instead: <code class="docutils literal notranslate"><span class="pre">huggingface-cli</span> <span class="pre">login</span></code> (or <code class="docutils literal notranslate"><span class="pre">login</span></code>)</p>
+<p>3️⃣ We’re now ready to push our trained agent to the 🤗 Hub 🔥 using <code class="docutils literal notranslate"><span class="pre">push_to_hub()</span></code> function</p>
+<ul class="simple">
+<li><p>Let’s create <strong>the model dictionary that contains the hyperparameters and the Q_table</strong>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;env_id&quot;</span><span class="p">:</span> <span class="n">env_id</span><span class="p">,</span>
+    <span class="s2">&quot;max_steps&quot;</span><span class="p">:</span> <span class="n">max_steps</span><span class="p">,</span>
+    <span class="s2">&quot;n_training_episodes&quot;</span><span class="p">:</span> <span class="n">n_training_episodes</span><span class="p">,</span>
+    <span class="s2">&quot;n_eval_episodes&quot;</span><span class="p">:</span> <span class="n">n_eval_episodes</span><span class="p">,</span>
+    <span class="s2">&quot;eval_seed&quot;</span><span class="p">:</span> <span class="n">eval_seed</span><span class="p">,</span>
+
+    <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span> <span class="n">learning_rate</span><span class="p">,</span>
+    <span class="s2">&quot;gamma&quot;</span><span class="p">:</span> <span class="n">gamma</span><span class="p">,</span>
+
+    <span class="s2">&quot;max_epsilon&quot;</span><span class="p">:</span> <span class="n">max_epsilon</span><span class="p">,</span>
+    <span class="s2">&quot;min_epsilon&quot;</span><span class="p">:</span> <span class="n">min_epsilon</span><span class="p">,</span>
+    <span class="s2">&quot;decay_rate&quot;</span><span class="p">:</span> <span class="n">decay_rate</span><span class="p">,</span>
+
+    <span class="s2">&quot;qtable&quot;</span><span class="p">:</span> <span class="n">Qtable_frozenlake</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s fill the <code class="docutils literal notranslate"><span class="pre">push_to_hub</span></code> function:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">repo_id</span></code>: the name of the Hugging Face Hub Repository that will be created/updated <code class="docutils literal notranslate"> <span class="pre">(repo_id</span> <span class="pre">=</span> <span class="pre">{username}/{repo_name})</span></code>
+💡 A good <code class="docutils literal notranslate"><span class="pre">repo_id</span></code> is <code class="docutils literal notranslate"><span class="pre">{username}/q-{env_id}</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model</span></code>: our model dictionary containing the hyperparameters and the Qtable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">env</span></code>: the environment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">commit_message</span></code>: message of the commit</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">username</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="c1"># FILL THIS</span>
+<span class="n">repo_name</span> <span class="o">=</span> <span class="s2">&quot;q-FrozenLake-v1-4x4-noSlippery&quot;</span>
+<span class="n">push_to_hub</span><span class="p">(</span>
+    <span class="n">repo_id</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">repo_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Congrats 🥳 you’ve just implemented from scratch, trained, and uploaded your first Reinforcement Learning agent.
+FrozenLake-v1 no_slippery is very simple environment, let’s try a harder one 🔥.</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="part-2-taxi-v3">
+<h1>Part 2: Taxi-v3 🚖<a class="headerlink" href="#part-2-taxi-v3" title="Permalink to this heading">#</a></h1>
+<section id="create-and-understand-taxi-v3">
+<h2>Create and understand <a class="reference external" href="https://gymnasium.farama.org/environments/toy_text/taxi/">Taxi-v3 🚕</a><a class="headerlink" href="#create-and-understand-taxi-v3" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>💡 A good habit when you start to use an environment is to check its documentation</p>
+<p>👉 <a class="reference external" href="https://gymnasium.farama.org/environments/toy_text/taxi/">https://gymnasium.farama.org/environments/toy_text/taxi/</a></p>
+<hr class="docutils" />
+<p>In <code class="docutils literal notranslate"><span class="pre">Taxi-v3</span></code> 🚕, there are four designated locations in the grid world indicated by R(ed), G(reen), Y(ellow), and B(lue).</p>
+<p>When the episode starts, <strong>the taxi starts off at a random square</strong> and the passenger is at a random location. The taxi drives to the passenger’s location, <strong>picks up the passenger</strong>, drives to the passenger’s destination (another one of the four specified locations), and then <strong>drops off the passenger</strong>. Once the passenger is dropped off, the episode ends.</p>
+<img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/notebooks/unit2/taxi.png" alt="Taxi">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;Taxi-v3&quot;</span><span class="p">,</span> <span class="n">render_mode</span><span class="o">=</span><span class="s2">&quot;rgb_array&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are <strong>500 discrete states since there are 25 taxi positions, 5 possible locations of the passenger</strong> (including the case when the passenger is in the taxi), and <strong>4 destination locations.</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">state_space</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">observation_space</span><span class="o">.</span><span class="n">n</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There are &quot;</span><span class="p">,</span> <span class="n">state_space</span><span class="p">,</span> <span class="s2">&quot; possible states&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">action_space</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">n</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There are &quot;</span><span class="p">,</span> <span class="n">action_space</span><span class="p">,</span> <span class="s2">&quot; possible actions&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The action space (the set of possible actions the agent can take) is discrete with <strong>6 actions available 🎮</strong>:</p>
+<ul class="simple">
+<li><p>0: move south</p></li>
+<li><p>1: move north</p></li>
+<li><p>2: move east</p></li>
+<li><p>3: move west</p></li>
+<li><p>4: pickup passenger</p></li>
+<li><p>5: drop off passenger</p></li>
+</ul>
+<p>Reward function 💰:</p>
+<ul class="simple">
+<li><p>-1 per step unless other reward is triggered.</p></li>
+<li><p>+20 delivering passenger.</p></li>
+<li><p>-10 executing “pickup” and “drop-off” actions illegally.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create our Q table with state_size rows and action_size columns (500x6)</span>
+<span class="n">Qtable_taxi</span> <span class="o">=</span> <span class="n">initialize_q_table</span><span class="p">(</span><span class="n">state_space</span><span class="p">,</span> <span class="n">action_space</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Qtable_taxi</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q-table shape: &quot;</span><span class="p">,</span> <span class="n">Qtable_taxi</span> <span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h2>Define the hyperparameters ⚙️<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<p>⚠ DO NOT MODIFY EVAL_SEED: the eval_seed array <strong>allows us to evaluate your agent with the same taxi starting positions for every classmate</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Training parameters</span>
+<span class="n">n_training_episodes</span> <span class="o">=</span> <span class="mi">25000</span>   <span class="c1"># Total training episodes</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.7</span>           <span class="c1"># Learning rate</span>
+
+<span class="c1"># Evaluation parameters</span>
+<span class="n">n_eval_episodes</span> <span class="o">=</span> <span class="mi">100</span>        <span class="c1"># Total number of test episodes</span>
+
+<span class="c1"># DO NOT MODIFY EVAL_SEED</span>
+<span class="n">eval_seed</span> <span class="o">=</span> <span class="p">[</span><span class="mi">16</span><span class="p">,</span><span class="mi">54</span><span class="p">,</span><span class="mi">165</span><span class="p">,</span><span class="mi">177</span><span class="p">,</span><span class="mi">191</span><span class="p">,</span><span class="mi">191</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span><span class="mi">149</span><span class="p">,</span><span class="mi">178</span><span class="p">,</span><span class="mi">48</span><span class="p">,</span><span class="mi">38</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">125</span><span class="p">,</span><span class="mi">174</span><span class="p">,</span><span class="mi">73</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">172</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">148</span><span class="p">,</span><span class="mi">146</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">68</span><span class="p">,</span><span class="mi">148</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="mi">167</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="mi">164</span><span class="p">,</span><span class="mi">176</span><span class="p">,</span><span class="mi">61</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">54</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span>
+ <span class="mi">161</span><span class="p">,</span><span class="mi">131</span><span class="p">,</span><span class="mi">184</span><span class="p">,</span><span class="mi">51</span><span class="p">,</span><span class="mi">170</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span><span class="mi">113</span><span class="p">,</span><span class="mi">95</span><span class="p">,</span><span class="mi">126</span><span class="p">,</span><span class="mi">51</span><span class="p">,</span><span class="mi">98</span><span class="p">,</span><span class="mi">36</span><span class="p">,</span><span class="mi">135</span><span class="p">,</span><span class="mi">54</span><span class="p">,</span><span class="mi">82</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span><span class="mi">95</span><span class="p">,</span><span class="mi">89</span><span class="p">,</span><span class="mi">59</span><span class="p">,</span><span class="mi">95</span><span class="p">,</span><span class="mi">124</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">113</span><span class="p">,</span><span class="mi">58</span><span class="p">,</span><span class="mi">85</span><span class="p">,</span><span class="mi">51</span><span class="p">,</span><span class="mi">134</span><span class="p">,</span><span class="mi">121</span><span class="p">,</span><span class="mi">169</span><span class="p">,</span><span class="mi">105</span><span class="p">,</span><span class="mi">21</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">65</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">43</span><span class="p">,</span><span class="mi">82</span><span class="p">,</span><span class="mi">145</span><span class="p">,</span><span class="mi">152</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="mi">106</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">85</span><span class="p">,</span><span class="mi">38</span><span class="p">,</span>
+ <span class="mi">112</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">168</span><span class="p">,</span><span class="mi">123</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="mi">21</span><span class="p">,</span><span class="mi">83</span><span class="p">,</span><span class="mi">158</span><span class="p">,</span><span class="mi">26</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span><span class="mi">63</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">81</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">148</span><span class="p">]</span> <span class="c1"># Evaluation seed, this ensures that all classmates agents are trained on the same taxi starting position</span>
+                                                          <span class="c1"># Each seed has a specific starting state</span>
+
+<span class="c1"># Environment parameters</span>
+<span class="n">env_id</span> <span class="o">=</span> <span class="s2">&quot;Taxi-v3&quot;</span>           <span class="c1"># Name of the environment</span>
+<span class="n">max_steps</span> <span class="o">=</span> <span class="mi">99</span>               <span class="c1"># Max steps per episode</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.95</span>                 <span class="c1"># Discounting rate</span>
+
+<span class="c1"># Exploration parameters</span>
+<span class="n">max_epsilon</span> <span class="o">=</span> <span class="mf">1.0</span>             <span class="c1"># Exploration probability at start</span>
+<span class="n">min_epsilon</span> <span class="o">=</span> <span class="mf">0.05</span>           <span class="c1"># Minimum exploration probability</span>
+<span class="n">decay_rate</span> <span class="o">=</span> <span class="mf">0.005</span>            <span class="c1"># Exponential decay rate for exploration prob</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="train-our-q-learning-agent">
+<h2>Train our Q-Learning agent 🏃<a class="headerlink" href="#train-our-q-learning-agent" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Qtable_taxi</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span><span class="n">n_training_episodes</span><span class="p">,</span> <span class="n">min_epsilon</span><span class="p">,</span> <span class="n">max_epsilon</span><span class="p">,</span> <span class="n">decay_rate</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">max_steps</span><span class="p">,</span> <span class="n">Qtable_taxi</span><span class="p">)</span>
+<span class="n">Qtable_taxi</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-a-model-dictionary-and-publish-our-trained-model-to-the-hub">
+<h2>Create a model dictionary 💾 and publish our trained model to the Hub 🔥<a class="headerlink" href="#create-a-model-dictionary-and-publish-our-trained-model-to-the-hub" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>We create a model dictionary that will contain all the training hyperparameters for reproducibility and the Q-Table.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;env_id&quot;</span><span class="p">:</span> <span class="n">env_id</span><span class="p">,</span>
+    <span class="s2">&quot;max_steps&quot;</span><span class="p">:</span> <span class="n">max_steps</span><span class="p">,</span>
+    <span class="s2">&quot;n_training_episodes&quot;</span><span class="p">:</span> <span class="n">n_training_episodes</span><span class="p">,</span>
+    <span class="s2">&quot;n_eval_episodes&quot;</span><span class="p">:</span> <span class="n">n_eval_episodes</span><span class="p">,</span>
+    <span class="s2">&quot;eval_seed&quot;</span><span class="p">:</span> <span class="n">eval_seed</span><span class="p">,</span>
+
+    <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span> <span class="n">learning_rate</span><span class="p">,</span>
+    <span class="s2">&quot;gamma&quot;</span><span class="p">:</span> <span class="n">gamma</span><span class="p">,</span>
+
+    <span class="s2">&quot;max_epsilon&quot;</span><span class="p">:</span> <span class="n">max_epsilon</span><span class="p">,</span>
+    <span class="s2">&quot;min_epsilon&quot;</span><span class="p">:</span> <span class="n">min_epsilon</span><span class="p">,</span>
+    <span class="s2">&quot;decay_rate&quot;</span><span class="p">:</span> <span class="n">decay_rate</span><span class="p">,</span>
+
+    <span class="s2">&quot;qtable&quot;</span><span class="p">:</span> <span class="n">Qtable_taxi</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">username</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="c1"># FILL THIS</span>
+<span class="n">repo_name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="c1"># FILL THIS</span>
+<span class="n">push_to_hub</span><span class="p">(</span>
+    <span class="n">repo_id</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">repo_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that it’s on the Hub, you can compare the results of your Taxi-v3 with your classmates using the leaderboard 🏆 👉 <a class="reference external" href="https://huggingface.co/spaces/huggingface-projects/Deep-Reinforcement-Learning-Leaderboard">https://huggingface.co/spaces/huggingface-projects/Deep-Reinforcement-Learning-Leaderboard</a></p>
+<img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/notebooks/unit2/taxi-leaderboard.png" alt="Taxi Leaderboard"></section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="part-3-load-from-hub">
+<h1>Part 3: Load from Hub 🔽<a class="headerlink" href="#part-3-load-from-hub" title="Permalink to this heading">#</a></h1>
+<p>What’s amazing with Hugging Face Hub 🤗 is that you can easily load powerful models from the community.</p>
+<p>Loading a saved model from the Hub is really easy:</p>
+<ol class="arabic simple">
+<li><p>You go <a class="reference external" href="https://huggingface.co/models?other=q-learning">https://huggingface.co/models?other=q-learning</a> to see the list of all the q-learning saved models.</p></li>
+<li><p>You select one and copy its repo_id</p></li>
+</ol>
+<img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/notebooks/unit2/copy-id.png" alt="Copy id"><ol class="arabic simple" start="3">
+<li><p>Then we just need to use <code class="docutils literal notranslate"><span class="pre">load_from_hub</span></code> with:</p></li>
+</ol>
+<ul class="simple">
+<li><p>The repo_id</p></li>
+<li><p>The filename: the saved model inside the repo.</p></li>
+</ul>
+<section id="id7">
+<h2>Do not modify this code<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">urllib.error</span> <span class="kn">import</span> <span class="n">HTTPError</span>
+
+<span class="kn">from</span> <span class="nn">huggingface_hub</span> <span class="kn">import</span> <span class="n">hf_hub_download</span>
+
+
+<span class="k">def</span> <span class="nf">load_from_hub</span><span class="p">(</span><span class="n">repo_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Download a model from Hugging Face Hub.</span>
+<span class="sd">    :param repo_id: id of the model repository from the Hugging Face Hub</span>
+<span class="sd">    :param filename: name of the model zip file from the repository</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get the model from the Hub, download and cache the model on your local disk</span>
+    <span class="n">pickle_model</span> <span class="o">=</span> <span class="n">hf_hub_download</span><span class="p">(</span>
+        <span class="n">repo_id</span><span class="o">=</span><span class="n">repo_id</span><span class="p">,</span>
+        <span class="n">filename</span><span class="o">=</span><span class="n">filename</span>
+    <span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">pickle_model</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+      <span class="n">downloaded_model_file</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">downloaded_model_file</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id8">
+<h2>.<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">load_from_hub</span><span class="p">(</span><span class="n">repo_id</span><span class="o">=</span><span class="s2">&quot;ThomasSimonini/q-Taxi-v3&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;q-learning.pkl&quot;</span><span class="p">)</span> <span class="c1"># Try to use another model</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;env_id&quot;</span><span class="p">])</span>
+
+<span class="n">evaluate_agent</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;max_steps&quot;</span><span class="p">],</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;n_eval_episodes&quot;</span><span class="p">],</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;qtable&quot;</span><span class="p">],</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;eval_seed&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">load_from_hub</span><span class="p">(</span><span class="n">repo_id</span><span class="o">=</span><span class="s2">&quot;ThomasSimonini/q-FrozenLake-v1-no-slippery&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;q-learning.pkl&quot;</span><span class="p">)</span> <span class="c1"># Try to use another model</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;env_id&quot;</span><span class="p">],</span> <span class="n">is_slippery</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">evaluate_agent</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;max_steps&quot;</span><span class="p">],</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;n_eval_episodes&quot;</span><span class="p">],</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;qtable&quot;</span><span class="p">],</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;eval_seed&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="some-additional-challenges">
+<h2>Some additional challenges 🏆<a class="headerlink" href="#some-additional-challenges" title="Permalink to this heading">#</a></h2>
+<p>The best way to learn <strong>is to try things on your own</strong>! As you saw, the current agent is not doing great. As a first suggestion, you can train for more steps. With 1,000,000 steps, we saw some great results!</p>
+<p>In the <a class="reference external" href="https://huggingface.co/spaces/huggingface-projects/Deep-Reinforcement-Learning-Leaderboard">Leaderboard</a> you will find your agents. Can you get to the top?</p>
+<p>Here are some ideas to climb up the leaderboard:</p>
+<ul class="simple">
+<li><p>Train more steps</p></li>
+<li><p>Try different hyperparameters by looking at what your classmates have done.</p></li>
+<li><p><strong>Push your new trained model</strong> on the Hub 🔥</p></li>
+</ul>
+<p>Are walking on ice and driving taxis too boring to you? Try to <strong>change the environment</strong>, why not use FrozenLake-v1 slippery version? Check how they work <a class="reference external" href="https://gymnasium.farama.org/">using the gymnasium documentation</a> and have fun 🎉.</p>
+<hr class="docutils" />
+<p>Congrats 🥳, you’ve just implemented, trained, and uploaded your first Reinforcement Learning agent.</p>
+<p>Understanding Q-Learning is an <strong>important step to understanding value-based methods.</strong></p>
+<p>In the next Unit with Deep Q-Learning, we’ll see that while creating and updating a Q-table was a good strategy — <strong>however, it is not scalable.</strong></p>
+<p>For instance, imagine you create an agent that learns to play Doom.</p>
+<img src="https://vizdoom.cs.put.edu.pl/user/pages/01.tutorial/basic.png" alt="Doom"/>
+<p>Doom is a large environment with a huge state space (millions of different states). Creating and updating a Q-table for that environment would not be efficient.</p>
+<p>That’s why we’ll study Deep Q-Learning in the next unit, an algorithm <strong>where we use a neural network that approximates, given a state, the different Q-values for each action.</strong></p>
+<img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit4/atari-envs.gif" alt="Environments"/>
+<p>See you in Unit 3! 🔥</p>
+</section>
+<section id="keep-learning-stay-awesome">
+<h2>Keep learning, stay awesome 🤗<a class="headerlink" href="#keep-learning-stay-awesome" title="Permalink to this heading">#</a></h2>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book/Bonus"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="NLP.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Natural Laguage Processing - NLP</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Unit 2: Q-Learning with FrozenLake-v1 ⛄ and Taxi-v3 🚕</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives-of-this-notebook">Objectives of this notebook 🏆</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#this-notebook-is-from-the-deep-reinforcement-learning-course">This notebook is from the Deep Reinforcement Learning Course</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites 🏗️</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-small-recap-of-q-learning">A small recap of Q-Learning</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-code-our-first-reinforcement-learning-algorithm">Let’s code our first Reinforcement Learning algorithm 🚀</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-dependencies-and-create-a-virtual-display">Install dependencies and create a virtual display 🔽</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-packages">Import the packages 📦</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-frozen-lake-non-slippery-version">Part 1: Frozen Lake ⛄ (non slippery version)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-and-understand-frozenlake-environment-https-gymnasium-farama-org-environments-toy-text-frozen-lake">Create and understand [FrozenLake environment ⛄]((https://gymnasium.farama.org/environments/toy_text/frozen_lake/)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution">Solution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-see-what-the-environment-looks-like">Let’s see what the Environment looks like:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-and-initialize-the-q-table">Create and Initialize the Q-table 🗄️</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Solution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-greedy-policy">Define the greedy policy 🤖</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Solution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Solution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-hyperparameters">Define the hyperparameters ⚙️</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-training-loop-method">Create the training loop method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Solution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-q-learning-agent">Train the Q-Learning agent 🏃</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-see-what-our-q-learning-table-looks-like-now">Let’s see what our Q-Learning table looks like now 👀</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-evaluation-method">The evaluation method 📝</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-our-q-learning-agent">Evaluate our Q-Learning agent 📈</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#publish-our-trained-model-to-the-hub">Publish our trained model to the Hub 🔥</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#do-not-modify-this-code">Do not modify this code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-taxi-v3">Part 2: Taxi-v3 🚖</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-and-understand-taxi-v3">Create and understand Taxi-v3 🚕</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Define the hyperparameters ⚙️</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-our-q-learning-agent">Train our Q-Learning agent 🏃</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-model-dictionary-and-publish-our-trained-model-to-the-hub">Create a model dictionary 💾 and publish our trained model to the Hub 🔥</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-load-from-hub">Part 3: Load from Hub 🔽</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Do not modify this code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-additional-challenges">Some additional challenges 🏆</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keep-learning-stay-awesome">Keep learning, stay awesome 🤗</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kyle Paul
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
