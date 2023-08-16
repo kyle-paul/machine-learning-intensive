@@ -69,7 +69,8 @@ chapters:
   - file: book/S11_SOL
   - file: book/Session 11 Revision
 
-  - file: book/S12_FinalExam
+  - file: book/S12_FinalExam_TEST
+  - file: book/S12_FinalExam_SOL
   - file: book/Final Test Theory
 
 
@@ -87,4 +88,4 @@ chapters:
 #       - file: book/bibliography
 
 
-# remains: s6 assignment, s11 assignment, final coding test, final theory tests
+# remains: final coding test, final theory tests
