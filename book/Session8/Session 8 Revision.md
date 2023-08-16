@@ -1,4 +1,4 @@
-# **Session 8: Revision**
+# Session 8: Revision
 
 ## **Theory**
 ### **Question 1**

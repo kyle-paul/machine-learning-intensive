@@ -1,4 +1,4 @@
-# **Session 11: Revision**
+# Session 11: Revision
 ## **Theory**
 ### **Question 1**
 Reinforcement learning is learn when we do not know $P(s'|s,a)$ and reward $R(r|s,a,s')$ functions by learning from the interaction data. In Q-learning, agent learn what and predict what?

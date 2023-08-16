@@ -1,11 +1,11 @@
-# **Theory Midterm Solution**
+# Theory Midterm Solution
 
 ## **Theory 1 Representation**
 ### **Question 1**
 Given a dataset $\bf D = \{x^1,...x^t,..., x^N\}$ with each $\bf x^t \in \mathbb{R}^d$. We need to use PCA to represent this dataset on the 2D graph. What is the shape of representation vector $\bf z^t$? What are the representation features? 
 ### **Answer**
 On the 2D-graph, we need 2 axes (2 features), which are 2 first principal components $\bf u_1$ and $\bf u_2$ of PCA. Hence $\mathbf{z} = (z_1, z_2) \in \mathbb{R}^2$
-
+s
 ### **Question 2**
 Pinpoint main differences between 2 embedding vectors $z_{pca}$ by PCA and $z_{sparse}$ by sparse coding.
 ### **Answer**w

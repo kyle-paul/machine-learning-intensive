@@ -1,4 +1,4 @@
-# **Session: 9 Revision**
+# Session: 9 Revision
 
 ## **Theory**
 <center><img src=https://d1q4qwyh0q55bh.cloudfront.net/images/BAWEdRauwTwPOZylWaWaNbm9fqWNSQnxhOR6Q0OQk3a4pyrrKo2oOfuhfNjM5KBG.png?d=desktop-thumbnail></center>

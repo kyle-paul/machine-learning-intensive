@@ -4,75 +4,74 @@
 format: jb-book
 root: index
 chapters:
-  - file: book/bibliography
+  - file: book/Session1/Preclass Session 1
+  - file: book/Session1/S1_Lab_Representation
+  - file: book/Session1/S1_ASM
+  - file: book/Session1/S1_SOL
+  - file: book/Session1/Session 1 Revision
 
-  - file: book/Preclass Session 1
-  - file: book/S1_Lab_Representation
-  - file: book/S1_ASM
-  - file: book/S1_SOL
-  - file: book/Session 1 Revision
+  - file: book/Session2/Preclass Session 2
+  - file: book/Session2/S2_Lab_LinearModel
+  - file: book/Session2/S2_ASM
+  - file: book/Session2/S2_SOL
+  - file: book/Session2/Session 2 Revision
 
-  - file: book/Preclass Session 2
-  - file: book/S2_Lab_LinearModel
-  - file: book/S2_ASM
-  - file: book/S2_SOL
-  - file: book/Session 2 Revision
+  - file: book/Session3/Preclass Session 3
+  - file: book/Session3/S3_Lab_RecSys
+  - file: book/Session3/S3_ASM
+  - file: book/Session3/S3_SOL
+  - file: book/Session3/Session 3 Revision
 
-  - file: book/Preclass Session 3
-  - file: book/S3_Lab_RecSys
-  - file: book/S3_ASM
-  - file: book/S3_SOL
-  - file: book/Session 3 Revision
+  - file: book/Session4/Preclass Session 4
+  - file: book/Session4/S4_Lab_NonLinearPredictors
+  - file: book/Session4/S4_ASM
+  - file: book/Session4/S4_SOL
+  - file: book/Session4/Session 4 Revision
 
-  - file: book/Preclass Session 4
-  - file: book/S4_Lab_NonLinearPredictors
-  - file: book/S4_ASM
-  - file: book/S4_SOL
-  - file: book/Session 4 Revision
+  - file: book/Session5/Preclass Session 5
+  - file: book/Session5/S5_Lab_Optimization
+  - file: book/Session5/S5_ASM
+  - file: book/Session5/S5_SOL
+  - file: book/Session5/Session 5 Revision
 
-  - file: book/Preclass Session 5
-  - file: book/S5_Lab_Optimization
-  - file: book/S5_ASM
-  - file: book/S5_SOL
-  - file: book/Session 5 Revision
+  - file: book/Session6/Preclass Session 6
+  - file: book/Session6/S6_Lab_Metrics&Losses
+  - file: book/Session6/S6_ASM
+  - file: book/Session6/S6_SOL
+  - file: book/Session6/Session 6 Revision
 
-  - file: book/Preclass Session 6
-  - file: book/S6_Lab_Metrics&Losses
-  - file: book/S6_ASM
-  - file: book/S6_SOL
+  - file: book/Session7/Midterm Theory Test
+  - file: book/Session7/Midterm Theory Solution
+  - file: book/Session7/S7_MidTerm_TEST
+  - file: book/Session7/S7_MidTerm_SOL
 
-  - file: book/Midterm Theory Test
-  - file: book/Midterm Theory Solution
-  - file: book/S7_MidTerm_TEST
-  - file: book/S7_MidTerm_SOL
+  - file: book/Session8/Preclass Session 8
+  - file: book/Session8/S8_Lab_CNN
+  - file: book/Session8/S8_ASM
+  - file: book/Session8/S8_SOL
+  - file: book/Session8/Session 8 Revision
 
-  - file: book/Preclass Session 8
-  - file: book/S8_Lab_CNN
-  - file: book/S8_ASM
-  - file: book/S8_SOL
-  - file: book/Session 8 Revision
+  - file: book/Session9/Preclass Session 9
+  - file: book/Session9/S9_LAB_RNN
+  - file: book/Session9/S9_ASM
+  - file: book/Session9/S9_SOL
+  - file: book/Session9/Session 9 Revision
 
-  - file: book/Preclass Session 9
-  - file: book/S9_LAB_RNN
-  - file: book/S9_ASM
-  - file: book/S9_SOL
-  - file: book/Session 9 Revision
+  - file: book/Session10/Preclass Session 10
+  - file: book/Session10/S10_LAB_MDP_PLANNING
+  - file: book/Session10/S10_ASM
+  - file: book/Session10/S10_SOL
+  - file: book/Session10/Session 10 Revision
 
-  - file: book/Preclass Session 10
-  - file: book/S10_LAB_MDP_PLANNING
-  - file: book/S10_ASM
-  - file: book/S10_SOL
-  - file: book/Session 10 Revision
+  - file: book/Session11/Preclass Session 11
+  - file: book/Session11/S11_LAB_Q_Learning
+  - file: book/Session11/S11_SOL
+  - file: book/Session11/Session 11 Revision
 
-  - file: book/Preclass Session 11
-  - file: book/S11_LAB_Q_Learning
-  - file: book/S11_SOL
-  - file: book/Session 11 Revision
-
-  - file: book/S12_FinalExam_TEST
-  - file: book/S12_FinalExam_SOL
-  - file: book/Final Test Theory
-
+  - file: book/Session12/Final Test Theory
+  - file: book/Session12/S12_FinalExam_TEST
+  - file: book/Session12/S12_FinalExam_SOL
+  
 
 # Or you organize the TOC by parts
 

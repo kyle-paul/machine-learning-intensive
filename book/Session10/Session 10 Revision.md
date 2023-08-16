@@ -1,4 +1,4 @@
-# **Session 10: Revision**
+# Session 10: Revision
 
 ## **Theory**
 ### **Question 1**
