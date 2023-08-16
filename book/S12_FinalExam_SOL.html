@@ -1,0 +1,2334 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Sesssion 12: Final Coding Solution &#8212; Machine Learning Intensive</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/S12_FinalExam_SOL';</script>
+    <link rel="canonical" href="https://kyle-paul.github.io/machine-learning-intensive/book/S12_FinalExam_SOL.html" />
+    <link rel="shortcut icon" href="../_static/avatar.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Session 12: final theory test" href="Final%20Test%20Theory.html" />
+    <link rel="prev" title="Sesssion 12: Final Coding Test" href="S12_FinalExam_TEST.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%201.html"><strong>Preclass Session 1: Representation</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S1_ASM.html">Session 1: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S1_SOL.html">Session 1: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%201%20Revision.html"><strong>Session 1: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%202.html"><strong>Preclass Session 2: Linear Model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S2_Lab_LinearModel.html">Session 2: Linear Model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S2_ASM.html">Session 2: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S2_SOL.html">Session 2: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%202%20Revision.html"><strong>Session 2: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%203.html"><strong>Preclass Session 3: Recommender System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S3_Lab_RecSys.html">Sesion 3: Recommender System</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S3_ASM.html">Session 3: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S3_SOL.html">Session 3: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%203%20Revision.html"><strong>Session 3: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%204.html"><strong>Preclass Session 4: NonLinear Predictor</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S4_Lab_NonLinearPredictors.html">Session 4: Nonlinear Predictors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S4_ASM.html">Session 4: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S4_SOL.html">Session 4: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%204%20Revision.html"><strong>Session 4: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%205.html"><strong>Preclass Session 5: Optimization</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S5_Lab_Optimization.html">Session 5: Optimization</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S5_ASM.html">Session 5: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S5_SOL.html">Session 5: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%205%20Revision.html"><strong>Session 5: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%206.html"><strong>Preclass Session 6: Metrics and Losses</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S6_Lab_Metrics%26Losses.html">Session 6: Metrics &amp; Losses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S6_ASM.html">Session 6: Assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S6_SOL.html">Session 6: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Midterm%20Theory%20Test.html"><strong>Theory Midterm Test</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Midterm%20Theory%20Solution.html"><strong>Theory Midterm Solution</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S7_MidTerm_TEST.html">Session 7: Midterm Coding Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S7_MidTerm_SOL.html">Session 7: Midterm Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%208.html"><strong>Preclass Session 8: Convolutional Neural Network</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S8_Lab_CNN.html">Session 8: Convolutional Neural Network</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="S8_ASM.html">Session 8: Assignment</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S8_SOL.html">Session 8: Coding Solution</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Session%208%20Revision.html"><strong>Session 8: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%209.html"><strong>Preclass Session 9: Natural Language Processing</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S9_LAB_RNN.html">Session 9 - Natural Language Processing</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S9_ASM.html">Session 9: Assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S9_SOL.html">Session 9: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%209%20Revision.html"><strong>Session: 9 Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%2010.html"><strong>Preclass Session 10: MDP Planning</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S10_LAB_MDP_PLANNING.html">Session 10 - MDP Planning</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S10_ASM.html">Session 10: Assigment</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S10_SOL.html">Session 10: Coding Solution</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Session%2010%20Revision.html"><strong>Session 10: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%2011.html"><strong>Preclass Session 11: Reinforcement Learning</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S11_LAB_Q_Learning.html">Session 11: Q Learning</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="S11_SOL.html">Session 11: Coding Solution</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Session%2011%20Revision.html"><strong>Session 11: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S12_FinalExam_TEST.html">Sesssion 12: Final Coding Test</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Sesssion 12: Final Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Final%20Test%20Theory.html"><strong>Session 12: final theory test</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/kyle-paul/machine-learning-intensive/master?urlpath=tree/book/S12_FinalExam_SOL.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/kyle-paul/machine-learning-intensive/blob/master/book/S12_FinalExam_SOL.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/edit/main/book/S12_FinalExam_SOL.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/issues/new?title=Issue%20on%20page%20%2Fbook/S12_FinalExam_SOL.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/S12_FinalExam_SOL.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Sesssion 12: Final Coding Solution</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#language-model-for-alphabet-characters-and-numbers">Language Model for Alphabet characters and numbers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-1">TODO 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-2">TODO 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train">Train</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-3">TODO 3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optical-character-recognition">Optical Character Recognition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-dataset">Prepare the dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-architecture">Build the architecture</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-4">TODO 4</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inference">Inference</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="sesssion-12-final-coding-solution">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Sesssion 12: Final Coding Solution</a><a class="headerlink" href="#sesssion-12-final-coding-solution" title="Permalink to this heading">#</a></h1>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#sesssion-12-final-coding-solution" id="id1">Sesssion 12: Final Coding Solution</a></p>
+<ul>
+<li><p><a class="reference internal" href="#language-model-for-alphabet-characters-and-numbers" id="id2">Language Model for Alphabet characters and numbers</a></p>
+<ul>
+<li><p><a class="reference internal" href="#todo-1" id="id3">TODO 1</a></p></li>
+<li><p><a class="reference internal" href="#todo-2" id="id4">TODO 2</a></p></li>
+<li><p><a class="reference internal" href="#train" id="id5">Train</a></p>
+<ul>
+<li><p><a class="reference internal" href="#todo-3" id="id6">TODO 3</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#optical-character-recognition" id="id7">Optical Character Recognition</a></p>
+<ul>
+<li><p><a class="reference internal" href="#prepare-the-dataset" id="id8">Prepare the dataset</a></p></li>
+<li><p><a class="reference internal" href="#build-the-architecture" id="id9">Build the architecture</a></p>
+<ul>
+<li><p><a class="reference internal" href="#todo-4" id="id10">TODO 4</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#inference" id="id11">Inference</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mounted at /content/drive
+</pre></div>
+</div>
+</div>
+</div>
+<p>The test is simple enough to complete in 1 hour and 30 minutes. You should time yourself to try it.</p>
+<section id="language-model-for-alphabet-characters-and-numbers">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Language Model for Alphabet characters and numbers</a><a class="headerlink" href="#language-model-for-alphabet-characters-and-numbers" title="Permalink to this heading">#</a></h2>
+<p>As you have experienced, Language Model has the most basic use of representing words by 1 numerical vector so that words with similar semantics will have distances in the vector space close to each other.</p>
+<p>Before you start coding, think about what the result of the Language model for alphabetic characters and numbers will be.</p>
+<p><strong>Read the Data</strong></p>
+<p>Our data consists of the titles of 10,000 English articles saved as 1 <code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span> <span class="k">as</span> <span class="nn">pkl</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/content/drive/MyDrive/Colab Notebooks/ML-intensive/data/problem_1.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+  <span class="n">data</span> <span class="o">=</span> <span class="n">pkl</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;aba decides against community broadcasting licence&#39;, &#39;act fire witnesses must be aware of defamation&#39;, &#39;a g calls for infrastructure protection summit&#39;, &#39;air nz staff in aust strike for pay rise&#39;, &#39;air nz strike to affect australian travellers&#39;, &#39;ambitious olsson wins triple jump&#39;, &#39;antic delighted with record breaking barca&#39;, &#39;aussie qualifier stosur wastes four memphis match&#39;, &#39;aust addresses un security council over iraq&#39;, &#39;australia is locked into war timetable opp&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;aba decides against community broadcasting licence&#39;,
+ &#39;act fire witnesses must be aware of defamation&#39;,
+ &#39;a g calls for infrastructure protection summit&#39;,
+ &#39;air nz staff in aust strike for pay rise&#39;,
+ &#39;air nz strike to affect australian travellers&#39;,
+ &#39;ambitious olsson wins triple jump&#39;,
+ &#39;antic delighted with record breaking barca&#39;,
+ &#39;aussie qualifier stosur wastes four memphis match&#39;,
+ &#39;aust addresses un security council over iraq&#39;,
+ &#39;australia is locked into war timetable opp&#39;,
+ &#39;australia to contribute 10 million in aid to iraq&#39;,
+ &#39;barca take record as robson celebrates birthday in&#39;,
+ &#39;bathhouse plans move ahead&#39;,
+ &#39;big hopes for launceston cycling championship&#39;,
+ &#39;big plan to boost paroo water supplies&#39;,
+ &#39;blizzard buries united states in bills&#39;,
+ &#39;brigadier dismisses reports troops harassed in&#39;,
+ &#39;british combat troops arriving daily in kuwait&#39;,
+ &#39;bryant leads lakers to double overtime win&#39;,
+ &#39;bushfire victims urged to see centrelink&#39;,
+ &#39;businesses should prepare for terrorist attacks&#39;,
+ &#39;calleri avenges final defeat to eliminate massu&#39;,
+ &#39;call for ethanol blend fuel to go ahead&#39;,
+ &#39;carews freak goal leaves roma in ruins&#39;,
+ &#39;cemeteries miss out on funds&#39;,
+ &#39;code of conduct toughens organ donation regulations&#39;,
+ &#39;commonwealth bank cuts fixed home loan rates&#39;,
+ &#39;community urged to help homeless youth&#39;,
+ &#39;council chief executive fails to secure position&#39;,
+ &#39;councillor to contest wollongong as independent&#39;,
+ &#39;council moves to protect tas heritage garden&#39;,
+ &#39;council welcomes ambulance levy decision&#39;,
+ &#39;council welcomes insurance breakthrough&#39;,
+ &#39;crean tells alp leadership critics to shut up&#39;,
+ &#39;dargo fire threat expected to rise&#39;,
+ &#39;death toll continues to climb in south korean subway&#39;,
+ &#39;dems hold plebiscite over iraqi conflict&#39;,
+ &#39;dent downs philippoussis in tie break thriller&#39;,
+ &#39;de villiers to learn fate on march 5&#39;,
+ &#39;digital tv will become commonplace summit&#39;,
+ &#39;direct anger at govt not soldiers crean urges&#39;,
+ &#39;dispute over at smithton vegetable processing plant&#39;,
+ &#39;dog mauls 18 month old toddler in nsw&#39;,
+ &#39;dying korean subway passengers phoned for help&#39;,
+ &#39;england change three for wales match&#39;,
+ &#39;epa still trying to recover chemical clean up costs&#39;,
+ &#39;expressions of interest sought to build livestock&#39;,
+ &#39;fed opp to re introduce national insurance&#39;,
+ &#39;firefighters contain acid spill&#39;,
+ &#39;four injured in head on highway crash&#39;,
+ &#39;freedom records net profit for third successive&#39;,
+ &#39;funds allocated for domestic violence victims&#39;,
+ &#39;funds allocated for youth at risk&#39;,
+ &#39;funds announced for bridge work&#39;,
+ &#39;funds to go to cadell upgrade&#39;,
+ &#39;funds to help restore cossack&#39;,
+ &#39;german court to give verdict on sept 11 accused&#39;,
+ &#39;gilchrist backs rest policy&#39;,
+ &#39;girl injured in head on highway crash&#39;,
+ &#39;gold coast to hear about bilby project&#39;,
+ &#39;golf club feeling smoking ban impact&#39;,
+ &#39;govt is to blame for ethanols unpopularity opp&#39;,
+ &#39;greens offer police station alternative&#39;,
+ &#39;griffiths under fire over project knock back&#39;,
+ &#39;group to meet in north west wa over rock art&#39;,
+ &#39;hacker gains access to eight million credit cards&#39;,
+ &#39;hanson is grossly naive over nsw issues costa&#39;,
+ &#39;hanson should go back where she came from nsw mp&#39;,
+ &#39;harrington raring to go after break&#39;,
+ &#39;health minister backs organ and tissue storage&#39;,
+ &#39;heavy metal deposits survey nearing end&#39;,
+ &#39;injured rios pulls out of buenos aires open&#39;,
+ &#39;inquest finds mans death accidental&#39;,
+ &#39;investigations underway into death toll of korean&#39;,
+ &#39;investigation underway into elster creek spill&#39;,
+ &#39;iraqs neighbours plead for continued un inspections&#39;,
+ &#39;iraq to pay for own rebuilding white house&#39;,
+ &#39;irish man arrested over omagh bombing&#39;,
+ &#39;irrigators vote over river management&#39;,
+ &#39;israeli forces push into gaza strip&#39;,
+ &#39;jury to consider verdict in murder case&#39;,
+ &#39;juvenile sex offenders unlikely to reoffend as&#39;,
+ &#39;kelly disgusted at alleged bp ethanol scare&#39;,
+ &#39;kelly not surprised ethanol confidence low&#39;,
+ &#39;korean subway fire 314 still missing&#39;,
+ &#39;last minute call hands alinghi big lead&#39;,
+ &#39;low demand forces air service cuts&#39;,
+ &#39;man arrested after central qld hijack attempt&#39;,
+ &#39;man charged over cooma murder&#39;,
+ &#39;man fined after aboriginal tent embassy raid&#39;,
+ &#39;man jailed over keno fraud&#39;,
+ &#39;man with knife hijacks light plane&#39;,
+ &#39;martin to lobby against losing nt seat in fed&#39;,
+ &#39;massive drug crop discovered in western nsw&#39;,
+ &#39;mayor warns landfill protesters&#39;,
+ &#39;meeting to consider tick clearance costs&#39;,
+ &#39;meeting to focus on broken hill water woes&#39;,
+ &#39;moderate lift in wages growth&#39;,
+ &#39;more than 40 pc of young men drink alcohol at&#39;,
+ &#39;more water restrictions predicted for northern tas&#39;,
+ &#39;more women urged to become councillors&#39;,
+ &#39;most highly educated live in nsw wa&#39;,
+ &#39;mp raises hospital concerns in parliament&#39;,
+ &#39;mp rejects ambulance levy claims&#39;,
+ &#39;mugabe to touch down in paris for summit&#39;,
+ &#39;national gallery gets all clear after&#39;,
+ &#39;nato gives green light to defend turkey&#39;,
+ &#39;nca defends aboriginal tent embassy raid&#39;,
+ &#39;new zealand imposes visa entry for zimbabwe&#39;,
+ &#39;no side effects for new whooping cough vaccine&#39;,
+ &#39;nsw govt under fire for holding back vegetation&#39;,
+ &#39;nsw opp defends claims of running race campaign&#39;,
+ &#39;nsw opp pledges 50m drought relief&#39;,
+ &#39;nt govt boosts nurse number with overseas intake&#39;,
+ &#39;nth koreans seek asylum at japanese embassy&#39;,
+ &#39;nursing student intake down&#39;,
+ &#39;oh brother your times up says ganguly senior&#39;,
+ &#39;omodei to stay in politics&#39;,
+ &#39;onesteel to invest 80m in whyalla steelworks&#39;,
+ &#39;opposition urged to help protect recherche bay&#39;,
+ &#39;orientation begins for uni students&#39;,
+ &#39;osullivan in world cross country doubt&#39;,
+ &#39;pagan says rule changes not necessary&#39;,
+ &#39;pair to face court over ayr murder&#39;,
+ &#39;patterson defends decision not to attend health&#39;,
+ &#39;patterson no show displays govts arrogance crean&#39;,
+ &#39;patterson snubs health meeting to avoid lions den&#39;,
+ &#39;peace agreement may bring respite for venezuela&#39;,
+ &#39;pienaar shines as ajax frustrate arsenal&#39;,
+ &#39;plan for second skatepark&#39;,
+ &#39;plan to encourage farmers into plantation timber&#39;,
+ &#39;png nurses strike after colleague raped on way to&#39;,
+ &#39;police cracking down on driver safety&#39;,
+ &#39;police defend aboriginal tent embassy raid&#39;,
+ &#39;policewomen accusations feature at federal crime&#39;,
+ &#39;probe launched into plane crash&#39;,
+ &#39;program to monitor forest harvested areas&#39;,
+ &#39;public urged to check gas cylinders&#39;,
+ &#39;public warned about phone scam&#39;,
+ &#39;qantas international crews to strike over pay&#39;,
+ &#39;qantas war plan to cut 2500 jobs outrages unions&#39;,
+ &#39;qr not planning northern route sackings&#39;,
+ &#39;questions public anger grows after korean subway&#39;,
+ &#39;rabbit control program on trial&#39;,
+ &#39;radioactive spill at wmcs olympic dam mine&#39;,
+ &#39;rain eases wheatbelt water woes&#39;,
+ &#39;reading go third in first division&#39;,
+ &#39;record amount for gladstone ventures&#39;,
+ &#39;refshauge wins defamation court case&#39;,
+ &#39;regulator to inspect gm canola trials&#39;,
+ &#39;report highlights container terminal potential&#39;,
+ &#39;resource stocks boost all ords&#39;,
+ &#39;restraint order issued against anti discrimination&#39;,
+ &#39;rfs rejects claim that act authorities spurned&#39;,
+ &#39;ricciuto undergoes surgery on injured ankle&#39;,
+ &#39;rice mill closures to put 300 out of work&#39;,
+ &#39;rsl angry about reports of troop harassment&#39;,
+ &#39;safety review begins after bushwalker death&#39;,
+ &#39;sa premier calls for action over river murray&#39;,
+ &#39;saudi arabians to stand trial over al qaeda&#39;,
+ &#39;saudi arabia tells arabs war on iraq inevitable&#39;,
+ &#39;search continues for victims in south korean subway&#39;,
+ &#39;second resolution on iraq expected shortly un&#39;,
+ &#39;shire offers assurances over finances&#39;,
+ &#39;six palestinians killed in gaza incursion&#39;,
+ &#39;slow recovery predicted for aust economy&#39;,
+ &#39;smoking bans hit tabcorp bottom line&#39;,
+ &#39;snowtown murder trial delayed&#39;,
+ &#39;states may be forced to label ethanol fuel&#39;,
+ &#39;stations to get fixed home phone service&#39;,
+ &#39;sterrey to steer sharks&#39;,
+ &#39;still no sign of missing fisherman&#39;,
+ &#39;stop changing the rules fans tell afl&#39;,
+ &#39;sugar industry plan to be revealed&#39;,
+ &#39;surge in new car sales in aust abs&#39;,
+ &#39;swiss challengers looking to future&#39;,
+ &#39;taipans placing future in publics hands&#39;,
+ &#39;talk of asian nuclear arms race unhelpful downer&#39;,
+ &#39;tasmanian scientists to search for east coast&#39;,
+ &#39;taylor denies calling on waugh to quit&#39;,
+ &#39;teen to face court over drug charges&#39;,
+ &#39;testing shows dioxin above drinking water standards&#39;,
+ &#39;thousands remember 61st anniversary of darwin&#39;,
+ &#39;unions to ask members to support public protests&#39;,
+ &#39;uni to continue tree disease study&#39;,
+ &#39;us british aircraft attack sth iraq target&#39;,
+ &#39;vff to buy stock feed pellets for fire affected&#39;,
+ &#39;vic local councils welcome single polling day&#39;,
+ &#39;victorian scientists honoured at awards&#39;,
+ &#39;vowles to retire at end of season&#39;,
+ &#39;wales coach accuses players of belittling red&#39;,
+ &#39;warne hearing set for friday&#39;,
+ &#39;webb favourite for ladies masters&#39;,
+ &#39;widnes abandon paul bid&#39;,
+ &#39;wildlife sanctuaries plan revealed&#39;,
+ &#39;williams says tight bowling key to warriors win&#39;,
+ &#39;wine chief bounces back from sacking&#39;,
+ &#39;worksafe probes potato harvester injuries&#39;,
+ &#39;15 dead in rebel bombing raid philippines army&#39;,
+ &#39;abattoir up for sale again&#39;,
+ &#39;academic upbeat about higher education review&#39;,
+ &#39;administrator to be appointed to land council&#39;,
+ &#39;aec to declare if nt to lose parliamentary seat&#39;,
+ &#39;amcor records solid profit result&#39;,
+ &#39;americas cup fourth race cancelled&#39;,
+ &#39;arsenal poised to swoop on beckham report&#39;,
+ &#39;aust drinking less alcohol smoking less study&#39;,
+ &#39;austeel eis release due soon nsw govt&#39;,
+ &#39;australian flag celebrates 100th birthday&#39;,
+ &#39;awu to hold meeting over port kembla jobs&#39;,
+ &#39;baby badly burnt in brisbane house fire&#39;,
+ &#39;bad weather might have caused iranian plane crash&#39;,
+ &#39;beckham leads as man u cut down depleted juve&#39;,
+ &#39;beware the standard alcoholic drink&#39;,
+ &#39;bilby dream to become reality&#39;,
+ &#39;brisbane sparkies head for 10 day strike&#39;,
+ &#39;britain tells nationals to leave iraq kuwait&#39;,
+ &#39;british high court overturns new blair asylum&#39;,
+ &#39;british magician to entomb himself in cheese&#39;,
+ &#39;bungle leaves doctor waiting to practise&#39;,
+ &#39;bushfire coronial inquiry winds up&#39;,
+ &#39;bush thanks nato for support on turkey&#39;,
+ &#39;call for ambos help in wake of funding changes&#39;,
+ &#39;canegrowers hope for late summer rain&#39;,
+ &#39;capriati hungry again in dubai&#39;,
+ &#39;celts underdogs for uefa clash oneill&#39;,
+ &#39;chambers vows to smash world mark&#39;,
+ &#39;charvis pays penalty as humphreys earns shock&#39;,
+ &#39;christmas is detention centre no go claims quashed&#39;,
+ &#39;claim defence spending priority over health nt&#39;,
+ &#39;claim education policy causing high indigenous&#39;,
+ &#39;claim new code should protect autopsy consent&#39;,
+ &#39;claim tas education policy causing high indigenous&#39;,
+ &#39;college to continue work experience&#39;,
+ &#39;concern act fire probe not covered by legal&#39;,
+ &#39;concorde makes emergency landing in canada&#39;,
+ &#39;coronial inquiry expected after hospital death&#39;,
+ &#39;council chief laments job advertising decision&#39;,
+ &#39;council general manager to step down&#39;,
+ &#39;council to offer vandalism reporting reward&#39;,
+ &#39;country racing clubs still hold tab fears&#39;,
+ &#39;court to rule on longford gas compo today&#39;,
+ &#39;cristal end eight match libertadores losing streak&#39;,
+ &#39;cuper slams inter bad boy recoba&#39;,
+ &#39;deportivo slip against buoyant swiss minnows basel&#39;,
+ &#39;distance swimmer maroney calls it quits&#39;,
+ &#39;dixon dismisses qantas monopoly claim&#39;,
+ &#39;downer warns iraq action could begin soon&#39;,
+ &#39;drought breaking rain may be months away&#39;,
+ &#39;drought impact may be more far reaching&#39;,
+ &#39;drought taking toll on insects&#39;,
+ &#39;early childhood development to receive research&#39;,
+ &#39;ellis webb well placed in ladies masters&#39;,
+ &#39;employee granted restraining order against a d&#39;,
+ &#39;england almost choke on burger king&#39;,
+ &#39;england call up morris for first cap&#39;,
+ &#39;epa to investigate radioactive spill in sa&#39;,
+ &#39;esso not responsible for economic losses from gas&#39;,
+ &#39;esso wins against class action for longford gas&#39;,
+ &#39;etienne agrees to tyson fight&#39;,
+ &#39;families confront korean president elect over&#39;,
+ &#39;fans join flower olonga in anti mugabe protest&#39;,
+ &#39;ferguson hails beckham in uniteds victory&#39;,
+ &#39;fewer australians being jailed abs&#39;,
+ &#39;fifa boss prepared to postpone matches for war&#39;,
+ &#39;firefighters told to not attend tip blazes&#39;,
+ &#39;fish cleaning facility plans announced&#39;,
+ &#39;flight attendant action wont affect bundaberg&#39;,
+ &#39;forest alliance rejects hindrance claims&#39;,
+ &#39;former bank worker pleads guilty to theft charges&#39;,
+ &#39;former treasurer charged with starting fire on sa&#39;,
+ &#39;forum puts focus on regional needs&#39;,
+ &#39;four nominate for nats charters towers preselection&#39;,
+ &#39;france drop merceron gelez to face scots&#39;,
+ &#39;french expedition site to be heritage protected&#39;,
+ &#39;fuel price jumps in newcastle&#39;,
+ &#39;fulham smash west brom with quickfire trio&#39;,
+ &#39;ganguly leads india to victory&#39;,
+ &#39;gartner wines to be wound up&#39;,
+ &#39;gippsland firefighters remain on guard&#39;,
+ &#39;govt canvassing ways to improve child development&#39;,
+ &#39;govt to work with rhh after coroners suicide report&#39;,
+ &#39;greenpeace calls for ban on gm canola&#39;,
+ &#39;greens dump anti terror kits on howards doorstep&#39;,
+ &#39;group airs truancy concerns&#39;,
+ &#39;groups praise outgoing opposition agriculture&#39;,
+ &#39;group to take over reef hq building&#39;,
+ &#39;hagan to blood rookies against penrith&#39;,
+ &#39;houllier backs owen to break rush scoring record&#39;,
+ &#39;howard steps up criticism of anti war protesters&#39;,
+ &#39;howard vows to stay on as pm until iraq crisis&#39;,
+ &#39;hussein says iraq doesnt want war with us&#39;,
+ &#39;illegal fishing hot spots identified&#39;,
+ &#39;immigration raid in melbourne draws flak&#39;,
+ &#39;impatience grows over water management plan&#39;,
+ &#39;indy meeting likely to include rain racing talks&#39;,
+ &#39;injuries threaten united finals bid&#39;,
+ &#39;interest sought in building stage one of bypass&#39;,
+ &#39;investigations underway into qantas skid&#39;,
+ &#39;investor in planned ethanol plant laments trial&#39;,
+ &#39;iran military plane crash kills 302&#39;,
+ &#39;iran plane crashes with at least 250 aboard tv&#39;,
+ &#39;iraqi use of human shields a war crime us&#39;,
+ &#39;italy remain unchanged for ireland clash&#39;,
+ &#39;kalgoorlie boulder crime rate declines&#39;,
+ &#39;kayakers rescued after second day of adventure&#39;,
+ &#39;kirwan sticks with winning formula for ireland&#39;,
+ &#39;korean books atp date with top seed roddick&#39;,
+ &#39;landholder contribution still under discussion&#39;,
+ &#39;lawyers allowed to visit manus is detention centre&#39;,
+ &#39;lawyers set to appeal mans sept 11 conviction&#39;,
+ &#39;lawyers to review case before any esso appeal&#39;,
+ &#39;lend leases posts 370 million loss&#39;,
+ &#39;lethal backs nine point rule change&#39;,
+ &#39;m5 airport tunnel remains closed after accident&#39;,
+ &#39;macarthurs kingfisher suffers minor damage&#39;,
+ &#39;man apologises for plane hijack&#39;,
+ &#39;man awaits sentencing over denmark murder&#39;,
+ &#39;man being questioned over qld backpacker death&#39;,
+ &#39;man charged over roxby downs plane incident&#39;,
+ &#39;man in hospital after stabbing attack&#39;,
+ &#39;man loses defamation compo bid&#39;,
+ &#39;man on murder charge refused bail&#39;,
+ &#39;man to face court over alleged hijack&#39;,
+ &#39;man to face court over attempted armed robbery&#39;,
+ &#39;man who whacked thatcher gets 3 months jail&#39;,
+ &#39;maroney calls it quits&#39;,
+ &#39;medal recognises islander war efforts&#39;,
+ &#39;meetings to consider glenelg river future&#39;,
+ &#39;melbourne man receives massive compo payout after&#39;,
+ &#39;mgladbach leave danger zone with home win&#39;,
+ &#39;mine rating challenge result expected in march&#39;,
+ &#39;miner exploring for nickel deposits&#39;,
+ &#39;molotov cocktail suspected in melb hotel fire&#39;,
+ &#39;more anti war rallies planned&#39;,
+ &#39;more land for noosa national park&#39;,
+ &#39;more teachers are at danger from students union&#39;,
+ &#39;more than 60 detained after immigration raid&#39;,
+ &#39;more women unlikely to join mens pga masters&#39;,
+ &#39;mosley ready for engine compromise&#39;,
+ &#39;motorists will avoid ethanol blended fuels labor&#39;,
+ &#39;mud crab business on the move&#39;,
+ &#39;murray meeting wouldnt detract from ministerial&#39;,
+ &#39;nats seek probe bushfires probe&#39;,
+ &#39;new boat takes to waterways&#39;,
+ &#39;new zealand to discover kenya fate on thursday&#39;,
+ &#39;no funding discussion until after nsw poll&#39;,
+ &#39;no penalties for church over damaged monument&#39;,
+ &#39;nsw coalition making magic pudding election&#39;,
+ &#39;nt govt announces community benefit grants&#39;,
+ &#39;offers roll in for classic holden&#39;,
+ &#39;oil prices hit new high&#39;,
+ &#39;oldfield to front court over one nation pre&#39;,
+ &#39;one nation pre selection hearing continues in nsw&#39;,
+ &#39;packer hands in licence as pistol investigation&#39;,
+ &#39;pakistani air force chief killed in air crash&#39;,
+ &#39;palaszczuk wont make disaster funds promise&#39;,
+ &#39;parks move to protect high conservation areas&#39;,
+ &#39;peace group denies members harassing soldiers&#39;,
+ &#39;people trapped after m5 pile up&#39;,
+ &#39;pilot makes emergency landing at adelaide airport&#39;,
+ &#39;players continue zimbabwe protest&#39;,
+ &#39;pm criticism of protesters disgraceful crean&#39;,
+ &#39;pm defends criticism of anti war protesters&#39;,
+ &#39;police continue probe into human remains find&#39;,
+ &#39;police find second cannabis crop&#39;,
+ &#39;police hope to gain an edge on weapons users&#39;,
+ &#39;police locate missing family of 6 after house&#39;,
+ &#39;police make arrests after drug raids&#39;,
+ &#39;police seek help over pay tv piracy&#39;,
+ &#39;police tax office to fight chop chop trade&#39;,
+ &#39;police wont rule out link between drug plantations&#39;,
+ &#39;politicians breeding publics anti troop sentiment&#39;,
+ &#39;pollock denies split in proteas camp&#39;,
+ &#39;population drift forces new federal boundaries&#39;,
+ &#39;powell to visit asia in bid to ease nth korean&#39;,
+ &#39;predictions of good wheatbelt rain&#39;,
+ &#39;probe launched into fatal police pursuit&#39;,
+ &#39;protesters condemn howard criticism of anti war&#39;,
+ &#39;protocols were followed in immigration raids&#39;,
+ &#39;public warned about snake handling dangers&#39;,
+ &#39;pumping continues at richmond after flooding&#39;,
+ &#39;qantas draws flak over redundancy talk&#39;,
+ &#39;qantas flags job cuts despite record profit&#39;,
+ &#39;qantas records 353 million profit&#39;,
+ &#39;qfvg upset over retail prices&#39;,
+ &#39;qld govt says new hospital on schedule&#39;,
+ &#39;qld nats close to deal with libs springborg&#39;,
+ &#39;racing club sneak a point in peru&#39;,
+ &#39;rain boosts farmers confidence&#39;,
+ &#39;rain may force aussie bowling change buchanan&#39;,
+ &#39;ram raid targets newsagency&#39;,
+ &#39;road funds to tackle flooding&#39;,
+ &#39;ronaldo puts real back in the race&#39;,
+ &#39;ruiz hat trick as guatemala rout nicaragua&#39;,
+ &#39;saff to gauge feelings on planned crown lands bill&#39;,
+ &#39;safin escude on rotterdam comeback trail&#39;,
+ &#39;sa govt defends moves to force fine defaulters to&#39;,
+ &#39;sa govt to appeal against fishing decision&#39;,
+ &#39;schmeichel set to miss arsenal trip&#39;,
+ &#39;school to reopen after paint fume scare&#39;,
+ &#39;scotland refuse to panic&#39;,
+ &#39;seaman injury crisis for arsenal&#39;,
+ &#39;self cloning crayfish threatens native species&#39;,
+ &#39;socceroos creep up world rankings&#39;,
+ &#39;solar cars to turn heads&#39;,
+ &#39;sporting task force planning begins&#39;,
+ &#39;start of americas cup race four delayed&#39;,
+ &#39;stone to stay on as federal liberal president&#39;,
+ &#39;sun needed for good downpour&#39;,
+ &#39;taipans win keeps play off dreams alive&#39;,
+ &#39;tas police to question injured man about house fire&#39;,
+ &#39;taxi driver to face sex trial&#39;,
+ &#39;tension increases after fighter strays into sth&#39;,
+ &#39;terror weapons pose minimal risk british expert&#39;,
+ &#39;thousands to visit dairy field days&#39;,
+ &#39;three israelis injured as hamas made rockets hit&#39;,
+ &#39;tnz shuffles pack as defeat looms&#39;,
+ &#39;tomasson gives milan narrow win over lokomotiv&#39;,
+ &#39;tough times ahead for water allocations&#39;,
+ &#39;tourism industry must be protected from iraq&#39;,
+ &#39;trial hears woman denied killing fiance&#39;,
+ &#39;triathletes back bris to gold coast bikeway&#39;,
+ &#39;truck roll destroys furniture&#39;,
+ &#39;turkey stands firm against us aid offer&#39;,
+ &#39;turkey still undecided over us aid for gulf attack&#39;,
+ &#39;union disunity over mccains enterprise agreement&#39;,
+ &#39;un security council ends two day open debate on&#39;,
+ &#39;us invited to talks with burmese military junta&#39;,
+ &#39;us launches homeland security ready campaign&#39;,
+ &#39;us markets remain jittery in shadow of war&#39;,
+ &#39;us tells turkey time running out for aid offer&#39;,
+ &#39;us to take no wto action against europe over ge&#39;,
+ &#39;uzbek journalist sentenced to seven years in jail&#39;,
+ &#39;verstappen pleased with new minardis track debut&#39;,
+ &#39;vic govt speaks out over rice mill closure claims&#39;,
+ &#39;wa fire crews battle bushfire at marangaroo&#39;,
+ &#39;war talk takes toll on all ords&#39;,
+ &#39;war with iraq could cost 120 billion economists&#39;,
+ &#39;watkins jeered at education forum&#39;,
+ &#39;wa wine destined for us&#39;,
+ &#39;western power reveals power supply bid details&#39;,
+ &#39;wide bay economy growing stronger&#39;,
+ &#39;wine exporters urged to push ahead&#39;,
+ &#39;winemakers move considered loss for tas industry&#39;,
+ &#39;woman faces court over child prostitution&#39;,
+ &#39;yacht loses mast in trawler incident&#39;,
+ &#39;zimbabwe bars british reporter from world cup&#39;,
+ &#39;accc too timid in petrol price investigations&#39;,
+ &#39;action wanted to lower indigenous unemployment rate&#39;,
+ &#39;aec ruling to scrap federal seat hurts us the most&#39;,
+ &#39;aek shut out malaga to claim goalless draw&#39;,
+ &#39;allan guilty on cash charges&#39;,
+ &#39;allan unlikely to appeal fine&#39;,
+ &#39;ama airs hospital reform concerns&#39;,
+ &#39;ama delivers health concerns list to politicians&#39;,
+ &#39;andersson atwal miss record in malaysia&#39;,
+ &#39;antarctic rocks could aid global warming&#39;,
+ &#39;anz confident of growth in tough environment&#39;,
+ &#39;anz to pay more than 260 million to tax office&#39;,
+ &#39;arab states press for war crimes condemnation of&#39;,
+ &#39;at least 26 dead in us club fire&#39;,
+ &#39;at least 42 injured in rhode island nightclub fire&#39;,
+ &#39;aussie dollar continues its climb&#39;,
+ &#39;aust could be in top four al qaeda target list&#39;,
+ &#39;australia to withdraw bougainville peace monitors&#39;,
+ &#39;aust share market ends week in negative territory&#39;,
+ &#39;bartlett vows to block govt plans for sa nuclear&#39;,
+ &#39;beattie unaware of tree clearing funds hold up&#39;,
+ &#39;bedi labels murali a chucker&#39;,
+ &#39;belgian police recover stolen works&#39;,
+ &#39;bhp port kembla production restarts&#39;,
+ &#39;big guns back to business in the premier league&#39;,
+ &#39;blake paradorn upset in memphis&#39;,
+ &#39;bracks backs ruling on deans 50000 a year pension&#39;,
+ &#39;british govt clashes with high court over asylum&#39;,
+ &#39;british pop awards will be platform for iraq&#39;,
+ &#39;briton stabbed to death in bangkok&#39;,
+ &#39;brothel owner acquitted of hiring underage&#39;,
+ &#39;brothel owner fronts court after allegedly hiring&#39;,
+ &#39;burmas suu kyi sentenced to one day jail fined&#39;,
+ &#39;bushfires burn over 1m hectares&#39;,
+ &#39;cairns canberra grab nbl wins&#39;,
+ &#39;cairns injured in kiwi nightclub brawl&#39;,
+ &#39;cairns injured in nightclub brawl report&#39;,
+ &#39;call to scrap national plantation target&#39;,
+ &#39;candleholders recalled as fire risk&#39;,
+ &#39;carr off the hook over brogden debate pm&#39;,
+ &#39;celts sink 10 man stuttgart&#39;,
+ &#39;central qld park area expanded&#39;,
+ &#39;centrelink to offer drought counselling&#39;,
+ &#39;china to wage chemical war on chewing gum blobs&#39;,
+ &#39;chirac mugabe talk on sidelines of africa summit&#39;,
+ &#39;christmas island residents not aware of detention&#39;,
+ &#39;claim low oil inventory causing high petrol prices&#39;,
+ &#39;claims live sheep cattle exports threatening tas&#39;,
+ &#39;claims more rain will boost stock prices&#39;,
+ &#39;class action may cost esso 50m&#39;,
+ &#39;clinton cancels trip to india&#39;,
+ &#39;coalition promises to scrap anglers fee&#39;,
+ &#39;committal continues into goulburn jail riot&#39;,
+ &#39;costello unhappy he wasnt consulted by stone&#39;,
+ &#39;council approves poultry farm&#39;,
+ &#39;council awaits more rain&#39;,
+ &#39;council considers indigenous caravan park plan&#39;,
+ &#39;council elections planned for may&#39;,
+ &#39;council rejects combined field days stand idea&#39;,
+ &#39;council to change tree protection by law&#39;,
+ &#39;council to fund groundwater study&#39;,
+ &#39;counsel begin summing up at warnes doping hearing&#39;,
+ &#39;criminal charges pending in south korea subway probe&#39;,
+ &#39;crocs prove too good for bullets&#39;,
+ &#39;date set for bushfires coronial inquiry&#39;,
+ &#39;dean to receive lifetime parliamentary pension&#39;,
+ &#39;death spells end to record marriage&#39;,
+ &#39;demons thump tigers&#39;,
+ &#39;deportivo cali outclass sulky river plate&#39;,
+ &#39;deschamps chases old flame marseille&#39;,
+ &#39;disaster funds to allow shire to complete other&#39;,
+ &#39;dortmund ready to hound bayern&#39;,
+ &#39;downpour closes tourist roads&#39;,
+ &#39;drought impacting on roadworks&#39;,
+ &#39;drought predicted to have long lasting impact&#39;,
+ &#39;education dept considers rural concerns&#39;,
+ &#39;family court rejects bid to invalidate transsexual&#39;,
+ &#39;farmers celebrate good rain&#39;,
+ &#39;fears patterson hiding bad news tas health minister&#39;,
+ &#39;federal funds sought for wave studies&#39;,
+ &#39;fed govt considering appeal over transsexual&#39;,
+ &#39;firefighters win battle to contain beechford blaze&#39;,
+ &#39;fishers to meet minister over court ruling&#39;,
+ &#39;fishing group seeks action over pilchard imports&#39;,
+ &#39;flight attendants action likely to affect&#39;,
+ &#39;footy great gets behind indigenous rights campaign&#39;,
+ &#39;former socceroos coach thomson dies&#39;,
+ &#39;funeral held for cricket legend&#39;,
+ &#39;funk leads elkington in california&#39;,
+ &#39;gebrselassie plans world record comeback&#39;,
+ &#39;g g to witness church bell hand over&#39;,
+ &#39;gold coast gets us tourism assurances&#39;,
+ &#39;group concerned rain brings wrong impression&#39;,
+ &#39;group gets clearer understanding of farmers gm&#39;,
+ &#39;guga reaches buenos aires quarters&#39;,
+ &#39;health service speaks out over patient death&#39;,
+ &#39;hoddle st murderer granted right to seek judicial&#39;,
+ &#39;horse ride to re enact mt isa mine find&#39;,
+ &#39;howard repeats zimbabwe boycott call&#39;,
+ &#39;hundreds of triathletes to head for coffs&#39;,
+ &#39;hungarian thief makes amends by posts&#39;,
+ &#39;hyypia the hero as liverpool bounce back&#39;,
+ &#39;iaea to visit iran to assess nuclear program&#39;,
+ &#39;indian jailed for smuggling pakistani in suitcase&#39;,
+ &#39;indian players to retrace gandhi journey&#39;,
+ &#39;indonesia says australia travel warnings&#39;,
+ &#39;industrial action to impact on brisbane schools&#39;,
+ &#39;investigation underway into m5 pile up&#39;,
+ &#39;investigator probes sa hospital staff complaints&#39;,
+ &#39;jackson hits back at explosive british tv interview&#39;,
+ &#39;japanese tourist drowns in gold coast surf&#39;,
+ &#39;joblink issues statement over sacking&#39;,
+ &#39;keegan aiming to bring arsenal down to earth&#39;,
+ &#39;kenya awarded points for kiwi call off&#39;,
+ &#39;kylie minogues posterior is hit of the brits&#39;,
+ &#39;land council dismissed administrator appointed&#39;,
+ &#39;langer named one day player of year&#39;,
+ &#39;liverpool win but lazio held by krakow&#39;,
+ &#39;llewellyn not impressed by patterson so show&#39;,
+ &#39;longreach water restrictions to remain&#39;,
+ &#39;loose cannon afridi set for pakistan against&#39;,
+ &#39;lovenkrands dreaming of hampden return&#39;,
+ &#39;low water sparks boat ban for lake albert&#39;,
+ &#39;male dna found on body of murdered schoolgirl&#39;,
+ &#39;man accused of selling bali bomb chemicals goes on&#39;,
+ &#39;man appears in court charged with stuttle murder&#39;,
+ &#39;man charged with stuttle murder&#39;,
+ &#39;man fails to overturn conviction over 1600yo bell&#39;,
+ &#39;man in hospital after receiving severe electric&#39;,
+ &#39;man in hospital after stabbing&#39;,
+ &#39;man jailed for fatally stabbing ex de facto&#39;,
+ &#39;man jailed for life over axe murder&#39;,
+ &#39;man to be re questioned over stuttle murder&#39;,
+ &#39;man to face court over fatal hit and run&#39;,
+ &#39;man u agreed deal with eriksson ferguson&#39;,
+ &#39;man who threatened melbourne water supply bailed&#39;,
+ &#39;map highlights potential river salinity problems&#39;,
+ &#39;mayor angry over mural vandalism&#39;,
+ &#39;mining giant calls for funding boost for native&#39;,
+ &#39;montgomery enters us indoor nationals&#39;,
+ &#39;more rain may delay tougher water restrictions&#39;,
+ &#39;more us troops to help hunt abu sayyaf rebels&#39;,
+ &#39;mp wants tank battalion rumours investigated&#39;,
+ &#39;mp welcomes police station announcement&#39;,
+ &#39;nardell mine closes as receiver appointed&#39;,
+ &#39;nauru appeals for help to keep nations airline&#39;,
+ &#39;new battle of britain looming in uefa cup&#39;,
+ &#39;newcastle city notch wins stallions draw with south&#39;,
+ &#39;new commercial mud crabbing restrictions planned&#39;,
+ &#39;new disability respite service&#39;,
+ &#39;n korea ducks nuclear talk at nam summit&#39;,
+ &#39;n korea warns it wont beg for peace&#39;,
+ &#39;no cost blowouts forecast for water treatment plan&#39;,
+ &#39;nsw coroner clears docs over death of toddler&#39;,
+ &#39;nsw graziers record heavy rainfall&#39;,
+ &#39;nsw opps drug free prison plan not new amery&#39;,
+ &#39;nursing home worker suspended&#39;,
+ &#39;olonga sacked by his club&#39;,
+ &#39;one million tickets sold for rugby world cup&#39;,
+ &#39;otago open super 12 with a win&#39;,
+ &#39;owners hesitant over northerlys overseas jaunt&#39;,
+ &#39;pair face court over machete attack&#39;,
+ &#39;palestinian killed at gaza strip crossing point&#39;,
+ &#39;patterson irresponsible with no show edmond&#39;,
+ &#39;patterson no show childish wa minister&#39;,
+ &#39;patterson says health meeting a waste of time&#39;,
+ &#39;petrol prices on the rise&#39;,
+ &#39;petrol will hit 120 if war breaks out ssa&#39;,
+ &#39;plan may include puckapunyal roo cull&#39;,
+ &#39;planning for intersection revamp begins&#39;,
+ &#39;pm accuses european countries of encouraging saddam&#39;,
+ &#39;pm defends protest comments&#39;,
+ &#39;pm has no choice but to stay on through iraq&#39;,
+ &#39;pm praises costello over leadership patience&#39;,
+ &#39;png governor general urges election unity&#39;,
+ &#39;police charge man over stabbing&#39;,
+ &#39;police continue investigating cannabis crops&#39;,
+ &#39;police stations face uncertainty&#39;,
+ &#39;powell calls on un to uphold responsibilities over&#39;,
+ &#39;push likely to seek more aged care workers&#39;,
+ &#39;push to extend fraser is world heritage listing&#39;,
+ &#39;qantas plane makes emergency landing&#39;,
+ &#39;qantas says it has no info as prime terrorist&#39;,
+ &#39;qantas urged to update security in shadow of&#39;,
+ &#39;qld govt rejects land acquisition claims&#39;,
+ &#39;racv not surprised by petrol rationing talk&#39;,
+ &#39;rail firm to assess workers needs&#39;,
+ &#39;rain brings stock losses&#39;,
+ &#39;rain causes chaos on melbourne roads&#39;,
+ &#39;rain expected to continue across act&#39;,
+ &#39;rainfall likely to clear on weekend&#39;,
+ &#39;rain in nsw a welcome relief but drought not over&#39;,
+ &#39;rain not enough to be drought breaking&#39;,
+ &#39;rain offers water supply boost&#39;,
+ &#39;rejuvenated tyson cured by cash injection&#39;,
+ &#39;residents get fire assurances&#39;,
+ &#39;retail sector airs trading hours review concerns&#39;,
+ &#39;romario jeered teams brawl as fluminense held&#39;,
+ &#39;round the world in no forget it&#39;,
+ &#39;ruddock commends australias traveller controls&#39;,
+ &#39;salinity experts map water catchments&#39;,
+ &#39;sa nt to lose seats in federal parliament&#39;,
+ &#39;sas soldier charged with misconduct while in e&#39;,
+ &#39;schumacher seeks more speed from less noise&#39;,
+ &#39;seaman set for ajax match&#39;,
+ &#39;search for better life pays off&#39;,
+ &#39;second us nightclub fire kills 10&#39;,
+ &#39;senators offer input into coast issues&#39;,
+ &#39;several dead in fire at rhode island nightclub&#39;,
+ &#39;shire says planning policy not compromised&#39;,
+ &#39;slapping paedophile to have arm amputated&#39;,
+ &#39;state territory health ministers arrive for meeting&#39;,
+ &#39;stolen wage report looks to improve indigenous&#39;,
+ &#39;strike expected to mean milk shortages&#39;,
+ &#39;strike may disrupt nsw milk supply&#39;,
+ &#39;study considers alternative crops for sugar regions&#39;,
+ &#39;study to probe snowy motorcycle crashes&#39;,
+ &#39;teachers shortage set to get worse report&#39;,
+ &#39;team mates send best wishes to warne&#39;,
+ &#39;telstra chief embarrassed with 1 billion writedown&#39;,
+ &#39;telstra punished after massive hong kong write down&#39;,
+ &#39;telstra still hurting from hk joint venture&#39;,
+ &#39;thieves target esperance cars&#39;,
+ &#39;timor sea treaty will be ratfied shortly martin&#39;,
+ &#39;troubled torino praying for a miracle&#39;,
+ &#39;tuckey laments gungahlin drive planning problems&#39;,
+ &#39;turkey delays vote on us troops&#39;,
+ &#39;turkey digs heels in us lobbies for support for&#39;,
+ &#39;turkey forces us to weigh up strategies&#39;,
+ &#39;union condemns qantass contract labour plan&#39;,
+ &#39;us asks indonesia to improve human rights record&#39;,
+ &#39;us boost troop numbers in philippines&#39;,
+ &#39;us chiropractor to address gold coast gathering&#39;,
+ &#39;us intelligence analyst found guilty of spying&#39;,
+ &#39;usq researchers prepare for move&#39;,
+ &#39;valencia sense victory in benitez vs benitez&#39;,
+ &#39;vic govt gets farmers drought update&#39;,
+ &#39;victorian farmers hope rain will break drought&#39;,
+ &#39;victoria welcomes rain relief&#39;,
+ &#39;vinnicombe rejects mps freeway claims&#39;,
+ &#39;waratahs go down in super 12 opener&#39;,
+ &#39;war impact on exercise unknown&#39;,
+ &#39;warne decision to be made saturday&#39;,
+ &#39;warne dope hearing underway&#39;,
+ &#39;williams and mclaren plan to take fia to court&#39;,
+ &#39;wine and avocados drive mutton and wool off nz&#39;,
+ &#39;wisla hold lazio in six goal thriller&#39;,
+ &#39;woodgate told to stay away from elland road&#39;,
+ &#39;workers return to work on burrup&#39;,
+ &#39;youth group unhappy with appeal for carers&#39;,
+ &#39;86 confirmed dead after us nightclub fire&#39;,
+ &#39;act tourist attractions honoured at awards night&#39;,
+ &#39;adelaide break port hearts&#39;,
+ &#39;al qaeda members jailed for us uk terrorist plots&#39;,
+ &#39;arafats number two outlines proposed ceasefire&#39;,
+ &#39;athens risks turning into games disaster ioc&#39;,
+ &#39;australia urged to abandon zimbabwe world cup match&#39;,
+ &#39;black day for black caps&#39;,
+ &#39;blix orders destruction of iraqi missiles&#39;,
+ &#39;botched operation leaves teenager with brain damage&#39;,
+ &#39;brockovich takes new cancer crusade to court&#39;,
+ &#39;brogden accuses carr of fudging ambulance figures&#39;,
+ &#39;brumbies pip reds at ballymore&#39;,
+ &#39;cairns will play despite brawl&#39;,
+ &#39;call for australian human rights act&#39;,
+ &#39;canberra capitals win 2003 championship&#39;,
+ &#39;capitals flames vie for wnbl title&#39;,
+ &#39;captain refuses to ship wheat to iraq&#39;,
+ &#39;childrens rights overlooked advocate&#39;,
+ &#39;clp confident of winning lower house seat&#39;,
+ &#39;coria stuns nalbandian to reach argentina semis&#39;,
+ &#39;croatia launches bid for eu membership&#39;,
+ &#39;crusaders begin defence with win&#39;,
+ &#39;darwin police investigate attempted sex assault&#39;,
+ &#39;davies webb share masters lead&#39;,
+ &#39;death toll rises to 39 in us club blaze&#39;,
+ &#39;deputy says iraq is ready for dialogue with us&#39;,
+ &#39;despite rain govt says drought isnt over&#39;,
+ &#39;donald left out of bangladesh clash&#39;,
+ &#39;dumbledore replacement picked for potter film&#39;,
+ &#39;eagles down dockers despite mix up&#39;,
+ &#39;faldo withdraws from match play tournament&#39;,
+ &#39;farina pays tribute to thomson&#39;,
+ &#39;female cosmonauts keep feet on the ground&#39;,
+ &#39;ferrero escude hobble out of rotterdam&#39;,
+ &#39;ferreros rotterdam campaign ends in agony&#39;,
+ &#39;flash flooding keeps ses busy&#39;,
+ &#39;former star koen licks cats&#39;,
+ &#39;fourth cup race postponed again&#39;,
+ &#39;freeman splits with husband&#39;,
+ &#39;french african leaders support iraq inspections&#39;,
+ &#39;gebrselassie breaks two mile indoor wr&#39;,
+ &#39;gebrselassie breaks wr feofanova reaches new&#39;,
+ &#39;gurkhas discrimination case fails in uk court&#39;,
+ &#39;hearing adjourned over prison riot&#39;,
+ &#39;hip pain sidelines golf legend palmer&#39;,
+ &#39;howell leads by one in california&#39;,
+ &#39;hussain giles recalled for pakistan clash&#39;,
+ &#39;iaea begins iran nuclear assessment&#39;,
+ &#39;iraqs wheat comments political vaile&#39;,
+ &#39;jackson leads caps to back to back titles&#39;,
+ &#39;japan backs us campaign for fresh iraq vote&#39;,
+ &#39;johnson pittman excel in canberra&#39;,
+ &#39;kangaroos thump essendon hawks edge saints&#39;,
+ &#39;kookaburras force dutch to draw&#39;,
+ &#39;labor targets council golden handshakes&#39;,
+ &#39;lara jumps to warnes defence&#39;,
+ &#39;light winds delay fourth americas cup race&#39;,
+ &#39;likud party still without coalition partner&#39;,
+ &#39;long haul for graziers as rain breaks&#39;,
+ &#39;massa test drives championship winning ferrari&#39;,
+ &#39;metro recruiting women for bus driver positions&#39;,
+ &#39;newcastle secures third spot&#39;,
+ &#39;no confirmation of iraqi wheat order awb&#39;,
+ &#39;not greece lightning but olympic work under control&#39;,
+ &#39;nsw opp plans inquiry into community services&#39;,
+ &#39;nt health minister calls for meeting with cwealth&#39;,
+ &#39;ntini stars as bangladesh felled for 108&#39;,
+ &#39;ny mayor plays down terrorist attack speculation&#39;,
+ &#39;nz cricket to investigate durban nightclub brawl&#39;,
+ &#39;oil price hikes may weigh on rates decision&#39;,
+ &#39;one killed after us fuel barge explodes&#39;,
+ &#39;pair missing after us fuel barge explodes&#39;,
+ &#39;pearson routs aussie women&#39;,
+ &#39;petrol price hike compared to interest rate rise&#39;,
+ &#39;police coming off the beat oppn claims&#39;,
+ &#39;police investigate muswellbrook death&#39;,
+ &#39;police treat hunter valley death as murder&#39;,
+ &#39;powell leaves japan talks now for china&#39;,
+ &#39;powell starts asian tour for north korea talks&#39;,
+ &#39;proteas demolish bangladesh&#39;,
+ &#39;protesters afloat deliver peace message to pm&#39;,
+ &#39;public less concerned with environment statistics&#39;,
+ &#39;qld takes gong in aust tourism awards&#39;,
+ &#39;rain brings relief for act farmers&#39;,
+ &#39;rain falls on drought ravaged eastern states&#39;,
+ &#39;recoba handed three match champions ban&#39;,
+ &#39;results of first aids vaccine trial to be released&#39;,
+ &#39;robo deer takes bullet for justice&#39;,
+ &#39;roddick heads all us semis in memphis&#39;,
+ &#39;saddam ponders un edict to scrap missiles&#39;,
+ &#39;sad note as esteemed music educator dies&#39;,
+ &#39;sa govt blocks glenelg high rise apartments&#39;,
+ &#39;sampras withdraws from arizona replaced by hewitt&#39;,
+ &#39;sa police closing in on schoolgirl killer&#39;,
+ &#39;seaman rested for maine road visit&#39;,
+ &#39;searchers fear 18 dead after china ferry sinks&#39;,
+ &#39;selectors to announce warne replacement soon&#39;,
+ &#39;seles to face henin hardenne in dubai final&#39;,
+ &#39;shop owner on trial accused over bali bomb&#39;,
+ &#39;s korea subway staff face kill charges over fire&#39;,
+ &#39;smigun takes out nordic skiing world championship&#39;,
+ &#39;st helens win super league season opener&#39;,
+ &#39;stormers slaughter sharks&#39;,
+ &#39;stuttle family welcomes travel offer&#39;,
+ &#39;sunrace heads into gloomy final day&#39;,
+ &#39;sun shines on rmit entry in eco car race&#39;,
+ &#39;taipans stay alive cannons dodge bullets&#39;,
+ &#39;tas relay to raise money for cancer council&#39;,
+ &#39;teenagers stabbed in cbd fight&#39;,
+ &#39;toll rises in us club fire&#39;,
+ &#39;turkey poised for iraq deal with us&#39;,
+ &#39;two killed in wa motorbike collision&#39;,
+ &#39;uk warns of final phase in iraq stand off&#39;,
+ &#39;ulster militants declare ceasefire&#39;,
+ &#39;us authorities confirm 95 killed in club fire&#39;,
+ &#39;us duo ensures all american semi finals&#39;,
+ &#39;us nightclub fire death toll hits 39&#39;,
+ &#39;us prosecutors win slave labour case in samoa&#39;,
+ &#39;us stocks rise following positive iraqi comments&#39;,
+ &#39;vic govt calls for volunteers in state clean up&#39;,
+ &#39;wa opp says police will be taken off the beat&#39;,
+ &#39;warne to appeal 12 month ban&#39;,
+ &#39;weather change saves white beach shacks&#39;,
+ &#39;woods remains in the hunt&#39;,
+ &#39;worker electrocuted during piggery repairs&#39;,
+ &#39;accused people smuggler to face darwin court&#39;,
+ &#39;act will struggle with public housing demand mla&#39;,
+ &#39;alice forum to discuss indigenous education issues&#39;,
+ &#39;alinghi fuming at another cancellation&#39;,
+ &#39;at least 14 die as bus tumbles into greece river&#39;,
+ &#39;aussies arrive in zimbabwe&#39;,
+ &#39;barca deportivo real shine in spain&#39;,
+ &#39;bayern open 10 point gap&#39;,
+ &#39;bevan not frustrated by lack of opportunities&#39;,
+ &#39;blair puts case on iraq to pope&#39;,
+ &#39;bradman baggy green expected to fetch 200000&#39;,
+ &#39;britain to rally support for new un resolution on&#39;,
+ &#39;brown claims french landing site could be tassies&#39;,
+ &#39;butchers defended over beef prices&#39;,
+ &#39;calls for peaceful iraqi resolution&#39;,
+ &#39;cambodian pm denies political emergency&#39;,
+ &#39;carpark shooting sparks adelaide manhunt&#39;,
+ &#39;carr plans 200m anti drug campaign&#39;,
+ &#39;cat lovers march for romes sacred strays&#39;,
+ &#39;cats claw dogs&#39;,
+ &#39;cats claw dogs pies swoop on blues&#39;,
+ &#39;coalition launches ads ahead of election&#39;,
+ &#39;colombian rebels demand rescuers back off&#39;,
+ &#39;consumers wear cost of trolley loss&#39;,
+ &#39;council denies revenue raising over parking fees&#39;,
+ &#39;court finds man guilty of gross ingratitude&#39;,
+ &#39;cricketers association says warne ban too harsh&#39;,
+ &#39;csl defends acquisition investigation&#39;,
+ &#39;darwin cleared to play next super 12 match&#39;,
+ &#39;davies takes ladies masters&#39;,
+ &#39;davison plunders record century&#39;,
+ &#39;deadly fire at us rock club whos at fault&#39;,
+ &#39;dems to block govts spending cut moves&#39;,
+ &#39;differences see beazley stay a backbencher&#39;,
+ &#39;downer expects un to back new iraq edict&#39;,
+ &#39;downer pushes urgent us talks with north korea&#39;,
+ &#39;downer unmoved by iraqi wheat decision&#39;,
+ &#39;drought doom turns to flood gloom&#39;,
+ &#39;end protest or face the axe zimbabwe players told&#39;,
+ &#39;england deserves cup favouritism oneill&#39;,
+ &#39;england keep grand slam dreams alive&#39;,
+ &#39;england punishes disappointing pakistan&#39;,
+ &#39;fake crocs scare off flamingos&#39;,
+ &#39;fickle weather again holds up cup racing&#39;,
+ &#39;firefighters to continue containment efforts near&#39;,
+ &#39;five palestinians die in army crackdown&#39;,
+ &#39;flower may play in australia report&#39;,
+ &#39;forensic teams struggle to identify us club fire&#39;,
+ &#39;former un ambassador criticises howard remarks&#39;,
+ &#39;freeman expected to race in melbourne&#39;,
+ &#39;gatecrashers blamed for violence at bali thank you&#39;,
+ &#39;geelong fights for ring road funding&#39;,
+ &#39;govt paper discusses preservation of adelaide&#39;,
+ &#39;gunners demolish city as man u stumble&#39;,
+ &#39;hampshire chairman calls for review of crickets&#39;,
+ &#39;hampshire wants warne once ban is done&#39;,
+ &#39;hard work steals craftsmens identities&#39;,
+ &#39;hayden focusing on cricket not politics&#39;,
+ &#39;henin hardenne outlasts seles in dubai thriller&#39;,
+ &#39;hill stars as tigers claim charity cup&#39;,
+ &#39;hockeyroos save best till last&#39;,
+ &#39;hotels association to fight smoking ban&#39;,
+ &#39;howell extends la lead&#39;,
+ &#39;hussain hails special england performance&#39;,
+ &#39;iaea says iraqi cooperation improving&#39;,
+ &#39;iraqi minister says protests prompt wheat decision&#39;,
+ &#39;kings regain top spot&#39;,
+ &#39;lions roll swans&#39;,
+ &#39;man charged after bashing nightclub door with&#39;,
+ &#39;man charged over ormiston attack&#39;,
+ &#39;man charged with attempted murder after stabbing&#39;,
+ &#39;man fights for life after stabbing&#39;,
+ &#39;man stabbed to death in melbourne brawl&#39;,
+ &#39;maroney makes one last swim&#39;,
+ &#39;medicare offices busier as bulk billing dips&#39;,
+ &#39;mirnyi slays federer to reach rotterdam final&#39;,
+ &#39;missile issue can be resolved with less pressure&#39;,
+ &#39;monster surf sweeps woman to death&#39;,
+ &#39;more magic from martina&#39;,
+ &#39;natasha spat wont destroy us dems&#39;,
+ &#39;nataus&#39;,
+ &#39;newton predicted 2060 armageddon reports&#39;,
+ &#39;new un resolution would give hussein days downer&#39;,
+ &#39;nine killed in violence outside karachi mosque&#39;,
+ &#39;nsw greens call for parties to show their hand&#39;,
+ &#39;nt uni receives cwealth literacy grant&#39;,
+ &#39;odriscoll captures record as ireland downs italy&#39;,
+ &#39;oil and water does mix okay&#39;,
+ &#39;opec pledges oil will flow despite war&#39;,
+ &#39;patterson says states should make an offer&#39;,
+ &#39;pearson says bureaucracy fails indigenous welfare&#39;,
+ &#39;perth tigers giants notch nbl wins&#39;,
+ &#39;pilot dies in ultralight plunge&#39;,
+ &#39;polanski gets best director cesar for the pianist&#39;,
+ &#39;police arrest pair attacked with bricks bottles&#39;,
+ &#39;police search for men after shooting&#39;,
+ &#39;pope urges blair to avert war&#39;,
+ &#39;psg crash to defeat despite ronaldinho gem&#39;,
+ &#39;rain still needed in central west qld&#39;,
+ &#39;raymond defends memphis title&#39;,
+ &#39;research turns spotlight on binge drinking&#39;,
+ &#39;roddick wants no dent in atp crown&#39;,
+ &#39;s african weapons inspectors to iraq&#39;,
+ &#39;sa police investigate fatal road crash&#39;,
+ &#39;searchers retrieve ultralight pilots body&#39;,
+ &#39;search intensifies for missing pilot&#39;,
+ &#39;search to begin for missing pilot&#39;,
+ &#39;ses busy after flash floods in north west nsw&#39;,
+ &#39;sharks steal glory in perth&#39;,
+ &#39;sherpa plans worlds highest cyber cafe byo oxygen&#39;,
+ &#39;storms whip nsw coast as northern floods steady&#39;,
+ &#39;strikers rout kingz&#39;,
+ &#39;strikers rout kingz united down knights&#39;,
+ &#39;tail rescues struggling wa&#39;,
+ &#39;tamworth flooding may cost millions&#39;,
+ &#39;teacher student guidelines need modifying mp&#39;,
+ &#39;teenager dies after transplant mix up&#39;,
+ &#39;tendulkar blazes century in big total&#39;,
+ &#39;territory on search for raw comedy talent&#39;,
+ &#39;third time lucky for canberra unis brisbane campus&#39;,
+ &#39;tight security to greet cricketers in zimbabwe&#39;,
+ &#39;tourists cry foul over spilt milk&#39;,
+ &#39;tropfest turns tarpfest but show will go on&#39;,
+ &#39;turkey signals go ahead for us troops&#39;,
+ &#39;tyson destroys etienne in less than a minute&#39;,
+ &#39;un vote on iraq soon after march 7 powell&#39;,
+ &#39;us spain draft second un resolution&#39;,
+ &#39;us to put new resolution before un&#39;,
+ &#39;warne appeal to delay naming of replacement&#39;,
+ &#39;warne will be back pollock&#39;,
+ &#39;warnings of water contamination after recent rain&#39;,
+ &#39;wa struggling in one day final&#39;,
+ &#39;waugh expected to play in one day final&#39;,
+ &#39;waugh leads blues to one day title&#39;,
+ &#39;weapons experts denounce us intelligence on iraq&#39;,
+ &#39;yemen chopper crash kills eight troops&#39;,
+ &#39;94 dead in china earthquake&#39;,
+ &#39;academic considers indigenous culture role in&#39;,
+ &#39;adelaide man charged with firearm offences&#39;,
+ &#39;ajax lose ground after utrecht defeat&#39;,
+ &#39;all ords jumps 33 points higher&#39;,
+ &#39;alp chooses charlestown candidate&#39;,
+ &#39;amino levels linked to malaria treatment research&#39;,
+ &#39;anti french jokes censored broadcaster complains&#39;,
+ &#39;asa welcomes court ruling on chairman&#39;,
+ &#39;at least five killed in factional afghan fighting&#39;,
+ &#39;awb defends grain freight spot price tendering&#39;,
+ &#39;beef prices set to rise&#39;,
+ &#39;bhp billiton reveals 19pc profit downturn&#39;,
+ &#39;blokes peel off pants for peace&#39;,
+ &#39;bomb alert delays domestic flights by philippine&#39;,
+ &#39;boulami set to be banned iaaf source&#39;,
+ &#39;boy almost drowns after being swept down storm&#39;,
+ &#39;bradman baggy green may go on tour&#39;,
+ &#39;britain concerned about reports of iraqi missiles&#39;,
+ &#39;building industry set for a shake up&#39;,
+ &#39;cabinet meets to balance budget priorities&#39;,
+ &#39;canberra steps up tourist campaign&#39;,
+ &#39;carr considers clarence battle&#39;,
+ &#39;celtic still on for four trophies&#39;,
+ &#39;chavez blasts media as violence continues&#39;,
+ &#39;civilian killed as gunmen attack minibus in east&#39;,
+ &#39;claim more than 20 diamond miners murdered in congo&#39;,
+ &#39;claims of new evidence in an unsolved double murder&#39;,
+ &#39;clean coal technology still years away&#39;,
+ &#39;coastal grazing boom lifts property prices&#39;,
+ &#39;combined approach tackles grasshoppers&#39;,
+ &#39;committee to offer aged care warning&#39;,
+ &#39;community bank shares trading shows little change&#39;,
+ &#39;community cleans up after drenching&#39;,
+ &#39;community flocks to use waste transfer station&#39;,
+ &#39;conference to focus on tuna fishery&#39;,
+ &#39;council hosts farewell for mp&#39;,
+ &#39;council resists eba roster pressure&#39;,
+ &#39;customs house restoration opened&#39;,
+ &#39;dam water levels still critically low&#39;,
+ ...]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Approach</strong></p>
+<p>We will build 1 Language Model <strong>very basic</strong> by doing the following:</p>
+<ul class="simple">
+<li><p>Use the Embedding layer to create a representation of each word in the dataset</p></li>
+<li><p>Update the weight for the Embedding layer through the problem <strong>“Predict the next character with the input of 1 unique character in front”</strong> (multi-label classification problem, the number of labels is the number of unique characters appearing in the dataset)</p></li>
+</ul>
+<p>Therefore, from the above text, we need to build a dataset with <code class="docutils literal notranslate"><span class="pre">x</span></code> as 1 character and <code class="docutils literal notranslate"><span class="pre">y</span></code> as the adjacent character immediately after.</p>
+<p>Example: The first sentence in the dataset <code class="docutils literal notranslate"><span class="pre">aba</span> <span class="pre">decides</span> <span class="pre">against</span> <span class="pre">community</span> <span class="pre">broadcasting</span> <span class="pre">licence</span></code></p>
+<p>This sentence is 50 characters long (including spaces) → we will create 49 data samples to train the model</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># For example, the &quot;aba decides&quot; segment will produce x pairs like</span>
+<span class="n">x</span>     <span class="o">|</span> <span class="n">y</span>
+<span class="o">------|-------</span>
+<span class="n">a</span>     <span class="o">|</span> <span class="n">b</span>
+<span class="n">b</span>     <span class="o">|</span> <span class="n">a</span>
+<span class="n">a</span>     <span class="o">|</span> <span class="n">space</span>
+<span class="n">space</span> <span class="o">|</span> <span class="n">d</span>
+<span class="n">d</span>     <span class="o">|</span> <span class="n">e</span>
+<span class="n">e</span>     <span class="o">|</span> <span class="n">c</span>
+<span class="n">c</span>     <span class="o">|</span> <span class="n">i</span>
+<span class="n">i</span>     <span class="o">|</span> <span class="n">d</span>
+<span class="n">d</span>     <span class="o">|</span> <span class="n">e</span>
+<span class="n">e</span>     <span class="o">|</span> <span class="n">s</span>
+</pre></div>
+</div>
+<section id="todo-1">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">TODO 1</a><a class="headerlink" href="#todo-1" title="Permalink to this heading">#</a></h3>
+<p>Design a code to:</p>
+<ul class="simple">
+<li><p>Create <code class="docutils literal notranslate"><span class="pre">x_char</span></code> and <code class="docutils literal notranslate"><span class="pre">y_char</span></code> containing the training data described above (on top of all the data in the <code class="docutils literal notranslate"><span class="pre">data</span></code> variable)</p></li>
+<li><p>Creating <code class="docutils literal notranslate"><span class="pre">unique_chars</span></code> is the <code class="docutils literal notranslate"><span class="pre">list</span></code> containing unique characters in <code class="docutils literal notranslate"><span class="pre">data</span></code> (including space characters), the data in this list is <code class="docutils literal notranslate"><span class="pre">sorted</span> <span class="pre">incrementally</span></code>.</p></li>
+<li><p>Based on <code class="docutils literal notranslate"><span class="pre">unique_chars</span></code>:</p>
+<ul>
+<li><p>Create a <code class="docutils literal notranslate"><span class="pre">NUM_CHAR</span></code> indicating the number of unique characters in <code class="docutils literal notranslate"><span class="pre">data</span></code></p></li>
+<li><p>Create <code class="docutils literal notranslate"><span class="pre">char_to_index</span></code> and <code class="docutils literal notranslate"><span class="pre">index_to_char</span></code> as 2 <code class="docutils literal notranslate"><span class="pre">dictionary</span></code> used to map each character with their index and vice versa</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x_char</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">y_char</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">unique_chars</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">char_to_index</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">index_to_char</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">NUM_CHAR</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prepare</span><span class="p">():</span>
+  <span class="n">x_char</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">y_char</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">unique_chars</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">NUM_CHAR</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">char_to_index</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="n">index_to_char</span> <span class="o">=</span> <span class="p">{}</span>
+
+  <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">char</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">unique_chars</span><span class="p">:</span>
+        <span class="n">unique_chars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">word</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+      <span class="n">x_char</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;space&quot;</span> <span class="k">if</span> <span class="n">char</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span> <span class="k">else</span> <span class="n">char</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">word</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+      <span class="n">y_char</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;space&quot;</span> <span class="k">if</span> <span class="n">char</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span> <span class="k">else</span> <span class="n">char</span><span class="p">)</span>
+
+  <span class="n">unique_chars</span> <span class="o">=</span> <span class="p">[</span><span class="n">char</span> <span class="k">if</span> <span class="n">char</span> <span class="o">!=</span> <span class="s2">&quot; &quot;</span> <span class="k">else</span> <span class="s2">&quot;space&quot;</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">unique_chars</span><span class="p">]</span>
+
+  <span class="c1"># sorting</span>
+  <span class="n">unique_chars</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+  <span class="n">NUM_CHAR</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_chars</span><span class="p">)</span>
+
+  <span class="c1"># mapping</span>
+  <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">char</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">unique_chars</span><span class="p">):</span>
+    <span class="n">char_to_index</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="o">=</span> <span class="n">index</span>
+    <span class="n">index_to_char</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">char</span>
+
+  <span class="k">return</span> <span class="n">x_char</span><span class="p">,</span> <span class="n">y_char</span><span class="p">,</span> <span class="n">unique_chars</span><span class="p">,</span> <span class="n">NUM_CHAR</span><span class="p">,</span> <span class="n">char_to_index</span><span class="p">,</span> <span class="n">index_to_char</span>
+
+<span class="n">x_char</span><span class="p">,</span> <span class="n">y_char</span><span class="p">,</span> <span class="n">unique_chars</span><span class="p">,</span> <span class="n">NUM_CHAR</span><span class="p">,</span> <span class="n">char_to_index</span><span class="p">,</span> <span class="n">index_to_char</span> <span class="o">=</span> <span class="n">prepare</span><span class="p">()</span>
+
+<span class="nb">len</span><span class="p">(</span><span class="n">x_char</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_char</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_chars</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">char_to_index</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">index_to_char</span><span class="p">),</span> <span class="n">NUM_CHAR</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(386880, 386880, 37, 37, 37, 37)
+</pre></div>
+</div>
+</div>
+</div>
+<p>After you have created all the above variables, the code below will generate <code class="docutils literal notranslate"><span class="pre">x</span></code> <code class="docutils literal notranslate"><span class="pre">y</span></code> which is the model training data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">char_x</span><span class="p">,</span> <span class="n">char_y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x_char</span><span class="p">,</span> <span class="n">y_char</span><span class="p">):</span>
+  <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">char_to_index</span><span class="p">[</span><span class="n">char_x</span><span class="p">])</span>
+  <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">char_to_index</span><span class="p">[</span><span class="n">char_y</span><span class="p">])</span>
+
+<span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(386880, 386880)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="todo-2">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">TODO 2</a><a class="headerlink" href="#todo-2" title="Permalink to this heading">#</a></h3>
+<p>Use Tensorflow to build the model as follows, the model consists of 2 layers:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Input</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Embedding</span></code> with</p>
+<ul>
+<li><p>Number of lines equal to the number of unique characters</p></li>
+<li><p>Each character is represented by 1 vector with 2 numbers</p></li>
+<li><p>Name this layer <code class="docutils literal notranslate"><span class="pre">&quot;embedding&quot;</span></code></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">model.add(Embedding(...,</span> <span class="pre">name=&quot;embedding&quot;))</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Just create a model, no compile and fit required</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">tensorflow.random</span> <span class="kn">import</span> <span class="n">set_seed</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.backend</span> <span class="kn">import</span> <span class="n">clear_session</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Embedding</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">clear_session</span><span class="p">()</span>
+<span class="n">set_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">EMB_FEATURES</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span>
+  <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,)),</span>
+  <span class="n">Embedding</span><span class="p">(</span><span class="n">NUM_CHAR</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;embedding&quot;</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ embedding (Embedding)       (None, 1, 2)              74        
+                                                                 
+=================================================================
+Total params: 74
+Trainable params: 74
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since the last layer of the model is <code class="docutils literal notranslate"><span class="pre">Embedding</span></code>, when we call the <code class="docutils literal notranslate"><span class="pre">predict</span></code> function and pass in all the unique characters, we get their representation (you need to implement the model correctly for the code below to run)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">character_embeddings</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">index_to_char</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">character_embeddings</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="c1"># notice the printed results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2/2 [==============================] - 0s 7ms/step
+(37, 1, 2)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Visualize the vector space of characters</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">vector</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">character_embeddings</span><span class="p">):</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vector</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">vector</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">index</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">vector</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">vector</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">index_to_char</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">vector</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">vector</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;SPACE&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e1513ebed14e7eaf3b62abca9ffc92882b77cbb40551a1922e25a9112e9305c5.png" src="../_images/e1513ebed14e7eaf3b62abca9ffc92882b77cbb40551a1922e25a9112e9305c5.png" />
+</div>
+</div>
+<p>We see that without training, the characters allocated are very messy in space</p>
+</section>
+<section id="train">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Train</a><a class="headerlink" href="#train" title="Permalink to this heading">#</a></h3>
+<p>To train the model, we need One Hot Encoding the variable <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<p>One Hot result is <code class="docutils literal notranslate"><span class="pre">y_encode</span></code> with shape <code class="docutils literal notranslate"><span class="pre">(num_sample,</span> <span class="pre">37)</span></code></p>
+<p>Since the Embedding layer will return a result with a shape of <code class="docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">1,</span> <span class="pre">2)</span></code>, we will transform the One Hot result to have a similar shape (if you do not understand here, just try deleting the <code class="docutils literal notranslate"><span class="pre">expand_dims</span></code> part and do TODO 3 below will see an error)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x_char</span><span class="p">)</span>
+
+<span class="c1"># One Hot and transform the shape to get more 1 in the middle</span>
+<span class="n">y_encode</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="n">NUM_CHAR</span><span class="p">)</span>
+<span class="n">y_encode</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">y_encode</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_encode</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(386880, 1, 37)
+</pre></div>
+</div>
+</div>
+</div>
+<section id="todo-3">
+<h4><a class="toc-backref" href="#id6" role="doc-backlink">TODO 3</a><a class="headerlink" href="#todo-3" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">Dense</span> <span class="pre">layer</span></code> to the model, which is used for prediction</p></li>
+<li><p>Train the above simple model in 5 epochs with <code class="docutils literal notranslate"><span class="pre">model.compile(...,</span> <span class="pre">optimizer=&quot;adam&quot;,</span> <span class="pre">metrics=[&quot;accuracy&quot;]</span></code>)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># YOUR SOLUTION</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span>
+  <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,)),</span>
+  <span class="n">Embedding</span><span class="p">(</span><span class="n">NUM_CHAR</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;embedding&quot;</span><span class="p">),</span>
+  <span class="n">Dense</span><span class="p">(</span><span class="mi">37</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;categorical_crossentropy&quot;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">])</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_encode</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/5
+12090/12090 [==============================] - 21s 2ms/step - loss: 2.7701 - accuracy: 0.1777
+Epoch 2/5
+12090/12090 [==============================] - 21s 2ms/step - loss: 2.6797 - accuracy: 0.1917
+Epoch 3/5
+12090/12090 [==============================] - 21s 2ms/step - loss: 2.6777 - accuracy: 0.1909
+Epoch 4/5
+12090/12090 [==============================] - 22s 2ms/step - loss: 2.6771 - accuracy: 0.1904
+Epoch 5/5
+12090/12090 [==============================] - 20s 2ms/step - loss: 2.6766 - accuracy: 0.1907
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.callbacks.History at 0x7f495c3e4580&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>After training, we will remove the <code class="docutils literal notranslate"><span class="pre">Dense</span></code> layer at the end to get the Language Model (put in 1 character to return the vector representing that character)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
+
+<span class="n">language_model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span>
+  <span class="n">inputs</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">input</span><span class="p">,</span>
+  <span class="n">outputs</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">get_layer</span><span class="p">(</span><span class="s2">&quot;embedding&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">output</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">char_embeddings</span> <span class="o">=</span> <span class="n">language_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">index_to_char</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">vector</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">char_embeddings</span><span class="p">):</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vector</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">vector</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">index</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">vector</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">vector</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">index_to_char</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">vector</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">vector</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;SPACE&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2/2 [==============================] - 0s 6ms/step
+</pre></div>
+</div>
+<img alt="../_images/c0fdea9aa5326d8f9ba2761359ec6a1e42481712dcf9c97f7c83e647c0e7e3cb.png" src="../_images/c0fdea9aa5326d8f9ba2761359ec6a1e42481712dcf9c97f7c83e647c0e7e3cb.png" />
+</div>
+</div>
+<p>Observing the position of characters in vector space, you will see:</p>
+<ul class="simple">
+<li><p>The cluster of <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">u</span> <span class="pre">o</span> <span class="pre">a</span> <span class="pre">i</span></code></p></li>
+<li><p>Cluster of remaining alphabet characters</p></li>
+<li><p>Cluster of numbers</p></li>
+<li><p>SPACE character</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="optical-character-recognition">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Optical Character Recognition</a><a class="headerlink" href="#optical-character-recognition" title="Permalink to this heading">#</a></h2>
+<p>In this part, we practice combining CNN and RNN models to solve the problem of optical letter recognition.</p>
+<p>The model is already trained, you just need to <strong>write code to create the architecture for the model according to the instructions</strong>, then load the weighting file into the model.</p>
+<section id="prepare-the-dataset">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">Prepare the dataset</a><a class="headerlink" href="#prepare-the-dataset" title="Permalink to this heading">#</a></h3>
+<p>We have the variable <code class="docutils literal notranslate"><span class="pre">char_list</span></code> which contains all alphabetic characters (a-z, A-Z) and numbers (0-9)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">string</span>
+
+<span class="n">char_list</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span><span class="o">+</span><span class="n">string</span><span class="o">.</span><span class="n">digits</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">char_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Read data from pickle file</strong></p>
+<p>Fix the path back to 2 files <code class="docutils literal notranslate"><span class="pre">img.pkl</span></code> and <code class="docutils literal notranslate"><span class="pre">label.pkl</span></code> in the <code class="docutils literal notranslate"><span class="pre">ocr_data</span></code> folder</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="k">def</span> <span class="nf">load_pickle_data</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+  <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+  <span class="n">data</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+  <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+  <span class="k">return</span> <span class="n">data</span>
+
+<span class="n">IMG_PATH</span> <span class="o">=</span> <span class="s1">&#39;/content/drive/MyDrive/Colab Notebooks/ML-intensive/data/ocr_data/img.pkl&#39;</span>
+<span class="n">LABEL_PATH</span> <span class="o">=</span> <span class="s1">&#39;/content/drive/MyDrive/Colab Notebooks/ML-intensive/data/ocr_data/label.pkl&#39;</span>
+
+<span class="n">img</span> <span class="o">=</span> <span class="n">load_pickle_data</span><span class="p">(</span><span class="n">IMG_PATH</span><span class="p">)</span>
+<span class="n">label</span> <span class="o">=</span> <span class="n">load_pickle_data</span><span class="p">(</span><span class="n">LABEL_PATH</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Visualize the data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+  <span class="n">target</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">img</span><span class="p">))</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">imgplot</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">[</span><span class="n">target</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;binary&#39;</span><span class="p">)</span>
+  <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Ground Truth: &#39;</span>
+  <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">label</span><span class="p">[</span><span class="n">target</span><span class="p">]:</span>
+    <span class="n">title</span> <span class="o">+=</span> <span class="n">char_list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4882bd7897c4e20bc6548a9158156fd73529f4059e0dd6548048cc1a9bd4c104.png" src="../_images/4882bd7897c4e20bc6548a9158156fd73529f4059e0dd6548048cc1a9bd4c104.png" />
+</div>
+</div>
+<p>Convert images from list to numpy array</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dataset Shape =&#39;</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dataset Shape = (1371, 32, 128, 1)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="build-the-architecture">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Build the architecture</a><a class="headerlink" href="#build-the-architecture" title="Permalink to this heading">#</a></h3>
+<section id="todo-4">
+<h4><a class="toc-backref" href="#id10" role="doc-backlink">TODO 4</a><a class="headerlink" href="#todo-4" title="Permalink to this heading">#</a></h4>
+<p><strong>Do this correctly, the steps below WILL work</strong></p>
+<ul class="simple">
+<li><p>When running the code box below, instructions for creating a model architecture will appear</p></li>
+<li><p>In which the colored rectangles represent 1 layer in the model.</p></li>
+<li><p>Click on the rectangle to <strong>show/disable</strong> the parameters of that layer.</p>
+<ul>
+<li><p>Based on layer name and suggested parameters to calculate the parameters yourself?</p></li>
+<li><p>2 purple layers (LSTM) you don’t care about the parameter <code class="docutils literal notranslate"><span class="pre">dropout=0.2</span></code></p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+<span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&lt;iframe width=&quot;100%&quot; height=&quot;250&quot; src=&quot;https://final-exam-litahung.vercel.app/ml&quot; allowfullscreen&gt;&lt;/iframe&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><iframe width="100%" height="250" src="https://final-exam-litahung.vercel.app/ml" allowfullscreen></iframe></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Conv2D</span><span class="p">,</span> <span class="n">MaxPool2D</span><span class="p">,</span> <span class="n">BatchNormalization</span><span class="p">,</span> <span class="n">Lambda</span><span class="p">,</span> <span class="n">Bidirectional</span><span class="p">,</span> <span class="n">LSTM</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">import</span> <span class="nn">tensorflow.keras.backend</span> <span class="k">as</span> <span class="nn">K</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+
+<span class="c1"># YOUR CODE</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span>
+    <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">128</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span>
+    <span class="n">Conv2D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Convolution_1&quot;</span><span class="p">),</span>
+    <span class="n">MaxPool2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Max_Pooling_1&quot;</span><span class="p">),</span>
+    <span class="n">Conv2D</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Convolution_2&quot;</span><span class="p">),</span>
+    <span class="n">MaxPool2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Max_Pooling_2&quot;</span><span class="p">),</span>
+    <span class="n">Conv2D</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Convolution_3&quot;</span><span class="p">),</span>
+    <span class="n">Conv2D</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Convolution_4&quot;</span><span class="p">),</span>
+    <span class="n">MaxPool2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Max_Pooling_3&quot;</span><span class="p">),</span>
+    <span class="n">Conv2D</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Convolution_5&quot;</span><span class="p">),</span>
+    <span class="n">BatchNormalization</span><span class="p">(),</span>
+    <span class="n">Conv2D</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Convolution_6&quot;</span><span class="p">),</span>
+    <span class="n">BatchNormalization</span><span class="p">(),</span>
+    <span class="n">MaxPool2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Max_Pooling_4&quot;</span><span class="p">),</span>
+    <span class="n">Conv2D</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;valid&quot;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Convolution_7&quot;</span><span class="p">),</span>
+    <span class="n">Lambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">K</span> <span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span>
+    <span class="n">Bidirectional</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)),</span>
+    <span class="n">Bidirectional</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)),</span>
+    <span class="n">Dense</span><span class="p">(</span><span class="mi">63</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;softmax&quot;</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_74&quot;
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ Convolution_1 (Conv2D)      (None, 32, 128, 64)       640       
+                                                                 
+ Max_Pooling_1 (MaxPooling2D  (None, 16, 64, 64)       0         
+ )                                                               
+                                                                 
+ Convolution_2 (Conv2D)      (None, 16, 64, 128)       73856     
+                                                                 
+ Max_Pooling_2 (MaxPooling2D  (None, 8, 32, 128)       0         
+ )                                                               
+                                                                 
+ Convolution_3 (Conv2D)      (None, 8, 32, 256)        295168    
+                                                                 
+ Convolution_4 (Conv2D)      (None, 8, 32, 256)        590080    
+                                                                 
+ Max_Pooling_3 (MaxPooling2D  (None, 4, 32, 256)       0         
+ )                                                               
+                                                                 
+ Convolution_5 (Conv2D)      (None, 4, 32, 512)        1180160   
+                                                                 
+ batch_normalization_25 (Bat  (None, 4, 32, 512)       2048      
+ chNormalization)                                                
+                                                                 
+ Convolution_6 (Conv2D)      (None, 4, 32, 512)        2359808   
+                                                                 
+ batch_normalization_26 (Bat  (None, 4, 32, 512)       2048      
+ chNormalization)                                                
+                                                                 
+ Max_Pooling_4 (MaxPooling2D  (None, 2, 32, 512)       0         
+ )                                                               
+                                                                 
+ Convolution_7 (Conv2D)      (None, 1, 31, 512)        1049088   
+                                                                 
+ lambda_4 (Lambda)           (None, 31, 512)           0         
+                                                                 
+ bidirectional_5 (Bidirectio  (None, 31, 256)          656384    
+ nal)                                                            
+                                                                 
+ bidirectional_6 (Bidirectio  (None, 31, 256)          394240    
+ nal)                                                            
+                                                                 
+ dense_8 (Dense)             (None, 31, 63)            16191     
+                                                                 
+=================================================================
+Total params: 6,619,711
+Trainable params: 6,617,663
+Non-trainable params: 2,048
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<p>Change the path to where to place the FILE in your Drive (file <code class="docutils literal notranslate"><span class="pre">ocr_weights.hdf5</span></code>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">load_weights</span><span class="p">(</span><span class="s1">&#39;/content/drive/MyDrive/Colab Notebooks/ML-intensive/data/ocr_weights.hdf5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="inference">
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">Inference</a><a class="headerlink" href="#inference" title="Permalink to this heading">#</a></h3>
+<p>If you create the right architecture, you can run the code below</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prediction</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">ctc_decode</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span>
+                      <span class="n">input_length</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">prediction</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">prediction</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                      <span class="n">greedy</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>43/43 [==============================] - 45s 1s/step
+</pre></div>
+</div>
+</div>
+</div>
+<p>The variable <code class="docutils literal notranslate"><span class="pre">result</span></code> contains the predicted result of the model (index of characters), but we do not care about values equal to <code class="docutils literal notranslate"><span class="pre">-1</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Result shape:&#39;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;1st item of result:&#39;</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result shape: (1371, 31)
+1st item of result: [35 14 18 20  4 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+ -1 -1 -1 -1 -1 -1 -1]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+  <span class="n">target</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">img</span><span class="p">))</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">imgplot</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">[</span><span class="n">target</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;binary&#39;</span><span class="p">)</span>
+  <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Ground Truth: &#39;</span>
+  <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">label</span><span class="p">[</span><span class="n">target</span><span class="p">]:</span>
+    <span class="n">title</span> <span class="o">+=</span> <span class="n">char_list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+  <span class="n">title</span> <span class="o">=</span> <span class="n">title</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Prediction: &#39;</span>
+  <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="n">target</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+      <span class="k">continue</span>
+    <span class="n">title</span> <span class="o">+=</span> <span class="n">char_list</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2bb40a981ce2c41d838dbaf6fe952b37236acb4d8448bfaa0b2d208f92579a7b.png" src="../_images/2bb40a981ce2c41d838dbaf6fe952b37236acb4d8448bfaa0b2d208f92579a7b.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="S12_FinalExam_TEST.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Sesssion 12: Final Coding Test</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Final%20Test%20Theory.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Session 12: final theory test</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#language-model-for-alphabet-characters-and-numbers">Language Model for Alphabet characters and numbers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-1">TODO 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-2">TODO 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train">Train</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-3">TODO 3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optical-character-recognition">Optical Character Recognition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-dataset">Prepare the dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-architecture">Build the architecture</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-4">TODO 4</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inference">Inference</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kyle Paul
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

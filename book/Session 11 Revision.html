@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Theory &#8212; Machine Learning Intensive</title>
+    <title>Session 11: Revision &#8212; Machine Learning Intensive</title>
   
   
   
@@ -68,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/avatar.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Sesssion 12: Final Coding test" href="S12_FinalExam.html" />
+    <link rel="next" title="Sesssion 12: Final Coding Test" href="S12_FinalExam_TEST.html" />
     <link rel="prev" title="Session 11: Coding Solution" href="S11_SOL.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -225,8 +225,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="S11_SOL.html">Session 11: Coding Solution</a></li>
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Theory</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="S12_FinalExam.html">Sesssion 12: Final Coding test</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Session 11: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S12_FinalExam_TEST.html">Sesssion 12: Final Coding Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S12_FinalExam_SOL.html">Sesssion 12: Final Coding Solution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Final%20Test%20Theory.html"><strong>Session 12: final theory test</strong></a></li>
 </ul>
 
@@ -428,7 +429,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Theory</h1>
+    <h1>Session 11: Revision</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -438,10 +439,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1"><strong>Question 1</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#answer"><strong>Answer</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2"><strong>Question 2</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Answer</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theory"><strong>Theory</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1"><strong>Question 1</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#answer"><strong>Answer</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2"><strong>Question 2</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Answer</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
 </ul>
             </nav>
         </div>
@@ -453,29 +458,40 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="theory">
-<h1><strong>Theory</strong><a class="headerlink" href="#theory" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="session-11-revision">
+<h1><strong>Session 11: Revision</strong><a class="headerlink" href="#session-11-revision" title="Permalink to this heading">#</a></h1>
+<section id="theory">
+<h2><strong>Theory</strong><a class="headerlink" href="#theory" title="Permalink to this heading">#</a></h2>
 <section id="question-1">
-<h2><strong>Question 1</strong><a class="headerlink" href="#question-1" title="Permalink to this heading">#</a></h2>
+<h3><strong>Question 1</strong><a class="headerlink" href="#question-1" title="Permalink to this heading">#</a></h3>
 <p>Reinforcement learning is learn when we do not know <span class="math notranslate nohighlight">\(P(s'|s,a)\)</span> and reward <span class="math notranslate nohighlight">\(R(r|s,a,s')\)</span> functions by learning from the interaction data. In Q-learning, agent learn what and predict what?</p>
 </section>
 <section id="answer">
-<h2><strong>Answer</strong><a class="headerlink" href="#answer" title="Permalink to this heading">#</a></h2>
+<h3><strong>Answer</strong><a class="headerlink" href="#answer" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Agent learn to predict optimal action value <span class="math notranslate nohighlight">\(Q^\pi(s,a)\)</span> for all state-action pairs, which is the mean of all rewards if from state <span class="math notranslate nohighlight">\(s\)</span>, executing action <span class="math notranslate nohighlight">\(a\)</span> under a policy <span class="math notranslate nohighlight">\(\pi\)</span> until terminating.</p></li>
-<li><p>In discrete MDP, the model of action value function <span class="math notranslate nohighlight">\(Q^\pi(s,a)\)</span> is a table (<span class="math notranslate nohighlight">\(Q\)</span> table) with each value in the table is a parameter need optimizing.</p></li>
+<li><p>In discrete MDP, the model of action value function <span class="math notranslate nohighlight">\(Q^\pi(s,a)\)</span> is a table (<span class="math notranslate nohighlight">\(Q\)</span> table) with each value in the table is a parameter need optimizing. Therefor, this table is also called “tabular Q-learning”</p></li>
 <li><p>We have the formula to update <span class="math notranslate nohighlight">\(Q(s,a)\)</span> to reach the optimal <span class="math notranslate nohighlight">\(Q^\pi(s,a)\)</span>
 $<span class="math notranslate nohighlight">\(
 Q(s,a) \leftarrow Q(s,a) + \eta(r + \gamma \max_{a'} Q(s',a') - Q(s,a))
 \)</span>$</p></li>
 </ul>
+<center><img src=https://d1q4qwyh0q55bh.cloudfront.net/images/1xg2ipllue5lQ86K8tQSjuN2TcAMFs2vEsH8eO1cjxG4FrwVGSwsUU3RFeHoam7i.png?d=desktop-thumbnail></center>
 </section>
 <section id="question-2">
-<h2><strong>Question 2</strong><a class="headerlink" href="#question-2" title="Permalink to this heading">#</a></h2>
-<p>Behaviour policy <span class="math notranslate nohighlight">\(\pi\)</span></p>
+<h3><strong>Question 2</strong><a class="headerlink" href="#question-2" title="Permalink to this heading">#</a></h3>
+<p>Explan what is behaviour policy <span class="math notranslate nohighlight">\(\pi_b\)</span> &amp; target/learning/optimizing plicy <span class="math notranslate nohighlight">\(\pi_o\)</span> in Q-learning and the formula to compute <span class="math notranslate nohighlight">\(a = \pi(s)\)</span>.</p>
 </section>
 <section id="id1">
-<h2><strong>Answer</strong><a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<h3><strong>Answer</strong><a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Behaviour policy <span class="math notranslate nohighlight">\(\pi_b\)</span> is policy for all actions interacting with the environment. Looking at the image above, at the first line of algorithm, <span class="math notranslate nohighlight">\(\pi_b\)</span> can be <span class="math notranslate nohighlight">\(\epsilon -greedy\)</span>, or softmax, or even random.</p></li>
+<li><p>Target/Learning/optimizing policy <span class="math notranslate nohighlight">\(\pi_o\)</span> is the policy for all actions to update Q-value (learning), which is line 3 <span class="math notranslate nohighlight">\(a = \arg \max Q(s,a)\)</span> (greedy policy)</p></li>
+</ul>
+</section>
+</section>
+<section id="summary">
+<h2><strong>Summary</strong><a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
 </section>
 </section>
 
@@ -520,11 +536,11 @@ Q(s,a) \leftarrow Q(s,a) + \eta(r + \gamma \max_{a'} Q(s',a') - Q(s,a))
       </div>
     </a>
     <a class="right-next"
-       href="S12_FinalExam.html"
+       href="S12_FinalExam_TEST.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Sesssion 12: Final Coding test</p>
+        <p class="prev-next-title">Sesssion 12: Final Coding Test</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -546,10 +562,14 @@ Q(s,a) \leftarrow Q(s,a) + \eta(r + \gamma \max_{a'} Q(s',a') - Q(s,a))
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1"><strong>Question 1</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#answer"><strong>Answer</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2"><strong>Question 2</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Answer</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theory"><strong>Theory</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1"><strong>Question 1</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#answer"><strong>Answer</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2"><strong>Question 2</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Answer</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
 </ul>
   </nav></div>
 
