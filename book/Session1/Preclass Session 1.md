@@ -23,7 +23,7 @@ $${\bf x}^t = \bar{\bf x} + z_1^t u_1 + \dots + z_n^t u_n$$
 4. PCA help to find $(u_1, \dots, u_n)$ with the smallest sum error $\frac{1}{N} \sum_{t=1}^N e^t_k$ on the dataset $D$ for all approximate $1  \leq k < n$
 5. For example for 1 dataset of faces, features are the main components and the average image calculated by PCA as shown below:
 
-<center><img src=https://hackmd.io/_uploads/Hk1xK1SP2.png width=500></center>
+<center><img src=https://d1q4qwyh0q55bh.cloudfront.net/images/NxLDUbpyDQ8eCHih5GcHGFb2cdgTw8xDjmVyEznkY7kYqQOVRqwdY5FYDZOyqQtZ.png?d=desktop-thumbnail width=500></center>
 
 
 ## **Sparse Coding**
@@ -34,7 +34,7 @@ $${\bf x}^t = \bar{\bf x} + z_1^t u_1 + \dots + z_n^t u_n$$
 
 2. For example, from natural photos, we take out small patches, then use the Sparse Coding method to select a dictionary with 64 features of edges as shown below. Each image will then be encoded with no more than 3 codewords.
 <br>
-<center><img src=https://hackmd.io/_uploads/S13p2yBvn.png width=500></center>
+<center><img src=https://d1q4qwyh0q55bh.cloudfront.net/images/n4CD5hUOYAMvirE81J1XzRsKA9VYnu0qbRF3XM2cH3cdxSp4TJQcHL75OoQXenah.png?d=desktop-thumbnail width=500></center>
 
 ## **Similarity**
 

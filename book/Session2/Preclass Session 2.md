@@ -2,25 +2,7 @@
 
 ## **Prediction Types**
 1. Four statistical data types
-```graphviz
-digraph Datatypes {
-
-    A  [label="Types of data"] 
-    B  [label="Numerical or \n Quantitive data"]
-    B1 [label="Discrete data \n (can count)"]
-    B2 [label="Continuous data \n (can measure)"]
-    C  [label="Categorical or \n Qualitative data"]
-    C1 [label="Nomial data \n (can brand)"]
-    C2 [label="Ordinal data \n (can rank/order)"]
-
-    A->B  
-    A->C  
-    B->B1 
-    B->B2 
-    C->C1
-    C->C2
-}
-```
+<center><img src=https://d1q4qwyh0q55bh.cloudfront.net/images/4IpNq8n3SsPonQDjZACCrL8dIffDlQnBf3OtgrQdBDajjKhfMUon9JX1kQxYEil1.webp?d=desktop-thumbnail></center>
 
 2. Two prediction types
 <center><img src=https://d1q4qwyh0q55bh.cloudfront.net/images/RwMftMVZBjde06KPVcgqrYoA69vggibULM9aPrSLvxH4AoX3eRRYgxDE0OGxjWMB.png?d=desktop-thumbnail></center> <br>

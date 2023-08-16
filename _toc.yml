@@ -71,6 +71,11 @@ chapters:
   - file: book/Session12/Final Test Theory
   - file: book/Session12/S12_FinalExam_TEST
   - file: book/Session12/S12_FinalExam_SOL
+
+  - file: book/Bonus/Sentiment Analysis
+  - file: book/Bonus/NLP
+  - file: book/Bonus/Reinforcement Learning Full Tutorial
+
   
 
 # Or you organize the TOC by parts
