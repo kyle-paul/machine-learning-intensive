@@ -1,0 +1,743 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Preclass Session 1: Representation &#8212; Machine Learning Intensive</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/Session1/Preclass Session 1';</script>
+    <link rel="canonical" href="https://kyle-paul.github.io/machine-learning-intensive/book/Session1/Preclass Session 1.html" />
+    <link rel="shortcut icon" href="../../_static/avatar.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Session 1: Representation" href="S1_Lab_Representation.html" />
+    <link rel="prev" title="About the author" href="../../index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Preclass Session 1: Representation</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S1_Lab_Representation.html">Session 1: Representation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S1_ASM.html">Session 1: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S1_SOL.html">Session 1: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Session%201%20Revision.html"><strong>Session 1: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/Preclass%20Session%202.html"><strong>Preclass Session 2: Linear Model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/S2_Lab_LinearModel.html">Session 2: Linear Model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session2/S2_ASM.html">Session 2: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/S2_SOL.html">Session 2: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/Session%202%20Revision.html">Session 2: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/Preclass%20Session%203.html"><strong>Preclass Session 3: Recommender System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/S3_Lab_RecSys.html">Sesion 3: Recommender System</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session3/S3_ASM.html">Session 3: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/S3_SOL.html">Session 3: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/Session%203%20Revision.html">Session 3: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/Preclass%20Session%204.html"><strong>Preclass Session 4: NonLinear Predictor</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/S4_Lab_NonLinearPredictors.html">Session 4: Nonlinear Predictors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/S4_ASM.html">Session 4: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/S4_SOL.html">Session 4: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/Session%204%20Revision.html">Session 4: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/Preclass%20Session%205.html"><strong>Preclass Session 5: Optimization</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/S5_Lab_Optimization.html">Session 5: Optimization</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session5/S5_ASM.html">Session 5: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/S5_SOL.html">Session 5: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/Session%205%20Revision.html">Session 5: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/Preclass%20Session%206.html"><strong>Preclass Session 6: Metrics and Losses</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/S6_Lab_Metrics%26Losses.html">Session 6: Metrics &amp; Losses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/S6_ASM.html">Session 6: Assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/S6_SOL.html">Session 6: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/Session%206%20Revision.html">Session 6: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session7/Midterm%20Theory%20Test.html"><strong>Theory Midterm Test</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session7/Midterm%20Theory%20Solution.html">Theory Midterm Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session7/S7_MidTerm_TEST.html">Session 7: Midterm Coding Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session7/S7_MidTerm_SOL.html">Session 7: Midterm Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session8/Preclass%20Session%208.html"><strong>Preclass Session 8: Convolutional Neural Network</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session8/S8_Lab_CNN.html">Session 8: Convolutional Neural Network</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session8/S8_ASM.html">Session 8: Assignment</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session8/S8_SOL.html">Session 8: Coding Solution</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session8/Session%208%20Revision.html">Session 8: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session9/Preclass%20Session%209.html"><strong>Preclass Session 9: Natural Language Processing</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session9/S9_LAB_RNN.html">Session 9 - Natural Language Processing</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session9/S9_ASM.html">Session 9: Assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session9/S9_SOL.html">Session 9: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session9/Session%209%20Revision.html">Session: 9 Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session10/Preclass%20Session%2010.html"><strong>Preclass Session 10: MDP Planning</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session10/S10_LAB_MDP_PLANNING.html">Session 10 - MDP Planning</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session10/S10_ASM.html">Session 10: Assigment</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session10/S10_SOL.html">Session 10: Coding Solution</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session10/Session%2010%20Revision.html">Session 10: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session11/Preclass%20Session%2011.html"><strong>Preclass Session 11: Reinforcement Learning</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session11/S11_LAB_Q_Learning.html">Session 11: Q Learning</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session11/S11_SOL.html">Session 11: Coding Solution</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session11/Session%2011%20Revision.html">Session 11: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session12/Final%20Test%20Theory.html"><strong>Session 12: final theory test</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session12/S12_FinalExam_TEST.html">Sesssion 12: Final Coding Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session12/S12_FinalExam_SOL.html">Sesssion 12: Final Coding Solution</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/edit/main/book/Session1/Preclass Session 1.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/issues/new?title=Issue%20on%20page%20%2Fbook/Session1/Preclass Session 1.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/book/Session1/Preclass Session 1.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Preclass Session 1: Representation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinates"><strong>Coordinates</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis"><strong>Principal Component Analysis</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sparse-coding"><strong>Sparse Coding</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity"><strong>Similarity</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-library"><strong>Sklearn library</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-dataset"><strong>Splitting dataset</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-test-split">Train test split</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stratified-split-only-for-classification-problems"><strong>Stratified Split (only for Classification problems)</strong></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="preclass-session-1-representation">
+<h1><strong>Preclass Session 1: Representation</strong><a class="headerlink" href="#preclass-session-1-representation" title="Permalink to this heading">#</a></h1>
+<section id="coordinates">
+<h2><strong>Coordinates</strong><a class="headerlink" href="#coordinates" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>See the simulation of <a class="reference external" href="https://www.geogebra.org/m/Dyf6yMWt">Cartesian Coordinate System</a>
+—(-0.7)—(-0.5)——0——z———0.9—&gt; <span class="math notranslate nohighlight">\(\phi\)</span>: “cat cry”</p></li>
+<li><p>The <strong>z-coordinates</strong> indicate the presence/occurrence of the <span class="math notranslate nohighlight">\(phi\)</span> characteristic in the object we are observing. For example, if another cat has <span class="math notranslate nohighlight">\(z'=0.95\)</span>, we can guess that this cat has a very loud cry throughout the neighborhood. A practical example <span class="math notranslate nohighlight">\(\phi\)</span> = “edge detector” featured in Wiesel &amp; Hubel’s vision experiment (watch <a class="reference external" href="https://www.youtube.com/watch?v=Cw5PKV9Rj3o">experiment</a> in 1959, winning 1981 Nobel Prize “for their discoveries concerning the visual system.”)</p></li>
+</ul>
+<center><img src=https://d1q4qwyh0q55bh.cloudfront.net/images/KHWopjEFwpKu5hxt0eMeVmAwxtU8NesNFNarqpL1UJU4nJlo7Y7ottPlX2lbdWZw.png?d=desktop-thumbnail width=1000></center>
+</section>
+<section id="principal-component-analysis">
+<h2><strong>Principal Component Analysis</strong><a class="headerlink" href="#principal-component-analysis" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Given a dataset <span class="math notranslate nohighlight">\(D=\{{\bf x}^1,\dots,{\bf x}^t,\dots,{\bf x}^N\} = \{{\bf x}^t\}_{t=1}^N\)</span> where <span class="math notranslate nohighlight">\({\bf x}^t\)</span> is a gray-scale image with <span class="math notranslate nohighlight">\({\bf x}^t \in \mathbb{R}^{m \space {\bf x} \space n}\)</span></p></li>
+<li><p>Principal Component Analysis allow us to extract <span class="math notranslate nohighlight">\(n &lt; N\)</span> features <span class="math notranslate nohighlight">\((u_1, \dots, u_n)\)</span>  to represent each <span class="math notranslate nohighlight">\({\bf x}^t\)</span>. As follows:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[{\bf x}^t = \bar{\bf x} + z_1^t u_1 + \dots + z_n^t u_n\]</div>
+<ol class="arabic simple" start="3">
+<li><p>We have: <span class="math notranslate nohighlight">\(\bar{\bf x} = \frac{{\bf x}^1 + \dots +{\bf x}^t + \dots + {\bf x}^N}{N}\)</span> is the mean value of the <span class="math notranslate nohighlight">\(D\)</span> and <span class="math notranslate nohighlight">\(u_i\)</span> features are:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Orthonormality">Orthonormality</a></p></li>
+<li><p>Same shape with input <span class="math notranslate nohighlight">\({\bf x}\)</span></p></li>
+<li><p>Arranged in order of importance from 1 to n so that the mean squared error is always the samllest when using <span class="math notranslate nohighlight">\(1 \leq k &lt; n\)</span> first initial features <span class="math notranslate nohighlight">\((u_1, \dots, u_k)\)</span> to represent approximately the dataset</p></li>
+<li><p>Specifically when approximately equal to k main components <span class="math notranslate nohighlight">\({\bf x}^t \approx \tilde{\bf x}^t_k = \bar{x} + z_1^t + \dots + z^t_k u_k \rightarrow\)</span> square error at one sample is <span class="math notranslate nohighlight">\(e^t_k = \|{\bf x}^t - \tilde{\bf x}^t_k\|\)</span></p></li>
+</ul>
+</li>
+<li><p>PCA help to find <span class="math notranslate nohighlight">\((u_1, \dots, u_n)\)</span> with the smallest sum error <span class="math notranslate nohighlight">\(\frac{1}{N} \sum_{t=1}^N e^t_k\)</span> on the dataset <span class="math notranslate nohighlight">\(D\)</span> for all approximate <span class="math notranslate nohighlight">\(1  \leq k &lt; n\)</span></p></li>
+<li><p>For example for 1 dataset of faces, features are the main components and the average image calculated by PCA as shown below:</p></li>
+</ol>
+<center><img src=https://hackmd.io/_uploads/Hk1xK1SP2.png width=500></center>
+</section>
+<section id="sparse-coding">
+<h2><strong>Sparse Coding</strong><a class="headerlink" href="#sparse-coding" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Sparse Coding is method to extract features of a dataset <span class="math notranslate nohighlight">\(D = \{\bf x^t\}_{t=1}^N\)</span>:</p>
+<ul class="simple">
+<li><p>some <span class="math notranslate nohighlight">\(n &lt; N\)</span> features <span class="math notranslate nohighlight">\((c_1, \dots, c_n)\)</span> are often selected from some inputs to make <code class="docutils literal notranslate"><span class="pre">codewords</span></code> to make a (dictionary, codebook)</p></li>
+<li><p>All input <span class="math notranslate nohighlight">\({\bf x}^t\)</span> can be best approximately represented (MSE on dataset <span class="math notranslate nohighlight">\(D\)</span>) with no more <span class="math notranslate nohighlight">\(k\ll n\)</span> codewords: <span class="math notranslate nohighlight">\({\bf x}^t \approx z_1^t{\bf c}_1 +\dots+ z_n^t{\bf c}_n\)</span> with most <span class="math notranslate nohighlight">\(z_i^t=0\)</span> and a very small number <span class="math notranslate nohighlight">\(k\)</span> coefficient <span class="math notranslate nohighlight">\(z_j^t\neq 0\)</span>.</p></li>
+</ul>
+</li>
+<li><p>For example, from natural photos, we take out small patches, then use the Sparse Coding method to select a dictionary with 64 features of edges as shown below. Each image will then be encoded with no more than 3 codewords.
+<br></p></li>
+</ol>
+<center><img src=https://hackmd.io/_uploads/S13p2yBvn.png width=500></center>
+</section>
+<section id="similarity">
+<h2><strong>Similarity</strong><a class="headerlink" href="#similarity" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>For AI to be able to identify, classify, and predict from input <span class="math notranslate nohighlight">\({\bf x}\)</span> effectively, We can perform similarity measurements, also known as matching, on embedded coordinate vectors <span class="math notranslate nohighlight">\({\bf z}=(z_1,\dots,z_n)\)</span> right in the semantic space of the extracted features <span class="math notranslate nohighlight">\(\phi_1,\dots,\phi_n\)</span>.</p></li>
+<li><p>Some of the most popular similarity measurements (matching):</p>
+<ol class="arabic simple">
+<li><p>Dot product (scalar product) <span class="math notranslate nohighlight">\({\bf z}\cdot{\bf z}' = {\bf z}'\cdot{\bf z}=z_1z_1'+\dots+z_nz_n'=\sum_{i=1}^nz_iz_i'\)</span></p>
+<ul class="simple">
+<li><p>The more positive we conclude <span class="math notranslate nohighlight">\({\bf z}, {\bf z}'\)</span>, the more similar <span class="math notranslate nohighlight">\({\bf x}, {\bf x}'\)</span> are in terms of the feature extrators <span class="math notranslate nohighlight">\(\phi_1,\dots,\phi_n\)</span> considererd.</p></li>
+<li><p>Conversely, the more negative the dot product, the more different and more contradictory they are.</p></li>
+<li><p>When very small dots near zero, they are almost unrelated (orthogonal, uncorrelated).</p></li>
+</ul>
+</li>
+<li><p>We can standardize the dot product to bring the similarity score to the range <span class="math notranslate nohighlight">\([-1,1]\)</span> for easy calculation and comparison, in 2 ways:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Pearson_correlation_coefficient">Correlation coefficient</a> = centered dot product <span class="math notranslate nohighlight">\({\dot {\bf z}}\cdot{\dot {\bf z}}'\)</span> with <span class="math notranslate nohighlight">\({\dot {\bf z}} = (z_1-\bar{z},\dots,z_n-\bar{z})\)</span> and <span class="math notranslate nohighlight">\({\bar z}=\frac{z_1+\dots+z_n}n\)</span>.</p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Cosine_similarity">Cosine similarity</a> = normalized dot product <span class="math notranslate nohighlight">\({\bar {\bf z}}\cdot{\bar {\bf z}}'\)</span> with <span class="math notranslate nohighlight">\({\bar {\bf z}} = \frac{{\bf z}}{\|{\bf z}\|}\)</span> and <span class="math notranslate nohighlight">\(\|{\bf z}\| = \sqrt{{\bf z}\cdot{\bf z}}\)</span></p></li>
+</ul>
+</li>
+<li><p>We can extend the dot product to 2 arrays (tensor, e.g. 2 color images) of the same size (shape): <span class="math notranslate nohighlight">\(A\cdot B = \sum_{ijjk}a_{ijk}b_{ijk}\)</span></p></li>
+<li><p>When 2 arrays are not the same shape, for example <span class="math notranslate nohighlight">\(A\)</span> is a large color image, <span class="math notranslate nohighlight">\(\kappa\)</span> is a small color image of <span class="math notranslate nohighlight">\(3\times 3\)</span> pixels (called kernel, template or filter)</p>
+<ul class="simple">
+<li><p>We can slid the core <span class="math notranslate nohighlight">\(\kappa\)</span> on <span class="math notranslate nohighlight">\(A\)</span> and match it with dot product at each position, creating an image called a feature map.</p></li>
+<li><p>This method of calculation is called <code class="docutils literal notranslate"><span class="pre">convolution</span></code>, very important in AI.</p></li>
+</ul>
+</li>
+<li><p>All 4 methods above are sensitive to the original point selection (zero point, centering) of embedded coordinates <span class="math notranslate nohighlight">\(z_i\)</span> because it involves the semantics of the extracted and used features. Distance measures can overcome this weakness. For example Euclidean distance: <span class="math notranslate nohighlight">\(d =\sqrt{\|{\bf z} - {\bf z}’\|}\)</span>. This method is applied in <a class="reference external" href="https://en.wikipedia.org/wiki/K-means_clustering">K-means clustering</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm">KNN</a></p></li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="sklearn-library">
+<h2><strong>Sklearn library</strong><a class="headerlink" href="#sklearn-library" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Most of the modules in sklearn library are often used as follows:</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize and fit</span>
+<span class="n">my_algo</span> <span class="o">=</span> <span class="n">AlgorithmName</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+<span class="n">my_algo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_set</span><span class="p">)</span>
+
+
+<span class="c1"># Transformation</span>
+<span class="n">my_ago</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">train_set</span><span class="p">)</span>
+<span class="n">my_ago</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">val_set</span><span class="p">)</span>
+<span class="n">my_ago</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test_set</span><span class="p">)</span>
+
+<span class="c1"># Predict</span>
+<span class="n">my_ago</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">train_set</span><span class="p">)</span>
+<span class="n">my_ago</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">val_set</span><span class="p">)</span>
+<span class="n">my_ago</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_set</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="splitting-dataset">
+<h2><strong>Splitting dataset</strong><a class="headerlink" href="#splitting-dataset" title="Permalink to this heading">#</a></h2>
+<section id="train-test-split">
+<h3>Train test split<a class="headerlink" href="#train-test-split" title="Permalink to this heading">#</a></h3>
+<div class="highlight-graphviz notranslate"><div class="highlight"><pre><span></span><span class="k">digraph</span><span class="w"> </span><span class="nt">Datatypes</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nt">A</span><span class="w">  </span><span class="p">[</span><span class="na">label</span><span class="p">=</span><span class="s2">&quot;Original labeled data&quot;</span><span class="p">]</span><span class="w"> </span>
+<span class="w">    </span><span class="nt">B</span><span class="w">  </span><span class="p">[</span><span class="na">label</span><span class="p">=</span><span class="s2">&quot;Training set&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">C</span><span class="w">  </span><span class="p">[</span><span class="na">label</span><span class="p">=</span><span class="s2">&quot;Validation set&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">D</span><span class="w">  </span><span class="p">[</span><span class="na">label</span><span class="p">=</span><span class="s2">&quot;Test set&quot;</span><span class="p">]</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nt">A</span><span class="o">-&gt;</span><span class="nt">B</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">A</span><span class="o">-&gt;</span><span class="nt">C</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">A</span><span class="o">-&gt;</span><span class="nt">D</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> in <code class="docutils literal notranslate"><span class="pre">sklearn</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">tran_test_split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span>
+                                                   <span class="n">test_size</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+                                                   <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                   <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Split the test set into validation set and test set</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x_val</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> 
+                                                <span class="n">test_size</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> 
+                                                <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                                                <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>So the ratio of <code class="docutils literal notranslate"><span class="pre">training</span> <span class="pre">set</span></code> : <code class="docutils literal notranslate"><span class="pre">test</span> <span class="pre">set</span></code> : <code class="docutils literal notranslate"><span class="pre">val</span> <span class="pre">set</span></code> is: <code class="docutils literal notranslate"><span class="pre">60</span> <span class="pre">:</span> <span class="pre">20</span> <span class="pre">:</span> <span class="pre">20</span></code></p>
+</section>
+<section id="stratified-split-only-for-classification-problems">
+<h3><strong>Stratified Split (only for Classification problems)</strong><a class="headerlink" href="#stratified-split-only-for-classification-problems" title="Permalink to this heading">#</a></h3>
+<p>We have to add the parameter <code class="docutils literal notranslate"><span class="pre">stratify=y</span></code> into the function <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code>. The ratio of classes (the distribution) in training, test, and val set is the same</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> 
+                                                    <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> 
+                                                    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> 
+                                                    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                                                    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book/Session1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../../index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">About the author</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="S1_Lab_Representation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Session 1: Representation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinates"><strong>Coordinates</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis"><strong>Principal Component Analysis</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sparse-coding"><strong>Sparse Coding</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity"><strong>Similarity</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-library"><strong>Sklearn library</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-dataset"><strong>Splitting dataset</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-test-split">Train test split</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stratified-split-only-for-classification-problems"><strong>Stratified Split (only for Classification problems)</strong></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kyle Paul
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1179 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Session 10 - MDP Planning &#8212; Machine Learning Intensive</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/Session10/S10_LAB_MDP_PLANNING';</script>
+    <link rel="canonical" href="https://kyle-paul.github.io/machine-learning-intensive/book/Session10/S10_LAB_MDP_PLANNING.html" />
+    <link rel="shortcut icon" href="../../_static/avatar.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Session 10: Assigment" href="S10_ASM.html" />
+    <link rel="prev" title="Preclass Session 10: MDP Planning" href="Preclass%20Session%2010.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Session1/Preclass%20Session%201.html"><strong>Preclass Session 1: Representation</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session1/S1_Lab_Representation.html">Session 1: Representation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session1/S1_ASM.html">Session 1: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session1/S1_SOL.html">Session 1: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session1/Session%201%20Revision.html"><strong>Session 1: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/Preclass%20Session%202.html"><strong>Preclass Session 2: Linear Model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/S2_Lab_LinearModel.html">Session 2: Linear Model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session2/S2_ASM.html">Session 2: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/S2_SOL.html">Session 2: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/Session%202%20Revision.html">Session 2: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/Preclass%20Session%203.html"><strong>Preclass Session 3: Recommender System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/S3_Lab_RecSys.html">Sesion 3: Recommender System</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session3/S3_ASM.html">Session 3: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/S3_SOL.html">Session 3: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/Session%203%20Revision.html">Session 3: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/Preclass%20Session%204.html"><strong>Preclass Session 4: NonLinear Predictor</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/S4_Lab_NonLinearPredictors.html">Session 4: Nonlinear Predictors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/S4_ASM.html">Session 4: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/S4_SOL.html">Session 4: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/Session%204%20Revision.html">Session 4: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/Preclass%20Session%205.html"><strong>Preclass Session 5: Optimization</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/S5_Lab_Optimization.html">Session 5: Optimization</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session5/S5_ASM.html">Session 5: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/S5_SOL.html">Session 5: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/Session%205%20Revision.html">Session 5: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/Preclass%20Session%206.html"><strong>Preclass Session 6: Metrics and Losses</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/S6_Lab_Metrics%26Losses.html">Session 6: Metrics &amp; Losses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/S6_ASM.html">Session 6: Assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/S6_SOL.html">Session 6: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/Session%206%20Revision.html">Session 6: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session7/Midterm%20Theory%20Test.html"><strong>Theory Midterm Test</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session7/Midterm%20Theory%20Solution.html">Theory Midterm Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session7/S7_MidTerm_TEST.html">Session 7: Midterm Coding Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session7/S7_MidTerm_SOL.html">Session 7: Midterm Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session8/Preclass%20Session%208.html"><strong>Preclass Session 8: Convolutional Neural Network</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session8/S8_Lab_CNN.html">Session 8: Convolutional Neural Network</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session8/S8_ASM.html">Session 8: Assignment</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session8/S8_SOL.html">Session 8: Coding Solution</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session8/Session%208%20Revision.html">Session 8: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session9/Preclass%20Session%209.html"><strong>Preclass Session 9: Natural Language Processing</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session9/S9_LAB_RNN.html">Session 9 - Natural Language Processing</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session9/S9_ASM.html">Session 9: Assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session9/S9_SOL.html">Session 9: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session9/Session%209%20Revision.html">Session: 9 Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%2010.html"><strong>Preclass Session 10: MDP Planning</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Session 10 - MDP Planning</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S10_ASM.html">Session 10: Assigment</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S10_SOL.html">Session 10: Coding Solution</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Session%2010%20Revision.html">Session 10: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session11/Preclass%20Session%2011.html"><strong>Preclass Session 11: Reinforcement Learning</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session11/S11_LAB_Q_Learning.html">Session 11: Q Learning</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session11/S11_SOL.html">Session 11: Coding Solution</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session11/Session%2011%20Revision.html">Session 11: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session12/Final%20Test%20Theory.html"><strong>Session 12: final theory test</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session12/S12_FinalExam_TEST.html">Sesssion 12: Final Coding Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session12/S12_FinalExam_SOL.html">Sesssion 12: Final Coding Solution</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/kyle-paul/machine-learning-intensive/master?urlpath=tree/book/Session10/S10_LAB_MDP_PLANNING.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/kyle-paul/machine-learning-intensive/blob/master/book/Session10/S10_LAB_MDP_PLANNING.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/edit/main/book/Session10/S10_LAB_MDP_PLANNING.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/issues/new?title=Issue%20on%20page%20%2Fbook/Session10/S10_LAB_MDP_PLANNING.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/book/Session10/S10_LAB_MDP_PLANNING.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Session 10 - MDP Planning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Session 10 - MDP Planning</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#excercise-frozen-lake">Excercise: Frozen Lake</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries-define-constants">Import libraries &amp; define constants</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-1-environment-simulation">TODO 1: ENVIRONMENT SIMULATION</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-2-explore-interact-with-the-environment-to-find-the-optimal-policy">TODO 2: EXPLORE/INTERACT WITH THE ENVIRONMENT TO FIND THE OPTIMAL POLICY</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-3-output-to-agent-s-path-action">TODO 3: OUTPUT TO AGENT’S PATH &amp; ACTION</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#branch-and-bound-with-backtracking">Branch and Bound with Backtracking</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="session-10-mdp-planning">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Session 10 - MDP Planning</a><a class="headerlink" href="#session-10-mdp-planning" title="Permalink to this heading">#</a></h1>
+<p>You need to read the theory lectures before practicing with this notebook:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://hackmd.io/&#64;KylePaul/ML_Preclass_S10">Preclass S10</a></p></li>
+<li><p><a class="reference external" href="https://hackmd.io/&#64;KylePaul/ML_Slide_S10">Slide</a></p></li>
+</ul>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#session-10-mdp-planning" id="id1">Session 10 - MDP Planning</a></p></li>
+<li><p><a class="reference internal" href="#excercise-frozen-lake" id="id2">Excercise: Frozen Lake</a></p>
+<ul>
+<li><p><a class="reference internal" href="#import-libraries-define-constants" id="id3">Import libraries &amp; define constants</a></p></li>
+<li><p><a class="reference internal" href="#todo-1-environment-simulation" id="id4">TODO 1: ENVIRONMENT SIMULATION</a></p></li>
+<li><p><a class="reference internal" href="#todo-2-explore-interact-with-the-environment-to-find-the-optimal-policy" id="id5">TODO 2: EXPLORE/INTERACT WITH THE ENVIRONMENT TO FIND THE OPTIMAL POLICY</a></p></li>
+<li><p><a class="reference internal" href="#todo-3-output-to-agent-s-path-action" id="id6">TODO 3: OUTPUT TO AGENT’S PATH &amp; ACTION</a></p></li>
+<li><p><a class="reference internal" href="#branch-and-bound-with-backtracking" id="id7">Branch and Bound with Backtracking</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="excercise-frozen-lake">
+<h1><a class="toc-backref" href="#id2" role="doc-backlink">Excercise: Frozen Lake</a><a class="headerlink" href="#excercise-frozen-lake" title="Permalink to this heading">#</a></h1>
+<p><strong>Description:</strong> Game glacial lake, is a rectangle of many squares, each of which will be ice or iceless. If you go into the ice-free box, the game over! Your task is to move from S to G.</p>
+<p><img alt="frozen-lake-description" src="https://i.imgur.com/jLhoSev.png" />
+<img alt="frozen-lake-map" src="https://i.imgur.com/1WS7wFJ.png" /></p>
+<p><strong>Q-values table</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>State(cell)</p></th>
+<th class="head"><p>Left</p></th>
+<th class="head"><p>Down</p></th>
+<th class="head"><p>Right</p></th>
+<th class="head"><p>Up</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+<section id="import-libraries-define-constants">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Import libraries &amp; define constants</a><a class="headerlink" href="#import-libraries-define-constants" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import numpy as np
+import pandas as pd
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>GAMMA = 0.9
+
+ACTION_LEFT = 0
+ACTION_RIGHT = 1
+ACTION_UP = 2
+ACTION_DOWN = 3
+
+ACTIONS = [&quot;left&quot;, &quot;right&quot;, &quot;up&quot;, &quot;down&quot;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="todo-1-environment-simulation">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">TODO 1: ENVIRONMENT SIMULATION</a><a class="headerlink" href="#todo-1-environment-simulation" title="Permalink to this heading">#</a></h2>
+<p>Class <code class="docutils literal notranslate"><span class="pre">FrozenLake</span></code> is a class that describes the game environment, and also indicates how the environment will respond to each Agent’s action</p>
+<ul class="simple">
+<li><p>Complete the function <code class="docutils literal notranslate"><span class="pre">step</span></code> of <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">FrozenLake</span></code> này.</p></li>
+<li><p>The input of this function:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">state</span></code> is the current position (index) of Agent</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">action</span></code> is the action that Agent takes</p></li>
+</ul>
+</li>
+<li><p>The output of this function</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">next_state</span></code> new position (index) of Agent</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reward</span></code> is the reward Agent receives</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> if <code class="docutils literal notranslate"><span class="pre">next_state</span></code> is goal</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-1</span></code> if <code class="docutils literal notranslate"><span class="pre">next_state</span></code> is a hole</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> for other positions</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Note:</p>
+<ul>
+<li><p>If the Agent is at the 4 edges of the map and continues to go outside the map or if he is standing at the pits or destination, make the Agent stand still</p></li>
+<li><p>The rest of the cases, Agent moves normally</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>class Env:
+  def __init__(self, rows, cols, start, goal, holes):
+    # YOUR CODE HERE
+    self.rows = rows
+    self.cols = cols
+    self.start = start
+    self.goal = goal
+    self.holes = holes
+
+  def render(self):
+    # render the current environment
+    pass
+
+  # get_next_state
+  # update
+  def step(self, state, action):
+    if state == self.goal or state in self.holes:
+      return state, 0
+
+    # Boundaries checking
+    if state % self.cols == 0 and action == ACTION_LEFT:
+      return state, 0
+    if state % self.cols == self.cols - 1 and action == ACTION_RIGHT:
+      return state, 0
+    if state &lt; self.cols and action == ACTION_UP:
+      return state, 0
+    if state &gt; (self.rows-1) * self.cols - 1 and action == ACTION_DOWN:
+      return state, 0
+
+    # Agent moves right, left, up, down
+    if action == ACTION_LEFT:
+      next_state = state - 1
+    elif action == ACTION_RIGHT:
+      next_state = state + 1
+    elif action == ACTION_UP:
+      next_state = state - self.cols
+    else:
+      next_state = state + self.cols
+
+    # assign reward given the state
+    reward = 0
+    if next_state in self.holes:
+      reward = -1
+    elif next_state == self.goal:
+      reward = 1
+
+    return next_state, reward
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>rows = 4
+cols = 4
+start = 0
+goal = 15
+holes = [5,7,11,12]
+
+env = Env(rows, cols, start, goal, holes)
+env.step(0, ACTION_DOWN)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4, 0)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="todo-2-explore-interact-with-the-environment-to-find-the-optimal-policy">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">TODO 2: EXPLORE/INTERACT WITH THE ENVIRONMENT TO FIND THE OPTIMAL POLICY</a><a class="headerlink" href="#todo-2-explore-interact-with-the-environment-to-find-the-optimal-policy" title="Permalink to this heading">#</a></h2>
+<p><strong>Bellman Equations</strong></p>
+<div class="math notranslate nohighlight">
+\[
+Q^*(s,a) = R(s,a) + \gamma \sum_{s'} P(s'|s,a)\max_{a'} Q^*(s',a')
+\]</div>
+<p>Complete the function <code class="docutils literal notranslate"><span class="pre">planning</span></code> as follows</p>
+<ul class="simple">
+<li><p>Input:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">iter</span></code>: number of interation loops you want to do</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">env</span></code>: Game environment has been initialized</p></li>
+</ul>
+</li>
+<li><p>Output: matrix Q has been optimized (optimal Q-table)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Q = np.zeros(shape=(env.rows * env.cols, 4))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>for state in range(Q.shape[0]):
+  for action in range(Q.shape[1]):
+    next_state, reward = env.step(state, action)
+
+    if next_state != state: # not terminate
+      Q[state, action] = reward + GAMMA * np.max(Q[next_state])
+Q
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.,  0.,  0.,  0.],
+       [ 0.,  0.,  0., -1.],
+       [ 0.,  0.,  0.,  0.],
+       [ 0.,  0.,  0., -1.],
+       [ 0., -1.,  0.,  0.],
+       [ 0.,  0.,  0.,  0.],
+       [-1., -1.,  0.,  0.],
+       [ 0.,  0.,  0.,  0.],
+       [ 0.,  0.,  0., -1.],
+       [ 0.,  0., -1.,  0.],
+       [ 0., -1.,  0.,  0.],
+       [ 0.,  0.,  0.,  0.],
+       [ 0.,  0.,  0.,  0.],
+       [-1.,  0.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  0.,  0.,  0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def planning(iter, env):
+  # state-action value function - initial values are 0
+  Q = np.zeros(shape=(env.rows * env.cols, 4))
+
+  for i in range(iter):
+    for state in range(Q.shape[0]):
+      for action in range(Q.shape[1]):
+        # update
+        next_state, reward = env.step(state, action)
+
+        # Do not update when the agent is in the hole or goal
+        # Do not update when the agent is on the edge and keep going out
+        if next_state != state:
+          Q[state, action] = reward + GAMMA * np.max(Q[next_state])
+  return Q
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># run planning
+iter = 1000
+Q = planning(iter, env)
+print(Q)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 0.        0.59049   0.        0.59049 ]
+ [ 0.531441  0.6561    0.       -1.      ]
+ [ 0.59049   0.59049   0.        0.729   ]
+ [ 0.6561    0.        0.       -1.      ]
+ [ 0.       -1.        0.531441  0.6561  ]
+ [ 0.        0.        0.        0.      ]
+ [-1.       -1.        0.6561    0.81    ]
+ [ 0.        0.        0.        0.      ]
+ [ 0.        0.729     0.59049  -1.      ]
+ [ 0.6561    0.81     -1.        0.81    ]
+ [ 0.729    -1.        0.729     0.9     ]
+ [ 0.        0.        0.        0.      ]
+ [ 0.        0.        0.        0.      ]
+ [-1.        0.9       0.729     0.      ]
+ [ 0.81      1.        0.81      0.      ]
+ [ 0.        0.        0.        0.      ]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="todo-3-output-to-agent-s-path-action">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">TODO 3: OUTPUT TO AGENT’S PATH &amp; ACTION</a><a class="headerlink" href="#todo-3-output-to-agent-s-path-action" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Complete the function <code class="docutils literal notranslate"><span class="pre">follow_policy</span></code></p></li>
+<li><p>Input of this function is</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Q</span></code> is the optimal Q-table (Q matrix after training)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">env</span></code> game environment</p></li>
+</ul>
+</li>
+<li><p>Output of this function</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">path</span></code> <strong>List</strong> contains the history of the Agent’s path</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">path_actions</span></code> <strong>List</strong> contains a history of the agent’s actions</p></li>
+</ul>
+</li>
+<li><p>Guildance:</p>
+<ul>
+<li><p>Search for the optimal action in each state based on the <strong>Q</strong> matrix then perform the action using the <code class="docutils literal notranslate"><span class="pre">step</span></code> function written above</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def follow_policy(Q, env):
+  path = [env.start]
+  path_actions = []
+  current_state = path[0]
+
+  while True:
+    # stop conditions
+    if current_state == env.goal:
+      break
+    if current_state in env.holes:
+      break
+
+    # follow the optimal policyt pi
+    optimal_action = np.argmax(Q[current_state])
+    next_state, reward = env.step(current_state, optimal_action)
+    path.append(next_state)
+    path_actions.append(ACTIONS[optimal_action])
+    current_state = next_state
+
+  return path, path_actions
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="frozen-lake-map" src="https://i.imgur.com/1WS7wFJ.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Q
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.      ,  0.59049 ,  0.      ,  0.59049 ],
+       [ 0.531441,  0.6561  ,  0.      , -1.      ],
+       [ 0.59049 ,  0.59049 ,  0.      ,  0.729   ],
+       [ 0.6561  ,  0.      ,  0.      , -1.      ],
+       [ 0.      , -1.      ,  0.531441,  0.6561  ],
+       [ 0.      ,  0.      ,  0.      ,  0.      ],
+       [-1.      , -1.      ,  0.6561  ,  0.81    ],
+       [ 0.      ,  0.      ,  0.      ,  0.      ],
+       [ 0.      ,  0.729   ,  0.59049 , -1.      ],
+       [ 0.6561  ,  0.81    , -1.      ,  0.81    ],
+       [ 0.729   , -1.      ,  0.729   ,  0.9     ],
+       [ 0.      ,  0.      ,  0.      ,  0.      ],
+       [ 0.      ,  0.      ,  0.      ,  0.      ],
+       [-1.      ,  0.9     ,  0.729   ,  0.      ],
+       [ 0.81    ,  1.      ,  0.81    ,  0.      ],
+       [ 0.      ,  0.      ,  0.      ,  0.      ]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># run follow_policy
+follow_policy(Q, env)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([0, 1, 2, 6, 10, 14, 15], [&#39;right&#39;, &#39;right&#39;, &#39;down&#39;, &#39;down&#39;, &#39;down&#39;, &#39;right&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="branch-and-bound-with-backtracking">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Branch and Bound with Backtracking</a><a class="headerlink" href="#branch-and-bound-with-backtracking" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import numpy as np
+
+matrix = np.array(
+    [[1, 0, 0, 0],
+    [0, -1, 0, -1],
+    [0, 0, 0, -1],
+    [-1, 0, 0, 2]]
+)
+
+control_i = [1, 0, -1, 0]
+control_j = [0, -1, 0, 1]
+n_rows, n_cols = 4, 4
+num_step = 0
+path = []
+best_num_step = n_rows * n_cols
+
+def valid(next_i, next_j):
+  if (next_i &gt;= n_rows or next_i &lt; 0 or next_j &gt;= n_cols or next_j &lt; 0 or matrix[next_i][next_j] == -1):
+    return False
+  return True
+
+def backtracking(cur_i, cur_j, num_step, path, best_num_step):
+  if matrix[cur_i][cur_j] == -1:
+    return False, num_step, path, best_num_step
+
+  elif matrix[cur_i][cur_j] == 2:
+    path.append((cur_i, cur_j))
+    if num_step &lt; best_num_step:
+      best_num_step = num_step
+    return True, num_step, path, best_num_step
+
+  temp = matrix[cur_i][cur_j]
+  matrix[cur_i][cur_j] = -1
+  path.append((cur_i, cur_j))
+  for k in range(len(control_i)):
+    next_i = cur_i + control_i[k]
+    next_j = cur_j + control_j[k]
+    if valid(next_i, next_j):
+      result, num_step, path, best_num_step = backtracking(next_i, next_j, num_step + 1, path, best_num_step)
+      if result:
+        return True, num_step, path, best_num_step
+
+  matrix[cur_i][cur_j] = temp
+  path.pop()
+
+  return False, num_step, path, best_num_step
+
+result, num_step, path, best_num_step = backtracking(0, 0, num_step, path, best_num_step)
+
+if result:
+    print(path)
+    print(len(path))
+else:
+    print(&quot;No pathway&quot;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 0), (1, 0), (2, 0), (2, 1), (3, 1), (3, 2), (3, 3)]
+7
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using <code class="docutils literal notranslate"><span class="pre">env.P[state][action]</span></code> is updated with the formula:</p>
+<div class="math notranslate nohighlight">
+\[
+\forall s,a: ~ Q(s,a) = \sum_{s'} P(s'|s,a)\big[R(s,a,s') + \gamma \max_{a'}(Q(s',a'))\big].
+\]</div>
+<p>This is the <strong>Bellman equation</strong> for Q-learning, which expresses the optimal Q-value as a function of the transition probabilities, rewards, and future Q-values. This equation can be used to iteratively update the Q-table until convergence.</p>
+<p>However, using env.P[state][action] is not a good idea for several reasons. First, it assumes that you have access to the full model of the environment, which is often not the case in real-world problems. Second, it requires you to loop over all possible next states for each state-action pair, which can be very inefficient and slow. Third, it does not account for the stochasticity and uncertainty of the environment, which can lead to suboptimal policies.</p>
+<p>A better alternative is to use <strong>sample-based updates</strong>, which use the actual observations from the environment to update the Q-table. This way, you only need to update one state-action pair at a time, based on the reward and the next state that you observe. This is more efficient, realistic, and robust.</p>
+<p>The sample-based update rule for Q-learning is:</p>
+<div class="math notranslate nohighlight">
+\[
+Q(s,a) \leftarrow Q(s,a) + \alpha \big[r + \gamma \max_{a'}(Q(s',a')) - Q(s,a)\big]
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha\)</span> is the <strong>learning rate</strong> that controls how much you update your Q-value based on new information.</p>
+<p>If you don’t want to use epsilon-greedy exploration, you can use other exploration strategies, such as <strong>Boltzmann exploration</strong> or <strong>optimistic initialization</strong>. Boltzmann exploration chooses an action based on a probability distribution that depends on the Q-values and a temperature parameter. Optimistic initialization sets the initial Q-values to high values, so that the agent is motivated to explore new actions.</p>
+<p>Here is a modified version of your code that uses sample-based updates and Boltzmann exploration:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s1">&#39;FrozenLake-v1&#39;</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">map_name</span><span class="o">=</span><span class="s2">&quot;4x4&quot;</span><span class="p">,</span> <span class="n">is_slippery</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">render_mode</span><span class="o">=</span><span class="s2">&quot;rgb_array&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">terminals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">planning</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">iters</span><span class="p">,</span> <span class="n">terminals</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.9</span><span class="p">):</span>
+  <span class="n">num_state</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">observation_space</span><span class="o">.</span><span class="n">n</span>
+  <span class="n">num_action</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">n</span>
+
+  <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">num_state</span><span class="p">,</span> <span class="n">num_action</span><span class="p">))</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span> <span class="c1"># reset the environment at the beginning of each episode</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+      <span class="n">action</span> <span class="o">=</span> <span class="n">choose_action</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">Q</span><span class="p">)</span> <span class="c1"># choose an action using Boltzmann exploration</span>
+      <span class="n">next_state</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span> <span class="c1"># take the action and observe the next state and reward</span>
+      <span class="k">if</span> <span class="n">next_state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">terminals</span><span class="p">:</span>
+        <span class="n">update_Q</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">next_state</span><span class="p">,</span> <span class="n">Q</span><span class="p">)</span> <span class="c1"># update the Q-table using sample-based updates</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="n">Q</span><span class="p">[</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">]</span> <span class="o">=</span> <span class="n">reward</span> <span class="c1"># terminal states have zero future value</span>
+      <span class="n">state</span> <span class="o">=</span> <span class="n">next_state</span> <span class="c1"># update the current state</span>
+      <span class="k">if</span> <span class="n">done</span><span class="p">:</span> <span class="c1"># check if the episode is over</span>
+        <span class="k">break</span> <span class="c1"># exit the loop</span>
+  <span class="k">return</span> <span class="n">Q</span>
+
+<span class="k">def</span> <span class="nf">choose_action</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">Q</span><span class="p">):</span>
+  <span class="n">tau</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="c1"># temperature parameter</span>
+  <span class="n">probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="n">state</span><span class="p">]</span> <span class="o">/</span> <span class="n">tau</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="n">state</span><span class="p">]</span> <span class="o">/</span> <span class="n">tau</span><span class="p">))</span> <span class="c1"># compute the Boltzmann probabilities</span>
+  <span class="n">action</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="n">state</span><span class="p">])),</span> <span class="n">p</span><span class="o">=</span><span class="n">probs</span><span class="p">)</span> <span class="c1"># choose an action based on the probabilities</span>
+  <span class="k">return</span> <span class="n">action</span>
+
+<span class="k">def</span> <span class="nf">update_Q</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">next_state</span><span class="p">,</span> <span class="n">Q</span><span class="p">):</span>
+  <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="c1"># learning rate</span>
+  <span class="n">Q</span><span class="p">[</span><span class="n">state</span><span class="p">][</span><span class="n">action</span><span class="p">]</span> <span class="o">+=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="p">(</span><span class="n">reward</span> <span class="o">+</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="n">next_state</span><span class="p">])</span> <span class="o">-</span> <span class="n">Q</span><span class="p">[</span><span class="n">state</span><span class="p">][</span><span class="n">action</span><span class="p">])</span> <span class="c1"># update the Q-value using sample-based updates</span>
+
+<span class="k">def</span> <span class="nf">get_optimal_actions</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">optimal_Q</span><span class="p">):</span>
+  <span class="n">optimal_actions</span> <span class="o">=</span> <span class="p">[]</span>
+
+  <span class="n">current_state</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span> <span class="c1"># reset the environment at the beginning of each episode</span>
+  <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">current_state</span> <span class="ow">in</span> <span class="n">terminals</span><span class="p">:</span>
+      <span class="k">break</span>
+    <span class="n">optimal_action</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="n">current_state</span><span class="p">])</span>
+    <span class="n">optimal_actions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">optimal_action</span><span class="p">)</span>
+    <span class="n">next_state</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">optimal_action</span><span class="p">)</span>
+    <span class="n">current_state</span> <span class="o">=</span> <span class="n">next_state</span>
+  <span class="k">return</span> <span class="n">optimal_actions</span>
+
+<span class="n">Q</span> <span class="o">=</span> <span class="n">planning</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">terminals</span><span class="p">)</span>
+<span class="n">optimal_actions</span> <span class="o">=</span> <span class="n">get_optimal_actions</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">Q</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book/Session10"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Preclass%20Session%2010.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Preclass Session 10: MDP Planning</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="S10_ASM.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Session 10: Assigment</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Session 10 - MDP Planning</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#excercise-frozen-lake">Excercise: Frozen Lake</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries-define-constants">Import libraries &amp; define constants</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-1-environment-simulation">TODO 1: ENVIRONMENT SIMULATION</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-2-explore-interact-with-the-environment-to-find-the-optimal-policy">TODO 2: EXPLORE/INTERACT WITH THE ENVIRONMENT TO FIND THE OPTIMAL POLICY</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-3-output-to-agent-s-path-action">TODO 3: OUTPUT TO AGENT’S PATH &amp; ACTION</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#branch-and-bound-with-backtracking">Branch and Bound with Backtracking</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kyle Paul
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

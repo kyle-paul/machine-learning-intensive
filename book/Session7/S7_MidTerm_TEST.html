@@ -1,0 +1,1833 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Session 7: Midterm Coding Test &#8212; Machine Learning Intensive</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/Session7/S7_MidTerm_TEST';</script>
+    <link rel="canonical" href="https://kyle-paul.github.io/machine-learning-intensive/book/Session7/S7_MidTerm_TEST.html" />
+    <link rel="shortcut icon" href="../../_static/avatar.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Session 7: Midterm Coding Solution" href="S7_MidTerm_SOL.html" />
+    <link rel="prev" title="Theory Midterm Solution" href="Midterm%20Theory%20Solution.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Session1/Preclass%20Session%201.html"><strong>Preclass Session 1: Representation</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session1/S1_Lab_Representation.html">Session 1: Representation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session1/S1_ASM.html">Session 1: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session1/S1_SOL.html">Session 1: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session1/Session%201%20Revision.html"><strong>Session 1: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/Preclass%20Session%202.html"><strong>Preclass Session 2: Linear Model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/S2_Lab_LinearModel.html">Session 2: Linear Model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session2/S2_ASM.html">Session 2: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/S2_SOL.html">Session 2: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/Session%202%20Revision.html">Session 2: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/Preclass%20Session%203.html"><strong>Preclass Session 3: Recommender System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/S3_Lab_RecSys.html">Sesion 3: Recommender System</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session3/S3_ASM.html">Session 3: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/S3_SOL.html">Session 3: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/Session%203%20Revision.html">Session 3: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/Preclass%20Session%204.html"><strong>Preclass Session 4: NonLinear Predictor</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/S4_Lab_NonLinearPredictors.html">Session 4: Nonlinear Predictors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/S4_ASM.html">Session 4: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/S4_SOL.html">Session 4: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/Session%204%20Revision.html">Session 4: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/Preclass%20Session%205.html"><strong>Preclass Session 5: Optimization</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/S5_Lab_Optimization.html">Session 5: Optimization</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session5/S5_ASM.html">Session 5: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/S5_SOL.html">Session 5: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/Session%205%20Revision.html">Session 5: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/Preclass%20Session%206.html"><strong>Preclass Session 6: Metrics and Losses</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/S6_Lab_Metrics%26Losses.html">Session 6: Metrics &amp; Losses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/S6_ASM.html">Session 6: Assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/S6_SOL.html">Session 6: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/Session%206%20Revision.html">Session 6: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Midterm%20Theory%20Test.html"><strong>Theory Midterm Test</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Midterm%20Theory%20Solution.html">Theory Midterm Solution</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Session 7: Midterm Coding Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S7_MidTerm_SOL.html">Session 7: Midterm Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session8/Preclass%20Session%208.html"><strong>Preclass Session 8: Convolutional Neural Network</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session8/S8_Lab_CNN.html">Session 8: Convolutional Neural Network</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session8/S8_ASM.html">Session 8: Assignment</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session8/S8_SOL.html">Session 8: Coding Solution</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session8/Session%208%20Revision.html">Session 8: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session9/Preclass%20Session%209.html"><strong>Preclass Session 9: Natural Language Processing</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session9/S9_LAB_RNN.html">Session 9 - Natural Language Processing</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session9/S9_ASM.html">Session 9: Assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session9/S9_SOL.html">Session 9: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session9/Session%209%20Revision.html">Session: 9 Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session10/Preclass%20Session%2010.html"><strong>Preclass Session 10: MDP Planning</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session10/S10_LAB_MDP_PLANNING.html">Session 10 - MDP Planning</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session10/S10_ASM.html">Session 10: Assigment</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session10/S10_SOL.html">Session 10: Coding Solution</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session10/Session%2010%20Revision.html">Session 10: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session11/Preclass%20Session%2011.html"><strong>Preclass Session 11: Reinforcement Learning</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session11/S11_LAB_Q_Learning.html">Session 11: Q Learning</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session11/S11_SOL.html">Session 11: Coding Solution</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session11/Session%2011%20Revision.html">Session 11: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session12/Final%20Test%20Theory.html"><strong>Session 12: final theory test</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session12/S12_FinalExam_TEST.html">Sesssion 12: Final Coding Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session12/S12_FinalExam_SOL.html">Sesssion 12: Final Coding Solution</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/kyle-paul/machine-learning-intensive/master?urlpath=tree/book/Session7/S7_MidTerm_TEST.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/kyle-paul/machine-learning-intensive/blob/master/book/Session7/S7_MidTerm_TEST.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/edit/main/book/Session7/S7_MidTerm_TEST.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/issues/new?title=Issue%20on%20page%20%2Fbook/Session7/S7_MidTerm_TEST.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/book/Session7/S7_MidTerm_TEST.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Session 7: Midterm Coding Test</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-employee-absenteeism-forecast-3-pts">Problem 1:  Employee absenteeism forecast (3 pts)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis-1-pt">Data Analysis (1 pt)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-1">TODO 1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-2">TODO 2</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-3">TODO 3</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#your-answer">Your answer</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-4">TODO 4</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-model-2pts">Train the model (2pts)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-5">TODO 5</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-data-clustering-3-pts">Problem 2: Data Clustering (3 pts)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-6-1-5-pts">TODO 6 (1.5 pts)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-7-1-5-pts">TODO 7 (1.5 pts)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-sentiment-analysis-4-pts">Problem 3: Sentiment Analysis (4 pts)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-dataset">Prepare the dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-embedding">Create Embedding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-model">Train the model</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-8">TODO 8</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="session-7-midterm-coding-test">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Session 7: Midterm Coding Test</a><a class="headerlink" href="#session-7-midterm-coding-test" title="Permalink to this heading">#</a></h1>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#session-7-midterm-coding-test" id="id1">Session 7: Midterm Coding Test</a></p>
+<ul>
+<li><p><a class="reference internal" href="#problem-1-employee-absenteeism-forecast-3-pts" id="id2">Problem 1:  Employee absenteeism forecast (3 pts)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#data-analysis-1-pt" id="id3">Data Analysis (1 pt)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#todo-1" id="id4">TODO 1</a></p></li>
+<li><p><a class="reference internal" href="#todo-2" id="id5">TODO 2</a></p></li>
+<li><p><a class="reference internal" href="#todo-3" id="id6">TODO 3</a></p></li>
+<li><p><a class="reference internal" href="#your-answer" id="id7">Your answer</a></p></li>
+<li><p><a class="reference internal" href="#todo-4" id="id8">TODO 4</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#train-the-model-2pts" id="id9">Train the model (2pts)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#todo-5" id="id10">TODO 5</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#problem-2-data-clustering-3-pts" id="id11">Problem 2: Data Clustering (3 pts)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#todo-6-1-5-pts" id="id12">TODO 6 (1.5 pts)</a></p></li>
+<li><p><a class="reference internal" href="#todo-7-1-5-pts" id="id13">TODO 7 (1.5 pts)</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#problem-3-sentiment-analysis-4-pts" id="id14">Problem 3: Sentiment Analysis (4 pts)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#prepare-the-dataset" id="id15">Prepare the dataset</a></p></li>
+<li><p><a class="reference internal" href="#create-embedding" id="id16">Create Embedding</a></p></li>
+<li><p><a class="reference internal" href="#train-the-model" id="id17">Train the model</a></p>
+<ul>
+<li><p><a class="reference internal" href="#todo-8" id="id18">TODO 8</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Note</strong>
+Assignment aims primarily to test coding skills, but encourages students to try to create the best AI models possible.</p>
+<ul class="simple">
+<li><p>Problem 3 needs to use GPU Runtime.</p></li>
+<li><p>To limit access limits, use CPU Runtime when doing Problem 1, 2. When you’re done, you can switch the Runtime to your GPU to continue working. When switching Runtime, you need to run the Google Drive connection code above again.</p></li>
+<li><p>In case of limit, you can share the notebook for 1 other gmail account, then use that account to continue the test.</p></li>
+</ul>
+<section id="problem-1-employee-absenteeism-forecast-3-pts">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Problem 1:  Employee absenteeism forecast (3 pts)</a><a class="headerlink" href="#problem-1-employee-absenteeism-forecast-3-pts" title="Permalink to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">pandas</span></code> <code class="docutils literal notranslate"><span class="pre">plotly</span></code> <code class="docutils literal notranslate"><span class="pre">sklearn</span> <span class="pre">MLPClassifier</span></code> <code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code></p>
+<p>In this article, we will use the SVM model on IBM’s Human Resource dataset</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SatisfactionIndex&#39;</span><span class="p">,</span> <span class="s1">&#39;LastEvaluationIndex&#39;</span><span class="p">,</span> <span class="s1">&#39;NumberOfProject&#39;</span><span class="p">,</span> <span class="s1">&#39;AverageMonthlyHour&#39;</span><span class="p">,</span> <span class="s1">&#39;YearInCompany&#39;</span><span class="p">,</span><span class="s1">&#39;WorkingAccident&#39;</span><span class="p">,</span> <span class="s1">&#39;TurnOver&#39;</span><span class="p">,</span><span class="s1">&#39;PromotionLastFiveYear&#39;</span><span class="p">,</span><span class="s1">&#39;Department&#39;</span><span class="p">,</span><span class="s1">&#39;SalaryLevel&#39;</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/content/drive/MyDrive/Colab Notebooks/ML-intensive/data/HR_data.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">cols</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This dataset contains information about the current status of 1 employee and the result “Which employee quit at the end of this month”. Quitting is <code class="docutils literal notranslate"><span class="pre">1</span></code>, no rest is <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column name</p></th>
+<th class="head"><p>meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SatisfactionIndex</p></td>
+<td><p>Employee satisfaction index</p></td>
+</tr>
+<tr class="row-odd"><td><p>LastEvaluationIndex</p></td>
+<td><p>Last employee review score</p></td>
+</tr>
+<tr class="row-even"><td><p>NumberOfProject</p></td>
+<td><p>Number of projects employees are participating in</p></td>
+</tr>
+<tr class="row-odd"><td><p>AverageMonthlyHour</p></td>
+<td><p>Average monthly working hours</p></td>
+</tr>
+<tr class="row-even"><td><p>YearInCompany</p></td>
+<td><p>Years worked at the company</p></td>
+</tr>
+<tr class="row-odd"><td><p>WorkingAccident</p></td>
+<td><p>Occurence of accident when working for the company</p></td>
+</tr>
+<tr class="row-even"><td><p>PromotionLastFiveYear</p></td>
+<td><p>Number of resignations during the last 5 year</p></td>
+</tr>
+<tr class="row-odd"><td><p>TurnOver</p></td>
+<td><p>quit job or not</p></td>
+</tr>
+<tr class="row-even"><td><p>Department</p></td>
+<td><p>Current Department</p></td>
+</tr>
+<tr class="row-odd"><td><p>SalaryLevel</p></td>
+<td><p>The level of Salary</p></td>
+</tr>
+</tbody>
+</table>
+<section id="data-analysis-1-pt">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">Data Analysis (1 pt)</a><a class="headerlink" href="#data-analysis-1-pt" title="Permalink to this heading">#</a></h3>
+<p>First we need to explore the data of the columns</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Observing the above results, we can see:</p>
+<ul class="simple">
+<li><p>Columns <code class="docutils literal notranslate"><span class="pre">Department</span></code> <code class="docutils literal notranslate"><span class="pre">SalaryLevel</span></code> has the datatype <code class="docutils literal notranslate"><span class="pre">object</span></code> → likely to be Categorical Variable.</p></li>
+<li><p>Column <code class="docutils literal notranslate"><span class="pre">TurnOver</span></code> has the datatype integer <code class="docutils literal notranslate"><span class="pre">int64</span></code> → from dataset description <span class="math notranslate nohighlight">\(\rightarrow\)</span> great possibility that there will be 2 values that are: <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+<li><p>columns <code class="docutils literal notranslate"><span class="pre">SatisfactionIndex</span></code> <code class="docutils literal notranslate"><span class="pre">LastEvaluationIndex</span></code>has the datatype <code class="docutils literal notranslate"><span class="pre">float64</span></code> → great possibility that values ranges <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">0</span> <span class="pre">to</span> <span class="pre">1</span></code></p></li>
+<li><p>The remaining columns have an integer data type <code class="docutils literal notranslate"><span class="pre">int64</span></code> → likely to be ascending integers</p></li>
+<li><p>No columns with empty values (14999 entries, 14999 non-null)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="todo-1">
+<h4><a class="toc-backref" href="#id4" role="doc-backlink">TODO 1</a><a class="headerlink" href="#todo-1" title="Permalink to this heading">#</a></h4>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">plotly</span></code> library to plot a column chart that counts the number of unique values in 3 columns <code class="docutils literal notranslate"><span class="pre">Department</span></code> <code class="docutils literal notranslate"><span class="pre">SalaryLevel</span></code> <code class="docutils literal notranslate"><span class="pre">TurnOver</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your Solution</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For columns with numeric value types, we can draw <code class="docutils literal notranslate"><span class="pre">boxplot</span></code> or use <code class="docutils literal notranslate"><span class="pre">df.describe()</span></code> to determine the average of their range of values and see if there are any outliers. For example, if the whole company has only 1 long-term employee, the value of that employee’s column <code class="docutils literal notranslate"><span class="pre">YearInCompany</span></code> may be very different from other employees.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;SatisfactionIndex&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LastEvaluationIndex&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NumberOfProject&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AverageMonthlyHour&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;YearInCompany&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;WorkingAccident&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PromotionLastFiveYear&quot;</span>
+<span class="p">]</span>
+
+<span class="n">df</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-e1f1ea7c-db55-49e1-bc4a-7d468cd5bfcf">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SatisfactionIndex</th>
+      <th>LastEvaluationIndex</th>
+      <th>NumberOfProject</th>
+      <th>AverageMonthlyHour</th>
+      <th>YearInCompany</th>
+      <th>WorkingAccident</th>
+      <th>PromotionLastFiveYear</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>14999.000000</td>
+      <td>14999.000000</td>
+      <td>14999.000000</td>
+      <td>14999.000000</td>
+      <td>14999.000000</td>
+      <td>14999.000000</td>
+      <td>14999.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.612834</td>
+      <td>0.716102</td>
+      <td>3.803054</td>
+      <td>201.050337</td>
+      <td>3.498233</td>
+      <td>0.144610</td>
+      <td>0.021268</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.248631</td>
+      <td>0.171169</td>
+      <td>1.232592</td>
+      <td>49.943099</td>
+      <td>1.460136</td>
+      <td>0.351719</td>
+      <td>0.144281</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.090000</td>
+      <td>0.360000</td>
+      <td>2.000000</td>
+      <td>96.000000</td>
+      <td>2.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.440000</td>
+      <td>0.560000</td>
+      <td>3.000000</td>
+      <td>156.000000</td>
+      <td>3.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.640000</td>
+      <td>0.720000</td>
+      <td>4.000000</td>
+      <td>200.000000</td>
+      <td>3.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.820000</td>
+      <td>0.870000</td>
+      <td>5.000000</td>
+      <td>245.000000</td>
+      <td>4.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>7.000000</td>
+      <td>310.000000</td>
+      <td>10.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-e1f1ea7c-db55-49e1-bc4a-7d468cd5bfcf')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+        
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+      
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-e1f1ea7c-db55-49e1-bc4a-7d468cd5bfcf button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-e1f1ea7c-db55-49e1-bc4a-7d468cd5bfcf');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+  </div></div>
+</div>
+<p>From the above results, we see:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">WorkingAccident</span></code> <code class="docutils literal notranslate"><span class="pre">PromotionLastFiveYear</span></code> contains only 2 values, <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SatisfactionIndex</span></code> <code class="docutils literal notranslate"><span class="pre">LastEvaluationIndex</span></code> has values ranging from <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NumberOfProject</span></code> has values ranging from <code class="docutils literal notranslate"><span class="pre">2</span></code> to <code class="docutils literal notranslate"><span class="pre">7</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">YearInCompany</span></code> ranges in value from <code class="docutils literal notranslate"><span class="pre">2</span></code> to <code class="docutils literal notranslate"><span class="pre">10</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AverageMonthlyHour</span></code> ranges from <code class="docutils literal notranslate"><span class="pre">96</span></code> to <code class="docutils literal notranslate"><span class="pre">310</span></code></p></li>
+</ul>
+<p>We can:</p>
+<ul class="simple">
+<li><p>Graph the count for <code class="docutils literal notranslate"><span class="pre">WorkingAccident</span></code> <code class="docutils literal notranslate"><span class="pre">PromotionLastFiveYear</span></code></p></li>
+<li><p>The remaining columns, we can draw <code class="docutils literal notranslate"><span class="pre">boxplot</span></code>, but instead of drawing multiple graphs, we can group columns with close values together to plot:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">SatisfactionIndex</span></code> <code class="docutils literal notranslate"><span class="pre">LastEvaluationIndex</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NumberOfProject</span></code> <code class="docutils literal notranslate"><span class="pre">YearInCompany</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AverageMonthlyHour</span></code></p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">px</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">WorkingAccident</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">WorkingAccident</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Working Accident&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">px</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">PromotionLastFiveYear</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">PromotionLastFiveYear</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Promotion Last Five Year&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">px</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;SatisfactionIndex&#39;</span><span class="p">,</span> <span class="s1">&#39;LastEvaluationIndex&#39;</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">px</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s2">&quot;NumberOfProject&quot;</span><span class="p">,</span> <span class="s2">&quot;YearInCompany&quot;</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">px</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">AverageMonthlyHour</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="todo-2">
+<h4><a class="toc-backref" href="#id5" role="doc-backlink">TODO 2</a><a class="headerlink" href="#todo-2" title="Permalink to this heading">#</a></h4>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">plotly</span></code> library to plot a <code class="docutils literal notranslate"><span class="pre">pie</span> <span class="pre">chart</span></code> that counts the number of unique values in 2 columns <code class="docutils literal notranslate"><span class="pre">WorkingAccident</span></code> <code class="docutils literal notranslate"><span class="pre">PromotionLastFiveYear</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># YOUR SOLUTION</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To draw a boxplot for multiple columns at once, we need to transform the current <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> a bit, check out the example below</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Column1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+    <span class="s1">&#39;Column2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+    <span class="s1">&#39;Column3&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
+    <span class="s1">&#39;Column4&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span>
+    <span class="s1">&#39;Column5&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">21</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">25</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1"># This dataframe is similar to our employee dataframe with columns containing Continuous type data</span>
+<span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">df_test</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Use the melt method to transform the dataframe</span>
+<span class="sd">  -&gt; new dataframe has only 2 columns left</span>
+<span class="sd">    1 column contains names of old columns, 1 column contains values</span>
+<span class="sd">From this new dataframe, we can draw Boxplot</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="n">df_melted</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">df_test</span><span class="p">,</span> <span class="n">value_vars</span><span class="o">=</span><span class="n">df_test</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;Column&#39;</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">&#39;Value&#39;</span><span class="p">)</span>
+<span class="n">df_melted</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Do the same with our DataFrame</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># list of columns need transformed</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;SatisfactionIndex&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LastEvaluationIndex&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">df_boxplot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">value_vars</span><span class="o">=</span><span class="n">cols</span><span class="p">,</span> <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;Column&#39;</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">&#39;Value&#39;</span><span class="p">)</span>
+<span class="n">df_boxplot</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># draw the boxplot</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">df_boxplot</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Column&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Value&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;Column&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># list of columns need transformed</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;NumberOfProject&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;YearInCompany&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">df_boxplot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">value_vars</span><span class="o">=</span><span class="n">cols</span><span class="p">,</span> <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;Column&#39;</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">&#39;Value&#39;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">df_boxplot</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Column&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Value&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;Column&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;AverageMonthlyHour&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Thinking about it for a moment, for this problem, we see that whether employees quit or not will have a lot to do with their satisfaction index in the process of working. The satisfaction index relates to other things.</p>
+<p>So is there a way to check the correlation between the columns in the DataFrame?</p>
+<p>We can use the <code class="docutils literal notranslate"><span class="pre">df.corr()</span></code> function to automatically calculate the correlation between columns. Then use a <code class="docutils literal notranslate"><span class="pre">heatmap</span></code> to plot the result</p>
+<ul class="simple">
+<li><p>A positive number means that 2 columns have a positive correlation (max = 1)</p></li>
+<li><p>Negative number means 2 columns with an inverse correlation (max = -1)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">color_continuous_scale</span><span class="o">=</span><span class="s2">&quot;blackbody&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Observing the above <code class="docutils literal notranslate"><span class="pre">heatmap</span></code>, we see:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">AverageMonthlyHour</span></code> is highly correlated with <code class="docutils literal notranslate"><span class="pre">NumberOfProject</span></code></p>
+<ul>
+<li><p>Reasonable, right? If you participate in many projects, the average working hours are also high.</p></li>
+</ul>
+</li>
+<li><p>Similarly we have a high <code class="docutils literal notranslate"><span class="pre">SatisfactionIndex</span></code> <strong>inverse correlation</strong> with <code class="docutils literal notranslate"><span class="pre">TurnOver</span></code></p>
+<ul>
+<li><p>Another reasonable 1 point, high <code class="docutils literal notranslate"><span class="pre">SatisfactionIndex</span></code>, low <code class="docutils literal notranslate"><span class="pre">TurnOver</span></code>, the more satisfied it is, the harder it is to quit</p></li>
+</ul>
+</li>
+</ul>
+<p>Looking at this correlation can help us understand a lot more about the data:</p>
+<ul class="simple">
+<li><p>If 2 features are highly correlated (0.8, 0.9) we can combine those 2 characteristics into 1 (average, for example).</p></li>
+<li><p>Assuming we have 1 AI model that very accurately predicts which employee will quit, we can rely on the correlation of the <code class="docutils literal notranslate"><span class="pre">SatisfactionIndex</span></code> with other columns to decide what to do to retain that employee (e.g. if the <code class="docutils literal notranslate"><span class="pre">SatisfactionIndex</span></code> is highly correlated with the <code class="docutils literal notranslate"><span class="pre">SalaryLevel</span></code> → raise wages to retain employees)</p></li>
+</ul>
+<p>There is still 1 problem we need to solve, which is to encode categorical values in 2 columns <code class="docutils literal notranslate"><span class="pre">Department</span></code> <code class="docutils literal notranslate"><span class="pre">SalaryLevel</span></code></p>
+<p>The values of <code class="docutils literal notranslate"><span class="pre">SalaryLevel</span></code> are actually of the form <strong>Ordinal</strong> (category and ordered data: <span class="math notranslate nohighlight">\(\text{low} &lt; \text{medium} &lt; \text{high}\)</span>)</p>
+<p>To convert the above columns to numbers, we <strong>do not need to apply OneHotEncoding</strong> but simply map them to <code class="docutils literal notranslate"><span class="pre">0</span></code> <code class="docutils literal notranslate"><span class="pre">1</span></code> <code class="docutils literal notranslate"><span class="pre">2</span></code></p>
+</section>
+<section id="todo-3">
+<h4><a class="toc-backref" href="#id6" role="doc-backlink">TODO 3</a><a class="headerlink" href="#todo-3" title="Permalink to this heading">#</a></h4>
+<p>Convert values <code class="docutils literal notranslate"><span class="pre">low</span></code> <code class="docutils literal notranslate"><span class="pre">medium</span></code> <code class="docutils literal notranslate"><span class="pre">high</span></code> in column <code class="docutils literal notranslate"><span class="pre">SalaryLevel</span></code> into <code class="docutils literal notranslate"><span class="pre">0</span></code> <code class="docutils literal notranslate"><span class="pre">1</span></code> <code class="docutils literal notranslate"><span class="pre">2</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># YOUR SOLUTION</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After the conversion is complete, we can redraw the <code class="docutils literal notranslate"><span class="pre">heatmap</span></code> to see if “High salaries are enough to retain employees?”</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">color_continuous_scale</span><span class="o">=</span><span class="s2">&quot;blackbody&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="your-answer">
+<h4><a class="toc-backref" href="#id7" role="doc-backlink">Your answer</a><a class="headerlink" href="#your-answer" title="Permalink to this heading">#</a></h4>
+</section>
+<section id="todo-4">
+<h4><a class="toc-backref" href="#id8" role="doc-backlink">TODO 4</a><a class="headerlink" href="#todo-4" title="Permalink to this heading">#</a></h4>
+<p>There’s a lot more that can be analyzed from this dataset. It’s your turn</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># YOUR SOLUTION</span>
+<span class="c1"># CODE AND ALSO WRITE DOWN YOUR LOGIC TO SHOW YOUR ANALYTICAL THOUGHT PROCESS</span>
+<span class="c1"># ALSO CONCLUDE WHAT IS THE SOLUTION FOR IBM AFTER YOUR DATA ANALYSIS</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Before training the model, we will use the command <code class="docutils literal notranslate"><span class="pre">pd.get_dummies()</span></code> to convert all columns with non-numeric data to One Hot (so you need to be careful to perform other encoding methods before calling <code class="docutils literal notranslate"><span class="pre">pd.get_dummies()</span></code>, in this tutorial we converted the column <code class="docutils literal notranslate"><span class="pre">SalaryLevel</span></code> first)</p>
+<p>See the result of the <code class="docutils literal notranslate"><span class="pre">pd.get_dummies()</span></code> command below</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that the values in the <code class="docutils literal notranslate"><span class="pre">Department</span></code> column are converted to the <code class="docutils literal notranslate"><span class="pre">Deparment_xxx</span></code> columns to contain the One Hot Vector</p>
+<p>We will assign this new DataFrame back to the old variable <code class="docutils literal notranslate"><span class="pre">df</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To create <code class="docutils literal notranslate"><span class="pre">x</span></code> <code class="docutils literal notranslate"><span class="pre">y</span></code> from DataFrame do the following:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code> Use the <code class="docutils literal notranslate"><span class="pre">drop()</span></code> function to remove the <code class="docutils literal notranslate"><span class="pre">TurnOver</span></code> column, then convert this DataFrame to the numpy array using the command <code class="docutils literal notranslate"><span class="pre">.values.copy()</span></code> (<code class="docutils literal notranslate"><span class="pre">copy()</span></code> so that the value of <code class="docutils literal notranslate"><span class="pre">df</span></code> is not changed when we change <code class="docutils literal notranslate"><span class="pre">x</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span></code> Use <code class="docutils literal notranslate"><span class="pre">.values.copy()</span></code> command on the <code class="docutils literal notranslate"><span class="pre">TurnOver</span></code> column</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">&quot;TurnOver&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;TurnOver&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="train-the-model-2pts">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Train the model (2pts)</a><a class="headerlink" href="#train-the-model-2pts" title="Permalink to this heading">#</a></h3>
+<section id="todo-5">
+<h4><a class="toc-backref" href="#id10" role="doc-backlink">TODO 5</a><a class="headerlink" href="#todo-5" title="Permalink to this heading">#</a></h4>
+<p>Split <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> into 2 episodes: Train and Test according to the following parameters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">random_state=42</span></code></p></li>
+<li><p>Test set accounts for <code class="docutils literal notranslate"><span class="pre">20%</span></code></p></li>
+<li><p>Have a shuffle and use Stratified Split</p></li>
+</ul>
+<p>Read about <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">MLPClassifier</span></code> of <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> at <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html">here</a>. You will find that initializing this class needs to pass a lot of parameters, most of them you have learned through using Tensorflow. Let’s train sklearn’s MLP model to solve this problem.</p>
+<ul class="simple">
+<li><p>How to declare the number of layers and the number of units in each layer: <code class="docutils literal notranslate"><span class="pre">hidden_layer_sizes=tuple</span></code> where the number of elements of <code class="docutils literal notranslate"><span class="pre">tuple</span></code> is the number of layers, while the value of each element represents the number of units at the corresponding layer
+Try applying <code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code> on <code class="docutils literal notranslate"><span class="pre">learning_rate_init</span></code> and <code class="docutils literal notranslate"><span class="pre">hidden_layer_sizes</span></code></p></li>
+<li><p>After training the model, you can retrieve the value history of the Loss Function (similar to the <code class="docutils literal notranslate"><span class="pre">history</span></code> variable in Tensorflow) with the command <code class="docutils literal notranslate"><span class="pre">model.loss_curve_</span></code> (if using GridSearchCV, you need to call this command from the best model)</p></li>
+</ul>
+<p>Draw confusion matrix and classification report on Test file</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># YOUR SOLUTION</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="problem-2-data-clustering-3-pts">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Problem 2: Data Clustering (3 pts)</a><a class="headerlink" href="#problem-2-data-clustering-3-pts" title="Permalink to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">PCA</span></code> <code class="docutils literal notranslate"><span class="pre">KMeans</span></code> <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">Embeddings</span></code></p>
+<p>In folder <code class="docutils literal notranslate"><span class="pre">MidTerm_Problem</span> <span class="pre">2</span></code>, contains the following files:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Images.zip</span></code> dataset consists of 961 images under 2 labels:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> (car)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> (not a car)</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dataset.csv</span></code> label information of each image</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pretrained.pkl</span></code> AI model capable of extracting characteristics of any 1 image.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">test_1.jpg</span></code> test image to run the sample code below</p></li>
+</ul>
+<p>Below is sample code to initialize the Pretrained Model and extract the characteristics of any image</p>
+<ul class="simple">
+<li><p>You need to correct the path to the <code class="docutils literal notranslate"><span class="pre">pretrained.pkl</span></code> and <code class="docutils literal notranslate"><span class="pre">test_1.jpg</span></code> files</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torchvision.transforms</span> <span class="k">as</span> <span class="nn">transforms</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="k">class</span> <span class="nc">PretrainedModel</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;/content/drive/MyDrive/Colab Notebooks/ML-intensive/data/MidTerm_Problem2/pretrained.pkl&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span> <span class="o">=</span>  <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+            <span class="n">transforms</span><span class="o">.</span><span class="n">Resize</span><span class="p">((</span><span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">)),</span>
+            <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
+            <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span>
+                <span class="n">mean</span><span class="o">=</span><span class="p">[</span><span class="mf">0.485</span><span class="p">,</span> <span class="mf">0.456</span><span class="p">,</span> <span class="mf">0.406</span><span class="p">],</span>
+                <span class="n">std</span><span class="o">=</span><span class="p">[</span><span class="mf">0.229</span><span class="p">,</span> <span class="mf">0.224</span><span class="p">,</span> <span class="mf">0.225</span><span class="p">]</span>
+            <span class="p">),</span>
+        <span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_feature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pil_image</span><span class="p">):</span>
+        <span class="n">image_tensor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span><span class="p">(</span><span class="n">pil_image</span><span class="p">)</span>
+        <span class="n">image_tensor</span> <span class="o">=</span> <span class="n">image_tensor</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="n">feature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">image_tensor</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">feature</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># init</span>
+<span class="n">pretrained</span> <span class="o">=</span> <span class="n">PretrainedModel</span><span class="p">()</span>
+
+<span class="c1"># get feature from a PIL Image</span>
+<span class="n">pil_img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;/content/drive/MyDrive/Colab Notebooks/ML-intensive/data/MidTerm_Problem2/test_1.jpg&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;RGB&quot;</span><span class="p">)</span>
+<span class="n">feature</span> <span class="o">=</span> <span class="n">pretrained</span><span class="o">.</span><span class="n">get_feature</span><span class="p">(</span><span class="n">pil_img</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">feature</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">feature</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s the code to unzip the <code class="docutils literal notranslate"><span class="pre">images.zip</span></code> file to Colab’s hard drive at <code class="docutils literal notranslate"><span class="pre">/content/images</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!unzip &quot;/content/drive/MyDrive/Colab Notebooks/ML-intensive/data/MidTerm_Problem2/images.zip&quot; -d &quot;/content/&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Read the csv file containing label information</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;/content/drive/MyDrive/Colab Notebooks/ML-intensive/data/MidTerm_Problem2/dataset.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Code to read the entire images and labels into 2 variables <code class="docutils literal notranslate"><span class="pre">x</span></code> <code class="docutils literal notranslate"><span class="pre">y</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">tqdm.notebook</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>            <span class="c1"># retrieve data from the label column</span>
+<span class="n">image_names</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;image&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>  <span class="c1"># retrieve the data from image colum (names of images)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>                            <span class="c1"># embedding vector</span>
+
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">image_names</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="n">image_names</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+  <span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;/content/images&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+  <span class="n">pil_img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;RGB&quot;</span><span class="p">)</span>
+  <span class="n">feature</span> <span class="o">=</span> <span class="n">pretrained</span><span class="o">.</span><span class="n">get_feature</span><span class="p">(</span><span class="n">pil_img</span><span class="p">)</span>
+  <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To find out which image the embedding at position <code class="docutils literal notranslate"><span class="pre">i</span></code> is, we use the following code</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">index</span> <span class="o">=</span> <span class="mi">123</span> <span class="c1"># sample index</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">==</span> <span class="n">index</span><span class="p">][</span><span class="s2">&quot;image&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># 1 index should take out the first element</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">indices</span><span class="p">)][</span><span class="s2">&quot;image&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the work section below, you will need to draw photos</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Guildance:</span>
+<span class="sd">- convert names into paths</span>
+<span class="sd">- Read photos, resize about 50x50 pixels to draw (original photos are too large)</span>
+<span class="sd">- Convert into numpy array</span>
+
+<span class="sd">- 6 photos -&gt; a plot with 3 rows of 2 columns (rows, cols, and figsize is freely customized)</span>
+<span class="sd">- Fiter to get the label</span>
+<span class="sd">- show image and set title image_name-label</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+
+<span class="n">test_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;0.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;1.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;2.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;3.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;800.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;900.jpg&quot;</span><span class="p">]</span>
+<span class="n">test_paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;/content/images&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">test_names</span><span class="p">]</span>
+<span class="n">test_images</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">)))</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">test_paths</span><span class="p">]</span>
+
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">):</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">test_images</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+  <span class="n">label</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;image&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">test_names</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="s2">&quot;label&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">test_names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> - Label = </span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/46702528334e12ffc652fc2b1d946bb0109b5f2949823d7945b55975080e6699.png" src="../../_images/46702528334e12ffc652fc2b1d946bb0109b5f2949823d7945b55975080e6699.png" />
+</div>
+</div>
+<section id="todo-6-1-5-pts">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">TODO 6 (1.5 pts)</a><a class="headerlink" href="#todo-6-1-5-pts" title="Permalink to this heading">#</a></h3>
+<p>Let:</p>
+<ul class="simple">
+<li><p>Apply PCA to reduce dimension to 3 (before PCA you must do what?)</p></li>
+<li><p>Display how data is distributed in 3D space (does the data have a clear separation between labels?)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># YOUR SOLUTION</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The actual data includes the following labels (more than 3 labels)</p>
+<ul class="simple">
+<li><p>Angle view of the car</p></li>
+<li><p>Many different vehicles</p></li>
+<li><p>Non-vehicle images of various subclasses</p></li>
+</ul>
+<p>Instead of looking at each image, there is 1 way to use the <code class="docutils literal notranslate"><span class="pre">KMeans</span></code> model to cluster the embedding (before PCA). If embedding is good, KMeans models will be able to group photos by hidden labels.</p>
+</section>
+<section id="todo-7-1-5-pts">
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">TODO 7 (1.5 pts)</a><a class="headerlink" href="#todo-7-1-5-pts" title="Permalink to this heading">#</a></h3>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">KMeans</span></code> model of <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> to cluster embedding (try different <code class="docutils literal notranslate"><span class="pre">k</span></code>)</p>
+<p>After clustering, at each cluster, draw several images of that cluster to see if you can find the hidden label of the dataset</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># YOUR SOLUTION</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="problem-3-sentiment-analysis-4-pts">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">Problem 3: Sentiment Analysis (4 pts)</a><a class="headerlink" href="#problem-3-sentiment-analysis-4-pts" title="Permalink to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">MLP</span></code></p>
+<p>In this Problem, we will try to use the Pretrained Language Model to classify emotions for English comments. Here’s how:
+Use the Pretrained Language Model to create embedding for comments</p>
+<ul class="simple">
+<li><p>From the above embedding set, MLP model training to classify emotions</p></li>
+</ul>
+<p>First, we need to install 1 more library</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!pip install -qq pyyaml==5.4.1
+!pip install -qq transformers
+!pip install -qq datasets
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/175.1 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">175.1/175.1 kB</span> <span class=" -Color -Color-Red">5.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25h  Installing build dependencies ... ?25l?25hdone
+  Getting requirements to build wheel ... ?25l?25hdone
+  Preparing metadata (pyproject.toml) ... ?25l?25hdone
+  Building wheel for pyyaml (pyproject.toml) ... ?25l?25hdone
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">7.2/7.2 MB</span> <span class=" -Color -Color-Red">62.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">236.8/236.8 kB</span> <span class=" -Color -Color-Red">35.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">7.8/7.8 MB</span> <span class=" -Color -Color-Red">118.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1.3/1.3 MB</span> <span class=" -Color -Color-Red">84.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">486.2/486.2 kB</span> <span class=" -Color -Color-Red">9.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">110.5/110.5 kB</span> <span class=" -Color -Color-Red">14.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">212.5/212.5 kB</span> <span class=" -Color -Color-Red">19.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">134.3/134.3 kB</span> <span class=" -Color -Color-Red">6.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25h
+</pre></div>
+</div>
+</div>
+</div>
+<section id="prepare-the-dataset">
+<h3><a class="toc-backref" href="#id15" role="doc-backlink">Prepare the dataset</a><a class="headerlink" href="#prepare-the-dataset" title="Permalink to this heading">#</a></h3>
+<p>The code below will generate 3 DataFrames representing the set of Train, Validation, Test.</p>
+<p>Labels of comment sentences are stored in the variable <code class="docutils literal notranslate"><span class="pre">label_names</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">emotion_ds</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;emotion&quot;</span><span class="p">)</span>
+<span class="n">emotion_ds</span><span class="o">.</span><span class="n">set_format</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">)</span>
+
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">emotion_ds</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">][:]</span>
+<span class="n">df_val</span> <span class="o">=</span> <span class="n">emotion_ds</span><span class="p">[</span><span class="s2">&quot;validation&quot;</span><span class="p">][:]</span>
+<span class="n">df_test</span> <span class="o">=</span> <span class="n">emotion_ds</span><span class="p">[</span><span class="s2">&quot;test&quot;</span><span class="p">][:]</span>
+
+<span class="n">label_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sadness&#39;</span><span class="p">,</span> <span class="s1">&#39;joy&#39;</span><span class="p">,</span> <span class="s1">&#39;love&#39;</span><span class="p">,</span> <span class="s1">&#39;anger&#39;</span><span class="p">,</span> <span class="s1">&#39;fear&#39;</span><span class="p">,</span> <span class="s1">&#39;surprise&#39;</span><span class="p">]</span>
+
+<span class="n">train_labels</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">train_label_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">label_names</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">train_labels</span><span class="p">]</span>
+<span class="n">df_train</span><span class="p">[</span><span class="s2">&quot;label_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_label_names</span>
+
+<span class="n">val_labels</span> <span class="o">=</span> <span class="n">df_val</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">val_label_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">label_names</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">val_labels</span><span class="p">]</span>
+<span class="n">df_val</span><span class="p">[</span><span class="s2">&quot;label_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val_label_names</span>
+
+<span class="n">test_labels</span> <span class="o">=</span> <span class="n">df_test</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">test_label_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">label_names</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">test_labels</span><span class="p">]</span>
+<span class="n">df_test</span><span class="p">[</span><span class="s2">&quot;label_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">test_label_names</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Explore the dataset</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df_train</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">label_names</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Label:&quot;</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+  <span class="n">texts</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s2">&quot;label_name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">label</span><span class="p">][</span><span class="s2">&quot;text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+  <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">texts</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train Set&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s2">&quot;label_name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Val Set&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_val</span><span class="p">[</span><span class="s2">&quot;label_name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test Set&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_test</span><span class="p">[</span><span class="s2">&quot;label_name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-embedding">
+<h3><a class="toc-backref" href="#id16" role="doc-backlink">Create Embedding</a><a class="headerlink" href="#create-embedding" title="Permalink to this heading">#</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">AutoTokenizer</span></code> from <code class="docutils literal notranslate"><span class="pre">transformers</span></code> library</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span>
+
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;distilbert-base-uncased&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">encoded_train_dict</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span>
+    <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+    <span class="n">max_length</span><span class="o">=</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">model_max_length</span><span class="p">,</span>
+    <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span> <span class="c1">#np #tf</span>
+<span class="p">)</span>
+
+<span class="n">encoded_val_dict</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span>
+    <span class="n">df_val</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+    <span class="n">max_length</span><span class="o">=</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">model_max_length</span><span class="p">,</span>
+    <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span>
+<span class="p">)</span>
+
+<span class="n">encoded_test_dict</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span>
+    <span class="n">df_test</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+    <span class="n">max_length</span><span class="o">=</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">model_max_length</span><span class="p">,</span>
+    <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoModel</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;distilbert-base-uncased&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="" src="https://www.azquotes.com/picture-quotes/quote-success-requires-both-urgency-and-patience-be-urgent-about-making-the-effort-and-patient-ralph-marston-124-20-15.jpg" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tqdm.notebook</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">extract_feature</span><span class="p">(</span><span class="n">data_dict</span><span class="p">,</span> <span class="n">device</span><span class="p">):</span>
+  <span class="n">features</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">input_id</span><span class="p">,</span> <span class="n">mask</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">data_dict</span><span class="p">[</span><span class="s2">&quot;input_ids&quot;</span><span class="p">],</span> <span class="n">data_dict</span><span class="p">[</span><span class="s2">&quot;attention_mask&quot;</span><span class="p">]),</span> <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">data_dict</span><span class="p">[</span><span class="s2">&quot;input_ids&quot;</span><span class="p">])):</span>
+      <span class="n">input_id</span> <span class="o">=</span> <span class="n">input_id</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+      <span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+      <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_id</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">mask</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">))</span><span class="o">.</span><span class="n">last_hidden_state</span><span class="o">.</span><span class="n">detach</span><span class="p">()[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+      <span class="n">features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train Set&quot;</span><span class="p">)</span>
+<span class="n">train_features</span> <span class="o">=</span> <span class="n">extract_feature</span><span class="p">(</span><span class="n">encoded_train_dict</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Val Set&quot;</span><span class="p">)</span>
+<span class="n">val_features</span> <span class="o">=</span> <span class="n">extract_feature</span><span class="p">(</span><span class="n">encoded_val_dict</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test Set&quot;</span><span class="p">)</span>
+<span class="n">test_features</span> <span class="o">=</span> <span class="n">extract_feature</span><span class="p">(</span><span class="n">encoded_test_dict</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">train_labels</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">val_labels</span> <span class="o">=</span> <span class="n">df_val</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">test_labels</span> <span class="o">=</span> <span class="n">df_test</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train Set:&quot;</span><span class="p">,</span> <span class="n">train_features</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">train_labels</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Val Set:&quot;</span><span class="p">,</span> <span class="n">val_features</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">val_labels</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test Set:&quot;</span><span class="p">,</span> <span class="n">test_features</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">test_labels</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="train-the-model">
+<h3><a class="toc-backref" href="#id17" role="doc-backlink">Train the model</a><a class="headerlink" href="#train-the-model" title="Permalink to this heading">#</a></h3>
+<section id="todo-8">
+<h4><a class="toc-backref" href="#id18" role="doc-backlink">TODO 8</a><a class="headerlink" href="#todo-8" title="Permalink to this heading">#</a></h4>
+<p>Train the MLP Tensorflow model on the above dataset. It would be nearly impossible to create a good model on this dataset, however:
+Try to make the training as stable as possible (no overfit on the validation set) when train 100 epochs (accuracy on train should &gt; 80%)</p>
+<p>Print out Confusion Matrix and Classification Report on Test file</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># YOUR SOLUTION</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualize metrics</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+<span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">chart_title</span><span class="p">):</span>
+  <span class="n">epochs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]))</span>
+
+  <span class="n">train_loss</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="n">train_loss</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Train Loss&quot;</span>
+  <span class="n">train_loss</span><span class="p">[</span><span class="s2">&quot;showlegend&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+  <span class="n">val_loss</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_loss&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="n">val_loss</span><span class="p">[</span><span class="s2">&quot;line&quot;</span><span class="p">][</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;#00ff00&quot;</span>
+  <span class="n">val_loss</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Val Loss&quot;</span>
+  <span class="n">val_loss</span><span class="p">[</span><span class="s2">&quot;showlegend&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+  <span class="n">train_accuracy</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="n">train_accuracy</span><span class="p">[</span><span class="s2">&quot;line&quot;</span><span class="p">][</span><span class="s2">&quot;dash&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;dot&quot;</span>
+  <span class="n">train_accuracy</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Train Accuracy&quot;</span>
+  <span class="n">train_accuracy</span><span class="p">[</span><span class="s2">&quot;showlegend&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+  <span class="n">val_accuracy</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_accuracy&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="n">val_accuracy</span><span class="p">[</span><span class="s2">&quot;line&quot;</span><span class="p">][</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;#00ff00&quot;</span>
+  <span class="n">val_accuracy</span><span class="p">[</span><span class="s2">&quot;line&quot;</span><span class="p">][</span><span class="s2">&quot;dash&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;dot&quot;</span>
+  <span class="n">val_accuracy</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Val Accuracy&quot;</span>
+  <span class="n">val_accuracy</span><span class="p">[</span><span class="s2">&quot;showlegend&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+  <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">train_loss</span><span class="p">,</span> <span class="n">val_loss</span><span class="p">,</span> <span class="n">train_accuracy</span><span class="p">,</span> <span class="n">val_accuracy</span><span class="p">])</span>
+  <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+      <span class="n">title</span> <span class="o">=</span> <span class="n">chart_title</span><span class="p">,</span>
+      <span class="n">xaxis_title</span> <span class="o">=</span> <span class="s2">&quot;Epoch&quot;</span><span class="p">,</span>
+      <span class="n">yaxis_title</span> <span class="o">=</span> <span class="s2">&quot;Value&quot;</span>
+  <span class="p">)</span>
+  <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">chart_title</span><span class="o">=</span><span class="s2">&quot;Loss vs Accuracy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><html>
+<head><meta charset="utf-8" /></head>
+<body>
+    <div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script src="https://cdn.plot.ly/plotly-2.18.2.min.js"></script>                <div id="9f572c17-286f-4492-b762-0d7efab0b783" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("9f572c17-286f-4492-b762-0d7efab0b783")) {                    Plotly.newPlot(                        "9f572c17-286f-4492-b762-0d7efab0b783",                        [{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#636efa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Train Loss","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99],"xaxis":"x","y":[1.4999947547912598,1.2954154014587402,1.2251605987548828,1.1922470331192017,1.1679691076278687,1.1573909521102905,1.1459872722625732,1.1533688306808472,1.1393654346466064,1.0537453889846802,1.0253944396972656,1.0107946395874023,0.9964113831520081,0.9793645739555359,0.9650303721427917,0.9487438201904297,0.938713788986206,0.9273194074630737,0.9187020063400269,0.902880847454071,0.8898678421974182,0.884853184223175,0.8710275888442993,0.8653894066810608,0.8595576882362366,0.8512060046195984,0.8386846780776978,0.8345310091972351,0.8324341177940369,0.8255303502082825,0.818518877029419,0.8139119148254395,0.8084225058555603,0.8011041283607483,0.7960759997367859,0.7973138689994812,0.7970291376113892,0.7897034883499146,0.7880995273590088,0.7845416069030762,0.780809223651886,0.7760600447654724,0.7738471031188965,0.7693734765052795,0.7735239267349243,0.7700399160385132,0.7648159265518188,0.7625128030776978,0.7661992311477661,0.7708059549331665,0.7636945843696594,0.7593008279800415,0.7580990791320801,0.7597215175628662,0.7531731128692627,0.7630622982978821,0.7506033778190613,0.7575294971466064,0.7552651762962341,0.7542984485626221,0.7528582811355591,0.7524816989898682,0.7480660080909729,0.7522172331809998,0.748212456703186,0.7459242939949036,0.7550090551376343,0.7517514824867249,0.7491293549537659,0.749297559261322,0.7494467496871948,0.7476231455802917,0.7484154105186462,0.7484732866287231,0.7454209327697754,0.7476477026939392,0.7479721903800964,0.7456120252609253,0.7497254610061646,0.7457130551338196,0.746149480342865,0.7485162615776062,0.7481657862663269,0.7497804164886475,0.7458711862564087,0.7452682256698608,0.7434152364730835,0.7477583289146423,0.7463294863700867,0.7486521005630493,0.7520171999931335,0.7492308616638184,0.743012011051178,0.7461832165718079,0.7439002394676208,0.7466404438018799,0.7485623955726624,0.748624324798584,0.7443165183067322,0.7474979758262634],"yaxis":"y","type":"scatter"},{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#00ff00","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Val Loss","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99],"xaxis":"x","y":[2.152371644973755,1.575921893119812,1.5729891061782837,1.9788156747817993,1.280464768409729,1.2870651483535767,1.3999660015106201,1.2434453964233398,1.5619304180145264,1.1401646137237549,1.291444182395935,1.2346781492233276,1.1069320440292358,1.5651737451553345,1.1894338130950928,1.1232224702835083,1.2095322608947754,1.1279504299163818,1.2163571119308472,1.138020634651184,1.12191903591156,1.0762138366699219,1.1083470582962036,1.0764527320861816,1.059198260307312,1.0475363731384277,1.0590837001800537,1.0663113594055176,1.1168006658554077,1.1037509441375732,1.1249518394470215,1.1036802530288696,1.08907949924469,1.1010276079177856,1.1050567626953125,1.0985609292984009,1.1063684225082397,1.0910812616348267,1.112502098083496,1.1023863554000854,1.1217690706253052,1.1003103256225586,1.1248058080673218,1.115649938583374,1.112597942352295,1.1050448417663574,1.1234314441680908,1.1281709671020508,1.1207890510559082,1.123292326927185,1.1185754537582397,1.129268765449524,1.1220930814743042,1.1273789405822754,1.1327722072601318,1.1254292726516724,1.1258957386016846,1.1267093420028687,1.1314703226089478,1.1253341436386108,1.1307837963104248,1.1354312896728516,1.1335580348968506,1.1347001791000366,1.1370291709899902,1.1351207494735718,1.1333706378936768,1.1364567279815674,1.1365677118301392,1.1368848085403442,1.1348170042037964,1.134638786315918,1.1360331773757935,1.1354979276657104,1.1362131834030151,1.1344698667526245,1.136688232421875,1.1355262994766235,1.1370518207550049,1.1382004022598267,1.1383975744247437,1.1375269889831543,1.1371934413909912,1.1364367008209229,1.1400140523910522,1.136582851409912,1.137820839881897,1.1364275217056274,1.1374847888946533,1.1387388706207275,1.137841820716858,1.1360502243041992,1.1384094953536987,1.139420747756958,1.1359686851501465,1.13765549659729,1.13685142993927,1.1382274627685547,1.1370532512664795,1.1372175216674805],"yaxis":"y","type":"scatter"},{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#636efa","dash":"dot"},"marker":{"symbol":"circle"},"mode":"lines","name":"Train Accuracy","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99],"xaxis":"x","y":[0.5036249756813049,0.5655624866485596,0.5842499732971191,0.5866249799728394,0.6005625128746033,0.6030625104904175,0.6055625081062317,0.5993750095367432,0.609125018119812,0.6349375247955322,0.645187497138977,0.6478124856948853,0.6501874923706055,0.6573749780654907,0.6603749990463257,0.6638749837875366,0.6635000109672546,0.6738749742507935,0.6710625290870667,0.6786249876022339,0.6833124756813049,0.6809999942779541,0.6883124709129333,0.6919999718666077,0.6896874904632568,0.6923750042915344,0.6935625076293945,0.6969375014305115,0.6989374756813049,0.6977499723434448,0.7023125290870667,0.7023125290870667,0.7058749794960022,0.7069374918937683,0.7098749876022339,0.7107499837875366,0.7109375,0.7090625166893005,0.7096874713897705,0.7120000123977661,0.7129999995231628,0.715749979019165,0.7138749957084656,0.7204375267028809,0.7156875133514404,0.7153124809265137,0.7203124761581421,0.7202500104904175,0.7158125042915344,0.7177500128746033,0.7193750143051147,0.7223125100135803,0.7208750247955322,0.71875,0.7228124737739563,0.7179999947547913,0.7255625128746033,0.7213125228881836,0.7246249914169312,0.7210624814033508,0.7253749966621399,0.7215625047683716,0.7256249785423279,0.7232499718666077,0.7260000109672546,0.7258750200271606,0.7228124737739563,0.7210000157356262,0.7245625257492065,0.7275000214576721,0.7259374856948853,0.7238125205039978,0.7273749709129333,0.7233750224113464,0.7273749709129333,0.7238749861717224,0.726937472820282,0.7252500057220459,0.7248125076293945,0.7244374752044678,0.7263749837875366,0.726187527179718,0.7254999876022339,0.7211250066757202,0.7260624766349792,0.7276250123977661,0.726937472820282,0.7253749966621399,0.7243124842643738,0.7228749990463257,0.7245000004768372,0.7255625128746033,0.7271875143051147,0.7233750224113464,0.726812481880188,0.7238125205039978,0.7257500290870667,0.726937472820282,0.7253749966621399,0.7240625023841858],"yaxis":"y","type":"scatter"},{"hovertemplate":"x=%{x}<br>y=%{y}<extra></extra>","legendgroup":"","line":{"color":"#00ff00","dash":"dot"},"marker":{"symbol":"circle"},"mode":"lines","name":"Val Accuracy","orientation":"v","showlegend":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99],"xaxis":"x","y":[0.4424999952316284,0.4794999957084656,0.44350001215934753,0.3529999852180481,0.5649999976158142,0.5625,0.5680000185966492,0.5885000228881836,0.5109999775886536,0.6025000214576721,0.5759999752044678,0.5805000066757202,0.6194999814033508,0.4959999918937683,0.5740000009536743,0.6205000281333923,0.5920000076293945,0.6140000224113464,0.5824999809265137,0.593500018119812,0.6000000238418579,0.6119999885559082,0.6234999895095825,0.625,0.6169999837875366,0.6234999895095825,0.6294999718666077,0.6305000185966492,0.6234999895095825,0.6215000152587891,0.621999979019165,0.6234999895095825,0.6294999718666077,0.6320000290870667,0.6240000128746033,0.6255000233650208,0.6305000185966492,0.6309999823570251,0.6305000185966492,0.6284999847412109,0.6299999952316284,0.6355000138282776,0.6255000233650208,0.628000020980835,0.6324999928474426,0.6324999928474426,0.6290000081062317,0.6305000185966492,0.6305000185966492,0.6305000185966492,0.6290000081062317,0.6330000162124634,0.628000020980835,0.6305000185966492,0.6244999766349792,0.6290000081062317,0.628000020980835,0.6294999718666077,0.6294999718666077,0.6274999976158142,0.6309999823570251,0.628000020980835,0.6274999976158142,0.6299999952316284,0.6290000081062317,0.6290000081062317,0.628000020980835,0.6274999976158142,0.6290000081062317,0.6290000081062317,0.6269999742507935,0.6309999823570251,0.6294999718666077,0.6294999718666077,0.6294999718666077,0.6284999847412109,0.6309999823570251,0.6315000057220459,0.6320000290870667,0.6305000185966492,0.6299999952316284,0.6294999718666077,0.6290000081062317,0.6294999718666077,0.6299999952316284,0.6290000081062317,0.6294999718666077,0.6309999823570251,0.6294999718666077,0.6305000185966492,0.6294999718666077,0.6294999718666077,0.6284999847412109,0.6294999718666077,0.6305000185966492,0.6299999952316284,0.628000020980835,0.6284999847412109,0.6305000185966492,0.6299999952316284],"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"text":"Loss vs Accuracy"},"xaxis":{"title":{"text":"Epoch"}},"yaxis":{"title":{"text":"Value"}}},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('9f572c17-286f-4492-b762-0d7efab0b783');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                            </script>        </div>
+</body>
+</html></div></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book/Session7"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Midterm%20Theory%20Solution.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Theory Midterm Solution</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="S7_MidTerm_SOL.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Session 7: Midterm Coding Solution</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-employee-absenteeism-forecast-3-pts">Problem 1:  Employee absenteeism forecast (3 pts)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis-1-pt">Data Analysis (1 pt)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-1">TODO 1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-2">TODO 2</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-3">TODO 3</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#your-answer">Your answer</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-4">TODO 4</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-model-2pts">Train the model (2pts)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-5">TODO 5</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-data-clustering-3-pts">Problem 2: Data Clustering (3 pts)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-6-1-5-pts">TODO 6 (1.5 pts)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-7-1-5-pts">TODO 7 (1.5 pts)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-sentiment-analysis-4-pts">Problem 3: Sentiment Analysis (4 pts)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-dataset">Prepare the dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-embedding">Create Embedding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-model">Train the model</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-8">TODO 8</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kyle Paul
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

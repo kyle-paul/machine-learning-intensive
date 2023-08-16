@@ -1,0 +1,783 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Session 10: Revision &#8212; Machine Learning Intensive</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/Session10/Session 10 Revision';</script>
+    <link rel="canonical" href="https://kyle-paul.github.io/machine-learning-intensive/book/Session10/Session 10 Revision.html" />
+    <link rel="shortcut icon" href="../../_static/avatar.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Preclass Session 11: Reinforcement Learning" href="../Session11/Preclass%20Session%2011.html" />
+    <link rel="prev" title="Session 10: Coding Solution" href="S10_SOL.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Session1/Preclass%20Session%201.html"><strong>Preclass Session 1: Representation</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session1/S1_Lab_Representation.html">Session 1: Representation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session1/S1_ASM.html">Session 1: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session1/S1_SOL.html">Session 1: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session1/Session%201%20Revision.html"><strong>Session 1: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/Preclass%20Session%202.html"><strong>Preclass Session 2: Linear Model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/S2_Lab_LinearModel.html">Session 2: Linear Model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session2/S2_ASM.html">Session 2: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/S2_SOL.html">Session 2: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/Session%202%20Revision.html">Session 2: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/Preclass%20Session%203.html"><strong>Preclass Session 3: Recommender System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/S3_Lab_RecSys.html">Sesion 3: Recommender System</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session3/S3_ASM.html">Session 3: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/S3_SOL.html">Session 3: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/Session%203%20Revision.html">Session 3: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/Preclass%20Session%204.html"><strong>Preclass Session 4: NonLinear Predictor</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/S4_Lab_NonLinearPredictors.html">Session 4: Nonlinear Predictors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/S4_ASM.html">Session 4: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/S4_SOL.html">Session 4: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/Session%204%20Revision.html">Session 4: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/Preclass%20Session%205.html"><strong>Preclass Session 5: Optimization</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/S5_Lab_Optimization.html">Session 5: Optimization</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session5/S5_ASM.html">Session 5: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/S5_SOL.html">Session 5: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/Session%205%20Revision.html">Session 5: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/Preclass%20Session%206.html"><strong>Preclass Session 6: Metrics and Losses</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/S6_Lab_Metrics%26Losses.html">Session 6: Metrics &amp; Losses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/S6_ASM.html">Session 6: Assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/S6_SOL.html">Session 6: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/Session%206%20Revision.html">Session 6: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session7/Midterm%20Theory%20Test.html"><strong>Theory Midterm Test</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session7/Midterm%20Theory%20Solution.html">Theory Midterm Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session7/S7_MidTerm_TEST.html">Session 7: Midterm Coding Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session7/S7_MidTerm_SOL.html">Session 7: Midterm Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session8/Preclass%20Session%208.html"><strong>Preclass Session 8: Convolutional Neural Network</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session8/S8_Lab_CNN.html">Session 8: Convolutional Neural Network</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session8/S8_ASM.html">Session 8: Assignment</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session8/S8_SOL.html">Session 8: Coding Solution</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session8/Session%208%20Revision.html">Session 8: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session9/Preclass%20Session%209.html"><strong>Preclass Session 9: Natural Language Processing</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session9/S9_LAB_RNN.html">Session 9 - Natural Language Processing</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session9/S9_ASM.html">Session 9: Assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session9/S9_SOL.html">Session 9: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session9/Session%209%20Revision.html">Session: 9 Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Preclass%20Session%2010.html"><strong>Preclass Session 10: MDP Planning</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S10_LAB_MDP_PLANNING.html">Session 10 - MDP Planning</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S10_ASM.html">Session 10: Assigment</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S10_SOL.html">Session 10: Coding Solution</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Session 10: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session11/Preclass%20Session%2011.html"><strong>Preclass Session 11: Reinforcement Learning</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session11/S11_LAB_Q_Learning.html">Session 11: Q Learning</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session11/S11_SOL.html">Session 11: Coding Solution</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session11/Session%2011%20Revision.html">Session 11: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session12/Final%20Test%20Theory.html"><strong>Session 12: final theory test</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session12/S12_FinalExam_TEST.html">Sesssion 12: Final Coding Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session12/S12_FinalExam_SOL.html">Sesssion 12: Final Coding Solution</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/edit/main/book/Session10/Session 10 Revision.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/issues/new?title=Issue%20on%20page%20%2Fbook/Session10/Session 10 Revision.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/book/Session10/Session 10 Revision.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Session 10: Revision</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theory"><strong>Theory</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1"><strong>Question 1</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#answer"><strong>Answer</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2"><strong>Question 2</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Answer</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3"><strong>Question 3</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Answer</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sumamry-mdp-planning-perception-action-loop"><strong>Sumamry - MDP Planning (Perception - Action Loop)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#planning-is-sequential-decision-making"><strong>Planning is Sequential Decision Making</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#markov-decision-process-mdp-formulation"><strong>Markov Decision Process (MDP) Formulation</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#simplest-formulation-assumptions"><strong>Simplest formulation (Assumptions)</strong>:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#simplest-formulation-text-mdp-s-a-t-r-gamma"><strong>Simplest formulation: <span class="math notranslate nohighlight">\(\text{MDP} = (S,A,T,R,\gamma)\)</span></strong>:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#s-a-t-r-gamma-to-text-policy-pi-s-text-and-value-q-pi-s-a"><span class="math notranslate nohighlight">\((S,A,T,R,\gamma) \to  \text{policy } \pi(s) \text{ and value } q^\pi(s,a)\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trajectory-episode-return-value-optimal-policy">Trajectory, Episode, Return, Value, Optimal Policy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-mdps-bellman-optimality-equation-q-value-iteration"><strong>Solving MDPs: Bellman Optimality Equation &amp; Q-Value-Iteration</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-finite-mdp-solver-planner"><strong>Discrete finite MDP solver / planner</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="session-10-revision">
+<h1>Session 10: Revision<a class="headerlink" href="#session-10-revision" title="Permalink to this heading">#</a></h1>
+<section id="theory">
+<h2><strong>Theory</strong><a class="headerlink" href="#theory" title="Permalink to this heading">#</a></h2>
+<section id="question-1">
+<h3><strong>Question 1</strong><a class="headerlink" href="#question-1" title="Permalink to this heading">#</a></h3>
+<p>Explain why MDP planning is also called “temporally extended predictions into future, ahead of time” and what is “prediction” here?</p>
+</section>
+<section id="answer">
+<h3><strong>Answer</strong><a class="headerlink" href="#answer" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>MDP planning is also called “temporally extended predictions into future, ahead of time” because it involves looking ahead and estimating the expected outcomes of <mark>different courses of actions</mark> <strong>(= extended)</strong> <mark>over multiple time steps</mark> <strong>(= temporally)</strong>.</p></li>
+<li><p>The <strong>prediction</strong> here refers to the <strong>expected value</strong> or <strong>utility of each state-action pair</strong>, which are <span class="math notranslate nohighlight">\(V^\pi(s)\)</span> and <span class="math notranslate nohighlight">\(Q^\pi(s,a)\)</span>: the mean discounted rewards in the future (after many courses of actions and state transitions) under policy <span class="math notranslate nohighlight">\(\pi\)</span>.</p></li>
+<li><p>For example, an agent playing chess can use MDP planning : The agent can predict the future states of the board and the rewards (win, lose or draw) based on its current state, its possible actions and the opponent’s responses. The agent can also <mark><strong>plan ahead for several moves in advance</strong></mark>, which is <strong>temporally extended</strong>.</p></li>
+</ul>
+</section>
+<section id="question-2">
+<h3><strong>Question 2</strong><a class="headerlink" href="#question-2" title="Permalink to this heading">#</a></h3>
+<p>Explain why MDP planning is also called “mental simulations”? What is “mental model” and what simulation, calculation is it used for?</p>
+</section>
+<section id="id1">
+<h3><strong>Answer</strong><a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>MDP planning is the “world model” including transition and reward function. Planner/solve use this model to obtain the next states &amp; rewards and compute values (e.g with Bellman optimality equation). Every calculations can be performed simulatively without any real interactions with the environment <span class="math notranslate nohighlight">\(\rightarrow\)</span> mental/model simulation.</p></li>
+</ul>
+</section>
+<section id="question-3">
+<h3><strong>Question 3</strong><a class="headerlink" href="#question-3" title="Permalink to this heading">#</a></h3>
+<p>Given a dataset with 2 trajectories (rollouts) as follows:
+$<span class="math notranslate nohighlight">\(
+𝝳_1 = S_3, A_1, S_1, A_2, S_2, A_1, 0.1, S_3, A_2, S_g, 1
+\)</span>$</p>
+<div class="math notranslate nohighlight">
+\[
+𝝳_2 = S_1, A_2, S_1, -0.1, A_1, S_3, A_1, S_2, 0.2, A_2, S_3, A_2, S_g, 1
+\]</div>
+<ul class="simple">
+<li><p>Calculate all return <span class="math notranslate nohighlight">\(G\)</span>, estimated state value <span class="math notranslate nohighlight">\(V\)</span>, action value <span class="math notranslate nohighlight">\(Q\)</span> for states and actions if there is no discount (<span class="math notranslate nohighlight">\(\gamma = 1\)</span>)</p></li>
+<li><p>Calculate the <strong>estimated</strong> transition probabilities <span class="math notranslate nohighlight">\(P(s',s,a)\)</span> and <strong>average</strong> reward <span class="math notranslate nohighlight">\(R(s,a)\)</span> for states and values</p></li>
+</ul>
+</section>
+<section id="id2">
+<h3><strong>Answer</strong><a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(G^1(S_1) = 1.1\)</span>, <span class="math notranslate nohighlight">\(G^2(S_1) = 1.1\)</span>, <span class="math notranslate nohighlight">\(G^3(S_1)=1.2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{V}(S_1) = \frac{G^1 + G^2 + G^3}{3} \approx 1.13\)</span></p></li>
+<li><p>There are two actions <span class="math notranslate nohighlight">\(\rightarrow\)</span> <span class="math notranslate nohighlight">\(\hat{Q}(S_1, A_1) \approx 1.2\)</span> and <span class="math notranslate nohighlight">\(\hat{Q}(S_1, A_2) \approx 1.1\)</span></p></li>
+<li><p>Estimated transition probabilities <span class="math notranslate nohighlight">\(P(s',s,a)\)</span> and average reward <span class="math notranslate nohighlight">\(R(s,a)\)</span>. Example for <span class="math notranslate nohighlight">\(S_1\)</span> and <span class="math notranslate nohighlight">\(A_2\)</span>:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(R(S_1, A_2) = \frac{0-0.1}{2} = -0.05\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(S_1, S_1, A_2) = P(S_2, S_1, A_2) = 0.5\)</span> and the rest <span class="math notranslate nohighlight">\(P(S_3, S_1, A_2) = P(S_g, S_1, A_2) = 0\)</span></p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="sumamry-mdp-planning-perception-action-loop">
+<h2><strong>Sumamry - MDP Planning (Perception - Action Loop)</strong><a class="headerlink" href="#sumamry-mdp-planning-perception-action-loop" title="Permalink to this heading">#</a></h2>
+<section id="planning-is-sequential-decision-making">
+<h3><strong>Planning is Sequential Decision Making</strong><a class="headerlink" href="#planning-is-sequential-decision-making" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Planning is the core of intelligence: temporally extended predictions into future. Proper planning prevents poor performance. Fail to plan = plan to fail</p></li>
+<li><p>Motion-replanning in real-time with obstacles avoidance.</p></li>
+<li><p>Planning example of “Mental simulations” - “Thought experience” - “Planning ahead of time”.</p>
+<ul>
+<li><p>Alpha zero</p></li>
+<li><p>Conversational AI</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="markov-decision-process-mdp-formulation">
+<h3><strong>Markov Decision Process (MDP) Formulation</strong><a class="headerlink" href="#markov-decision-process-mdp-formulation" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(M = (S, A, R, T, \gamma)\)</span> with “world model” <span class="math notranslate nohighlight">\((T,R)\)</span> is used as “mental model” simulations: <span class="math notranslate nohighlight">\(s \xrightarrow{a} s' \sim r\)</span></p></li>
+<li><p>Hypothesis: Reward is enough for intelligence</p>
+<ul>
+<li><p>Objective: at each state <span class="math notranslate nohighlight">\(s\)</span>, find best action <span class="math notranslate nohighlight">\(a^*\)</span> to maximize expected / average total / sum of future rewards</p></li>
+</ul>
+</li>
+</ul>
+<section id="simplest-formulation-assumptions">
+<h4><strong>Simplest formulation (Assumptions)</strong>:<a class="headerlink" href="#simplest-formulation-assumptions" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>One agent perceives its environment as <span class="math notranslate nohighlight">\(\bf o_t\)</span> and take action <span class="math notranslate nohighlight">\(a_t\)</span> at every time step <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p>The agent can “fully observe” the environment “state”: from observation <span class="math notranslate nohighlight">\(\bf o_t \rightarrow\)</span> (internal) agent’s state representation <span class="math notranslate nohighlight">\(\bf z_t =\)</span> (external) environmental state <span class="math notranslate nohighlight">\(s_t\)</span></p></li>
+<li><p>Agent’s <span class="math notranslate nohighlight">\(a_t\)</span> causes <span class="math notranslate nohighlight">\(s_t\)</span> to change in “Markovian” way <span class="math notranslate nohighlight">\(s_{t+1} \sim T(s_t, a_t)\)</span> known to the agent.</p></li>
+<li><p>The agent knows its task: at each and every situation, it gets a real number <span class="math notranslate nohighlight">\(r_{t+1} \sim R(s_t, a_t, s_{t+1})\)</span> for reward or penalty/cost or whatever the task is done (either successfully or unsuccessfully)</p></li>
+</ul>
+</section>
+<section id="simplest-formulation-text-mdp-s-a-t-r-gamma">
+<h4><strong>Simplest formulation: <span class="math notranslate nohighlight">\(\text{MDP} = (S,A,T,R,\gamma)\)</span></strong>:<a class="headerlink" href="#simplest-formulation-text-mdp-s-a-t-r-gamma" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>A Markov Decision Process is 5-tuple <span class="math notranslate nohighlight">\(M = (S,A,T,R, \gamma)\)</span> wit discount factor <span class="math notranslate nohighlight">\(0 \leq \gamma \leq 1\)</span></p></li>
+<li><p>A planning algorithm <span class="math notranslate nohighlight">\(P\)</span> solves the given MDP: <span class="math notranslate nohighlight">\(P(M) =\)</span> a good plan which specifies a sequence of actions to efficiently achieve a goal</p></li>
+</ul>
+</section>
+<section id="s-a-t-r-gamma-to-text-policy-pi-s-text-and-value-q-pi-s-a">
+<h4><span class="math notranslate nohighlight">\((S,A,T,R,\gamma) \to  \text{policy } \pi(s) \text{ and value } q^\pi(s,a)\)</span><a class="headerlink" href="#s-a-t-r-gamma-to-text-policy-pi-s-text-and-value-q-pi-s-a" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(M)\)</span> = plan = a policy <span class="math notranslate nohighlight">\(\pi(s)\)</span> having value <span class="math notranslate nohighlight">\(q^\pi(s,a)\)</span> with <span class="math notranslate nohighlight">\(a \leftarrow \pi(s)\)</span></p>
+<ul>
+<li><p>What to do at each and every situation <span class="math notranslate nohighlight">\(\forall s \in S\)</span>: <span class="math notranslate nohighlight">\(a_t \leftarrow \pi(s_t)\)</span></p></li>
+<li><p>How good each action is in the future (sum of reward sense): action value <span class="math notranslate nohighlight">\(q^\pi(s,a)\)</span></p></li>
+<li><p>There are many ways / plannings / policy <span class="math notranslate nohighlight">\(\pi\)</span> <span class="math notranslate nohighlight">\(\rightarrow\)</span> Find the optimal one <span class="math notranslate nohighlight">\(\pi^*\)</span>
+$<span class="math notranslate nohighlight">\(
+\pi^* = \arg\max_\pi q^\pi(s,a), ~ \forall s\in S
+\)</span>$</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="trajectory-episode-return-value-optimal-policy">
+<h3>Trajectory, Episode, Return, Value, Optimal Policy<a class="headerlink" href="#trajectory-episode-return-value-optimal-policy" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A <strong>trajectory</strong> when executing a policy <span class="math notranslate nohighlight">\(\pi\)</span> is the sequence of <span class="math notranslate nohighlight">\(s_t,a_t,s_{t+1}\)</span> for <span class="math notranslate nohighlight">\(t=0\)</span> to termination <span class="math notranslate nohighlight">\(T\)</span>.</p></li>
+<li><p>The return of an eposide when executing a policy <span class="math notranslate nohighlight">\(\pi\)</span> from state <span class="math notranslate nohighlight">\(s\)</span> is the sum of discounted reward on the trajectory:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+G^\pi (s) = \sum_{t=1}^T \gamma^{t-1} r_t \space \space | \space \space s_0 = s
+\]</div>
+<ul class="simple">
+<li><p>The value of action <span class="math notranslate nohighlight">\(a\)</span> at state <span class="math notranslate nohighlight">\(s\)</span> is the average return of <span class="math notranslate nohighlight">\(K\)</span> episodes when repeatedly take <span class="math notranslate nohighlight">\(a\)</span> from <span class="math notranslate nohighlight">\(s\)</span> &amp; transit to <span class="math notranslate nohighlight">\(s' \sim T(s,a)\)</span> then follow <span class="math notranslate nohighlight">\(\pi\)</span> until termination:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+q^\pi(s,a) = \frac1{K} \sum_{k=1}^K \Big(r_1 + \gamma G^\pi_k(s') \Big)
+\]</div>
+<ul class="simple">
+<li><p>An optimal policy <span class="math notranslate nohighlight">\(\pi^*\)</span> has maximal action values at all states:
+$<span class="math notranslate nohighlight">\(
+\pi^* = \arg\max_\pi q^\pi(s,a), ~ \forall s\in S
+\)</span>$</p></li>
+</ul>
+</section>
+<section id="solving-mdps-bellman-optimality-equation-q-value-iteration">
+<h3><strong>Solving MDPs: Bellman Optimality Equation &amp; Q-Value-Iteration</strong><a class="headerlink" href="#solving-mdps-bellman-optimality-equation-q-value-iteration" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+Q^*(s,a) = R(s,a) + \gamma \sum_{s'} P(s'|s,a)\max_{a'} Q^*(s',a')
+\]</div>
+<section id="discrete-finite-mdp-solver-planner">
+<h4><strong>Discrete finite MDP solver / planner</strong><a class="headerlink" href="#discrete-finite-mdp-solver-planner" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Dynamic Programming turns Bellman optimality equation into an iterative update rule:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boxed{\begin{align}
+&amp;\text{Inputs: } S^+, A, \gamma \;\&amp;\; R(s,a), P(s,a,s') \text{ arrays }\to \text{ Outputs: } \hat{Q}^*(s,a) \text{ and } \hat{\pi}^*(s)\\
+\\
+&amp;\text{1. Initialize: }  Q_{0}(s,a) = 0, ~ \forall s,a\\
+&amp;\text{2. Iterate until termination: }\\
+&amp;\quad \forall s\neq\text{terminal states}, \forall a: ~ Q_{k+1}(s,a) = R(s,a) + \gamma \sum_{s'} P(s'|s,a)\max_{a'}(Q_k(s',a')).
+\end{align}}\end{split}\]</div>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book/Session10"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="S10_SOL.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Session 10: Coding Solution</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Session11/Preclass%20Session%2011.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Preclass Session 11: Reinforcement Learning</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theory"><strong>Theory</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1"><strong>Question 1</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#answer"><strong>Answer</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2"><strong>Question 2</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Answer</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3"><strong>Question 3</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Answer</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sumamry-mdp-planning-perception-action-loop"><strong>Sumamry - MDP Planning (Perception - Action Loop)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#planning-is-sequential-decision-making"><strong>Planning is Sequential Decision Making</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#markov-decision-process-mdp-formulation"><strong>Markov Decision Process (MDP) Formulation</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#simplest-formulation-assumptions"><strong>Simplest formulation (Assumptions)</strong>:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#simplest-formulation-text-mdp-s-a-t-r-gamma"><strong>Simplest formulation: <span class="math notranslate nohighlight">\(\text{MDP} = (S,A,T,R,\gamma)\)</span></strong>:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#s-a-t-r-gamma-to-text-policy-pi-s-text-and-value-q-pi-s-a"><span class="math notranslate nohighlight">\((S,A,T,R,\gamma) \to  \text{policy } \pi(s) \text{ and value } q^\pi(s,a)\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trajectory-episode-return-value-optimal-policy">Trajectory, Episode, Return, Value, Optimal Policy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-mdps-bellman-optimality-equation-q-value-iteration"><strong>Solving MDPs: Bellman Optimality Equation &amp; Q-Value-Iteration</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-finite-mdp-solver-planner"><strong>Discrete finite MDP solver / planner</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kyle Paul
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

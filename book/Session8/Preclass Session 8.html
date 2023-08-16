@@ -1,0 +1,658 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Preclass Session 8: Convolutional Neural Network &#8212; Machine Learning Intensive</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/Session8/Preclass Session 8';</script>
+    <link rel="canonical" href="https://kyle-paul.github.io/machine-learning-intensive/book/Session8/Preclass Session 8.html" />
+    <link rel="shortcut icon" href="../../_static/avatar.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Session 8: Convolutional Neural Network" href="S8_Lab_CNN.html" />
+    <link rel="prev" title="Session 7: Midterm Coding Solution" href="../Session7/S7_MidTerm_SOL.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Session1/Preclass%20Session%201.html"><strong>Preclass Session 1: Representation</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session1/S1_Lab_Representation.html">Session 1: Representation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session1/S1_ASM.html">Session 1: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session1/S1_SOL.html">Session 1: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session1/Session%201%20Revision.html"><strong>Session 1: Revision</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/Preclass%20Session%202.html"><strong>Preclass Session 2: Linear Model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/S2_Lab_LinearModel.html">Session 2: Linear Model</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session2/S2_ASM.html">Session 2: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/S2_SOL.html">Session 2: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session2/Session%202%20Revision.html">Session 2: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/Preclass%20Session%203.html"><strong>Preclass Session 3: Recommender System</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/S3_Lab_RecSys.html">Sesion 3: Recommender System</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session3/S3_ASM.html">Session 3: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/S3_SOL.html">Session 3: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session3/Session%203%20Revision.html">Session 3: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/Preclass%20Session%204.html"><strong>Preclass Session 4: NonLinear Predictor</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/S4_Lab_NonLinearPredictors.html">Session 4: Nonlinear Predictors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/S4_ASM.html">Session 4: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/S4_SOL.html">Session 4: Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session4/Session%204%20Revision.html">Session 4: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/Preclass%20Session%205.html"><strong>Preclass Session 5: Optimization</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/S5_Lab_Optimization.html">Session 5: Optimization</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session5/S5_ASM.html">Session 5: Assigment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/S5_SOL.html">Session 5: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session5/Session%205%20Revision.html">Session 5: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/Preclass%20Session%206.html"><strong>Preclass Session 6: Metrics and Losses</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/S6_Lab_Metrics%26Losses.html">Session 6: Metrics &amp; Losses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/S6_ASM.html">Session 6: Assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/S6_SOL.html">Session 6: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session6/Session%206%20Revision.html">Session 6: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session7/Midterm%20Theory%20Test.html"><strong>Theory Midterm Test</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session7/Midterm%20Theory%20Solution.html">Theory Midterm Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session7/S7_MidTerm_TEST.html">Session 7: Midterm Coding Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session7/S7_MidTerm_SOL.html">Session 7: Midterm Coding Solution</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Preclass Session 8: Convolutional Neural Network</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="S8_Lab_CNN.html">Session 8: Convolutional Neural Network</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="S8_ASM.html">Session 8: Assignment</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="S8_SOL.html">Session 8: Coding Solution</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Session%208%20Revision.html">Session 8: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session9/Preclass%20Session%209.html"><strong>Preclass Session 9: Natural Language Processing</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session9/S9_LAB_RNN.html">Session 9 - Natural Language Processing</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session9/S9_ASM.html">Session 9: Assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session9/S9_SOL.html">Session 9: Coding Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session9/Session%209%20Revision.html">Session: 9 Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session10/Preclass%20Session%2010.html"><strong>Preclass Session 10: MDP Planning</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session10/S10_LAB_MDP_PLANNING.html">Session 10 - MDP Planning</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session10/S10_ASM.html">Session 10: Assigment</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session10/S10_SOL.html">Session 10: Coding Solution</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Session10/Session%2010%20Revision.html">Session 10: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session11/Preclass%20Session%2011.html"><strong>Preclass Session 11: Reinforcement Learning</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session11/S11_LAB_Q_Learning.html">Session 11: Q Learning</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session11/S11_SOL.html">Session 11: Coding Solution</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Session11/Session%2011%20Revision.html">Session 11: Revision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session12/Final%20Test%20Theory.html"><strong>Session 12: final theory test</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session12/S12_FinalExam_TEST.html">Sesssion 12: Final Coding Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Session12/S12_FinalExam_SOL.html">Sesssion 12: Final Coding Solution</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/edit/main/book/Session8/Preclass Session 8.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kyle-paul/machine-learning-intensive/issues/new?title=Issue%20on%20page%20%2Fbook/Session8/Preclass Session 8.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/book/Session8/Preclass Session 8.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Preclass Session 8: Convolutional Neural Network</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-neural-network"><strong>Convolutional Neural Network</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#review-part-1"><strong>Review part 1</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#review-part-2"><strong>Review Part 2</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolution"><strong>Convolution</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arrays-or-data-tensors"><strong>Arrays or Data Tensors</strong></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="preclass-session-8-convolutional-neural-network">
+<h1><strong>Preclass Session 8: Convolutional Neural Network</strong><a class="headerlink" href="#preclass-session-8-convolutional-neural-network" title="Permalink to this heading">#</a></h1>
+<section id="convolutional-neural-network">
+<h2><strong>Convolutional Neural Network</strong><a class="headerlink" href="#convolutional-neural-network" title="Permalink to this heading">#</a></h2>
+<section id="review-part-1">
+<h3><strong>Review part 1</strong><a class="headerlink" href="#review-part-1" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Pattern matchng for feature extraction: From the oberservation of input <span class="math notranslate nohighlight">\(\bf x \in \mathbb{R}^m\)</span>, we use <span class="math notranslate nohighlight">\(n\)</span> features <span class="math notranslate nohighlight">\(\phi_1,...\phi_n\)</span> to perform pattern matching with raw input <span class="math notranslate nohighlight">\(\bf x\)</span> <span class="math notranslate nohighlight">\(\rightarrow\)</span> producing embedding vector <span class="math notranslate nohighlight">\(\mathbf{z} = (z_1,...,z_n)\)</span>.</p>
+<ul class="simple">
+<li><p>This process of sampling and matching is also called feature extraction, producing <span class="math notranslate nohighlight">\(\mathbf{z} \in \mathbb{R}^n\)</span> or <span class="math notranslate nohighlight">\(z_i = \phi(\mathbf{x})\)</span> with <span class="math notranslate nohighlight">\(i = 1,...,n\)</span></p></li>
+<li><p>For example, in PCA, each feature <span class="math notranslate nohighlight">\(\phi_i = \bf u_i\)</span> and <span class="math notranslate nohighlight">\(z_i = \phi(\mathbf{x}) = \bf u_i \cdot \dot{x}\)</span> with matching operation is the dot product between the principal component <span class="math notranslate nohighlight">\(\bf u_i\)</span> with centered input <span class="math notranslate nohighlight">\(\bf \dot{x} = x - \bar{x}\)</span> (<span class="math notranslate nohighlight">\(\bf \bar{x}\)</span> is the mean of <span class="math notranslate nohighlight">\(\bf x\)</span>)</p></li>
+</ul>
+</li>
+<li><p>We can continue extract <span class="math notranslate nohighlight">\(d\)</span> samples and perform matching right in the semantic space of extracted features <span class="math notranslate nohighlight">\(\phi_1,...,\phi_2\)</span> to extract higher-level features.</p>
+<ul class="simple">
+<li><p>In particular, we use features <span class="math notranslate nohighlight">\(\phi_1,..., \phi_d\)</span> to perform pattern matching with <span class="math notranslate nohighlight">\(\bf z\)</span>, producing <span class="math notranslate nohighlight">\(\mathbf{z'} = (z_1',...z_d')\)</span> with <span class="math notranslate nohighlight">\(z'_j = \phi_j(\mathbf{z})\)</span></p></li>
+<li><p>Another example, in Multilayer Perceptron with neural layers / fully-connected layers <span class="math notranslate nohighlight">\(\bf z' = \gamma(W^lz + b^l)\)</span>. Each row <span class="math notranslate nohighlight">\(\bf w_j\)</span> of matrix <span class="math notranslate nohighlight">\(\bf W \in \mathbb{R}^{d \times n}\)</span> is a high-dimensional feature <span class="math notranslate nohighlight">\(\phi_j\)</span> (we call prototypes, landmarks) pattern matching with input (low-level feature cooridinates) <span class="math notranslate nohighlight">\(\mathbf{z} \in \mathbb{R}^n\)</span> by dot product <span class="math notranslate nohighlight">\(z_j' = \phi(\mathbb{z}) = \gamma(\mathbf{z} \cdot \mathbf{z_j} + b_j)\)</span>. This process can be repeated (stacked neuron layers) to extract higher-dimensional features. And MLP is an example of model “Artificial Neural Network (ANNs)”</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="review-part-2">
+<h3><strong>Review Part 2</strong><a class="headerlink" href="#review-part-2" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Dot product (scaler product) <span class="math notranslate nohighlight">\(\mathbf{z} \cdot \mathbf{z'} = \mathbf{z'} \cdot \mathbf{z} = z_1z_1' + ... + z_nz_n' = \sum_{i=1}^nz_iz_i'\)</span></p>
+<ul class="simple">
+<li><p>The more positive the result of the dot product, the more similar of embedding coordinate vectors <span class="math notranslate nohighlight">\(\bf z\)</span> and <span class="math notranslate nohighlight">\(\bf z\)</span>, which means the more similar of input <span class="math notranslate nohighlight">\(\bf x\)</span> and <span class="math notranslate nohighlight">\(\bf x'\)</span> when considering features <span class="math notranslate nohighlight">\(\phi_1,...,\phi_n\)</span> being applied.</p></li>
+<li><p>Conversely, the more negative the result of dot product, the more dissimilar of embedding coordinates <span class="math notranslate nohighlight">\(\bf z\)</span> and <span class="math notranslate nohighlight">\(\bf z\)</span>.</p></li>
+<li><p>Specially, when the result of dot product is pretty small <span class="math notranslate nohighlight">\(\rightarrow\)</span> two embedding coordinate vectors are unrelated to each other (orthogonal, uncorrelated).</p></li>
+</ul>
+</li>
+<li><p>We can expand the notion of dot product for 2 tensors (e.g. 2 colored images) with the same shape/size: <span class="math notranslate nohighlight">\(\mathbf{A} \cdot \mathbf{B} = \sum_{ijjk} a_{ijk} b_{ijk}\)</span>. This is sum of element-wise products.</p>
+<ul class="simple">
+<li><p>Dot product in math means sum of element-wise product of 2 same shape arrays (in code we call tensors) <span class="math notranslate nohighlight">\(\bf A,B\)</span>. Since <span class="math notranslate nohighlight">\(c = \mathbf{A \cdot B}\)</span> is a scaler, it’s also named scaler product, or inner product (collapsing dimensions, to differentiate with expanding dimensions by <a class="reference external" href="https://en.wikipedia.org/wiki/Outer_product">outer product</a>). It’s used as a similarity measure of 2 arrays (tensors) <span class="math notranslate nohighlight">\(\bf A\)</span> and <span class="math notranslate nohighlight">\(\bf B\)</span>. It is also used to explain <strong>convolutional operator</strong> (dot product + sliding)</p></li>
+<li><p>In coding e.g <code class="docutils literal notranslate"><span class="pre">numpy.dot</span></code> means different things depending on the shapes of <span class="math notranslate nohighlight">\(\bf A\)</span> and <span class="math notranslate nohighlight">\(\bf B\)</span>. For 2D array <span class="math notranslate nohighlight">\(\mathbf{A}^{m \times n}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{B}^{n \times p}\)</span> it means matrix multiplication (which results in a matrix <span class="math notranslate nohighlight">\(\mathbf{C}^{m \times p}\)</span>), which is not a scaler.</p></li>
+</ul>
+</li>
+<li><p>Flattening or vectorization is when we convert an array/tensor <span class="math notranslate nohighlight">\(\bf A\)</span> of shape <span class="math notranslate nohighlight">\(m \times n \times p\)</span>… into a column of vector <span class="math notranslate nohighlight">\(\bf a\)</span> containing all elements <span class="math notranslate nohighlight">\(a_{ijk}\)</span> of <span class="math notranslate nohighlight">\(\bf A\)</span> (hence <span class="math notranslate nohighlight">\(l\)</span>-dimensional vector <span class="math notranslate nohighlight">\(\bf a\)</span> has <span class="math notranslate nohighlight">\(l = mnp...\)</span>) By vectorizing or flattening 2 arrays of same shape <span class="math notranslate nohighlight">\(\bf A\)</span> and <span class="math notranslate nohighlight">\(\bf B\)</span> into <span class="math notranslate nohighlight">\(\bf a\)</span> and <span class="math notranslate nohighlight">\(\bf b\)</span>, we can compute their dot product as <span class="math notranslate nohighlight">\(\bf A \cdot B = a \cdot b = a^T b\)</span></p></li>
+</ol>
+<center><img src=https://d1q4qwyh0q55bh.cloudfront.net/images/JtY3EATzGim2Ojl3AmNsjfHzWxb0I3Y4ASLGtMIQteQpHFcrH5ogweioMf4Mj4tA.png?d=desktop-thumbnail></center><br>
+<p>Note: these above methods are very sensitive with the selection of origin (zero, centering) of coordinates.</p>
+</section>
+<section id="convolution">
+<h3><strong>Convolution</strong><a class="headerlink" href="#convolution" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>When two arrays/tensors are not in the same shape/size, e.g. <span class="math notranslate nohighlight">\(\bf A\)</span> is a large colored image, <span class="math notranslate nohighlight">\(\mathcal{K}\)</span> is a small colored image with size <span class="math notranslate nohighlight">\(3 \times 3\)</span> called a kernel, template, feature, or filter.</p>
+<ul>
+<li><p>We can make kernel <span class="math notranslate nohighlight">\(\mathcal{K}\)</span> slide on <span class="math notranslate nohighlight">\(\bf A\)</span> and then perform pattern matching with dot product at each position the kernel is placed <span class="math notranslate nohighlight">\(\rightarrow\)</span> producing a new image called <strong>feature map</strong> <span class="math notranslate nohighlight">\(Z\)</span>. This calculation is called convolution.</p></li>
+<li><p>We can consider the feature map <span class="math notranslate nohighlight">\(Z\)</span> is an image and continue using different kernels/filters <span class="math notranslate nohighlight">\(3 \times 3\)</span> to slide and perform pattern matching to extract higher-level features <span class="math notranslate nohighlight">\(\rightarrow\)</span> producing feature maps <span class="math notranslate nohighlight">\(Z'\)</span>.</p></li>
+<li><p>We can take tons of kernels/filters <span class="math notranslate nohighlight">\(3 \times 3\)</span> to extract tons of feature maps. Each kernel/filter can be designed/engineered with values of 9 numbers to create the desired effects. View more filters in <a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_(image_processing)">image processing</a></p></li>
+<li><p>We can parameterize kernels/filters by optimizing <span class="math notranslate nohighlight">\(w_{11}, w_{12},..., w_{33}\)</span> by learning from data input. The process in which we optimize parameters for kernels/filters and for the neural network is called end-to-end learning.</p></li>
+</ul>
+</li>
+</ul>
+<center><img src=https://d1q4qwyh0q55bh.cloudfront.net/images/ZRmeTCCDT25fh2Qq1HSvFquHxQ4DrVKwVgIZMMZuekVM9Qn4HPjLZ1kYQsBtn28b.gif?d=desktop-thumbnail></center><br>
+</section>
+<section id="arrays-or-data-tensors">
+<h3><strong>Arrays or Data Tensors</strong><a class="headerlink" href="#arrays-or-data-tensors" title="Permalink to this heading">#</a></h3>
+<p>The number of dimensions of array is the number of indices we have to use to access each element in that array/tensor.</p>
+<ul class="simple">
+<li><p>1D tensors = vectors <span class="math notranslate nohighlight">\(\in \mathbb{R}^d\)</span></p></li>
+<li><p>2D tensors = matrics <span class="math notranslate nohighlight">\(\in \mathbb{R}^{d \times n}\)</span></p></li>
+<li><p>3D tensors (e.g. RGB images) <span class="math notranslate nohighlight">\(\in \mathbb{R}^{m \times n \times c}\)</span></p></li>
+<li><p>multi-dimensional tensors <span class="math notranslate nohighlight">\(T = [a_{ijkl...}] \in \mathbb{R}^{i \times j \times k \times l ...}\)</span></p></li>
+</ul>
+<center><img src=https://d1q4qwyh0q55bh.cloudfront.net/images/2ENBTdS41Z08prolFQGw9yhw0Co6BLblDX1RR5dSFDCYYjOgXI6Rs6XoxI9jRluj.png?d=desktop-thumbnail></center><br>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book/Session8"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Session7/S7_MidTerm_SOL.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Session 7: Midterm Coding Solution</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="S8_Lab_CNN.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Session 8: Convolutional Neural Network</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-neural-network"><strong>Convolutional Neural Network</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#review-part-1"><strong>Review part 1</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#review-part-2"><strong>Review Part 2</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolution"><strong>Convolution</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arrays-or-data-tensors"><strong>Arrays or Data Tensors</strong></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kyle Paul
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
